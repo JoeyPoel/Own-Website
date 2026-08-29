@@ -1,0 +1,103 @@
+{
+  "profile": [
+    {
+      "name": "Joey van der Poel",
+      "role": "Full-Stack Mobile App Developer & AI Automation Engineer",
+      "location": "Medemblik / Amsterdam, Netherlands",
+      "availability": "Available for 16h/week freelance contracts & small business builds"
+    }
+  ],
+  "services": [
+    {
+      "id": "1",
+      "title": "End-to-End Mobile App MVP",
+      "description": "I design and code performant iOS and Android apps using React Native. From structural state logic to App Store and Google Play publication.",
+      "timeframe": "4–6 Weeks Delivery"
+    },
+    {
+      "id": "2",
+      "title": "Business Process & Document Automation",
+      "description": "We connect your documents, spreadsheets, and mainframe tools with custom AI extraction pipelines, eliminating hours of manual typing.",
+      "timeframe": "3–4 Weeks Delivery"
+    },
+    {
+      "id": "3",
+      "title": "AI Feature Integration",
+      "description": "Add intelligence to existing software. I integrate large language models, custom image classification APIs, and conversational assistance.",
+      "timeframe": "2–3 Weeks Delivery"
+    }
+  ],
+  "projects": [
+    {
+      "id": "1",
+      "title": "Tracks & Taps (iOS App)",
+      "category": "mobile",
+      "tagline": "Gamified travel & city exploration mobile SaaS published to the Apple App Store.",
+      "stack": "[\"React Native\",\"Expo\",\"TypeScript\",\"Supabase\"]",
+      "highlights": "[\"Live interactive quest system & navigation logic\",\"Pub Golf group exploration mode\",\"Dynamic typography & text scaling accessibility features\",\"Robust offline-first synchronization engine\"]",
+      "linkLabel": "iOS App Store Link",
+      "linkUrl": "https://apps.apple.com",
+      "image": "/projects/swift_runner_app.jpg"
+    },
+    {
+      "id": "2",
+      "title": "Intelligent Document & RPA Pipeline (Tata Steel)",
+      "category": "automation",
+      "tagline": "Enterprise document extraction and order entry automation system.",
+      "stack": "[\"Python\",\"UiPath Document Understanding\",\"Data Pipelines\"]",
+      "highlights": "[\"Replaced manual pricing and mainframe data entry logs\",\"Substantially reduced line-item mismatches\",\"Cut manual processing overhead by 90% across the department\"]",
+      "image": "/projects/neural_net_dashboard.jpg"
+    },
+    {
+      "id": "3",
+      "title": "Accessible AI Zoo Guide (DEPT® Collaboration)",
+      "category": "mobile",
+      "tagline": "Inclusive native Android app integrating custom computer vision and conversational AI.",
+      "stack": "[\"Kotlin\",\"Jetpack Compose\",\"OpenAI API\",\"Firebase\",\"Mapbox\"]",
+      "highlights": "[\"Deep integration with Android TalkBack accessibility tools\",\"Scalable high-contrast color styling for visual assistance\",\"Hybrid on-device and cloud multimodal AI image recognition models\"]",
+      "image": "/projects/agentic_terminal.jpg"
+    },
+    {
+      "id": "4",
+      "title": "SwapClub Marketplace App",
+      "category": "mobile",
+      "tagline": "Cross-platform circular economy marketplace app built with strict type safety.",
+      "stack": "[\"React Native\",\"Expo\",\"TypeScript\"]",
+      "highlights": "[\"Modular layered codebase decoupling business logic from UI elements\",\"Dynamic multi-tag catalog filtering pipelines\",\"Optimized image uploading and compression assets\"]",
+      "image": "/projects/swift_runner_app.jpg"
+    },
+    {
+      "id": "5",
+      "title": "Talent Mobility Matching Engine",
+      "category": "automation",
+      "tagline": "Natural language processing microservice modeling holistic competency matching for HR.",
+      "stack": "[\"Python\",\"FastAPI\",\"spaCy / NLP\"]",
+      "highlights": "[\"Ingests unstructured manager feedback notes and HR parameters\",\"Extracts skill vectors and maps candidate alignment dynamically\",\"Built as Joey's Bachelor Thesis Proof-of-Concept\"]",
+      "image": "/projects/agentic_terminal.jpg"
+    }
+  ],
+  "testimonials": [
+    {
+      "id": "1",
+      "quote": "Joey took real ownership without needing much direction. Communication was clear and practical, deadlines were consistently met, and he brought a steady, solution-focused energy.",
+      "author": "Megan de Klein",
+      "role": "Co-Founder",
+      "company": "The Swap Club"
+    },
+    {
+      "id": "2",
+      "quote": "Joey pushed the boundaries of the assignment by integrating AI features such as a chatbot and a custom image recognition model. He approached the stack with curiosity and depth.",
+      "author": "Ramon Nagelhout",
+      "role": "Product Owner",
+      "company": "DEPT®"
+    },
+    {
+      "id": "3",
+      "quote": "Highly eager to learn, quickly grasps new concepts and consistently takes a solution-oriented approach. His application of AI within our workflows proved particularly valuable.",
+      "author": "Sarah Otto",
+      "role": "Team Lead",
+      "company": "Tata Steel"
+    }
+  ],
+  "inquiries": []
+}

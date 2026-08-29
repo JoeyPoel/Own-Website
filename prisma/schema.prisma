@@ -1,0 +1,46 @@
+model Profile {
+  id           String @id @default(uuid())
+  name         String
+  role         String
+  location     String
+  availability String
+}
+
+model Service {
+  id          String @id @default(uuid())
+  title       String
+  description String
+  timeframe   String
+}
+
+model Project {
+  id         String   @id @default(uuid())
+  title      String
+  category   String
+  tagline    String
+  stack      String[]
+  highlights String[]
+  linkLabel  String?
+  linkUrl    String?
+  image      String
+}
+
+model Testimonial {
+  id      String @id @default(uuid())
+  quote   String
+  author  String
+  role    String
+  company String
+}
+
+model Inquiry {
+  id          String   @id @default(uuid())
+  name        String
+  email       String
+  projectType String
+  budget      String
+  timeline    String
+  message     String
+  status      String   @default("pending")
+  createdAt   DateTime @default(now())
+}
