@@ -1,4 +1,4 @@
-import inquiryService from '../services/inquiryService'
+import inquiryService from '../services/inquiryService.js'
 
 export class InquiryController {
   /**
@@ -13,7 +13,7 @@ export class InquiryController {
         })
       }
 
-      const body = await req.json()
+      const body = await req.json() as any
       const result = await inquiryService.processInquiry(body)
 
       return new Response(JSON.stringify(result), {

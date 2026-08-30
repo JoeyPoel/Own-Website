@@ -1,4 +1,4 @@
-import inquiryRepository, { CreateInquiryInput } from '../repositories/inquiryRepository'
+import inquiryRepository, { type CreateInquiryInput } from '../repositories/inquiryRepository.js'
 
 export class InquiryService {
   /**

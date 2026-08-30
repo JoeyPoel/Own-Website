@@ -1,10 +1,10 @@
-import portfolioService from '../services/portfolioService'
+import portfolioService from '../services/portfolioService.js'
 
 export class PortfolioController {
   /**
    * Handles dynamic fetching of portfolio settings.
    */
-  async getPortfolio(req: Request): Promise<Response> {
+  async getPortfolio(_req: Request): Promise<Response> {
     try {
       const data = await portfolioService.getFullPortfolio()
       return new Response(JSON.stringify(data), {

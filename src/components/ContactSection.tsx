@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Send, CheckCircle2, Mail, Linkedin, Clock } from 'lucide-react'
+import { CheckCircle2, Mail, Linkedin, Clock } from 'lucide-react'
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
@@ -53,8 +53,8 @@ export default function ContactSection() {
   }
 
   return (
-    <section id="contact" className="py-24 relative bg-dot-pattern border-t border-zinc-900">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#09090b] via-transparent to-[#09090b] pointer-events-none" />
+    <section id="contact" className="py-24 relative bg-dot-pattern border-t border-theme-20">
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/30 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
@@ -67,25 +67,25 @@ export default function ContactSection() {
             transition={{ duration: 0.5 }}
             className="lg:col-span-5 flex flex-col gap-6"
           >
-            <span className="text-[11px] font-bold tracking-widest text-emerald-400 font-mono uppercase bg-emerald-500/5 px-3 py-1 rounded-full border border-emerald-500/10 w-max">
+            <span className="text-[11px] font-bold tracking-widest text-theme font-mono uppercase bg-theme-10 px-3 py-1 rounded-full border border-theme-20 w-max">
               Contact
             </span>
-            <h2 className="text-3xl md:text-5xl font-bold font-heading text-white">
+            <h2 className="text-3xl md:text-5xl font-bold font-heading text-slate-850">
               Discuss a Project
             </h2>
-            <p className="text-zinc-400 text-sm md:text-base leading-relaxed max-w-md">
-              Need a cross-platform React Native app or a workflow automation tool built? Get in touch and let\'s review the details.
+            <p className="text-slate-650 text-sm md:text-base leading-relaxed max-w-md">
+              Need a cross-platform React Native app or a workflow automation tool built? Get in touch and let's review the details.
             </p>
 
             <div className="flex flex-col gap-4 mt-8 max-w-sm">
               <a
                 href="mailto:joey@poel.dev"
-                className="flex items-center gap-3 p-4 rounded-xl bg-zinc-900/50 border border-zinc-805 hover:border-zinc-700 transition-colors group shadow-md"
+                className="flex items-center gap-3 p-4 rounded-xl bg-white/60 border border-theme-20 hover:border-theme-30 transition-colors group shadow-md"
               >
-                <Mail className="w-5 h-5 text-emerald-400" />
+                <Mail className="w-5 h-5 text-theme" />
                 <div>
-                  <span className="text-[9px] font-bold font-mono text-zinc-500 uppercase tracking-widest block">Email Direct</span>
-                  <span className="text-sm font-semibold text-zinc-300 group-hover:text-emerald-400 transition-colors">joey@poel.dev</span>
+                  <span className="text-[9px] font-bold font-mono text-slate-500 uppercase tracking-widest block">Email Direct</span>
+                  <span className="text-sm font-semibold text-slate-750 group-hover:text-theme transition-colors">joey@poel.dev</span>
                 </div>
               </a>
 
@@ -93,20 +93,20 @@ export default function ContactSection() {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 p-4 rounded-xl bg-zinc-900/50 border border-zinc-805 hover:border-zinc-700 transition-colors group shadow-md"
+                className="flex items-center gap-3 p-4 rounded-xl bg-white/60 border border-theme-20 hover:border-theme-30 transition-colors group shadow-md"
               >
-                <Linkedin className="w-5 h-5 text-emerald-400" />
+                <Linkedin className="w-5 h-5 text-theme" />
                 <div>
-                  <span className="text-[9px] font-bold font-mono text-zinc-500 uppercase tracking-widest block">LinkedIn</span>
-                  <span className="text-sm font-semibold text-zinc-300 group-hover:text-emerald-400 transition-colors">Joey van der Poel</span>
+                  <span className="text-[9px] font-bold font-mono text-slate-500 uppercase tracking-widest block">LinkedIn</span>
+                  <span className="text-sm font-semibold text-slate-750 group-hover:text-theme transition-colors">Joey van der Poel</span>
                 </div>
               </a>
 
-              <div className="flex items-center gap-3 p-4 rounded-xl bg-zinc-900/20 border border-zinc-900/80">
-                <Clock className="w-5 h-5 text-zinc-650" />
+              <div className="flex items-center gap-3 p-4 rounded-xl bg-white/30 border border-theme-10">
+                <Clock className="w-5 h-5 text-slate-550" />
                 <div>
-                  <span className="text-[9px] font-bold font-mono text-zinc-600 uppercase tracking-widest block">Response Time</span>
-                  <span className="text-xs font-semibold text-zinc-500 uppercase tracking-tight font-mono">Quotes in 24 hours</span>
+                  <span className="text-[9px] font-bold font-mono text-slate-500 uppercase tracking-widest block">Response Time</span>
+                  <span className="text-xs font-semibold text-slate-650 uppercase tracking-tight font-mono">Quotes in 24 hours</span>
                 </div>
               </div>
             </div>
@@ -132,7 +132,7 @@ export default function ContactSection() {
                 >
                   {/* Project Type Selection */}
                   <div className="flex flex-col gap-3">
-                    <span className="text-xs font-bold text-zinc-400 uppercase tracking-wider font-mono">
+                    <span className="text-xs font-bold text-slate-600 uppercase tracking-wider font-mono">
                       What project stack?
                     </span>
                     <div className="flex flex-wrap gap-2">
@@ -143,8 +143,8 @@ export default function ContactSection() {
                           onClick={() => setProjectType(type)}
                           className={`px-4 py-2 rounded-xl text-xs font-semibold uppercase tracking-wide cursor-pointer transition-all border ${
                             projectType === type
-                              ? 'bg-emerald-500/10 border-emerald-500 text-emerald-400'
-                              : 'bg-zinc-950 border-zinc-800 text-zinc-400 hover:text-zinc-200'
+                              ? 'bg-theme-10 border-theme-30 text-theme'
+                              : 'bg-white/60 border-theme-20 text-slate-650 hover:text-sky-950'
                           }`}
                         >
                           {type}
@@ -155,7 +155,7 @@ export default function ContactSection() {
 
                   {/* Budget Selection */}
                   <div className="flex flex-col gap-3">
-                    <span className="text-xs font-bold text-zinc-400 uppercase tracking-wider font-mono">
+                    <span className="text-xs font-bold text-slate-600 uppercase tracking-wider font-mono">
                       Estimated Project Budget
                     </span>
                     <div className="flex flex-wrap gap-2">
@@ -166,8 +166,8 @@ export default function ContactSection() {
                           onClick={() => setBudget(range)}
                           className={`px-4 py-2 rounded-xl text-xs font-semibold uppercase tracking-wide cursor-pointer transition-all border ${
                             budget === range
-                              ? 'bg-emerald-500/10 border-emerald-500 text-emerald-400'
-                              : 'bg-zinc-950 border-zinc-800 text-zinc-400 hover:text-zinc-200'
+                              ? 'bg-theme-10 border-theme-30 text-theme'
+                              : 'bg-white/60 border-theme-20 text-slate-650 hover:text-sky-950'
                           }`}
                         >
                           {range}
@@ -178,7 +178,7 @@ export default function ContactSection() {
 
                   {/* Timeline Selection */}
                   <div className="flex flex-col gap-3">
-                    <span className="text-xs font-bold text-zinc-400 uppercase tracking-wider font-mono">
+                    <span className="text-xs font-bold text-slate-600 uppercase tracking-wider font-mono">
                       Expected Timeline
                     </span>
                     <div className="flex flex-wrap gap-2">
@@ -189,8 +189,8 @@ export default function ContactSection() {
                           onClick={() => setTimeline(time)}
                           className={`px-4 py-2 rounded-xl text-xs font-semibold uppercase tracking-wide cursor-pointer transition-all border ${
                             timeline === time
-                              ? 'bg-emerald-500/10 border-emerald-500 text-emerald-400'
-                              : 'bg-zinc-950 border-zinc-800 text-zinc-400 hover:text-zinc-200'
+                              ? 'bg-theme-10 border-theme-30 text-theme'
+                              : 'bg-white/60 border-theme-20 text-slate-650 hover:text-sky-950'
                           }`}
                         >
                           {time}
@@ -202,7 +202,7 @@ export default function ContactSection() {
                   {/* Text Inputs */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="flex flex-col gap-2">
-                      <label htmlFor="name" className="text-xs font-bold text-zinc-400 uppercase tracking-wider font-mono">
+                      <label htmlFor="name" className="text-xs font-bold text-slate-600 uppercase tracking-wider font-mono">
                         Name
                       </label>
                       <input
@@ -213,12 +213,12 @@ export default function ContactSection() {
                         value={formData.name}
                         onChange={handleChange}
                         placeholder="John Doe"
-                        className="px-4 py-3 rounded-xl bg-zinc-950 border border-zinc-800 text-white placeholder-zinc-700 focus:outline-none focus:border-emerald-500/80 focus:ring-1 focus:ring-emerald-500/80 transition-all text-sm font-sans"
+                        className="px-4 py-3 rounded-xl bg-white/70 border border-theme-20 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-theme focus:ring-1 focus:ring-theme transition-all text-sm font-sans"
                       />
                     </div>
 
                     <div className="flex flex-col gap-2">
-                      <label htmlFor="email" className="text-xs font-bold text-zinc-400 uppercase tracking-wider font-mono">
+                      <label htmlFor="email" className="text-xs font-bold text-slate-600 uppercase tracking-wider font-mono">
                         Email Address
                       </label>
                       <input
@@ -229,13 +229,13 @@ export default function ContactSection() {
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="john@example.com"
-                        className="px-4 py-3 rounded-xl bg-zinc-950 border border-zinc-800 text-white placeholder-zinc-700 focus:outline-none focus:border-emerald-500/80 focus:ring-1 focus:ring-emerald-500/80 transition-all text-sm font-sans"
+                        className="px-4 py-3 rounded-xl bg-white/70 border border-theme-20 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-theme focus:ring-1 focus:ring-theme transition-all text-sm font-sans"
                       />
                     </div>
                   </div>
 
                   <div className="flex flex-col gap-2">
-                    <label htmlFor="message" className="text-xs font-bold text-zinc-400 uppercase tracking-wider font-mono">
+                    <label htmlFor="message" className="text-xs font-bold text-slate-600 uppercase tracking-wider font-mono">
                       What goals are we targeting?
                     </label>
                     <textarea
@@ -246,7 +246,7 @@ export default function ContactSection() {
                       value={formData.message}
                       onChange={handleChange}
                       placeholder="Outline the operational bottleneck or the mobile app concept..."
-                      className="px-4 py-3 rounded-xl bg-zinc-950 border border-zinc-800 text-white placeholder-zinc-700 focus:outline-none focus:border-emerald-500/80 focus:ring-1 focus:ring-emerald-500/80 transition-all text-sm font-sans resize-none"
+                      className="px-4 py-3 rounded-xl bg-white/70 border border-theme-20 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-theme focus:ring-1 focus:ring-theme transition-all text-sm font-sans resize-none"
                     />
                   </div>
 

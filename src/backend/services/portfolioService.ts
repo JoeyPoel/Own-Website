@@ -1,4 +1,4 @@
-import portfolioRepository from '../repositories/portfolioRepository'
+import portfolioRepository from '../repositories/portfolioRepository.js'
 
 export class PortfolioService {
   /**

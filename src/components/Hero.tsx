@@ -1,6 +1,7 @@
+import React from 'react'
 import { motion } from 'framer-motion'
 import type { Variants } from 'framer-motion'
-import { Sparkles, ArrowRight, ArrowDown } from 'lucide-react'
+import { Cloud, ArrowRight, ArrowDown, Code2 } from 'lucide-react'
 
 interface HeroProps {
   profile: {
@@ -38,11 +39,7 @@ export default function Hero({ profile }: HeroProps) {
   }
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center pt-28 overflow-hidden bg-dot-pattern">
-      {/* Subtle Ambient Accent Glows */}
-      <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-emerald-500/5 blur-[120px] rounded-full pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-96 h-96 bg-cyan-500/5 blur-[120px] rounded-full pointer-events-none" />
-
+    <section id="home" className="relative min-h-screen flex items-center justify-center pt-28 pb-16 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 py-12 z-10 flex flex-col items-center text-center">
         <motion.div
           variants={containerVariants}
@@ -50,41 +47,36 @@ export default function Hero({ profile }: HeroProps) {
           animate="visible"
           className="flex flex-col items-center"
         >
-          {/* Badge */}
+          {/* Sky Badge */}
           <motion.div
             variants={itemVariants}
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-300 text-xs font-semibold tracking-wider mb-8"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 border border-theme-20 text-sky-950 text-xs font-semibold tracking-wide mb-8 shadow-sm backdrop-blur-md"
           >
-            <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
-            <span>{profile.location || 'Netherlands'}</span>
+            <Cloud className="w-4 h-4 text-theme fill-theme-10" />
+            <span>{profile.location || 'Medemblik / Amsterdam, Netherlands'}</span>
           </motion.div>
 
           {/* Core Headline */}
           <motion.h1
             variants={itemVariants}
-            className="text-4xl md:text-6xl font-bold tracking-tight font-heading text-white max-w-4xl leading-[1.1] mb-6"
+            className="text-4xl md:text-6xl font-extrabold tracking-tight font-heading text-slate-900 max-w-4xl leading-[1.15] mb-6 drop-shadow-sm"
           >
-            {profile.role ? (
-              <>
-                I build cross-platform{' '}
-                <span className="text-gradient-emerald">mobile apps</span> &{' '}
-                <span className="text-gradient-emerald">AI automations</span>.
-              </>
-            ) : (
-              <>
-                I build cross-platform{' '}
-                <span className="text-gradient-emerald">mobile apps</span> &{' '}
-                <span className="text-gradient-emerald">AI automations</span> that eliminate manual work.
-              </>
-            )}
+            {profile.name} — Building{' '}
+            <span className="text-gradient-theme-1">
+              Mobile Apps
+            </span>{' '}
+            &{' '}
+            <span className="text-gradient-theme-2">
+              AI Automations
+            </span>
           </motion.h1>
 
           {/* Subheading */}
           <motion.p
             variants={itemVariants}
-            className="text-base md:text-lg text-zinc-400 max-w-2xl leading-relaxed mb-10"
+            className="text-base md:text-lg text-slate-800 font-medium max-w-2xl leading-relaxed mb-10 drop-shadow-xs"
           >
-            Leveraging software engineering rigor and applied AI expertise to translate complex ideas into production-ready software.
+            Demystifying mobile technology and applied AI into high-converting, automated business solutions.
           </motion.p>
 
           {/* Technical Credentials Badges */}
@@ -95,11 +87,11 @@ export default function Hero({ profile }: HeroProps) {
             {[
               '🎓 BSc Software Engineering',
               '🧠 MSc Applied Artificial Intelligence',
-              profile.availability ? `⚡ ${profile.availability}` : '⚡ 16h/week Contract Availability'
+              profile.availability ? `⚡ ${profile.availability}` : '⚡ Available for contract builds'
             ].map((highlight) => (
               <span
                 key={highlight}
-                className="px-4 py-2 bg-zinc-900/80 border border-zinc-800 text-zinc-300 text-xs font-semibold tracking-wide rounded-xl font-mono"
+                className="px-4 py-2 bg-white/75 border border-theme-20 text-sky-950 text-xs font-semibold tracking-wide rounded-xl font-mono shadow-xs backdrop-blur-md"
               >
                 {highlight}
               </span>
@@ -113,25 +105,26 @@ export default function Hero({ profile }: HeroProps) {
           >
             <button
               onClick={(e) => handleScroll(e, '#contact')}
-              className="w-full sm:w-auto px-8 py-4 bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-bold text-sm tracking-wide rounded-xl flex items-center justify-center gap-2 cursor-pointer transition-colors shadow-lg shadow-emerald-500/10"
+              className="w-full sm:w-auto px-8 py-4 bg-theme hover:brightness-110 text-white font-bold text-sm tracking-wide rounded-xl flex items-center justify-center gap-2 cursor-pointer transition-all shadow-theme-10 hover:-translate-y-0.5"
             >
-              <span>Discuss a Project</span>
+              <span>Start a Project</span>
               <ArrowRight className="w-4 h-4" />
             </button>
 
             <button
               onClick={(e) => handleScroll(e, '#work')}
-              className="w-full sm:w-auto px-8 py-4 bg-zinc-900 border border-zinc-800 text-white font-semibold text-sm tracking-wide rounded-xl flex items-center justify-center gap-2 cursor-pointer transition-colors hover:bg-zinc-800"
+              className="w-full sm:w-auto px-8 py-4 bg-white/80 hover:bg-white border border-theme-30 text-theme font-bold text-sm tracking-wide rounded-xl flex items-center justify-center gap-2 cursor-pointer transition-all shadow-xs backdrop-blur-md hover:-translate-y-0.5"
             >
-              <span>View Shipped Work</span>
+              <Code2 className="w-4 h-4 text-theme" />
+              <span>Explore Code & Work</span>
             </button>
           </motion.div>
         </motion.div>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-40">
-        <span className="text-[10px] tracking-widest text-zinc-500 font-semibold uppercase">SCROLL</span>
-        <ArrowDown className="w-3.5 h-3.5 text-zinc-500" />
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-70">
+        <span className="text-[10px] tracking-widest text-theme font-bold uppercase font-mono">SCROLL TO CODE</span>
+        <ArrowDown className="w-4 h-4 text-theme animate-bounce" />
       </div>
     </section>
   )

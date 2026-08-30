@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import CloudToCodeBackground from './components/CloudToCodeBackground'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import ServicesSection from './components/ServicesSection'
@@ -35,10 +36,10 @@ export default function App() {
 
   if (loading) {
     return (
-      <div className="bg-[#09090b] min-h-screen flex items-center justify-center">
+      <div className="bg-sky-100 min-h-screen flex items-center justify-center font-mono">
         <div className="flex flex-col items-center gap-4">
-          <div className="w-8 h-8 border-2 border-emerald-500 border-t-transparent rounded-full animate-spin" />
-          <p className="text-zinc-500 font-mono text-sm">Loading portfolio...</p>
+          <div className="w-10 h-10 border-3 border-sky-500 border-t-transparent rounded-full animate-spin" />
+          <p className="text-sky-800 text-xs font-semibold tracking-wider">CONNECTING TO CLOUD DB...</p>
         </div>
       </div>
     )
@@ -46,23 +47,22 @@ export default function App() {
 
   if (!profile) {
     return (
-      <div className="bg-[#09090b] min-h-screen flex items-center justify-center">
-        <p className="text-zinc-500 font-mono text-sm">Failed to load portfolio. Please refresh.</p>
+      <div className="bg-sky-100 min-h-screen flex items-center justify-center font-mono">
+        <p className="text-sky-900 text-sm">Failed to load portfolio. Please refresh.</p>
       </div>
     )
   }
 
   return (
-    <div className="bg-[#09090b] text-zinc-300 min-h-screen relative overflow-hidden selection:bg-emerald-500/25 selection:text-white">
-      {/* Background Grids */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-[0.25] pointer-events-none" />
-      <div className="absolute inset-0 bg-dot-pattern opacity-[0.35] pointer-events-none" />
+    <div className="min-h-screen relative text-slate-800 selection:bg-sky-500/30 selection:text-sky-950">
+      {/* Dynamic Animated Cloud to Code Background Canvas */}
+      <CloudToCodeBackground />
 
-      {/* Floating Header */}
+      {/* Floating Header Navigation */}
       <Navbar profile={profile} />
 
-      {/* Main Pages */}
-      <main className="relative w-full">
+      {/* Main Page Sections */}
+      <main className="relative z-10 w-full">
         <Hero profile={profile} />
         <ServicesSection services={services} />
         <ProjectsSection projects={projects} />
@@ -71,11 +71,11 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <footer className="py-12 border-t border-zinc-900 bg-zinc-950/20 backdrop-blur-sm relative z-10 font-sans">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-zinc-500 font-mono">
+      <footer className="py-12 border-t border-sky-500/25 bg-white/45 backdrop-blur-md relative z-10 font-sans">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-slate-600 font-mono">
           <span>&copy; {new Date().getFullYear()} {profile.name}. All rights reserved.</span>
           <div className="flex gap-6">
-            <a href="#home" className="hover:text-emerald-450 transition-colors">Back to top</a>
+            <a href="#home" className="hover:text-sky-600 transition-colors">Back to top</a>
           </div>
         </div>
       </footer>

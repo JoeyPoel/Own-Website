@@ -32,9 +32,7 @@ export default function ServicesSection({ services }: ServicesSectionProps) {
   }
 
   return (
-    <section id="services" className="py-24 relative bg-dot-pattern border-t border-zinc-900">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#09090b] via-transparent to-[#09090b] pointer-events-none" />
-
+    <section id="services" className="py-24 relative border-t border-theme-20">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
         {/* Section Header */}
@@ -45,13 +43,13 @@ export default function ServicesSection({ services }: ServicesSectionProps) {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <span className="text-[11px] font-bold tracking-widest text-emerald-400 font-mono uppercase bg-emerald-500/5 px-3 py-1 rounded-full border border-emerald-500/10">
-            Consultancy
+          <span className="text-[11px] font-bold tracking-widest text-theme font-mono uppercase bg-theme-10 px-3 py-1 rounded-full border border-theme-20">
+            // CONSULTANCY & SERVICES
           </span>
-          <h2 className="text-3xl md:text-5xl font-bold font-heading text-white mt-4 mb-4">
+          <h2 className="text-3xl md:text-5xl font-extrabold font-heading text-slate-850 mt-4 mb-4 drop-shadow-sm">
             How I Help Businesses Ship & Automate
           </h2>
-          <p className="text-zinc-400 max-w-xl mx-auto text-sm md:text-base">
+          <p className="text-slate-650 max-w-xl mx-auto text-sm md:text-base font-sans">
             Structured development models targeting fast deliveries and measurable administrative hour savings.
           </p>
         </motion.div>
@@ -64,28 +62,28 @@ export default function ServicesSection({ services }: ServicesSectionProps) {
           viewport={{ once: true, margin: '-100px' }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          {services.map((service) => {
-            const Icon = iconsMap[service.id as keyof typeof iconsMap] || Sparkles
+          {services.map((service, index) => {
+            const Icon = iconsMap[(index + 1).toString() as keyof typeof iconsMap] || Sparkles
             return (
               <motion.div
                 key={service.id}
                 variants={cardVariants}
-                className="card-premium p-8 rounded-2xl flex flex-col justify-between hover:border-zinc-700 transition-all duration-300 group"
+                className="card-premium p-8 rounded-2xl flex flex-col justify-between hover:border-theme-30 hover:shadow-theme-10 transition-all duration-300 group"
               >
                 <div>
                   <div className="flex items-center justify-between mb-6">
-                    <div className="p-3 bg-zinc-950 border border-zinc-800 rounded-xl text-emerald-400">
+                    <div className="p-3 bg-white/80 border border-theme-30 rounded-xl text-theme group-hover:scale-110 transition-transform shadow-xs">
                       <Icon className="w-5 h-5" />
                     </div>
-                    <span className="text-[10px] font-semibold font-mono text-zinc-400 bg-zinc-900 border border-zinc-850 px-2.5 py-1 rounded-full">
+                    <span className="text-[10px] font-bold font-mono text-theme bg-theme-10 border border-theme-20 px-2.5 py-1 rounded-full">
                       {service.timeframe}
                     </span>
                   </div>
 
-                  <h3 className="text-xl font-bold font-heading text-white mb-3">
+                  <h3 className="text-xl font-bold font-heading text-slate-850 mb-3">
                     {service.title}
                   </h3>
-                  <p className="text-zinc-400 text-sm leading-relaxed mb-6 font-sans">
+                  <p className="text-slate-700 text-sm leading-relaxed mb-6 font-sans">
                     {service.description}
                   </p>
                 </div>

@@ -1,10 +1,7 @@
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
-import { readFileSync } from 'node:fs'
-import { resolve } from 'node:path'
-import { createRequire } from 'node:module'
-import { createServer } from 'node:http'
+
 
 // ─── Vite API Middleware Plugin ───────────────────────────────────────────────
 // Intercepts /api/* requests in dev so there's no need for a separate server.

@@ -1,4 +1,4 @@
-import { getDb } from '../utils/prisma'
+import { getDb } from '../utils/prisma.js'
 
 export interface CreateInquiryInput {
   name: string

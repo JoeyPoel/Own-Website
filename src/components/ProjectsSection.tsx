@@ -16,9 +16,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
   })
 
   return (
-    <section id="work" className="py-24 relative bg-dot-pattern border-t border-zinc-900">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#09090b] via-transparent to-[#09090b] pointer-events-none" />
-
+    <section id="work" className="py-24 relative border-t border-sky-500/10">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
         {/* Section Header */}
@@ -29,14 +27,14 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <span className="text-[11px] font-bold tracking-widest text-emerald-400 font-mono uppercase bg-emerald-500/5 px-3 py-1 rounded-full border border-emerald-500/10">
-            Case Studies
+          <span className="text-[11px] font-bold tracking-widest text-sky-600 font-mono uppercase bg-sky-500/5 px-3 py-1 rounded-full border border-sky-500/10">
+            // CASE STUDIES & WORK
           </span>
-          <h2 className="text-3xl md:text-5xl font-bold font-heading text-white mt-4 mb-4">
-            Shipped Work & Prototypes
+          <h2 className="text-3xl md:text-5xl font-extrabold font-heading text-slate-850 mt-4 mb-4 drop-shadow-sm">
+            Shipped Work & Production Builds
           </h2>
-          <p className="text-zinc-400 max-w-xl mx-auto text-sm md:text-base">
-            No stock screen templates. These are functional products and production automation pipelines developed for startups and enterprise teams.
+          <p className="text-slate-650 max-w-xl mx-auto text-sm md:text-base font-sans">
+            No stock screen templates. Functional products and automation pipelines developed for startups and enterprise clients.
           </p>
         </motion.div>
 
@@ -47,7 +45,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
           viewport={{ once: true }}
           className="flex justify-center mb-12"
         >
-          <div className="flex p-1.5 rounded-full bg-zinc-900/60 border border-zinc-800 backdrop-blur-md">
+          <div className="flex p-1.5 rounded-full bg-white/60 border border-sky-300/40 backdrop-blur-md">
             {(['all', 'mobile', 'automation'] as const).map((category) => {
               const label =
                 category === 'all'
@@ -61,14 +59,14 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                 <button
                   key={category}
                   onClick={() => setFilter(category)}
-                  className={`relative px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider cursor-pointer transition-colors duration-300 ${
-                    isActive ? 'text-white' : 'text-zinc-400 hover:text-zinc-200'
+                  className={`relative px-5 py-2 rounded-full text-xs font-bold uppercase tracking-wider cursor-pointer transition-colors duration-300 ${
+                    isActive ? 'text-sky-950 font-bold' : 'text-slate-700 hover:text-sky-950'
                   }`}
                 >
                   {isActive && (
                     <motion.div
                       layoutId="activeFilterTab"
-                      className="absolute inset-0 bg-zinc-800/40 border border-zinc-700/60 rounded-full"
+                      className="absolute inset-0 bg-sky-500/15 border border-sky-400/30 rounded-full"
                       transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                     />
                   )}
