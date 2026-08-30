@@ -2,11 +2,14 @@ import { useState, useEffect } from 'react'
 import CloudToCodeBackground from './components/CloudToCodeBackground'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
+import AboutSection from './components/AboutSection'
+import TracksSection from './components/TracksSection'
 import ServicesSection from './components/ServicesSection'
 import ProjectsSection from './components/ProjectsSection'
 import TestimonialsSection from './components/TestimonialsSection'
 import ContactSection from './components/ContactSection'
 import type { Profile, Service, Project, Testimonial } from './data/portfolioData'
+import { STRINGS } from './data/strings'
 
 export default function App() {
   const [profile, setProfile] = useState<Profile | null>(null)
@@ -64,18 +67,45 @@ export default function App() {
       {/* Main Page Sections */}
       <main className="relative z-10 w-full">
         <Hero profile={profile} />
+        <AboutSection />
+        <TracksSection />
         <ServicesSection services={services} />
         <ProjectsSection projects={projects} />
         <TestimonialsSection testimonials={testimonials} />
         <ContactSection />
       </main>
 
-      {/* Footer */}
-      <footer className="py-12 border-t border-sky-500/25 bg-white/45 backdrop-blur-md relative z-10 font-sans">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-slate-600 font-mono">
-          <span>&copy; {new Date().getFullYear()} {profile.name}. All rights reserved.</span>
-          <div className="flex gap-6">
-            <a href="#home" className="hover:text-sky-600 transition-colors">Back to top</a>
+      {/* Footer Links */}
+      <footer className="relative z-10 w-full border-t border-theme-20 py-8 bg-white/20 backdrop-blur-md">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-slate-500 font-mono">
+            &copy; {new Date().getFullYear()} Joey van der Poel. All rights reserved.
+          </p>
+          <div className="flex items-center gap-6">
+            <a
+              href={STRINGS.links.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-bold text-slate-650 hover:text-theme transition-colors font-mono uppercase tracking-wider"
+            >
+              LinkedIn
+            </a>
+            <a
+              href={STRINGS.links.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-bold text-slate-650 hover:text-theme transition-colors font-mono uppercase tracking-wider"
+            >
+              GitHub
+            </a>
+            <a
+              href={STRINGS.links.appStore}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-bold text-slate-650 hover:text-theme transition-colors font-mono uppercase tracking-wider"
+            >
+              Tracks & Taps
+            </a>
           </div>
         </div>
       </footer>

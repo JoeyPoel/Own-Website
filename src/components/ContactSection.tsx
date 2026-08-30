@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { CheckCircle2, Mail, Linkedin, Clock } from 'lucide-react'
+import { CheckCircle2, Mail, Linkedin, Clock, Github, Smartphone } from 'lucide-react'
+import { STRINGS } from '../data/strings'
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
   const [projectType, setProjectType] = useState('Mobile App')
-  const [budget, setBudget] = useState('$5k – $10k')
-  const [timeline, setTimeline] = useState('1–2 Months')
+  const [customProjectType, setCustomProjectType] = useState('')
+  const [budget, setBudget] = useState('Not Specified')
+  const [timeline, setTimeline] = useState('1–2 Months (Standard)')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
 
@@ -26,7 +28,7 @@ export default function ContactSection() {
           name: formData.name,
           email: formData.email,
           message: formData.message,
-          projectType,
+          projectType: projectType === 'Other' ? `Other: ${customProjectType}` : projectType,
           budget,
           timeline,
         }),
@@ -39,6 +41,7 @@ export default function ContactSection() {
 
       setIsSuccess(true)
       setFormData({ name: '', email: '', message: '' })
+      setCustomProjectType('')
       setTimeout(() => setIsSuccess(false), 5000)
     } catch (err: any) {
       setErrorMsg(err.message || 'Something went wrong. Please try again.')
@@ -68,47 +71,65 @@ export default function ContactSection() {
             className="lg:col-span-5 flex flex-col gap-6"
           >
             <span className="text-[11px] font-bold tracking-widest text-theme font-mono uppercase bg-theme-10 px-3 py-1 rounded-full border border-theme-20 w-max">
-              Contact
+              {STRINGS.contact.badge}
             </span>
             <h2 className="text-3xl md:text-5xl font-bold font-heading text-slate-850">
-              Discuss a Project
+              {STRINGS.contact.title}
             </h2>
             <p className="text-slate-650 text-sm md:text-base leading-relaxed max-w-md">
-              Need a cross-platform React Native app or a workflow automation tool built? Get in touch and let's review the details.
+              {STRINGS.contact.description}
             </p>
 
-            <div className="flex flex-col gap-4 mt-8 max-w-sm">
+            <div className="flex flex-col gap-3 mt-4 max-w-sm">
               <a
-                href="mailto:joey@poel.dev"
-                className="flex items-center gap-3 p-4 rounded-xl bg-white/60 border border-theme-20 hover:border-theme-30 transition-colors group shadow-md"
+                href="mailto:Joeywognum@gmail.com"
+                className="flex items-center gap-3 p-3.5 rounded-xl bg-white/60 border border-theme-20 hover:border-theme-30 transition-colors group shadow-xs"
               >
-                <Mail className="w-5 h-5 text-theme" />
+                <Mail className="w-4 h-4 text-theme" />
                 <div>
-                  <span className="text-[9px] font-bold font-mono text-slate-500 uppercase tracking-widest block">Email Direct</span>
-                  <span className="text-sm font-semibold text-slate-750 group-hover:text-theme transition-colors">joey@poel.dev</span>
+                  <span className="text-[8px] font-bold font-mono text-slate-500 uppercase tracking-widest block">{STRINGS.contact.emailLabel}</span>
+                  <span className="text-xs font-semibold text-slate-750 group-hover:text-theme transition-colors">Joeywognum@gmail.com</span>
                 </div>
               </a>
 
               <a
-                href="https://linkedin.com"
+                href={STRINGS.links.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 p-4 rounded-xl bg-white/60 border border-theme-20 hover:border-theme-30 transition-colors group shadow-md"
+                className="flex items-center gap-3 p-3.5 rounded-xl bg-white/60 border border-theme-20 hover:border-theme-30 transition-colors group shadow-xs"
               >
-                <Linkedin className="w-5 h-5 text-theme" />
+                <Linkedin className="w-4 h-4 text-theme" />
                 <div>
-                  <span className="text-[9px] font-bold font-mono text-slate-500 uppercase tracking-widest block">LinkedIn</span>
-                  <span className="text-sm font-semibold text-slate-750 group-hover:text-theme transition-colors">Joey van der Poel</span>
+                  <span className="text-[8px] font-bold font-mono text-slate-500 uppercase tracking-widest block">{STRINGS.contact.linkedinLabel}</span>
+                  <span className="text-xs font-semibold text-slate-750 group-hover:text-theme transition-colors">Joey van der Poel</span>
                 </div>
               </a>
 
-              <div className="flex items-center gap-3 p-4 rounded-xl bg-white/30 border border-theme-10">
-                <Clock className="w-5 h-5 text-slate-550" />
+              <a
+                href={STRINGS.links.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 p-3.5 rounded-xl bg-white/60 border border-theme-20 hover:border-theme-30 transition-colors group shadow-xs"
+              >
+                <Github className="w-4 h-4 text-theme" />
                 <div>
-                  <span className="text-[9px] font-bold font-mono text-slate-500 uppercase tracking-widest block">Response Time</span>
-                  <span className="text-xs font-semibold text-slate-650 uppercase tracking-tight font-mono">Quotes in 24 hours</span>
+                  <span className="text-[8px] font-bold font-mono text-slate-500 uppercase tracking-widest block">GitHub</span>
+                  <span className="text-xs font-semibold text-slate-750 group-hover:text-theme transition-colors">JoeyPoel</span>
                 </div>
-              </div>
+              </a>
+
+              <a
+                href={STRINGS.links.appStore}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 p-3.5 rounded-xl bg-white/60 border border-theme-20 hover:border-theme-30 transition-colors group shadow-xs"
+              >
+                <Smartphone className="w-4 h-4 text-theme" />
+                <div>
+                  <span className="text-[8px] font-bold font-mono text-slate-500 uppercase tracking-widest block">Tracks & Taps</span>
+                  <span className="text-xs font-semibold text-slate-750 group-hover:text-theme transition-colors">App Store Download</span>
+                </div>
+              </a>
             </div>
           </motion.div>
 
@@ -133,10 +154,10 @@ export default function ContactSection() {
                   {/* Project Type Selection */}
                   <div className="flex flex-col gap-3">
                     <span className="text-xs font-bold text-slate-600 uppercase tracking-wider font-mono">
-                      What project stack?
+                      {STRINGS.contact.form.stackLabel}
                     </span>
-                    <div className="flex flex-wrap gap-2">
-                      {['Mobile App', 'AI Automation', 'AI Integration', 'Other'].map((type) => (
+                    <div className="flex flex-wrap gap-2 items-center">
+                      {['Mobile App', 'AI Automation', 'Other'].map((type) => (
                         <button
                           key={type}
                           type="button"
@@ -150,39 +171,33 @@ export default function ContactSection() {
                           {type}
                         </button>
                       ))}
-                    </div>
-                  </div>
-
-                  {/* Budget Selection */}
-                  <div className="flex flex-col gap-3">
-                    <span className="text-xs font-bold text-slate-600 uppercase tracking-wider font-mono">
-                      Estimated Project Budget
-                    </span>
-                    <div className="flex flex-wrap gap-2">
-                      {['Under $5k', '$5k – $10k', '$10k – $20k', '$20k+'].map((range) => (
-                        <button
-                          key={range}
-                          type="button"
-                          onClick={() => setBudget(range)}
-                          className={`px-4 py-2 rounded-xl text-xs font-semibold uppercase tracking-wide cursor-pointer transition-all border ${
-                            budget === range
-                              ? 'bg-theme-10 border-theme-30 text-theme'
-                              : 'bg-white/60 border-theme-20 text-slate-650 hover:text-sky-950'
-                          }`}
-                        >
-                          {range}
-                        </button>
-                      ))}
+                      
+                      {/* Custom "Other" Text Field */}
+                      <AnimatePresence>
+                        {projectType === 'Other' && (
+                          <motion.input
+                            initial={{ opacity: 0, scale: 0.95, width: 0 }}
+                            animate={{ opacity: 1, scale: 1, width: '200px' }}
+                            exit={{ opacity: 0, scale: 0.95, width: 0 }}
+                            type="text"
+                            placeholder="Specify stack..."
+                            required
+                            value={customProjectType}
+                            onChange={(e) => setCustomProjectType(e.target.value)}
+                            className="px-3.5 py-2 rounded-xl bg-white/70 border border-theme-30 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-theme text-xs font-sans"
+                          />
+                        )}
+                      </AnimatePresence>
                     </div>
                   </div>
 
                   {/* Timeline Selection */}
                   <div className="flex flex-col gap-3">
                     <span className="text-xs font-bold text-slate-600 uppercase tracking-wider font-mono">
-                      Expected Timeline
+                      {STRINGS.contact.form.timelineLabel}
                     </span>
                     <div className="flex flex-wrap gap-2">
-                      {['Immediate Sprints', '1–2 Months', 'Flexible'].map((time) => (
+                      {['ASAP (Urgent)', '1–2 Months (Standard)', 'Flexible (1+ Months)'].map((time) => (
                         <button
                           key={time}
                           type="button"
@@ -203,7 +218,7 @@ export default function ContactSection() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="flex flex-col gap-2">
                       <label htmlFor="name" className="text-xs font-bold text-slate-600 uppercase tracking-wider font-mono">
-                        Name
+                        {STRINGS.contact.form.nameLabel}
                       </label>
                       <input
                         id="name"
@@ -212,14 +227,14 @@ export default function ContactSection() {
                         required
                         value={formData.name}
                         onChange={handleChange}
-                        placeholder="John Doe"
+                        placeholder={STRINGS.contact.form.namePlaceholder}
                         className="px-4 py-3 rounded-xl bg-white/70 border border-theme-20 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-theme focus:ring-1 focus:ring-theme transition-all text-sm font-sans"
                       />
                     </div>
 
                     <div className="flex flex-col gap-2">
                       <label htmlFor="email" className="text-xs font-bold text-slate-600 uppercase tracking-wider font-mono">
-                        Email Address
+                        {STRINGS.contact.form.emailLabel}
                       </label>
                       <input
                         id="email"
@@ -228,7 +243,7 @@ export default function ContactSection() {
                         required
                         value={formData.email}
                         onChange={handleChange}
-                        placeholder="john@example.com"
+                        placeholder={STRINGS.contact.form.emailPlaceholder}
                         className="px-4 py-3 rounded-xl bg-white/70 border border-theme-20 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-theme focus:ring-1 focus:ring-theme transition-all text-sm font-sans"
                       />
                     </div>
@@ -236,7 +251,7 @@ export default function ContactSection() {
 
                   <div className="flex flex-col gap-2">
                     <label htmlFor="message" className="text-xs font-bold text-slate-600 uppercase tracking-wider font-mono">
-                      What goals are we targeting?
+                      {STRINGS.contact.form.goalsLabel}
                     </label>
                     <textarea
                       id="message"
@@ -245,7 +260,7 @@ export default function ContactSection() {
                       rows={3}
                       value={formData.message}
                       onChange={handleChange}
-                      placeholder="Outline the operational bottleneck or the mobile app concept..."
+                      placeholder={STRINGS.contact.form.goalsPlaceholder}
                       className="px-4 py-3 rounded-xl bg-white/70 border border-theme-20 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-theme focus:ring-1 focus:ring-theme transition-all text-sm font-sans resize-none"
                     />
                   </div>
@@ -262,9 +277,9 @@ export default function ContactSection() {
                     whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.99 }}
                     disabled={isSubmitting}
-                    className="w-full py-4 bg-emerald-500 hover:bg-emerald-400 text-zinc-950 font-bold text-sm tracking-wide rounded-xl flex items-center justify-center gap-2 cursor-pointer transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-emerald-500/5"
+                    className="w-full py-4 bg-theme hover:brightness-110 text-white font-bold text-sm tracking-wide rounded-xl flex items-center justify-center gap-2 cursor-pointer transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-theme-10"
                   >
-                    <span>{isSubmitting ? 'Submitting Details...' : 'Request Quote & Consultation'}</span>
+                    <span>{isSubmitting ? STRINGS.contact.form.btnSubmitting : STRINGS.contact.form.btnSubmit}</span>
                   </motion.button>
                 </motion.form>
               ) : (
@@ -277,10 +292,10 @@ export default function ContactSection() {
                 >
                   <CheckCircle2 className="w-12 h-12 text-emerald-400 mb-4" />
                   <h3 className="text-xl font-bold font-heading text-white mb-2">
-                    Planner Transmitted
+                    {STRINGS.contact.form.successTitle}
                   </h3>
                   <p className="text-zinc-400 text-xs max-w-xs leading-relaxed">
-                    Thank you. Joey will follow up with initial scheduling options within 24 hours.
+                    {STRINGS.contact.form.successDesc}
                   </p>
                 </motion.div>
               )}

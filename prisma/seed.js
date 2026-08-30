@@ -22,7 +22,7 @@ async function main() {
     name: 'Joey van der Poel',
     role: 'Full-Stack Mobile App Developer & AI Automation Engineer',
     location: 'Medemblik / Amsterdam, Netherlands',
-    availability: 'Available for 16h/week freelance contracts & small business builds',
+    availability: 'Available for freelance contracts & small business builds',
   })
   console.log('Seeded Profile:', profile.name)
 

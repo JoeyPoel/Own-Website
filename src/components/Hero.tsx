@@ -1,7 +1,7 @@
-import React from 'react'
 import { motion } from 'framer-motion'
 import type { Variants } from 'framer-motion'
-import { Cloud, ArrowRight, ArrowDown, Code2 } from 'lucide-react'
+import { Zap, ArrowRight, ArrowDown, Code2, Github, Linkedin, Smartphone } from 'lucide-react'
+import { STRINGS } from '../data/strings'
 
 interface HeroProps {
   profile: {
@@ -47,36 +47,44 @@ export default function Hero({ profile }: HeroProps) {
           animate="visible"
           className="flex flex-col items-center"
         >
-          {/* Sky Badge */}
+          {/* Rounded Profile Image */}
           <motion.div
             variants={itemVariants}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/80 border border-theme-20 text-sky-950 text-xs font-semibold tracking-wide mb-8 shadow-sm backdrop-blur-md"
+            className="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-4 border-white shadow-md mb-6 flex-shrink-0"
           >
-            <Cloud className="w-4 h-4 text-theme fill-theme-10" />
-            <span>{profile.location || 'Medemblik / Amsterdam, Netherlands'}</span>
+            <img src="/joey.jpg" alt="Joey van der Poel" className="w-full h-full object-cover" />
+          </motion.div>
+
+          {/* Availability Badge */}
+          <motion.div
+            variants={itemVariants}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 border border-theme-20 text-slate-900 text-xs font-bold tracking-wide mb-8 shadow-md backdrop-blur-md"
+          >
+            <Zap className="w-3.5 h-3.5 text-theme fill-theme-10" />
+            <span>{STRINGS.hero.availabilityBadge}</span>
           </motion.div>
 
           {/* Core Headline */}
           <motion.h1
             variants={itemVariants}
-            className="text-4xl md:text-6xl font-extrabold tracking-tight font-heading text-slate-900 max-w-4xl leading-[1.15] mb-6 drop-shadow-sm"
+            className="text-4xl md:text-6xl font-black tracking-tight font-heading text-white max-w-4xl leading-[1.12] mb-6 drop-shadow-md"
           >
             {profile.name} — Building{' '}
-            <span className="text-gradient-theme-1">
-              Mobile Apps
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-cyan-300 to-sky-400 font-extrabold">
+              {STRINGS.hero.headlineMobileApps}
             </span>{' '}
             &{' '}
-            <span className="text-gradient-theme-2">
-              AI Automations
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 via-sky-400 to-cyan-300 font-extrabold">
+              {STRINGS.hero.headlineAIAutomations}
             </span>
           </motion.h1>
 
-          {/* Subheading */}
+          {/* Subheading with high readability glass styling */}
           <motion.p
             variants={itemVariants}
-            className="text-base md:text-lg text-slate-800 font-medium max-w-2xl leading-relaxed mb-10 drop-shadow-xs"
+            className="text-sm md:text-base text-slate-900 font-semibold max-w-2xl leading-relaxed mb-10 bg-white/50 border border-white/40 shadow-sm px-6 py-4 rounded-2xl backdrop-blur-md"
           >
-            Demystifying mobile technology and applied AI into high-converting, automated business solutions.
+            {STRINGS.hero.subheading}
           </motion.p>
 
           {/* Technical Credentials Badges */}
@@ -84,14 +92,10 @@ export default function Hero({ profile }: HeroProps) {
             variants={itemVariants} 
             className="flex flex-wrap justify-center gap-3 mb-12 max-w-3xl"
           >
-            {[
-              '🎓 BSc Software Engineering',
-              '🧠 MSc Applied Artificial Intelligence',
-              profile.availability ? `⚡ ${profile.availability}` : '⚡ Available for contract builds'
-            ].map((highlight) => (
+            {STRINGS.hero.credentials.map((highlight) => (
               <span
                 key={highlight}
-                className="px-4 py-2 bg-white/75 border border-theme-20 text-sky-950 text-xs font-semibold tracking-wide rounded-xl font-mono shadow-xs backdrop-blur-md"
+                className="px-4 py-2 bg-white/80 border border-theme-20 text-slate-900 text-xs font-bold tracking-wide rounded-xl font-mono shadow-xs backdrop-blur-md"
               >
                 {highlight}
               </span>
@@ -107,7 +111,7 @@ export default function Hero({ profile }: HeroProps) {
               onClick={(e) => handleScroll(e, '#contact')}
               className="w-full sm:w-auto px-8 py-4 bg-theme hover:brightness-110 text-white font-bold text-sm tracking-wide rounded-xl flex items-center justify-center gap-2 cursor-pointer transition-all shadow-theme-10 hover:-translate-y-0.5"
             >
-              <span>Start a Project</span>
+              <span>{STRINGS.hero.btnStartProject}</span>
               <ArrowRight className="w-4 h-4" />
             </button>
 
@@ -116,14 +120,48 @@ export default function Hero({ profile }: HeroProps) {
               className="w-full sm:w-auto px-8 py-4 bg-white/80 hover:bg-white border border-theme-30 text-theme font-bold text-sm tracking-wide rounded-xl flex items-center justify-center gap-2 cursor-pointer transition-all shadow-xs backdrop-blur-md hover:-translate-y-0.5"
             >
               <Code2 className="w-4 h-4 text-theme" />
-              <span>Explore Code & Work</span>
+              <span>{STRINGS.hero.btnExploreCode}</span>
             </button>
+          </motion.div>
+
+          {/* Social Row */}
+          <motion.div
+            variants={itemVariants}
+            className="flex items-center gap-6 mt-10"
+          >
+            <a
+              href={STRINGS.links.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white hover:text-sky-300 transition-colors flex items-center gap-2 text-xs font-bold font-mono tracking-wider uppercase drop-shadow-sm"
+            >
+              <Linkedin className="w-4 h-4" />
+              <span>LinkedIn</span>
+            </a>
+            <a
+              href={STRINGS.links.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white hover:text-sky-300 transition-colors flex items-center gap-2 text-xs font-bold font-mono tracking-wider uppercase drop-shadow-sm"
+            >
+              <Github className="w-4 h-4" />
+              <span>GitHub</span>
+            </a>
+            <a
+              href={STRINGS.links.appStore}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white hover:text-sky-300 transition-colors flex items-center gap-2 text-xs font-bold font-mono tracking-wider uppercase drop-shadow-sm"
+            >
+              <Smartphone className="w-4 h-4" />
+              <span>App Store</span>
+            </a>
           </motion.div>
         </motion.div>
       </div>
 
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-70">
-        <span className="text-[10px] tracking-widest text-theme font-bold uppercase font-mono">SCROLL TO CODE</span>
+        <span className="text-[10px] tracking-widest text-theme font-bold uppercase font-mono">{STRINGS.hero.scrollIndicator}</span>
         <ArrowDown className="w-4 h-4 text-theme animate-bounce" />
       </div>
     </section>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, ArrowUpRight } from 'lucide-react'
+import { STRINGS } from '../data/strings'
 
 const navLinks = [
   { name: 'Work', href: '#work' },
@@ -80,7 +81,7 @@ export default function Navbar({ profile }: NavbarProps) {
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-theme"></span>
                 </span>
                 <span className="text-[10px] font-bold tracking-wide text-theme font-mono uppercase">
-                  {profile.availability || 'Available for Contracts'}
+                  {profile.availability || STRINGS.navbar.availabilityFallback}
                 </span>
               </div>
             </div>
@@ -118,7 +119,7 @@ export default function Navbar({ profile }: NavbarProps) {
                 onClick={(e) => handleNavClick(e, '#contact')}
                 className="inline-flex items-center gap-1.5 px-5 py-2 overflow-hidden rounded-full bg-theme hover:brightness-110 text-white font-bold text-xs tracking-wider transition-all shadow-theme-10 hover:scale-105"
               >
-                <span>Discuss a Project</span>
+                <span>{STRINGS.navbar.btnDiscuss}</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
               </a>
             </div>
@@ -157,7 +158,7 @@ export default function Navbar({ profile }: NavbarProps) {
               <div className="flex flex-col gap-8">
                 <div className="flex items-center justify-between">
                   <span className="font-heading font-bold text-theme tracking-wider text-sm font-mono">
-                    // NAVIGATION
+                    {STRINGS.navbar.navigationLabel}
                   </span>
                   <button
                     onClick={() => setMobileMenuOpen(false)}
@@ -194,7 +195,7 @@ export default function Navbar({ profile }: NavbarProps) {
                   onClick={(e) => handleNavClick(e, '#contact')}
                   className="w-full text-center py-4 rounded-xl bg-theme font-bold text-xs tracking-wider text-white shadow-lg transition-colors"
                 >
-                  Discuss a Project
+                  {STRINGS.navbar.btnDiscuss}
                 </a>
               </div>
             </motion.div>

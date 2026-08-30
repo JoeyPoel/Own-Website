@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import type { Variants } from 'framer-motion'
 import { Smartphone, Zap, Sparkles } from 'lucide-react'
 import type { Service } from '../data/portfolioData'
+import { STRINGS } from '../data/strings'
 
 const iconsMap = {
   '1': Smartphone,
@@ -44,13 +45,13 @@ export default function ServicesSection({ services }: ServicesSectionProps) {
           className="text-center mb-16"
         >
           <span className="text-[11px] font-bold tracking-widest text-theme font-mono uppercase bg-theme-10 px-3 py-1 rounded-full border border-theme-20">
-            // CONSULTANCY & SERVICES
+            {STRINGS.services.badge}
           </span>
           <h2 className="text-3xl md:text-5xl font-extrabold font-heading text-slate-850 mt-4 mb-4 drop-shadow-sm">
-            How I Help Businesses Ship & Automate
+            {STRINGS.services.title}
           </h2>
           <p className="text-slate-650 max-w-xl mx-auto text-sm md:text-base font-sans">
-            Structured development models targeting fast deliveries and measurable administrative hour savings.
+            {STRINGS.services.description}
           </p>
         </motion.div>
 
@@ -71,13 +72,10 @@ export default function ServicesSection({ services }: ServicesSectionProps) {
                 className="card-premium p-8 rounded-2xl flex flex-col justify-between hover:border-theme-30 hover:shadow-theme-10 transition-all duration-300 group"
               >
                 <div>
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="p-3 bg-white/80 border border-theme-30 rounded-xl text-theme group-hover:scale-110 transition-transform shadow-xs">
+                  <div className="mb-6">
+                    <div className="w-max p-3 bg-white/80 border border-theme-30 rounded-xl text-theme group-hover:scale-110 transition-transform shadow-xs">
                       <Icon className="w-5 h-5" />
                     </div>
-                    <span className="text-[10px] font-bold font-mono text-theme bg-theme-10 border border-theme-20 px-2.5 py-1 rounded-full">
-                      {service.timeframe}
-                    </span>
                   </div>
 
                   <h3 className="text-xl font-bold font-heading text-slate-850 mb-3">

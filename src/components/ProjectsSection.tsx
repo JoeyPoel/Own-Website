@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import ProjectCard from './ProjectCard'
 import type { Project } from '../data/portfolioData'
+import { STRINGS } from '../data/strings'
 
 interface ProjectsSectionProps {
   projects: Project[]
@@ -16,7 +17,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
   })
 
   return (
-    <section id="work" className="py-24 relative border-t border-sky-500/10">
+    <section id="work" className="py-24 relative border-t border-theme-20">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
         {/* Section Header */}
@@ -27,14 +28,14 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <span className="text-[11px] font-bold tracking-widest text-sky-600 font-mono uppercase bg-sky-500/5 px-3 py-1 rounded-full border border-sky-500/10">
-            // CASE STUDIES & WORK
+          <span className="text-[11px] font-bold tracking-widest text-theme font-mono uppercase bg-theme-10 px-3 py-1 rounded-full border border-theme-20">
+            {STRINGS.projects.badge}
           </span>
           <h2 className="text-3xl md:text-5xl font-extrabold font-heading text-slate-850 mt-4 mb-4 drop-shadow-sm">
-            Shipped Work & Production Builds
+            {STRINGS.projects.title}
           </h2>
           <p className="text-slate-650 max-w-xl mx-auto text-sm md:text-base font-sans">
-            No stock screen templates. Functional products and automation pipelines developed for startups and enterprise clients.
+            {STRINGS.projects.description}
           </p>
         </motion.div>
 
@@ -45,14 +46,14 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
           viewport={{ once: true }}
           className="flex justify-center mb-12"
         >
-          <div className="flex p-1.5 rounded-full bg-white/60 border border-sky-300/40 backdrop-blur-md">
+          <div className="flex p-1.5 rounded-full bg-white/60 border border-theme-30 backdrop-blur-md">
             {(['all', 'mobile', 'automation'] as const).map((category) => {
               const label =
                 category === 'all'
-                  ? 'All Work'
+                  ? STRINGS.projects.filters.all
                   : category === 'mobile'
-                  ? 'Mobile Apps'
-                  : 'AI & Automation'
+                  ? STRINGS.projects.filters.mobile
+                  : STRINGS.projects.filters.automation
               const isActive = filter === category
 
               return (
@@ -66,7 +67,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                   {isActive && (
                     <motion.div
                       layoutId="activeFilterTab"
-                      className="absolute inset-0 bg-sky-500/15 border border-sky-400/30 rounded-full"
+                      className="absolute inset-0 bg-theme-15 border border-theme-20 rounded-full"
                       transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                     />
                   )}

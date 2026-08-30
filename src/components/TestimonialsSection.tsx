@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import type { Variants } from 'framer-motion'
 import { Quote } from 'lucide-react'
 import type { Testimonial } from '../data/portfolioData'
+import { STRINGS } from '../data/strings'
 
 interface TestimonialsSectionProps {
   testimonials: Testimonial[]
@@ -38,17 +39,28 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <span className="text-[11px] font-bold tracking-widest text-sky-600 font-mono uppercase bg-sky-500/5 px-3 py-1 rounded-full border border-sky-500/10">
-            Endorsements
+          <span className="text-[11px] font-bold tracking-widest text-theme font-mono uppercase bg-theme-10 px-3 py-1 rounded-full border border-theme-20">
+            {STRINGS.testimonials.badge}
           </span>
           <h2 className="text-3xl md:text-5xl font-bold font-heading text-slate-850 mt-4 mb-4">
-            Feedback from Past Teams
+            {STRINGS.testimonials.title}
           </h2>
-          <p className="text-slate-600 max-w-xl mx-auto text-sm md:text-base">
-            Real recommendations from clients and managers at DEPT®, SwapClub, and Tata Steel.
+          <p className="text-slate-650 max-w-xl mx-auto text-sm md:text-base">
+            {STRINGS.testimonials.description}
           </p>
+          <div className="mt-4">
+            <a
+              href={STRINGS.links.recommendations}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 text-xs font-bold text-theme hover:underline font-mono uppercase tracking-wider"
+            >
+              <span>Verify Legitimacy on LinkedIn</span>
+              <span className="font-sans">→</span>
+            </a>
+          </div>
         </motion.div>
-
+ 
         {/* Testimonials Grid */}
         <motion.div
           variants={containerVariants}
@@ -62,16 +74,16 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
               <motion.div
                 key={testimonial.id}
                 variants={cardVariants}
-                className="card-premium p-8 rounded-2xl flex flex-col justify-between hover:border-sky-300 transition-all duration-300"
+                className="card-premium p-8 rounded-2xl flex flex-col justify-between hover:border-theme-30 hover:shadow-theme-10 transition-all duration-300"
               >
                 <div>
-                  <Quote className="w-8 h-8 text-sky-550/20 mb-6" />
+                  <Quote className="w-8 h-8 text-theme opacity-30 mb-6" />
                   <p className="text-slate-700 text-sm leading-relaxed mb-8 italic font-sans">
                     "{testimonial.quote}"
                   </p>
                 </div>
-
-                <div className="border-t border-sky-100 pt-4">
+ 
+                <div className="border-t border-theme-20 pt-4">
                   <h4 className="text-sm font-bold text-slate-850 font-heading">
                     {testimonial.author}
                   </h4>
