@@ -12,10 +12,9 @@ const iconsMap = {
 
 interface ServicesSectionProps {
   services: Service[]
-  loading?: boolean
 }
 
-export default function ServicesSection({ services, loading }: ServicesSectionProps) {
+export default function ServicesSection({ services }: ServicesSectionProps) {
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -64,51 +63,31 @@ export default function ServicesSection({ services, loading }: ServicesSectionPr
           viewport={{ once: true, margin: '-100px' }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          {loading ? (
-            Array.from({ length: 3 }).map((_, index) => (
-              <div
-                key={`skeleton-service-${index}`}
-                className="card-premium p-8 rounded-2xl flex flex-col justify-between border border-theme-20 relative overflow-hidden bg-white/40 backdrop-blur-sm"
+          {services.map((service, index) => {
+            const Icon = iconsMap[(index + 1).toString() as keyof typeof iconsMap] || Sparkles
+            return (
+              <motion.div
+                key={service.id}
+                variants={cardVariants}
+                className="card-premium p-8 rounded-2xl flex flex-col justify-between hover:border-theme-30 hover:shadow-theme-10 transition-all duration-300 group"
               >
                 <div>
                   <div className="mb-6">
-                    <div className="w-12 h-12 bg-slate-200/60 animate-pulse rounded-xl" />
-                  </div>
-                  <div className="w-2/3 h-5 bg-slate-200/60 animate-pulse rounded mb-4" />
-                  <div className="space-y-2">
-                    <div className="w-full h-3.5 bg-slate-100/60 animate-pulse rounded" />
-                    <div className="w-5/6 h-3.5 bg-slate-100/60 animate-pulse rounded" />
-                  </div>
-                </div>
-              </div>
-            ))
-          ) : (
-            services.map((service, index) => {
-              const Icon = iconsMap[(index + 1).toString() as keyof typeof iconsMap] || Sparkles
-              return (
-                <motion.div
-                  key={service.id}
-                  variants={cardVariants}
-                  className="card-premium p-8 rounded-2xl flex flex-col justify-between hover:border-theme-30 hover:shadow-theme-10 transition-all duration-300 group"
-                >
-                  <div>
-                    <div className="mb-6">
-                      <div className="w-max p-3 bg-white/80 border border-theme-30 rounded-xl text-theme group-hover:scale-110 transition-transform shadow-xs">
-                        <Icon className="w-5 h-5" />
-                      </div>
+                    <div className="w-max p-3 bg-white/80 border border-theme-30 rounded-xl text-theme group-hover:scale-110 transition-transform shadow-xs">
+                      <Icon className="w-5 h-5" />
                     </div>
-
-                    <h3 className="text-xl font-bold font-heading text-slate-850 mb-3">
-                      {service.title}
-                    </h3>
-                    <p className="text-slate-700 text-sm leading-relaxed mb-6 font-sans">
-                      {service.description}
-                    </p>
                   </div>
-                </motion.div>
-              )
-            })
-          )}
+
+                  <h3 className="text-xl font-bold font-heading text-slate-850 mb-3">
+                    {service.title}
+                  </h3>
+                  <p className="text-slate-700 text-sm leading-relaxed mb-6 font-sans">
+                    {service.description}
+                  </p>
+                </div>
+              </motion.div>
+            )
+          })}
         </motion.div>
       </div>
     </section>

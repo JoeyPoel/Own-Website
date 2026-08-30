@@ -6,10 +6,9 @@ import { STRINGS } from '../data/strings'
 
 interface TestimonialsSectionProps {
   testimonials: Testimonial[]
-  loading?: boolean
 }
 
-export default function TestimonialsSection({ testimonials, loading }: TestimonialsSectionProps) {
+export default function TestimonialsSection({ testimonials }: TestimonialsSectionProps) {
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -70,34 +69,7 @@ export default function TestimonialsSection({ testimonials, loading }: Testimoni
           viewport={{ once: true, margin: '-100px' }}
           className="grid grid-cols-1 md:grid-cols-3 gap-8"
         >
-          {loading ? (
-            Array.from({ length: 3 }).map((_, index) => (
-              <div
-                key={`skeleton-testimonial-${index}`}
-                className="card-premium p-8 rounded-2xl flex flex-col justify-between border border-theme-20 relative overflow-hidden bg-white/40 backdrop-blur-sm animate-pulse"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-6">
-                    <Quote className="w-8 h-8 text-theme opacity-10" />
-                    <div className="w-24 h-4 bg-slate-200/60 rounded-full" />
-                  </div>
-                  <div className="space-y-2 mb-8">
-                    <div className="w-full h-3.5 bg-slate-150 rounded" />
-                    <div className="w-5/6 h-3.5 bg-slate-150 rounded" />
-                    <div className="w-4/5 h-3.5 bg-slate-150 rounded" />
-                  </div>
-                </div>
-                <div className="border-t border-theme-20 pt-4 flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-slate-200/60 flex-shrink-0" />
-                  <div className="space-y-1.5 flex-1">
-                    <div className="w-2/3 h-3.5 bg-slate-200/60 rounded" />
-                    <div className="w-1/2 h-3 bg-slate-150 rounded" />
-                  </div>
-                </div>
-              </div>
-            ))
-          ) : (
-            testimonials.map((testimonial) => {
+          {testimonials.map((testimonial) => {
             // Define custom outcome badges and avatars based on the company
             let trustBadge = ""
             let avatarBg = "bg-theme-10 text-theme"
@@ -165,7 +137,7 @@ export default function TestimonialsSection({ testimonials, loading }: Testimoni
                 </div>
               </motion.div>
             )
-          }))}
+          })}
         </motion.div>
       </div>
     </section>

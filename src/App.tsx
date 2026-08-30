@@ -14,17 +14,29 @@ import type { Profile, Service, Project, Testimonial } from './data/portfolioDat
 import { STRINGS } from './data/strings'
 import fallbackData from '../prisma/dev.db.json'
 
+// Parse fallback profile information
+const initialProfile: Profile = fallbackData.profile?.[0] || {
+  name: 'Joey van der Poel',
+  role: 'Full-Stack Mobile App Developer & AI Automation Engineer',
+  location: 'Medemblik / Amsterdam, Netherlands',
+  availability: 'Available for freelance contracts & small business builds',
+}
+
+// Parse projects stack and highlights (stored as JSON-strings in seed DB file)
+const initialProjects: Project[] = (fallbackData.projects || []).map((p: any) => ({
+  ...p,
+  stack: typeof p.stack === 'string' ? JSON.parse(p.stack) : p.stack,
+  highlights: typeof p.highlights === 'string' ? JSON.parse(p.highlights) : p.highlights
+}))
+
+const initialServices: Service[] = fallbackData.services || []
+const initialTestimonials: Testimonial[] = fallbackData.testimonials || []
+
 export default function App() {
-  const [profile, setProfile] = useState<Profile>({
-    name: 'Joey van der Poel',
-    role: 'Full-Stack Mobile App Developer & AI Automation Engineer',
-    location: 'Medemblik / Amsterdam, Netherlands',
-    availability: 'Available for freelance contracts & small business builds',
-  })
-  const [services, setServices] = useState<Service[]>([])
-  const [projects, setProjects] = useState<Project[]>([])
-  const [testimonials, setTestimonials] = useState<Testimonial[]>([])
-  const [loading, setLoading] = useState(true)
+  const [profile, setProfile] = useState<Profile>(initialProfile)
+  const [services, setServices] = useState<Service[]>(initialServices)
+  const [projects, setProjects] = useState<Project[]>(initialProjects)
+  const [testimonials, setTestimonials] = useState<Testimonial[]>(initialTestimonials)
 
   useEffect(() => {
     const fetchPortfolio = async () => {
@@ -37,24 +49,7 @@ export default function App() {
         if (data.projects?.length) setProjects(data.projects)
         if (data.testimonials?.length) setTestimonials(data.testimonials)
       } catch (err) {
-        console.warn('Failed to load portfolio data from API, using static JSON fallback:', err)
-        // Fallback to static JSON file data for static deployments (like GitHub Pages)
-        if (fallbackData.profile?.[0]) {
-          setProfile(fallbackData.profile[0])
-        }
-        
-        // Parse projects stack and highlights since they are JSON-stringified in the dev.db.json seed file
-        const parsedProjects = (fallbackData.projects || []).map((p: any) => ({
-          ...p,
-          stack: typeof p.stack === 'string' ? JSON.parse(p.stack) : p.stack,
-          highlights: typeof p.highlights === 'string' ? JSON.parse(p.highlights) : p.highlights
-        }))
-        
-        setServices(fallbackData.services || [])
-        setProjects(parsedProjects)
-        setTestimonials(fallbackData.testimonials || [])
-      } finally {
-        setLoading(false)
+        console.warn('Failed to load portfolio data from API, already using local static JSON data:', err)
       }
     }
     fetchPortfolio()
@@ -74,10 +69,10 @@ export default function App() {
         <AboutSection />
         <TracksSection />
         <AutomationVisualizer />
-        <ServicesSection services={services} loading={loading} />
+        <ServicesSection services={services} />
         <ProcessSection />
-        <ProjectsSection projects={projects} loading={loading} />
-        <TestimonialsSection testimonials={testimonials} loading={loading} />
+        <ProjectsSection projects={projects} />
+        <TestimonialsSection testimonials={testimonials} />
         <ContactSection />
       </main>
 

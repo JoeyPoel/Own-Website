@@ -6,10 +6,9 @@ import { STRINGS } from '../data/strings'
 
 interface ProjectsSectionProps {
   projects: Project[]
-  loading?: boolean
 }
 
-export default function ProjectsSection({ projects, loading }: ProjectsSectionProps) {
+export default function ProjectsSection({ projects }: ProjectsSectionProps) {
   const [filter, setFilter] = useState<'all' | 'mobile' | 'automation'>('all')
 
   const filteredProjects = projects.filter((project) => {
@@ -54,7 +53,7 @@ export default function ProjectsSection({ projects, loading }: ProjectsSectionPr
                   ? STRINGS.projects.filters.all
                   : category === 'mobile'
                   ? STRINGS.projects.filters.mobile
-                  : STRINGS.projects.filters.automation
+                  : category === 'mobile' ? '' : STRINGS.projects.filters.automation
               const isActive = filter === category
 
               return (
@@ -81,40 +80,11 @@ export default function ProjectsSection({ projects, loading }: ProjectsSectionPr
 
         {/* Stacked Cases */}
         <div className="flex flex-col gap-10">
-          {loading ? (
-            Array.from({ length: 3 }).map((_, index) => (
-              <div 
-                key={`skeleton-project-${index}`}
-                className="card-premium rounded-2xl overflow-hidden flex flex-col lg:flex-row shadow-xl border border-sky-200 bg-white/40 backdrop-blur-sm h-[320px] animate-pulse"
-              >
-                {/* Visual Area Skeleton */}
-                <div className="lg:w-1/2 p-8 flex items-center justify-center border-b lg:border-b-0 lg:border-r border-sky-200/80">
-                  <div className="w-36 h-[200px] bg-slate-200/60 rounded-xl" />
-                </div>
-                {/* Content Area Skeleton */}
-                <div className="lg:w-1/2 p-8 flex flex-col justify-between">
-                  <div>
-                    <div className="w-1/3 h-3.5 bg-slate-250 rounded mb-4" />
-                    <div className="w-2/3 h-6 bg-slate-250 rounded mb-4" />
-                    <div className="space-y-2 mb-6">
-                      <div className="w-full h-3.5 bg-slate-150 rounded" />
-                      <div className="w-5/6 h-3.5 bg-slate-150 rounded" />
-                    </div>
-                  </div>
-                  <div className="flex gap-2">
-                    <div className="w-16 h-5 bg-slate-200/60 rounded-full" />
-                    <div className="w-16 h-5 bg-slate-200/60 rounded-full" />
-                  </div>
-                </div>
-              </div>
-            ))
-          ) : (
-            <AnimatePresence mode="popLayout">
-              {filteredProjects.map((project) => (
-                <ProjectCard key={project.id} project={project} />
-              ))}
-            </AnimatePresence>
-          )}
+          <AnimatePresence mode="popLayout">
+            {filteredProjects.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))}
+          </AnimatePresence>
         </div>
       </div>
     </section>
