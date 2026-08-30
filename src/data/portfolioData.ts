@@ -18,6 +18,7 @@ export interface Project {
   linkLabel?: string | null
   linkUrl?: string | null
   image: string
+  status?: string | null
 }
 
 export interface Testimonial {

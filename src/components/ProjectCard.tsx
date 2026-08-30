@@ -32,10 +32,6 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                 alt={project.title}
                 className="w-full h-full object-cover opacity-95 select-none pointer-events-none"
               />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-900/80 via-slate-900/30 to-transparent p-2.5 pt-6">
-                <span className="text-[7px] font-bold font-mono text-sky-400 block tracking-wider uppercase mb-0.5">Live Release</span>
-                <span className="text-[9px] font-black text-white leading-tight block truncate">{project.title}</span>
-              </div>
             </div>
           </div>
         ) : (
@@ -49,12 +45,14 @@ export default function ProjectCard({ project }: ProjectCardProps) {
               <span className="text-[9px] font-mono text-slate-500 ml-2 uppercase">automation_monitor.sh</span>
             </div>
             {/* Terminal contents with image */}
-            <div className="relative p-2 bg-slate-950 flex-grow aspect-video overflow-hidden flex flex-col justify-between">
-              <img
-                src={project.image}
-                alt={project.title}
-                className="w-full h-32 object-cover opacity-85 rounded border border-slate-850"
-              />
+            <div className="relative p-2.5 bg-slate-950 flex-grow flex flex-col justify-between">
+              <div className="w-full h-40 bg-black rounded border border-slate-850 flex items-center justify-center overflow-hidden">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="max-w-full max-h-full object-contain opacity-95 select-none pointer-events-none"
+                />
+              </div>
               <div className="bg-slate-900 px-3 py-1.5 rounded border border-slate-800 text-[8px] font-mono text-cyan-400 flex items-center justify-between mt-2">
                 <span>$ python pipeline.py --run</span>
                 <span className="text-emerald-400 animate-pulse font-bold">● Active</span>
@@ -71,19 +69,9 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             <span className="text-[10px] font-bold font-mono tracking-widest text-theme uppercase">
               {isMobile ? 'iOS & Android Native App' : 'AI Automation & RPA Pipeline'}
             </span>
-            {project.title.includes("Tracks") && (
-              <span className="text-[8px] font-bold font-mono px-2 py-0.5 rounded-md bg-emerald-600 text-white uppercase tracking-wider font-semibold shadow-xs">
-                App Store Published
-              </span>
-            )}
-            {project.title.includes("Steel") && (
-              <span className="text-[8px] font-bold font-mono px-2 py-0.5 rounded-md bg-slate-900 text-white uppercase tracking-wider font-semibold shadow-xs">
-                Enterprise Shipped
-              </span>
-            )}
-            {project.title.includes("DEPT") && (
-              <span className="text-[8px] font-bold font-mono px-2 py-0.5 rounded-md bg-purple-600 text-white uppercase tracking-wider font-semibold shadow-xs">
-                AI MVP Delivered
+            {project.status && (
+              <span className="text-[8px] font-bold font-mono px-2 py-0.5 rounded bg-theme-10 border border-theme-20 text-theme uppercase tracking-wider shadow-xs">
+                {project.status}
               </span>
             )}
           </div>

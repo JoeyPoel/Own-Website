@@ -23,6 +23,7 @@ model Project {
   linkLabel  String?
   linkUrl    String?
   image      String
+  status     String?
 }
 
 model Testimonial {
