@@ -44,7 +44,7 @@ export default function CloudToCodeBackground() {
 
     // Generate Cloud Formations (Larger, flatter bottom shape)
     const clouds: CloudGroup[] = []
-    const cloudCount = Math.max(5, Math.floor(width / 185))
+    const cloudCount = Math.max(7, Math.floor(width / 145))
 
     for (let i = 0; i < cloudCount; i++) {
       // Spread clouds across the viewport and off-screen to the left to create a continuous stream
@@ -123,17 +123,18 @@ export default function CloudToCodeBackground() {
         const t = scrollProgress / 0.5
         // Top: Deeper Blue (22, 54, 165) -> Richer Blue (130, 175, 240)
         r1 = Math.round(22 + (130 - 22) * t)
-        g1 = Math.round(54 + (175 - 54) * t)
+        g1 = Math.round(54 + (175 - 54) * t + Math.sin(t * Math.PI) * 15)
         b1 = Math.round(165 + (240 - 165) * t)
 
         // Middle: Bright sky blue (40, 155, 235) -> Deep peach (240, 180, 135)
+        // Add a curved transition to keep the colors saturated and avoid a gray/muddy midpoint
         r2 = Math.round(40 + (240 - 40) * t)
-        g2 = Math.round(155 + (180 - 155) * t)
-        b2 = Math.round(235 + (135 - 235) * t)
+        g2 = Math.round(155 + (180 - 155) * t + Math.sin(t * Math.PI) * 35)
+        b2 = Math.round(235 + (135 - 235) * t + Math.sin(t * Math.PI) * 15)
 
         // Bottom: Soft sky blue (180, 220, 250) -> Warm yellow (245, 220, 115)
         r3 = Math.round(180 + (245 - 180) * t)
-        g3 = Math.round(220 + (220 - 220) * t)
+        g3 = Math.round(220 + (220 - 220) * t + Math.sin(t * Math.PI) * 20)
         b3 = Math.round(250 + (115 - 250) * t)
       } else {
         const t = (scrollProgress - 0.5) / 0.5
@@ -195,9 +196,9 @@ export default function CloudToCodeBackground() {
       document.documentElement.style.setProperty('--theme-accent', `rgb(${sr}, ${sg}, ${sb})`)
       document.documentElement.style.setProperty('--theme-accent-rgb', `${sr}, ${sg}, ${sb}`)
 
-      // Calculate Morph Ratios
-      const cloudPuffOpacity = Math.max(0, 1 - scrollProgress * 1.6)
-      const codeOpacity = Math.min(1, scrollProgress * 1.5)
+      // Calculate Morph Ratios (stretched transition to morph clouds into code slower)
+      const cloudPuffOpacity = Math.max(0, 1 - scrollProgress * 1.05)
+      const codeOpacity = Math.min(1, scrollProgress * 0.95)
 
       // Interpolate Cloud Colors on scroll (softer morning to peach-rose tones)
       let cr, cg, cb

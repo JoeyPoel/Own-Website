@@ -58,7 +58,6 @@ export default function ContactSection() {
 
   return (
     <section id="contact" className="py-24 relative bg-dot-pattern border-t border-theme-20">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/30 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
