@@ -12,6 +12,7 @@ import TestimonialsSection from './components/TestimonialsSection'
 import ContactSection from './components/ContactSection'
 import type { Profile, Service, Project, Testimonial } from './data/portfolioData'
 import { STRINGS } from './data/strings'
+import fallbackData from '../prisma/dev.db.json'
 
 export default function App() {
   const [profile, setProfile] = useState<Profile>({
@@ -36,7 +37,22 @@ export default function App() {
         if (data.projects?.length) setProjects(data.projects)
         if (data.testimonials?.length) setTestimonials(data.testimonials)
       } catch (err) {
-        console.error('Failed to load portfolio data:', err)
+        console.warn('Failed to load portfolio data from API, using static JSON fallback:', err)
+        // Fallback to static JSON file data for static deployments (like GitHub Pages)
+        if (fallbackData.profile?.[0]) {
+          setProfile(fallbackData.profile[0])
+        }
+        
+        // Parse projects stack and highlights since they are JSON-stringified in the dev.db.json seed file
+        const parsedProjects = (fallbackData.projects || []).map((p: any) => ({
+          ...p,
+          stack: typeof p.stack === 'string' ? JSON.parse(p.stack) : p.stack,
+          highlights: typeof p.highlights === 'string' ? JSON.parse(p.highlights) : p.highlights
+        }))
+        
+        setServices(fallbackData.services || [])
+        setProjects(parsedProjects)
+        setTestimonials(fallbackData.testimonials || [])
       } finally {
         setLoading(false)
       }

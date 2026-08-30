@@ -64,6 +64,7 @@ function apiPlugin() {
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/Own-Website/',
   plugins: [react(), tailwindcss(), apiPlugin()],
   esbuild: {
     drop: ['console', 'debugger'],
