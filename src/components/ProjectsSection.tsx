@@ -80,7 +80,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
 
         {/* Stacked Cases */}
         <div className="flex flex-col gap-10">
-          <AnimatePresence mode="popLayout">
+          <AnimatePresence mode="wait">
             {filteredProjects.map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))}

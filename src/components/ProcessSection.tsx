@@ -58,7 +58,7 @@ export default function ProcessSection() {
                   className="flex flex-col items-center text-center group"
                 >
                   {/* Step Circle Badge */}
-                  <div className="relative flex items-center justify-center w-20 h-20 rounded-full bg-white border border-theme-30 shadow-lg group-hover:border-theme group-hover:shadow-theme-10 transition-all duration-300 mb-8 z-15">
+                  <div className="relative flex items-center justify-center w-20 h-20 rounded-full bg-white border border-theme-30 shadow-lg group-hover:border-theme group-hover:shadow-theme-10 transition duration-300 mb-8 z-15">
                     {/* Pulsing overlay */}
                     <div className="absolute inset-0 rounded-full bg-theme-10 scale-100 group-hover:scale-110 transition-transform duration-300 opacity-0 group-hover:opacity-100" />
                     

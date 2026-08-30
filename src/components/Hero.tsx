@@ -109,7 +109,7 @@ export default function Hero({ profile }: HeroProps) {
           >
             <button
               onClick={(e) => handleScroll(e, '#contact')}
-              className="w-full sm:w-auto px-8 py-4 bg-theme hover:brightness-110 text-white font-bold text-sm tracking-wide rounded-xl flex items-center justify-center gap-2 cursor-pointer transition-all shadow-theme-10 hover:-translate-y-0.5"
+              className="w-full sm:w-auto px-8 py-4 bg-theme hover:brightness-110 text-white font-bold text-sm tracking-wide rounded-xl flex items-center justify-center gap-2 cursor-pointer transition shadow-theme-10 hover:-translate-y-0.5"
             >
               <span>{STRINGS.hero.btnStartProject}</span>
               <ArrowRight className="w-4 h-4" />
@@ -117,7 +117,7 @@ export default function Hero({ profile }: HeroProps) {
 
             <button
               onClick={(e) => handleScroll(e, '#work')}
-              className="w-full sm:w-auto px-8 py-4 bg-white/80 hover:bg-white border border-theme-30 text-theme font-bold text-sm tracking-wide rounded-xl flex items-center justify-center gap-2 cursor-pointer transition-all shadow-xs backdrop-blur-md hover:-translate-y-0.5"
+              className="w-full sm:w-auto px-8 py-4 bg-white/80 hover:bg-white border border-theme-30 text-theme font-bold text-sm tracking-wide rounded-xl flex items-center justify-center gap-2 cursor-pointer transition shadow-xs backdrop-blur-md hover:-translate-y-0.5"
             >
               <Code2 className="w-4 h-4 text-theme" />
               <span>{STRINGS.hero.btnExploreCode}</span>

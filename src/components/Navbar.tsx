@@ -23,25 +23,30 @@ export default function Navbar({ profile }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   useEffect(() => {
+    // Cache the DOM elements on mount to avoid layout thrashing via querySelector on every scroll tick
+    const sectionElements = navLinks.map(link => ({
+      id: link.href.substring(1),
+      element: document.querySelector(link.href) as HTMLElement | null
+    }))
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20)
 
-      const sections = navLinks.map(link => document.querySelector(link.href))
-      const scrollPosition = window.scrollY + 100
+      const scrollPosition = window.scrollY + 120
 
-      sections.forEach(section => {
-        if (!section) return
-        const top = (section as HTMLElement).offsetTop
-        const height = (section as HTMLElement).offsetHeight
-        const id = section.getAttribute('id')
+      for (const section of sectionElements) {
+        if (!section.element) continue
+        const top = section.element.offsetTop
+        const height = section.element.offsetHeight
 
         if (scrollPosition >= top && scrollPosition < top + height) {
-          if (id) setActiveSection(id)
+          setActiveSection(section.id)
+          break // Found the current active section, exit loop early
         }
-      })
+      }
     }
 
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 

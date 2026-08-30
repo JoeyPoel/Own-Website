@@ -11,12 +11,11 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 
   return (
     <motion.div
-      layout
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20 }}
       transition={{ duration: 0.4 }}
-      className="card-premium rounded-2xl overflow-hidden flex flex-col lg:flex-row shadow-xl border border-sky-200 hover:border-sky-300 transition-all duration-300"
+      className="card-premium rounded-2xl overflow-hidden flex flex-col lg:flex-row shadow-xl border border-sky-200 hover:border-sky-300 transition-[border-color] duration-300"
     >
       {/* Visual Mockup Area */}
       <div className="lg:w-1/2 p-8 bg-white/40 flex items-center justify-center border-b lg:border-b-0 lg:border-r border-sky-200/80 min-h-[300px]">

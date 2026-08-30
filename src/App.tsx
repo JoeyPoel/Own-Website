@@ -50,6 +50,8 @@ export default function App() {
         if (data.testimonials?.length) setTestimonials(data.testimonials)
       } catch (err) {
         console.warn('Failed to load portfolio data from API, already using local static JSON data:', err)
+      } finally {
+        document.body.classList.add('loaded')
       }
     }
     fetchPortfolio()
@@ -77,7 +79,7 @@ export default function App() {
       </main>
 
       {/* Footer Links */}
-      <footer className="relative z-10 w-full border-t border-theme-20 py-8 bg-white/20 backdrop-blur-md">
+      <footer className="relative z-10 w-full border-t border-theme-20 py-8 bg-white/90">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-slate-500 font-mono">
             &copy; {new Date().getFullYear()} Joey van der Poel. All rights reserved.

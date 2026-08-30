@@ -56,25 +56,19 @@ body {
 
 /* Translucent Glassmorphic Cards suited for Sky & Code Canvas */
 .card-premium {
-  background: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.90);
   border: 1px solid rgba(14, 165, 233, 0.22);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
   box-shadow: 0 10px 30px -10px rgba(14, 165, 233, 0.1);
 }
 
 .card-light-glass {
-  background: rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.92);
   border: 1px solid rgba(186, 230, 253, 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
   box-shadow: 0 10px 30px -10px rgba(14, 165, 233, 0.15);
 }
 
 .glass-nav {
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(255, 255, 255, 0.88);
   border: 1px solid rgba(14, 165, 233, 0.25);
 }
 
