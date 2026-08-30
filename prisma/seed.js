@@ -35,7 +35,7 @@ async function main() {
     },
     {
       title: 'Business Process & Document Automation',
-      description: 'We connect your documents, spreadsheets, and mainframe tools with custom AI extraction pipelines, eliminating hours of manual typing.',
+      description: 'I connect your documents, spreadsheets, and mainframe tools with custom AI extraction pipelines, eliminating hours of manual typing.',
       timeframe: '3–4 Weeks Delivery',
     },
     {

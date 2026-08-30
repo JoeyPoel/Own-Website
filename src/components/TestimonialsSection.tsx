@@ -6,9 +6,10 @@ import { STRINGS } from '../data/strings'
 
 interface TestimonialsSectionProps {
   testimonials: Testimonial[]
+  loading?: boolean
 }
 
-export default function TestimonialsSection({ testimonials }: TestimonialsSectionProps) {
+export default function TestimonialsSection({ testimonials, loading }: TestimonialsSectionProps) {
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -69,31 +70,102 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
           viewport={{ once: true, margin: '-100px' }}
           className="grid grid-cols-1 md:grid-cols-3 gap-8"
         >
-          {testimonials.map((testimonial) => {
+          {loading ? (
+            Array.from({ length: 3 }).map((_, index) => (
+              <div
+                key={`skeleton-testimonial-${index}`}
+                className="card-premium p-8 rounded-2xl flex flex-col justify-between border border-theme-20 relative overflow-hidden bg-white/40 backdrop-blur-sm animate-pulse"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-6">
+                    <Quote className="w-8 h-8 text-theme opacity-10" />
+                    <div className="w-24 h-4 bg-slate-200/60 rounded-full" />
+                  </div>
+                  <div className="space-y-2 mb-8">
+                    <div className="w-full h-3.5 bg-slate-150 rounded" />
+                    <div className="w-5/6 h-3.5 bg-slate-150 rounded" />
+                    <div className="w-4/5 h-3.5 bg-slate-150 rounded" />
+                  </div>
+                </div>
+                <div className="border-t border-theme-20 pt-4 flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-slate-200/60 flex-shrink-0" />
+                  <div className="space-y-1.5 flex-1">
+                    <div className="w-2/3 h-3.5 bg-slate-200/60 rounded" />
+                    <div className="w-1/2 h-3 bg-slate-150 rounded" />
+                  </div>
+                </div>
+              </div>
+            ))
+          ) : (
+            testimonials.map((testimonial) => {
+            // Define custom outcome badges and avatars based on the company
+            let trustBadge = ""
+            let avatarBg = "bg-theme-10 text-theme"
+            let initial = "JD"
+            let logoUrl = ""
+            
+            if (testimonial.company.toLowerCase().includes('swap')) {
+              trustBadge = "Circular App MVP Launched"
+              avatarBg = "bg-white border border-slate-200"
+              initial = "MK"
+              logoUrl = "/swapclub.jpg"
+            } else if (testimonial.company.toLowerCase().includes('dept')) {
+              trustBadge = "Computer Vision MVP Shipped"
+              avatarBg = "bg-black border border-slate-800"
+              initial = "RN"
+              logoUrl = "/dept.jpg"
+            } else if (testimonial.company.toLowerCase().includes('tata')) {
+              trustBadge = "90% Process Overhead Reduced"
+              avatarBg = "bg-white border border-slate-200"
+              initial = "SO"
+              logoUrl = "/tata.png"
+            }
+
             return (
               <motion.div
                 key={testimonial.id}
                 variants={cardVariants}
-                className="card-premium p-8 rounded-2xl flex flex-col justify-between hover:border-theme-30 hover:shadow-theme-10 transition-all duration-300"
+                className="card-premium p-8 rounded-2xl flex flex-col justify-between hover:border-theme-30 hover:shadow-theme-10 transition-all duration-300 relative overflow-hidden"
               >
                 <div>
-                  <Quote className="w-8 h-8 text-theme opacity-30 mb-6" />
+                  <div className="flex items-center justify-between mb-6">
+                    <Quote className="w-8 h-8 text-theme opacity-30" />
+                    {trustBadge && (
+                      <span className="text-[9px] font-bold font-mono px-2.5 py-1 rounded-full bg-slate-900 text-white shadow-xs tracking-wider uppercase">
+                        {trustBadge}
+                      </span>
+                    )}
+                  </div>
                   <p className="text-slate-700 text-sm leading-relaxed mb-8 italic font-sans">
                     "{testimonial.quote}"
                   </p>
                 </div>
  
-                <div className="border-t border-theme-20 pt-4">
-                  <h4 className="text-sm font-bold text-slate-850 font-heading">
-                    {testimonial.author}
-                  </h4>
-                  <p className="text-[11px] font-mono text-slate-500 mt-0.5 uppercase">
-                    {testimonial.role} &bull; {testimonial.company}
-                  </p>
+                <div className="border-t border-theme-20 pt-4 flex items-center gap-3">
+                  {/* Clean Initial Avatar or Company Logo */}
+                  <div className={`w-10 h-10 rounded-full ${avatarBg} flex items-center justify-center font-bold text-xs font-mono shadow-inner flex-shrink-0 overflow-hidden`}>
+                    {logoUrl ? (
+                      <img 
+                        src={logoUrl} 
+                        alt={`${testimonial.company} Logo`} 
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      initial
+                    )}
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-bold text-slate-850 font-heading">
+                      {testimonial.author}
+                    </h4>
+                    <p className="text-[10px] font-mono text-slate-500 mt-0.5 uppercase">
+                      {testimonial.role} &bull; {testimonial.company}
+                    </p>
+                  </div>
                 </div>
               </motion.div>
             )
-          })}
+          }))}
         </motion.div>
       </div>
     </section>

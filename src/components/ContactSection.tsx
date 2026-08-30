@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { CheckCircle2, Mail, Linkedin, Clock, Github, Smartphone } from 'lucide-react'
+import { CheckCircle2, Mail, Linkedin, Github, Smartphone } from 'lucide-react'
 import { STRINGS } from '../data/strings'
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
   const [projectType, setProjectType] = useState('Mobile App')
   const [customProjectType, setCustomProjectType] = useState('')
-  const [budget, setBudget] = useState('Not Specified')
+  const budget = 'Not Specified'
   const [timeline, setTimeline] = useState('1–2 Months (Standard)')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
@@ -21,6 +21,7 @@ export default function ContactSection() {
     setIsSubmitting(true)
     setErrorMsg('')
     try {
+      const pType = projectType === 'Other' ? `Other: ${customProjectType}` : projectType
       const response = await fetch('/api/inquiry', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -28,7 +29,7 @@ export default function ContactSection() {
           name: formData.name,
           email: formData.email,
           message: formData.message,
-          projectType: projectType === 'Other' ? `Other: ${customProjectType}` : projectType,
+          projectType: pType,
           budget,
           timeline,
         }),
@@ -271,16 +272,18 @@ export default function ContactSection() {
                     </div>
                   )}
 
-                  {/* Submit button */}
-                  <motion.button
-                    type="submit"
-                    whileHover={{ scale: 1.01 }}
-                    whileTap={{ scale: 0.99 }}
-                    disabled={isSubmitting}
-                    className="w-full py-4 bg-theme hover:brightness-110 text-white font-bold text-sm tracking-wide rounded-xl flex items-center justify-center gap-2 cursor-pointer transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-theme-10"
-                  >
-                    <span>{isSubmitting ? STRINGS.contact.form.btnSubmitting : STRINGS.contact.form.btnSubmit}</span>
-                  </motion.button>
+                  {/* Single Action Button */}
+                  <div className="flex flex-col items-center gap-4 mt-2">
+                    <motion.button
+                      type="submit"
+                      whileHover={{ scale: 1.01 }}
+                      whileTap={{ scale: 0.99 }}
+                      disabled={isSubmitting}
+                      className="w-full py-4 bg-theme hover:brightness-110 text-white font-bold text-sm tracking-wide rounded-xl flex items-center justify-center gap-2 cursor-pointer transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-theme-10"
+                    >
+                      <span>{isSubmitting ? STRINGS.contact.form.btnSubmitting : "Send Inquiry"}</span>
+                    </motion.button>
+                  </div>
                 </motion.form>
               ) : (
                 <motion.div

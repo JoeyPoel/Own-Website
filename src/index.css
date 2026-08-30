@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@theme {
+  --color-slate-650: #2d3a4f; /* Global override mapping slate-650 to high-contrast dark slate */
+}
+
 :root {
   --font-sans: 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
@@ -7,7 +11,7 @@
 
 html {
   scroll-behavior: smooth;
-  background-color: #7dd3fc; /* Fallback sky blue top */
+  background-color: #ffffff; /* Fallback white background to prevent flashing */
   color: #0f172a;
   font-family: var(--font-sans);
 }

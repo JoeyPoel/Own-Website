@@ -4,14 +4,15 @@ export const STRINGS = {
     headlineStart: "Joey van der Poel — Building",
     headlineMobileApps: "Mobile Apps",
     headlineAIAutomations: "AI Automations",
-    subheading: "No idea is too crazy, and no pipeline is too complex—if you can think it, I can build it. Let's engineer your next mobile app or AI automation from scratch.",
+    subheading: "Building production-ready mobile apps and eliminating manual operations with custom AI workflows. No idea is too crazy, and no pipeline is too complex.",
     credentials: [
       "🎓 BSc Software Engineering",
-      "🧠 MSc Applied Artificial Intelligence"
+      "🧠 MSc Applied Artificial Intelligence",
+      "🚀 Full-Lifecycle Architecture & Deployment"
     ],
     btnStartProject: "Start a Project",
     btnExploreCode: "Explore Code & Work",
-    scrollIndicator: "SCROLL TO CODE"
+    scrollIndicator: "SCROLL TO EXPLORE"
   },
   navbar: {
     availabilityFallback: "Available for Contracts",
@@ -80,7 +81,8 @@ export const STRINGS = {
       emailPlaceholder: "john@example.com",
       goalsLabel: "What goals are we targeting?",
       goalsPlaceholder: "Outline the operational bottleneck or the mobile app concept...",
-      btnSubmit: "Submit Inquiry",
+      btnSubmit: "Get a Free Project Estimate",
+      btnBookCall: "Schedule an Intro Call",
       btnSubmitting: "Sending...",
       successTitle: "Thank you!",
       successDesc: "Your project intake details have been submitted successfully. I will review your goals and follow up in 24 hours."
@@ -90,6 +92,7 @@ export const STRINGS = {
     linkedin: "https://www.linkedin.com/in/joey-van-der-poel-974203302/",
     appStore: "https://apps.apple.com/nl/app/tracks-taps/id6756650785?l=en-GB",
     github: "https://github.com/JoeyPoel",
-    recommendations: "https://www.linkedin.com/in/joey-van-der-poel-974203302/details/recommendations/?detailScreenTabIndex=0"
+    recommendations: "https://www.linkedin.com/in/joey-van-der-poel-974203302/details/recommendations/?detailScreenTabIndex=0",
+    cal: "https://cal.com/joeywognum"
   }
 }

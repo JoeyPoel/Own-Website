@@ -21,49 +21,43 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       {/* Visual Mockup Area */}
       <div className="lg:w-1/2 p-8 bg-white/40 flex items-center justify-center border-b lg:border-b-0 lg:border-r border-sky-200/80 min-h-[300px]">
         {isMobile ? (
-          /* Phone Bezel Container */
-          <div className="relative mx-auto border-slate-350 bg-white border-[10px] rounded-[2.2rem] h-[340px] w-[170px] shadow-2xl overflow-hidden flex-shrink-0">
-            {/* Camera notch / Speaker */}
-            <div className="absolute top-2 left-1/2 -translate-x-1/2 bg-slate-300 h-1.5 w-12 rounded-full z-20" />
-            {/* Screen */}
-            <div className="w-full h-full relative z-10 bg-slate-100">
+          /* Same Phone Bezel Container as Tracks Section (scaled down to fit) */
+          <div className="relative border-[6px] border-slate-200 bg-white rounded-[28px] p-1 shadow-2xl overflow-hidden flex-shrink-0 w-[160px] aspect-[9/19.5] border-b-[7px]">
+            {/* Dynamic Island / Notch */}
+            <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-10 h-2 bg-slate-900 rounded-full z-20" />
+            {/* Screen container */}
+            <div className="w-full h-full rounded-[20px] overflow-hidden bg-slate-100 border border-slate-100 relative">
               <img
                 src={project.image}
                 alt={project.title}
-                className="w-full h-full object-cover opacity-95"
+                className="w-full h-full object-cover opacity-95 select-none pointer-events-none"
               />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-900/80 via-slate-900/30 to-transparent p-3 pt-8">
-                <span className="text-[8px] font-bold font-mono text-sky-400 block tracking-wider uppercase mb-0.5">Live Release</span>
-                <span className="text-[10px] font-black text-white leading-tight block truncate">{project.title}</span>
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-900/80 via-slate-900/30 to-transparent p-2.5 pt-6">
+                <span className="text-[7px] font-bold font-mono text-sky-400 block tracking-wider uppercase mb-0.5">Live Release</span>
+                <span className="text-[9px] font-black text-white leading-tight block truncate">{project.title}</span>
               </div>
             </div>
           </div>
         ) : (
-          /* Automation Pipeline Bezel / Dashboard Mock */
-          <div className="w-full max-w-sm rounded-xl border border-sky-300 bg-white/90 shadow-2xl overflow-hidden flex flex-col">
+          /* Terminal Window Mockup displaying its own project image */
+          <div className="w-full max-w-sm rounded-xl border border-sky-250 bg-white/90 shadow-2xl overflow-hidden flex flex-col">
             {/* Window controls */}
-            <div className="flex items-center gap-1.5 px-4 py-3 bg-slate-50 border-b border-sky-200/60">
-              <div className="w-2.5 h-2.5 rounded-full bg-slate-300" />
-              <div className="w-2.5 h-2.5 rounded-full bg-slate-300" />
-              <div className="w-2.5 h-2.5 rounded-full bg-slate-300" />
-              <span className="text-[9px] font-mono text-slate-500 ml-2 uppercase">rpa_pipeline_process.log</span>
+            <div className="flex items-center gap-1.5 px-4 py-2.5 bg-slate-50 border-b border-sky-200/60">
+              <div className="w-2 h-2 rounded-full bg-red-400" />
+              <div className="w-2 h-2 rounded-full bg-yellow-400" />
+              <div className="w-2 h-2 rounded-full bg-green-400" />
+              <span className="text-[9px] font-mono text-slate-500 ml-2 uppercase">automation_monitor.sh</span>
             </div>
-            {/* Terminal contents */}
-            <div className="p-4 flex-grow font-mono text-[10px] text-slate-700 flex flex-col gap-2 bg-white/40">
-              <div className="flex items-center gap-2 text-sky-600">
-                <span>$</span>
-                <span>initialize_model_inference --input_path=data/docs</span>
-              </div>
-              <div className="text-slate-500">[SYSTEM] Loaded weights successfully.</div>
-              <div className="text-slate-600">[PROCESS] Matching line items: 99.4% accuracy</div>
-              <div className="text-slate-600">[SUCCESS] Automated DB registry complete (Tata Steel pipeline)</div>
-              {/* Architecture tags */}
-              <div className="flex flex-wrap gap-1 mt-4">
-                {project.stack.map(tag => (
-                  <span key={tag} className="text-[8px] px-2 py-0.5 bg-white border border-sky-250 text-slate-500 font-mono">
-                    {tag}
-                  </span>
-                ))}
+            {/* Terminal contents with image */}
+            <div className="relative p-2 bg-slate-950 flex-grow aspect-video overflow-hidden flex flex-col justify-between">
+              <img
+                src={project.image}
+                alt={project.title}
+                className="w-full h-32 object-cover opacity-85 rounded border border-slate-850"
+              />
+              <div className="bg-slate-900 px-3 py-1.5 rounded border border-slate-800 text-[8px] font-mono text-cyan-400 flex items-center justify-between mt-2">
+                <span>$ python pipeline.py --run</span>
+                <span className="text-emerald-400 animate-pulse font-bold">● Active</span>
               </div>
             </div>
           </div>
@@ -73,9 +67,26 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       {/* Case Details */}
       <div className="lg:w-1/2 p-8 flex flex-col justify-between">
         <div>
-          <span className="text-[10px] font-bold font-mono tracking-widest text-theme uppercase mb-3 block">
-            {isMobile ? 'iOS & Android Native App' : 'AI Automation & RPA Pipeline'}
-          </span>
+          <div className="flex items-center justify-between gap-2 mb-3">
+            <span className="text-[10px] font-bold font-mono tracking-widest text-theme uppercase">
+              {isMobile ? 'iOS & Android Native App' : 'AI Automation & RPA Pipeline'}
+            </span>
+            {project.title.includes("Tracks") && (
+              <span className="text-[8px] font-bold font-mono px-2 py-0.5 rounded-md bg-emerald-600 text-white uppercase tracking-wider font-semibold shadow-xs">
+                App Store Published
+              </span>
+            )}
+            {project.title.includes("Steel") && (
+              <span className="text-[8px] font-bold font-mono px-2 py-0.5 rounded-md bg-slate-900 text-white uppercase tracking-wider font-semibold shadow-xs">
+                Enterprise Shipped
+              </span>
+            )}
+            {project.title.includes("DEPT") && (
+              <span className="text-[8px] font-bold font-mono px-2 py-0.5 rounded-md bg-purple-600 text-white uppercase tracking-wider font-semibold shadow-xs">
+                AI MVP Delivered
+              </span>
+            )}
+          </div>
           <h3 className="text-xl font-bold font-heading text-slate-800 mb-3">
             {project.title}
           </h3>

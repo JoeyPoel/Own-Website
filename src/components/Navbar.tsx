@@ -73,7 +73,7 @@ export default function Navbar({ profile }: NavbarProps) {
                 onClick={(e) => handleNavClick(e, '#home')}
                 className="font-bold text-sky-950 tracking-wide font-heading text-sm"
               >
-                {profile.name || 'Joey van der Poel'}<span className="text-theme font-sans">.</span>
+                {profile.name || 'Joey van der Poel'}
               </a>
               <div className="hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-full bg-theme-15 border border-theme-30">
                 <span className="relative flex h-2 w-2">
@@ -86,34 +86,33 @@ export default function Navbar({ profile }: NavbarProps) {
               </div>
             </div>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-1">
-              {navLinks.map((link) => {
-                const isActive = activeSection === link.href.substring(1)
-                return (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    onClick={(e) => handleNavClick(e, link.href)}
-                    className={`relative px-4 py-2 text-xs font-bold uppercase tracking-wider transition-colors duration-300 rounded-full ${
-                      isActive ? 'text-sky-950 font-extrabold' : 'text-slate-700 hover:text-sky-950'
-                    }`}
-                  >
-                    {isActive && (
-                      <motion.span
-                        layoutId="activeNavTab"
-                        className="absolute inset-0 bg-theme-15 border border-theme-20 rounded-full -z-10"
-                        transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                      />
-                    )}
-                    {link.name}
-                  </a>
-                )
-              })}
-            </div>
+            {/* Desktop Navigation + CTA (grouped on the right to eliminate whitespace) */}
+            <div className="hidden md:flex items-center gap-6">
+              <div className="flex items-center gap-1">
+                {navLinks.map((link) => {
+                  const isActive = activeSection === link.href.substring(1)
+                  return (
+                    <a
+                      key={link.name}
+                      href={link.href}
+                      onClick={(e) => handleNavClick(e, link.href)}
+                      className={`relative px-4 py-2 text-xs font-bold uppercase tracking-wider transition-colors duration-300 rounded-full ${
+                        isActive ? 'text-sky-950 font-extrabold' : 'text-slate-700 hover:text-sky-950'
+                      }`}
+                    >
+                      {isActive && (
+                        <motion.span
+                          layoutId="activeNavTab"
+                          className="absolute inset-0 bg-theme-15 border border-theme-20 rounded-full -z-10"
+                          transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                        />
+                      )}
+                      {link.name}
+                    </a>
+                  )
+                })}
+              </div>
 
-            {/* CTA Button */}
-            <div className="hidden md:block">
               <a
                 href="#contact"
                 onClick={(e) => handleNavClick(e, '#contact')}

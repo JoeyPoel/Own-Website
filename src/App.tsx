@@ -4,7 +4,9 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import AboutSection from './components/AboutSection'
 import TracksSection from './components/TracksSection'
+import AutomationVisualizer from './components/AutomationVisualizer'
 import ServicesSection from './components/ServicesSection'
+import ProcessSection from './components/ProcessSection'
 import ProjectsSection from './components/ProjectsSection'
 import TestimonialsSection from './components/TestimonialsSection'
 import ContactSection from './components/ContactSection'
@@ -12,7 +14,12 @@ import type { Profile, Service, Project, Testimonial } from './data/portfolioDat
 import { STRINGS } from './data/strings'
 
 export default function App() {
-  const [profile, setProfile] = useState<Profile | null>(null)
+  const [profile, setProfile] = useState<Profile>({
+    name: 'Joey van der Poel',
+    role: 'Full-Stack Mobile App Developer & AI Automation Engineer',
+    location: 'Medemblik / Amsterdam, Netherlands',
+    availability: 'Available for freelance contracts & small business builds',
+  })
   const [services, setServices] = useState<Service[]>([])
   const [projects, setProjects] = useState<Project[]>([])
   const [testimonials, setTestimonials] = useState<Testimonial[]>([])
@@ -37,25 +44,6 @@ export default function App() {
     fetchPortfolio()
   }, [])
 
-  if (loading) {
-    return (
-      <div className="bg-sky-100 min-h-screen flex items-center justify-center font-mono">
-        <div className="flex flex-col items-center gap-4">
-          <div className="w-10 h-10 border-3 border-sky-500 border-t-transparent rounded-full animate-spin" />
-          <p className="text-sky-800 text-xs font-semibold tracking-wider">CONNECTING TO CLOUD DB...</p>
-        </div>
-      </div>
-    )
-  }
-
-  if (!profile) {
-    return (
-      <div className="bg-sky-100 min-h-screen flex items-center justify-center font-mono">
-        <p className="text-sky-900 text-sm">Failed to load portfolio. Please refresh.</p>
-      </div>
-    )
-  }
-
   return (
     <div className="min-h-screen relative text-slate-800 selection:bg-sky-500/30 selection:text-sky-950">
       {/* Dynamic Animated Cloud to Code Background Canvas */}
@@ -69,9 +57,11 @@ export default function App() {
         <Hero profile={profile} />
         <AboutSection />
         <TracksSection />
-        <ServicesSection services={services} />
-        <ProjectsSection projects={projects} />
-        <TestimonialsSection testimonials={testimonials} />
+        <AutomationVisualizer />
+        <ServicesSection services={services} loading={loading} />
+        <ProcessSection />
+        <ProjectsSection projects={projects} loading={loading} />
+        <TestimonialsSection testimonials={testimonials} loading={loading} />
         <ContactSection />
       </main>
 

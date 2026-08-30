@@ -95,7 +95,7 @@ export default function Hero({ profile }: HeroProps) {
             {STRINGS.hero.credentials.map((highlight) => (
               <span
                 key={highlight}
-                className="px-4 py-2 bg-white/80 border border-theme-20 text-slate-900 text-xs font-bold tracking-wide rounded-xl font-mono shadow-xs backdrop-blur-md"
+                className="px-4 py-2 bg-white/30 border border-white/50 text-slate-900 text-xs font-bold tracking-wide rounded-xl font-mono shadow-sm backdrop-blur-md"
               >
                 {highlight}
               </span>

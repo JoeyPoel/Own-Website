@@ -47,9 +47,10 @@ export default function CloudToCodeBackground() {
     const cloudCount = Math.max(5, Math.floor(width / 185))
 
     for (let i = 0; i < cloudCount; i++) {
-      const baseX = Math.random() * width
+      // Spread clouds across the viewport and off-screen to the left to create a continuous stream
+      const baseX = Math.random() * (width + 600) - 600
       const baseY = Math.random() * (height * 0.85)
-      const speedX = 0.08 + Math.random() * 0.15
+      const speedX = 0.06 + Math.random() * 0.12
       const particles: CloudParticle[] = []
       const pCount = 15 + Math.floor(Math.random() * 10)
 
@@ -207,29 +208,48 @@ export default function CloudToCodeBackground() {
         cg = Math.round(255 + (241 - 255) * t)
         cb = Math.round(255 + (230 - 255) * t)
       } else {
-        const t = (scrollProgress - 0.5) / 0.5
-        // Soft Peach-White (255, 241, 230) -> Soft Lavender-Pink (250, 225, 235)
-        cr = Math.round(255 + (250 - 255) * t)
-        cg = Math.round(241 + (225 - 241) * t)
-        cb = Math.round(230 + (235 - 230) * t)
+        // Calculate scroll ratio specifically for the second half of the scroll progress (0.5 to 1.0)
+        const scrollRatio = (scrollProgress - 0.5) / 0.5
+        
+        // Blend from Soft Peach-White (255, 241, 230) to Soft Lavender-Pink (250, 225, 235)
+        cr = Math.round(255 + (250 - 255) * scrollRatio)
+        cg = Math.round(241 + (225 - 241) * scrollRatio)
+        cb = Math.round(230 + (235 - 230) * scrollRatio)
       }
 
       // 2. Render Animated Floating Clouds & Code
       clouds.forEach((cloud) => {
-        // Drift cloud group horizontally
+        // Drift the entire cloud group horizontally to the right
         cloud.x += cloud.speedX
-        if (cloud.x - 180 > width) {
-          cloud.x = -180
+        
+        const isOffScreenRight = cloud.x - 220 > width
+        if (isOffScreenRight) {
+          // Stagger starting coordinate off-screen to the left so clouds enter one by one at intervals
+          cloud.x = -220 - Math.random() * 600
+          cloud.y = Math.random() * (height * 0.85)
+          
+          // Reset particles to a tight cluster to clear any long-term shape dispersion
+          cloud.particles.forEach((p) => {
+            p.x = (Math.random() - 0.5) * 190
+            p.y = -Math.abs(Math.random() * 55) + 15
+          })
         }
 
         // Update particle offsets
         cloud.particles.forEach((p) => {
           p.x += p.speedX
           p.y += p.speedY
+
+          // Gently reverse drift directions if particles drift too far, keeping cloud shape cohesive
+          if (Math.abs(p.x) > 110) p.speedX *= -1
+          if (p.y < -70 || p.y > 35) p.speedY *= -1
         })
 
-        // 2A. Render Soft Cloud Puffs (fades out as we scroll)
-        if (cloudPuffOpacity > 0.01) {
+        // Check horizontal visibility in the viewport
+        const isVisible = cloud.x + 250 > 0 && cloud.x - 250 < width
+
+        // 2A. Render Soft Cloud Puffs (fades out on scroll)
+        if (cloudPuffOpacity > 0.01 && isVisible) {
           cloud.particles.forEach((p) => {
             const posX = cloud.x + p.x
             const posY = cloud.y + p.y
@@ -250,29 +270,31 @@ export default function CloudToCodeBackground() {
         }
       })
 
-      // 2B. Render Binary Code masked perfectly to the cloud shapes (fades in as we scroll)
-      // Caching / Pattern optimization: Instead of nested draw loops, we fill the combined clip path with a translated pattern
+      // 2B. Render Binary Code masked perfectly to the cloud shapes (fades in on scroll)
       if (codeOpacity > 0.01 && pattern) {
         ctx.save()
         ctx.globalAlpha = codeOpacity * 0.85
 
-        // Create a single clipping path from all cloud particles
+        // Create a single clipping path from all visible cloud particles
         ctx.beginPath()
         clouds.forEach((cloud) => {
-          cloud.particles.forEach((p) => {
-            const posX = cloud.x + p.x
-            const posY = cloud.y + p.y
-            ctx.moveTo(posX + p.radius * 1.35, posY)
-            ctx.arc(posX, posY, p.radius * 1.35, 0, Math.PI * 2)
-          })
+          const isVisible = cloud.x + 250 > 0 && cloud.x - 250 < width
+
+          if (isVisible) {
+            cloud.particles.forEach((p) => {
+              const posX = cloud.x + p.x
+              const posY = cloud.y + p.y
+              ctx.moveTo(posX + p.radius * 1.35, posY)
+              ctx.arc(posX, posY, p.radius * 1.35, 0, Math.PI * 2)
+            })
+          }
         })
         ctx.clip()
 
-        // Translate the repeating pattern for smooth horizontal and scroll-drift animation
+        // Translate the repeating pattern for smooth horizontal drift (scroll translation removed for optimization)
         const matrix = new DOMMatrix()
         const timeDrift = (Date.now() * 0.02) % 130
-        const scrollDrift = (scrollY * 0.15) % 130
-        pattern.setTransform(matrix.translate(timeDrift, scrollDrift))
+        pattern.setTransform(matrix.translate(timeDrift, 0))
 
         ctx.fillStyle = pattern
         ctx.fillRect(0, 0, width, height)
