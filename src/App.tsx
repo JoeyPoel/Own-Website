@@ -50,8 +50,6 @@ export default function App() {
         if (data.testimonials?.length) setTestimonials(data.testimonials)
       } catch (err) {
         console.warn('Failed to load portfolio data from API, already using local static JSON data:', err)
-      } finally {
-        document.body.classList.add('loaded')
       }
     }
     fetchPortfolio()

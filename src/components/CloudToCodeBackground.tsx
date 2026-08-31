@@ -18,6 +18,7 @@ interface CloudGroup {
   speedX: number
   particles: CloudParticle[]
   canvas: HTMLCanvasElement
+  sunriseCanvas: HTMLCanvasElement
 }
 
 const CODE_SNIPPETS = ['0', '1']
@@ -37,14 +38,19 @@ export default function CloudToCodeBackground() {
 
     const handleResize = () => {
       if (!canvas) return
-      width = canvas.width = window.innerWidth
-      height = canvas.height = window.innerHeight
+      const newWidth = window.innerWidth
+      const newHeight = window.innerHeight
+      // Only resize canvas if width changed or height changed significantly (ignores mobile address bar collapses)
+      if (Math.abs(newWidth - width) > 10 || Math.abs(newHeight - height) > 120) {
+        width = canvas.width = newWidth
+        height = canvas.height = newHeight
+      }
     }
 
-    window.addEventListener('resize', handleResize)
-    window.addEventListener('orientationchange', handleResize)
+    window.addEventListener('resize', handleResize, { passive: true })
+    window.addEventListener('orientationchange', handleResize, { passive: true })
 
-    // 1. Pre-render a white soft cloud puff sprite to avoid createRadialGradient calls on every frame
+    // 1. Pre-render a white soft cloud puff sprite and a subtle warm tinted puff sprite
     const puffCanvas = document.createElement('canvas')
     puffCanvas.width = 256
     puffCanvas.height = 256
@@ -60,6 +66,22 @@ export default function CloudToCodeBackground() {
       puffCtx.fill()
     }
 
+    const subtlePuffCanvas = document.createElement('canvas')
+    subtlePuffCanvas.width = 256
+    subtlePuffCanvas.height = 256
+    const sPuffCtx = subtlePuffCanvas.getContext('2d')
+    if (sPuffCtx) {
+      const grad = sPuffCtx.createRadialGradient(128, 128, 4, 128, 128, 120)
+      grad.addColorStop(0, 'rgba(255, 248, 240, 1)')      // Soft warm white core
+      grad.addColorStop(0.45, 'rgba(254, 228, 210, 0.85)') // Gentle soft peach
+      grad.addColorStop(0.8, 'rgba(252, 205, 195, 0.7)')  // Subtle light rose tint
+      grad.addColorStop(1, 'rgba(252, 205, 195, 0)')       // Soft transparent edge
+      sPuffCtx.fillStyle = grad
+      sPuffCtx.beginPath()
+      sPuffCtx.arc(128, 128, 120, 0, Math.PI * 2)
+      sPuffCtx.fill()
+    }
+
     // 2. Generate Cloud Formations with Pre-Rendered canvas shapes
     const clouds: CloudGroup[] = []
     const cloudCount = Math.max(9, Math.floor(width / 120))
@@ -72,17 +94,22 @@ export default function CloudToCodeBackground() {
       const particles: CloudParticle[] = []
       const pCount = 8 + Math.floor(Math.random() * 6)
 
-      // Create an off-screen canvas to pre-render this specific cloud shape once on mount
+      // Create an off-screen canvas for the white morning cloud shape
       const cloudCanvas = document.createElement('canvas')
       cloudCanvas.width = 700
       cloudCanvas.height = 400
       const cCtx = cloudCanvas.getContext('2d')
 
+      // Create an off-screen canvas for the subtle warm tinted cloud shape
+      const sunriseCloudCanvas = document.createElement('canvas')
+      sunriseCloudCanvas.width = 700
+      sunriseCloudCanvas.height = 400
+      const sCtx = sunriseCloudCanvas.getContext('2d')
+
       for (let j = 0; j < pCount; j++) {
-        // Flat bottom layout: offset X is wider, offset Y is skewed upwards (restricted positive range)
+        // Flat bottom layout: offset X is wider, offset Y is skewed upwards
         const offsetX = (Math.random() - 0.5) * 210
         const offsetY = -Math.abs(Math.random() * 55) + 12
-        // Balanced radius for clouds
         const radius = 45 + Math.random() * 40
         const char = CODE_SNIPPETS[Math.floor(Math.random() * CODE_SNIPPETS.length)]
 
@@ -98,13 +125,21 @@ export default function CloudToCodeBackground() {
           layer: Math.random() > 0.5 ? 1 : 2
         })
 
-        // Draw particle onto off-screen cloudCanvas (centered at 350, 200)
+        // Draw onto white cloudCanvas (centered at 350, 200)
+        const size = radius * 2.9
         if (cCtx) {
           cCtx.save()
           cCtx.globalAlpha = (0.35 + Math.random() * 0.5) * 0.75
-          const size = radius * 2.9
           cCtx.drawImage(puffCanvas, 350 + offsetX - size / 2, 200 + offsetY - size / 2, size, size)
           cCtx.restore()
+        }
+
+        // Draw onto subtle warm cloudCanvas
+        if (sCtx) {
+          sCtx.save()
+          sCtx.globalAlpha = (0.35 + Math.random() * 0.5) * 0.8
+          sCtx.drawImage(subtlePuffCanvas, 350 + offsetX - size / 2, 200 + offsetY - size / 2, size, size)
+          sCtx.restore()
         }
       }
 
@@ -113,11 +148,28 @@ export default function CloudToCodeBackground() {
         y: baseY,
         speedX,
         particles,
-        canvas: cloudCanvas
+        canvas: cloudCanvas,
+        sunriseCanvas: sunriseCloudCanvas
       })
+
+      // CloudCanvas remains pure white with no gradient at top of page
+
+      // Apply bottom-to-top sunrise gradient to sunriseCloudCanvas for deeper scroll
+      if (sCtx) {
+        sCtx.save()
+        sCtx.globalCompositeOperation = 'source-in'
+        const deeperGrad = sCtx.createLinearGradient(0, 265, 0, 135)
+        deeperGrad.addColorStop(0, 'rgba(249, 145, 60, 1.0)')      // Bottom underside: glowing golden sunrise peach/orange
+        deeperGrad.addColorStop(0.35, 'rgba(251, 185, 125, 0.98)') // Lower-mid: warm golden coral
+        deeperGrad.addColorStop(0.7, 'rgba(254, 225, 195, 0.98)')  // Upper-mid: soft morning warmth
+        deeperGrad.addColorStop(1, 'rgba(255, 250, 252, 0.98)')    // Top: light clean white/sky tint
+        sCtx.fillStyle = deeperGrad
+        sCtx.fillRect(0, 0, 700, 400)
+        sCtx.restore()
+      }
     }
 
-    // Pre-render Binary Grid Pattern Canvas (Highly Optimized)
+    // Pre-render Binary Grid Pattern Canvas for Code Overlay (Uniform for seamless masking without stripe bands)
     const patternCanvas = document.createElement('canvas')
     patternCanvas.width = 130
     patternCanvas.height = 130
@@ -125,7 +177,7 @@ export default function CloudToCodeBackground() {
     let pattern: CanvasPattern | null = null
 
     if (pCtx) {
-      pCtx.fillStyle = 'rgba(255, 255, 255, 0.95)'
+      pCtx.fillStyle = 'rgba(255, 255, 255, 0.92)'
       pCtx.font = "600 11px 'JetBrains Mono', Courier New, monospace"
       const step = 13
       for (let y = 0; y < 130; y += step) {
@@ -166,6 +218,9 @@ export default function CloudToCodeBackground() {
       const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight)
       const scrollProgress = Math.min(1, Math.max(0, scrollY / maxScroll))
 
+      // Shift the gradient transition downwards (no gradient at top/hero section)
+      const gradientProgress = Math.max(0, (scrollProgress - 0.12) / 0.88)
+
       // Clear Canvas
       ctx.clearRect(0, 0, width, height)
 
@@ -176,44 +231,43 @@ export default function CloudToCodeBackground() {
         lastHeight = height
         hasDrawnGradient = true
 
-        // 1. Interpolate Sky Background Colors (Morning blue sky to soft light sunset/twilight)
+        // 1. Interpolate Sky Background Colors (Morning blue sky at top, shifting into soft subtle twilight downwards)
         let r1, g1, b1
         let r2, g2, b2
         let r3, g3, b3
 
-        if (scrollProgress < 0.5) {
-          const t = scrollProgress / 0.5
-          // Top: Deeper Blue (22, 54, 165) -> Richer Blue (130, 175, 240)
-          r1 = Math.round(22 + (130 - 22) * t)
-          g1 = Math.round(54 + (175 - 54) * t + Math.sin(t * Math.PI) * 15)
-          b1 = Math.round(165 + (240 - 165) * t)
+        if (gradientProgress < 0.5) {
+          const t = gradientProgress / 0.5
+          // Top: Deeper Blue (22, 54, 165) -> Soft Rich Blue (85, 130, 220)
+          r1 = Math.round(22 + (85 - 22) * t)
+          g1 = Math.round(54 + (130 - 54) * t + Math.sin(t * Math.PI) * 15)
+          b1 = Math.round(165 + (220 - 165) * t)
 
-          // Middle: Bright sky blue (40, 155, 235) -> Deep peach (240, 180, 135)
-          // Add a curved transition to keep the colors saturated and avoid a gray/muddy midpoint
+          // Middle: Bright sky blue (40, 155, 235) -> Gentle Peach (240, 180, 150)
           r2 = Math.round(40 + (240 - 40) * t)
-          g2 = Math.round(155 + (180 - 155) * t + Math.sin(t * Math.PI) * 35)
-          b2 = Math.round(235 + (135 - 235) * t + Math.sin(t * Math.PI) * 15)
+          g2 = Math.round(155 + (180 - 155) * t + Math.sin(t * Math.PI) * 25)
+          b2 = Math.round(235 + (150 - 235) * t)
 
-          // Bottom: Soft sky blue (180, 220, 250) -> Warm yellow (245, 220, 115)
-          r3 = Math.round(180 + (245 - 180) * t)
-          g3 = Math.round(220 + (220 - 220) * t + Math.sin(t * Math.PI) * 20)
-          b3 = Math.round(250 + (115 - 250) * t)
+          // Bottom: Soft sky blue (180, 220, 250) -> Warm Soft Amber (250, 215, 140)
+          r3 = Math.round(180 + (250 - 180) * t)
+          g3 = Math.round(220 + (215 - 220) * t + Math.sin(t * Math.PI) * 15)
+          b3 = Math.round(250 + (140 - 250) * t)
         } else {
-          const t = (scrollProgress - 0.5) / 0.5
-          // Top: Richer Blue (130, 175, 240) -> Twilight Purple (200, 150, 225)
-          r1 = Math.round(130 + (200 - 130) * t)
-          g1 = Math.round(175 + (150 - 175) * t)
-          b1 = Math.round(240 + (225 - 240) * t)
+          const t = (gradientProgress - 0.5) / 0.5
+          // Top: Soft Rich Blue (85, 130, 220) -> Twilight Lavender (140, 120, 205)
+          r1 = Math.round(85 + (140 - 85) * t)
+          g1 = Math.round(130 + (120 - 130) * t)
+          b1 = Math.round(220 + (205 - 220) * t)
 
-          // Middle: Deep peach (240, 180, 135) -> Sunset Pink (235, 130, 150)
+          // Middle: Gentle Peach (240, 180, 150) -> Soft Rose (235, 145, 155)
           r2 = Math.round(240 + (235 - 240) * t)
-          g2 = Math.round(180 + (130 - 180) * t)
-          b2 = Math.round(135 + (150 - 135) * t)
+          g2 = Math.round(180 + (145 - 180) * t)
+          b2 = Math.round(150 + (155 - 150) * t)
 
-          // Bottom: Warm yellow (245, 220, 115) -> Deep Horizon Gold (245, 210, 155)
-          r3 = Math.round(245 + (245 - 245) * t)
-          g3 = Math.round(220 + (210 - 220) * t)
-          b3 = Math.round(115 + (155 - 115) * t)
+          // Bottom: Warm Soft Amber (250, 215, 140) -> Horizon Gold (248, 205, 155)
+          r3 = Math.round(250 + (248 - 250) * t)
+          g3 = Math.round(215 + (205 - 215) * t)
+          b3 = Math.round(140 + (155 - 140) * t)
         }
 
         if (gradCtx) {
@@ -229,8 +283,8 @@ export default function CloudToCodeBackground() {
         let ar, ag, ab // Accent primary
         let sr, sg, sb // Accent secondary
 
-        if (scrollProgress < 0.5) {
-          const t = scrollProgress / 0.5
+        if (gradientProgress < 0.5) {
+          const t = gradientProgress / 0.5
           // Primary: Sky Blue (2, 132, 199) -> Orange/Coral (234, 88, 12)
           ar = Math.round(2 + (234 - 2) * t)
           ag = Math.round(132 + (88 - 132) * t)
@@ -241,7 +295,7 @@ export default function CloudToCodeBackground() {
           sg = Math.round(145 + (39 - 145) * t)
           sb = Math.round(178 + (119 - 178) * t)
         } else {
-          const t = (scrollProgress - 0.5) / 0.5
+          const t = (gradientProgress - 0.5) / 0.5
           // Primary: Orange/Coral (234, 88, 12) -> Lavender/Violet (124, 58, 237)
           ar = Math.round(234 + (124 - 234) * t)
           ag = Math.round(88 + (58 - 88) * t)
@@ -269,20 +323,17 @@ export default function CloudToCodeBackground() {
 
       ctx.drawImage(gradCanvas, 0, 0, width, height)
 
-      // Calculate Morph Ratios (stretched transition to morph clouds into code slower)
-      const cloudPuffOpacity = Math.max(0, 1 - scrollProgress * 1.05)
-      const codeOpacity = Math.min(1, scrollProgress * 0.95)
+      // Morph Ratios: Clouds stay visible much longer and turn into code slower
+      const cloudPuffOpacity = Math.max(0.35, 1 - Math.max(0, scrollProgress - 0.15) * 0.5)
+      const codeOpacity = Math.max(0, Math.min(1, (scrollProgress - 0.25) / 0.75)) * 0.75
 
-
-
-      // 2. Render Animated Floating Clouds & Code
+      // 2. Render Animated Floating Clouds with Subtle Warm Shading
       clouds.forEach((cloud) => {
         // Drift the entire cloud group horizontally to the right
         cloud.x += cloud.speedX
         
         const isOffScreenRight = cloud.x - 350 > width
         if (isOffScreenRight) {
-          // Stagger starting coordinate off-screen to the left so clouds enter one by one at intervals
           cloud.x = -350 - Math.random() * 700
           cloud.y = Math.random() * (height * 0.88)
         }
@@ -290,12 +341,24 @@ export default function CloudToCodeBackground() {
         // Check horizontal visibility in the viewport
         const isVisible = cloud.x + 350 > 0 && cloud.x - 350 < width
 
-        if (cloudPuffOpacity > 0.01 && isVisible) {
-          ctx.save()
-          ctx.globalAlpha = cloudPuffOpacity * 0.75
-          // Draw the pre-rendered cloud shape canvas in a single draw operation
-          ctx.drawImage(cloud.canvas, cloud.x - 350, cloud.y - 200)
-          ctx.restore()
+        if (isVisible && cloudPuffOpacity > 0.01) {
+          // No gradient at top (100% white); gradient shifts in smoothly as you scroll downwards
+          const sunriseWeight = Math.min(1, gradientProgress * 1.4)
+          const whiteWeight = 1 - sunriseWeight
+
+          if (whiteWeight > 0.01) {
+            ctx.save()
+            ctx.globalAlpha = cloudPuffOpacity * whiteWeight * 0.78
+            ctx.drawImage(cloud.canvas, cloud.x - 350, cloud.y - 200)
+            ctx.restore()
+          }
+
+          if (sunriseWeight > 0.01) {
+            ctx.save()
+            ctx.globalAlpha = cloudPuffOpacity * sunriseWeight * 0.78
+            ctx.drawImage(cloud.sunriseCanvas, cloud.x - 350, cloud.y - 200)
+            ctx.restore()
+          }
         }
       })
 
@@ -304,7 +367,7 @@ export default function CloudToCodeBackground() {
         ctx.save()
         ctx.globalAlpha = codeOpacity * 0.85
 
-        // Translate the repeating pattern for smooth horizontal drift (scroll translation removed for optimization)
+        // Translate the repeating pattern for smooth horizontal drift
         const matrix = new DOMMatrix()
         const timeDrift = (Date.now() * 0.02) % 130
         pattern.setTransform(matrix.translate(timeDrift, 0))
@@ -342,7 +405,7 @@ export default function CloudToCodeBackground() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 w-full h-full min-w-full min-h-full pointer-events-none z-0 transition-opacity duration-300"
+      className="fixed inset-0 w-full h-full min-w-full min-h-full pointer-events-none z-0 transform-gpu will-change-transform"
     />
   )
 }
