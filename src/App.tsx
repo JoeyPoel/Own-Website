@@ -58,7 +58,7 @@ export default function App() {
   }, [])
 
   return (
-    <div className="min-h-screen relative text-slate-800 selection:bg-sky-500/30 selection:text-sky-950">
+    <div className="min-h-screen w-full overflow-x-hidden relative text-slate-800 selection:bg-sky-500/30 selection:text-sky-950">
       {/* Dynamic Animated Cloud to Code Background Canvas */}
       <CloudToCodeBackground />
 

@@ -11,14 +11,18 @@
 
 html {
   scroll-behavior: smooth;
-  background-color: #ffffff; /* Fallback white background to prevent flashing */
+  background-color: #ffffff;
   color: #0f172a;
   font-family: var(--font-sans);
+  width: 100%;
+  min-height: 100%;
 }
 
 body {
   margin: 0;
   padding: 0;
+  width: 100%;
+  min-height: 100%;
   overflow-x: hidden;
 }
 

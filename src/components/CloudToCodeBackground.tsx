@@ -42,6 +42,7 @@ export default function CloudToCodeBackground() {
     }
 
     window.addEventListener('resize', handleResize)
+    window.addEventListener('orientationchange', handleResize)
 
     // 1. Pre-render a white soft cloud puff sprite to avoid createRadialGradient calls on every frame
     const puffCanvas = document.createElement('canvas')
@@ -333,6 +334,7 @@ export default function CloudToCodeBackground() {
 
     return () => {
       window.removeEventListener('resize', handleResize)
+      window.removeEventListener('orientationchange', handleResize)
       cancelAnimationFrame(animationFrameId)
     }
   }, [])
@@ -340,7 +342,7 @@ export default function CloudToCodeBackground() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0 transition-opacity duration-300"
+      className="fixed inset-0 w-full h-full min-w-full min-h-full pointer-events-none z-0 transition-opacity duration-300"
     />
   )
 }
