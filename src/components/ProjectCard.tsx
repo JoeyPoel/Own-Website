@@ -7,43 +7,9 @@ interface ProjectCardProps {
   project: Project
 }
 
-function getLocalFallbackImage(title: string): string | null {
-  const t = title.toLowerCase()
-  if (t.includes('tracks & taps')) {
-    return '/public/tracks&tapsProject.png'
-  }
-  if (t.includes('mainframe pricelist')) {
-    return '/public/pricelist automation.png'
-  }
-  if (t.includes('intelligent document') || t.includes('document understanding')) {
-    return '/public/Document Understanding.webp'
-  }
-  if (t.includes('swapclub')) {
-    return '/public/swapclub.png'
-  }
-  if (t.includes('zoo guide') || t.includes('dept')) {
-    return '/public/DeptChatbot.png'
-  }
-  return null
-}
-
 export default function ProjectCard({ project }: ProjectCardProps) {
-  const [imgSrc, setImgSrc] = useState(project.image)
-  const [triedFallback, setTriedFallback] = useState(false)
   const [imageError, setImageError] = useState(false)
   const isMobile = project.category === 'mobile'
-
-  const handleImageError = () => {
-    if (!triedFallback) {
-      const fallback = getLocalFallbackImage(project.title)
-      if (fallback && fallback !== project.image) {
-        setImgSrc(fallback)
-        setTriedFallback(true)
-        return
-      }
-    }
-    setImageError(true)
-  }
 
   return (
     <motion.div
@@ -66,9 +32,9 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                 <div className="w-full h-full bg-black" />
               ) : (
                 <img
-                  src={imgSrc}
+                  src={project.image}
                   alt=""
-                  onError={handleImageError}
+                  onError={() => setImageError(true)}
                   className="w-full h-full object-cover opacity-95 select-none pointer-events-none"
                 />
               )}
@@ -91,9 +57,9 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                   <div className="w-full h-full bg-black" />
                 ) : (
                   <img
-                    src={imgSrc}
+                    src={project.image}
                     alt=""
-                    onError={handleImageError}
+                    onError={() => setImageError(true)}
                     className="max-w-full max-h-full object-contain opacity-95 select-none pointer-events-none"
                   />
                 )}
