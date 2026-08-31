@@ -4,8 +4,9 @@ import { Menu, X, ArrowUpRight } from 'lucide-react'
 import { STRINGS } from '../data/strings'
 
 const navLinks = [
-  { name: 'Work', href: '#work' },
+  { name: 'About', href: '#about' },
   { name: 'Services', href: '#services' },
+  { name: 'Work', href: '#work' },
   { name: 'Testimonials', href: '#testimonials' },
   { name: 'Contact', href: '#contact' },
 ]
@@ -24,10 +25,13 @@ export default function Navbar({ profile }: NavbarProps) {
 
   useEffect(() => {
     // Cache the DOM elements on mount to avoid layout thrashing via querySelector on every scroll tick
-    const sectionElements = navLinks.map(link => ({
-      id: link.href.substring(1),
-      element: document.querySelector(link.href) as HTMLElement | null
-    }))
+    const sectionElements = [
+      { id: 'home', element: document.querySelector('#home') as HTMLElement | null },
+      ...navLinks.map(link => ({
+        id: link.href.substring(1),
+        element: document.querySelector(link.href) as HTMLElement | null
+      }))
+    ]
 
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20)
@@ -85,8 +89,11 @@ export default function Navbar({ profile }: NavbarProps) {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-theme opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-theme"></span>
                 </span>
-                <span className="text-[10px] font-bold tracking-wide text-theme font-mono uppercase">
-                  {profile.availability || STRINGS.navbar.availabilityFallback}
+                <span className="text-[10px] font-bold tracking-wide text-theme font-mono uppercase lg:hidden">
+                  Available for contracts
+                </span>
+                <span className="text-[10px] font-bold tracking-wide text-theme font-mono uppercase hidden lg:inline">
+                  {STRINGS.navbar.availabilityFallback}
                 </span>
               </div>
             </div>

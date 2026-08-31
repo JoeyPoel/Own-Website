@@ -15,7 +15,7 @@ export const STRINGS = {
     scrollIndicator: "SCROLL TO EXPLORE"
   },
   navbar: {
-    availabilityFallback: "Available for Contracts",
+    availabilityFallback: "Available for freelance & small business builds",
     btnDiscuss: "Discuss a Project",
     navigationLabel: "NAVIGATION"
   },
@@ -59,7 +59,7 @@ export const STRINGS = {
     }
   },
   testimonials: {
-    badge: "Endorsements",
+    badge: "Testimonials",
     title: "Feedback from Past Teams",
     description: "Real recommendations from clients and managers at DEPT®, SwapClub, and Tata Steel."
   },

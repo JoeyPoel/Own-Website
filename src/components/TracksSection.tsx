@@ -21,7 +21,7 @@ export default function TracksSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ type: 'tween', ease: 'easeOut', duration: 0.5 }}
-            className="max-w-2xl"
+            className="max-w-2xl transform-gpu will-change-transform"
           >
             <span className="text-[11px] font-bold tracking-widest text-theme font-mono uppercase bg-theme-10 px-3 py-1 rounded-full border border-theme-20 w-max">
               {STRINGS.tracks.badge}
@@ -50,7 +50,7 @@ export default function TracksSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ type: 'tween', ease: 'easeOut', duration: 0.5 }}
-            className="flex gap-4"
+            className="flex gap-4 transform-gpu will-change-transform"
           >
             <div className="px-5 py-3 rounded-2xl bg-white/60 border border-theme-20 text-center shadow-xs">
               <span className="block text-xl font-extrabold text-theme font-mono">{STRINGS.tracks.metricSoloTitle}</span>
@@ -94,7 +94,7 @@ export default function TracksSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ type: 'tween', ease: 'easeOut', duration: 0.6 }}
-          className="flex gap-6 overflow-x-auto pb-6 scrollbar-thin scrollbar-thumb-theme scrollbar-track-transparent snap-x"
+          className="flex gap-6 overflow-x-auto pb-6 scrollbar-thin scrollbar-thumb-theme scrollbar-track-transparent snap-x transform-gpu will-change-transform"
         >
           {screenshots.map((img, idx) => (
             <div

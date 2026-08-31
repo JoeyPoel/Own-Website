@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { ExternalLink } from 'lucide-react'
 import type { Project } from '../data/portfolioData'
@@ -7,6 +8,7 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ project }: ProjectCardProps) {
+  const [imageError, setImageError] = useState(false)
   const isMobile = project.category === 'mobile'
 
   return (
@@ -26,11 +28,16 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-10 h-2 bg-slate-900 rounded-full z-20" />
             {/* Screen container */}
             <div className="w-full h-full rounded-[20px] overflow-hidden bg-slate-100 border border-slate-100 relative">
-              <img
-                src={project.image}
-                alt={project.title}
-                className="w-full h-full object-cover opacity-95 select-none pointer-events-none"
-              />
+              {imageError ? (
+                <div className="w-full h-full bg-slate-200" />
+              ) : (
+                <img
+                  src={project.image}
+                  alt=""
+                  onError={() => setImageError(true)}
+                  className="w-full h-full object-cover opacity-95 select-none pointer-events-none"
+                />
+              )}
             </div>
           </div>
         ) : (
@@ -46,11 +53,16 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             {/* Terminal contents with image */}
             <div className="relative p-2.5 bg-slate-950 flex-grow flex flex-col justify-between">
               <div className="w-full h-40 bg-black rounded border border-slate-850 flex items-center justify-center overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="max-w-full max-h-full object-contain opacity-95 select-none pointer-events-none"
-                />
+                {imageError ? (
+                  <div className="w-full h-full bg-slate-900/50" />
+                ) : (
+                  <img
+                    src={project.image}
+                    alt=""
+                    onError={() => setImageError(true)}
+                    className="max-w-full max-h-full object-contain opacity-95 select-none pointer-events-none"
+                  />
+                )}
               </div>
               <div className="bg-slate-900 px-3 py-1.5 rounded border border-slate-800 text-[8px] font-mono text-cyan-400 flex items-center justify-between mt-2">
                 <span>$ python pipeline.py --run</span>

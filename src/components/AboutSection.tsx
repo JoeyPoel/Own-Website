@@ -14,7 +14,7 @@ export default function AboutSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ type: 'tween', ease: 'easeOut', duration: 0.6 }}
-            className="flex-1 flex flex-col gap-6"
+            className="flex-1 flex flex-col gap-6 transform-gpu will-change-transform"
           >
             <span className="text-[11px] font-bold tracking-widest text-theme font-mono uppercase bg-theme-10 px-3 py-1 rounded-full border border-theme-20 w-max">
               {STRINGS.about.badge}
@@ -59,7 +59,7 @@ export default function AboutSection() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ type: 'tween', ease: 'easeOut', duration: 0.6 }}
-            className="w-full lg:w-[420px] flex-shrink-0 flex justify-center"
+            className="w-full lg:w-[420px] flex-shrink-0 flex justify-center transform-gpu will-change-transform"
           >
             <div className="relative group max-w-sm lg:max-w-none">
               {/* Dynamic scroll-colored glow border */}

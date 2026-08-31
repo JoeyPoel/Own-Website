@@ -33,7 +33,7 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-60px' }}
         transition={{ type: 'tween', ease: 'easeOut', duration: 0.5 }}
-        className="max-w-7xl mx-auto px-6 relative z-10"
+        className="max-w-7xl mx-auto px-6 relative z-10 transform-gpu will-change-transform"
       >
         
         {/* Section Header */}

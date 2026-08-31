@@ -17,30 +17,32 @@ export default function AutomationVisualizer() {
     pubgolf: true,
     stops: [
       {
-        name: "Colosseum",
-        coordinates: [41.8902, 12.4922],
-        type: "historic",
-        challenge: {
-          type: "TRIVIA",
-          question: "Which emperor completed the Colosseum?"
-        },
-        pubgolf: {
-          hole: 1,
-          par: 3,
-          drink: "Limoncello shot"
-        }
+      name: "Colosseum",
+      coordinates: [41.8902, 12.4922],
+      type: "historic",
+      challenge: {
+        type: "TRIVIA",
+        question: "Which emperor completed the Colosseum?",
+        answer: "Titus"
       },
-      {
-        name: "Roman Forum",
-        coordinates: [41.8925, 12.4853],
-        type: "historic",
-        challenge: {
-          type: "RIDDLE",
-          question: "I was the heart of public life in ancient Rome. What am I?"
-        }
+      pubgolf: {
+        hole: 1,
+        par: 3,
+        drink: "Glass of White Wine"
       }
-    ]
-  }
+    },
+    {
+      name: "Roman Forum",
+      coordinates: [41.8925, 12.4853],
+      type: "historic",
+      challenge: {
+        type: "RIDDLE",
+        question: "I was the heart of public life in ancient Rome. What am I?",
+        answer: "The Roman Forum"
+      }
+    }
+  ]
+};
 
   const logSteps = [
     { text: "📥 [1/8] INGEST  ─── Ingested Rome CSV row", color: "text-slate-400" },
@@ -73,16 +75,16 @@ export default function AutomationVisualizer() {
 
   return (
     <section id="automation-visualizer" className="py-24 relative border-t border-theme-20 bg-transparent">
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ type: 'tween', ease: 'easeOut', duration: 0.5 }}
+        className="max-w-7xl mx-auto px-6 relative z-10 transform-gpu will-change-transform"
+      >
         
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ type: 'tween', ease: 'easeOut', duration: 0.5 }}
-          className="text-center mb-16"
-        >
+        <div className="text-center mb-16">
           <span className="text-[11px] font-bold tracking-widest text-theme font-mono uppercase bg-theme-10 px-3 py-1 rounded-full border border-theme-20">
             Automatic Tour Generator
           </span>
@@ -92,7 +94,7 @@ export default function AutomationVisualizer() {
           <p className="text-slate-650 max-w-xl mx-auto text-sm md:text-base font-sans">
             A visual simulation of the multi-model AI pipeline built for Tracks & Taps. It reads tour themes, discovers sights, geocodes and routes stops, verifies quality, writes narratives, and posts production-ready tours on autopilot.
           </p>
-        </motion.div>
+        </div>
 
         {/* 1. Node Pipeline Diagram */}
         <div className="bg-white/40 border border-theme-20 rounded-2xl p-6 md:p-8 mb-12 shadow-sm backdrop-blur-md">
@@ -161,7 +163,7 @@ export default function AutomationVisualizer() {
               <div className="md:col-span-5 flex flex-col gap-2">
                 <span className="text-[9px] font-mono text-slate-500 uppercase tracking-wider block">tours.csv Row</span>
                 <div className="bg-slate-900 rounded-xl p-3.5 border border-slate-700/50 aspect-[4/3] overflow-auto">
-                  <pre className="text-[10px] text-slate-300 font-mono whitespace-pre-wrap leading-relaxed select-none">
+                  <pre className="text-[10px] text-slate-300 font-mono whitespace-pre-wrapselect-none">
                     {rawInput}
                   </pre>
                 </div>
@@ -244,7 +246,7 @@ export default function AutomationVisualizer() {
           </div>
         </div>
 
-      </div>
+      </motion.div>
     </section>
   )
 }
