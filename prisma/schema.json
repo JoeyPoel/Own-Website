@@ -38,6 +38,13 @@
                   "kind": "scalar"
                 }
               },
+              "company": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
               "createdAt": {
                 "nullable": false,
                 "type": {
@@ -59,6 +66,13 @@
                   "kind": "scalar"
                 }
               },
+              "links": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/json@1",
+                  "kind": "scalar"
+                }
+              },
               "message": {
                 "nullable": false,
                 "type": {
@@ -68,6 +82,13 @@
               },
               "name": {
                 "nullable": false,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
+              "phone": {
+                "nullable": true,
                 "type": {
                   "codecId": "pg/text@1",
                   "kind": "scalar"
@@ -101,6 +122,9 @@
                 "budget": {
                   "column": "budget"
                 },
+                "company": {
+                  "column": "company"
+                },
                 "createdAt": {
                   "column": "createdAt"
                 },
@@ -110,11 +134,17 @@
                 "id": {
                   "column": "id"
                 },
+                "links": {
+                  "column": "links"
+                },
                 "message": {
                   "column": "message"
                 },
                 "name": {
                   "column": "name"
+                },
+                "phone": {
+                  "column": "phone"
                 },
                 "projectType": {
                   "column": "projectType"
@@ -244,6 +274,13 @@
                   "kind": "scalar"
                 }
               },
+              "status": {
+                "nullable": true,
+                "type": {
+                  "codecId": "pg/text@1",
+                  "kind": "scalar"
+                }
+              },
               "tagline": {
                 "nullable": false,
                 "type": {
@@ -282,6 +319,9 @@
                 },
                 "stack": {
                   "column": "stack"
+                },
+                "status": {
+                  "column": "status"
                 },
                 "tagline": {
                   "column": "tagline"
@@ -422,6 +462,11 @@
                   "nativeType": "text",
                   "nullable": false
                 },
+                "company": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": true
+                },
                 "createdAt": {
                   "codecId": "pg/timestamptz-temporal@1",
                   "default": {
@@ -441,6 +486,11 @@
                   "nativeType": "text",
                   "nullable": false
                 },
+                "links": {
+                  "codecId": "pg/json@1",
+                  "nativeType": "json",
+                  "nullable": true
+                },
                 "message": {
                   "codecId": "pg/text@1",
                   "nativeType": "text",
@@ -450,6 +500,11 @@
                   "codecId": "pg/text@1",
                   "nativeType": "text",
                   "nullable": false
+                },
+                "phone": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": true
                 },
                 "projectType": {
                   "codecId": "pg/text@1",
@@ -568,6 +623,11 @@
                   "nativeType": "text",
                   "nullable": false
                 },
+                "status": {
+                  "codecId": "pg/text@1",
+                  "nativeType": "text",
+                  "nullable": true
+                },
                 "tagline": {
                   "codecId": "pg/text@1",
                   "nativeType": "text",
@@ -663,7 +723,7 @@
         "kind": "postgres-schema"
       }
     },
-    "storageHash": "a5b415f5cd4800e7f17522465b4db067a35f91729bb153553e083f9c71114e66"
+    "storageHash": "db5c84aba01d7a51fc87f5cb668973cbce96ec4a599bf538e9eb82a6d3548ac3"
   },
   "execution": {
     "executionHash": "21047cdc676554de2175d2e10d7834b519b6b07259f1d9a774762e83757f0d5e",

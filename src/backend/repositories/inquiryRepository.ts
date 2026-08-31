@@ -7,6 +7,9 @@ export interface CreateInquiryInput {
   budget: string
   timeline: string
   message: string
+  company?: string
+  phone?: string
+  links?: Record<string, string> | string
 }
 
 export class InquiryRepository {
@@ -22,6 +25,9 @@ export class InquiryRepository {
       budget: data.budget,
       timeline: data.timeline,
       message: data.message,
+      company: data.company,
+      phone: data.phone,
+      links: data.links,
     })
   }
 }

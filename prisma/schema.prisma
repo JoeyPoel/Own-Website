@@ -42,6 +42,9 @@ model Inquiry {
   budget      String
   timeline    String
   message     String
+  company     String?
+  phone       String?
+  links       Json?
   status      String   @default("pending")
   createdAt   DateTime @default(now())
 }

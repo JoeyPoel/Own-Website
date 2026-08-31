@@ -7,6 +7,10 @@ async function sendEmailNotification(input: CreateInquiryInput) {
     return
   }
 
+  const formattedLinks = typeof input.links === 'object' && input.links !== null
+    ? Object.entries(input.links).map(([k, v]) => `${k}: ${v}`).join(', ')
+    : input.links
+
   try {
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -23,6 +27,9 @@ async function sendEmailNotification(input: CreateInquiryInput) {
           <h2>New Inquiry Received</h2>
           <p><strong>Name:</strong> ${input.name}</p>
           <p><strong>Email:</strong> ${input.email}</p>
+          ${input.company ? `<p><strong>Company:</strong> ${input.company}</p>` : ''}
+          ${input.phone ? `<p><strong>Phone:</strong> ${input.phone}</p>` : ''}
+          ${formattedLinks ? `<p><strong>Links/Socials:</strong> ${formattedLinks}</p>` : ''}
           <p><strong>Project Type:</strong> ${input.projectType || 'N/A'}</p>
           <p><strong>Budget:</strong> ${input.budget || 'N/A'}</p>
           <p><strong>Timeline:</strong> ${input.timeline || 'N/A'}</p>
@@ -72,11 +79,20 @@ export class InquiryService {
       budget: input.budget,
       timeline: input.timeline,
       message: input.message.trim(),
+      company: input.company?.trim(),
+      phone: input.phone?.trim(),
+      links: typeof input.links === 'string' ? input.links.trim() : input.links,
     })
 
     // 3. Send Email Notification (awaited to prevent serverless execution freeze)
     try {
-      await sendEmailNotification(result)
+      await sendEmailNotification({
+        ...result,
+        phone: input.phone,
+        links: input.links,
+        company: input.company,
+        message: input.message.trim(), // Send the clean original message in the email body
+      })
     } catch (err) {
       console.error('Email sending failure:', err)
     }

@@ -33,12 +33,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #0284c7;
+  background: var(--theme-color, #0284c7);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #38bdf8;
+  background: var(--theme-accent, #38bdf8);
 }
 
 /* Subtle dot/grid background patterns */

@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { CheckCircle2, Mail, Linkedin, Github, Smartphone } from 'lucide-react'
+import { CheckCircle2, Mail, Linkedin, Github, Smartphone, Plus, Trash2 } from 'lucide-react'
 import { STRINGS } from '../data/strings'
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
+  const [companyName, setCompanyName] = useState('')
+  const [phoneNumber, setPhoneNumber] = useState('')
+  const [socialLinks, setSocialLinks] = useState<{ platform: string; url: string }[]>([])
   const [projectType, setProjectType] = useState('Mobile App')
   const [customProjectType, setCustomProjectType] = useState('')
   const budget = 'Not Specified'
@@ -14,6 +17,20 @@ export default function ContactSection() {
 
   const [errorMsg, setErrorMsg] = useState('')
 
+  const addSocialLink = () => {
+    setSocialLinks([...socialLinks, { platform: '', url: '' }])
+  }
+
+  const removeSocialLink = (index: number) => {
+    setSocialLinks(socialLinks.filter((_, i) => i !== index))
+  }
+
+  const handleSocialChange = (index: number, field: 'platform' | 'url', value: string) => {
+    const updated = [...socialLinks]
+    updated[index][field] = value
+    setSocialLinks(updated)
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!formData.name || !formData.email || !formData.message) return
@@ -22,6 +39,16 @@ export default function ContactSection() {
     setErrorMsg('')
     try {
       const pType = projectType === 'Other' ? `Other: ${customProjectType}` : projectType
+      const formattedLinks = socialLinks
+        .filter((link) => link.platform.trim() || link.url.trim())
+        .reduce((acc, link) => {
+          const key = link.platform.trim() || 'Link'
+          acc[key] = link.url.trim()
+          return acc
+        }, {} as Record<string, string>)
+
+      const hasLinks = Object.keys(formattedLinks).length > 0
+
       const response = await fetch('/api/inquiry', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -32,6 +59,9 @@ export default function ContactSection() {
           projectType: pType,
           budget,
           timeline,
+          phone: phoneNumber.trim() || undefined,
+          links: hasLinks ? formattedLinks : undefined,
+          company: companyName.trim() || undefined,
         }),
       })
 
@@ -42,6 +72,9 @@ export default function ContactSection() {
 
       setIsSuccess(true)
       setFormData({ name: '', email: '', message: '' })
+      setCompanyName('')
+      setPhoneNumber('')
+      setSocialLinks([{ platform: '', url: '' }])
       setCustomProjectType('')
       setTimeout(() => setIsSuccess(false), 5000)
     } catch (err: any) {
@@ -215,7 +248,7 @@ export default function ContactSection() {
                     </div>
                   </div>
 
-                  {/* Text Inputs */}
+                  {/* Row 1: Name and Company Name */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="flex flex-col gap-2">
                       <label htmlFor="name" className="text-xs font-bold text-slate-600 uppercase tracking-wider font-mono">
@@ -234,6 +267,24 @@ export default function ContactSection() {
                     </div>
 
                     <div className="flex flex-col gap-2">
+                      <label htmlFor="company" className="text-xs font-bold text-slate-600 uppercase tracking-wider font-mono">
+                        Company Name (Optional)
+                      </label>
+                      <input
+                        id="company"
+                        type="text"
+                        name="company"
+                        value={companyName}
+                        onChange={(e) => setCompanyName(e.target.value)}
+                        placeholder="e.g. Acme Corp"
+                        className="px-4 py-3 rounded-xl bg-white/70 border border-theme-20 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-theme focus:ring-1 focus:ring-theme transition-all text-sm font-sans"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Row 2: Email and Phone Number */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="flex flex-col gap-2">
                       <label htmlFor="email" className="text-xs font-bold text-slate-600 uppercase tracking-wider font-mono">
                         {STRINGS.contact.form.emailLabel}
                       </label>
@@ -248,6 +299,67 @@ export default function ContactSection() {
                         className="px-4 py-3 rounded-xl bg-white/70 border border-theme-20 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-theme focus:ring-1 focus:ring-theme transition-all text-sm font-sans"
                       />
                     </div>
+
+                    <div className="flex flex-col gap-2">
+                      <label htmlFor="phone" className="text-xs font-bold text-slate-600 uppercase tracking-wider font-mono">
+                        Phone Number (Optional)
+                      </label>
+                      <input
+                        id="phone"
+                        type="tel"
+                        name="phone"
+                        value={phoneNumber}
+                        onChange={(e) => setPhoneNumber(e.target.value)}
+                        placeholder="e.g. +31 6 12345678"
+                        className="px-4 py-3 rounded-xl bg-white/70 border border-theme-20 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-theme focus:ring-1 focus:ring-theme transition-all text-sm font-sans"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Row 3: Social Links List */}
+                  <div className="flex flex-col gap-2">
+                    <span className="text-xs font-bold text-slate-600 uppercase tracking-wider font-mono">
+                      Social Links / Company URLs (Optional)
+                    </span>
+                    {socialLinks.length > 0 && (
+                      <div className="flex flex-col gap-2.5">
+                        {socialLinks.map((link, idx) => (
+                          <div key={idx} className="flex gap-2 items-center">
+                            <input
+                              type="text"
+                              placeholder="Platform (e.g. LinkedIn)"
+                              value={link.platform}
+                              onChange={(e) => handleSocialChange(idx, 'platform', e.target.value)}
+                              className="w-1/3 px-3 py-2.5 rounded-xl bg-white/70 border border-theme-20 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-theme focus:ring-1 focus:ring-theme text-xs font-sans"
+                            />
+                            <input
+                              type="text"
+                              placeholder="URL / Handle"
+                              value={link.url}
+                              onChange={(e) => handleSocialChange(idx, 'url', e.target.value)}
+                              className="flex-grow px-3 py-2.5 rounded-xl bg-white/70 border border-theme-20 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-theme focus:ring-1 focus:ring-theme text-xs font-sans"
+                            />
+                            {socialLinks.length >= 1 && (
+                              <button
+                                type="button"
+                                onClick={() => removeSocialLink(idx)}
+                                className="p-2.5 rounded-xl bg-red-950/10 border border-red-900/20 text-red-400 hover:bg-red-950/20 hover:border-red-900/30 transition-all cursor-pointer"
+                              >
+                                <Trash2 className="w-3.5 h-3.5" />
+                              </button>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    <button
+                      type="button"
+                      onClick={addSocialLink}
+                      className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white/50 border border-theme-20 text-[10px] font-bold text-slate-650 hover:bg-theme-10 hover:text-theme transition-all cursor-pointer w-max"
+                    >
+                      <Plus className="w-3.5 h-3.5" />
+                      <span>Add Social Link</span>
+                    </button>
                   </div>
 
                   <div className="flex flex-col gap-2">
@@ -258,11 +370,11 @@ export default function ContactSection() {
                       id="message"
                       name="message"
                       required
-                      rows={3}
+                      rows={8}
                       value={formData.message}
                       onChange={handleChange}
                       placeholder={STRINGS.contact.form.goalsPlaceholder}
-                      className="px-4 py-3 rounded-xl bg-white/70 border border-theme-20 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-theme focus:ring-1 focus:ring-theme transition-all text-sm font-sans resize-none"
+                      className="px-4 py-3 rounded-xl bg-white/70 border border-theme-20 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-theme focus:ring-1 focus:ring-theme transition-all text-sm font-sans resize-y min-h-[160px]"
                     />
                   </div>
 
