@@ -16,7 +16,7 @@ async function sendEmailNotification(input: CreateInquiryInput) {
       },
       body: JSON.stringify({
         from: 'Portfolio Inquiry <onboarding@resend.dev>',
-        to: 'Joeywognum@gmail.com',
+        to: 'joeywognum@gmail.com',
         reply_to: input.email,
         subject: `New Portfolio Inquiry from ${input.name}`,
         html: `
