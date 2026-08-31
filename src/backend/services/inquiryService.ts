@@ -74,10 +74,12 @@ export class InquiryService {
       message: input.message.trim(),
     })
 
-    // 3. Send Email Notification (non-blocking)
-    sendEmailNotification(result).catch((err) => {
-      console.error('Deferred email sending failure:', err)
-    })
+    // 3. Send Email Notification (awaited to prevent serverless execution freeze)
+    try {
+      await sendEmailNotification(result)
+    } catch (err) {
+      console.error('Email sending failure:', err)
+    }
 
     return {
       success: true,
