@@ -7,8 +7,7 @@ export default function TracksSection() {
     { src: '/tracks1.png', alt: 'Adventure Join screen' },
     { src: '/tracks2.png', alt: 'Stop challenges screen' },
     { src: '/tracks3.png', alt: 'Amsterdam Map overlay' },
-    { src: '/tracks4.png', alt: 'Explore screen' },
-    { src: '/tracks5.png', alt: 'Basic info creation screen' }
+    { src: '/tracks4.png', alt: 'Explore screen' }
   ]
 
   return (
@@ -21,7 +20,7 @@ export default function TracksSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            transition={{ type: 'tween', ease: 'easeOut', duration: 0.5 }}
             className="max-w-2xl"
           >
             <span className="text-[11px] font-bold tracking-widest text-theme font-mono uppercase bg-theme-10 px-3 py-1 rounded-full border border-theme-20 w-max">
@@ -50,7 +49,7 @@ export default function TracksSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            transition={{ type: 'tween', ease: 'easeOut', duration: 0.5 }}
             className="flex gap-4"
           >
             <div className="px-5 py-3 rounded-2xl bg-white/60 border border-theme-20 text-center shadow-xs">
@@ -94,7 +93,7 @@ export default function TracksSection() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ type: 'tween', ease: 'easeOut', duration: 0.6 }}
           className="flex gap-6 overflow-x-auto pb-6 scrollbar-thin scrollbar-thumb-theme scrollbar-track-transparent snap-x"
         >
           {screenshots.map((img, idx) => (
@@ -116,7 +115,6 @@ export default function TracksSection() {
             </div>
           ))}
         </motion.div>
-
       </div>
     </section>
   )

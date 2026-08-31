@@ -18,16 +18,16 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
 
   return (
     <section id="work" className="py-24 relative border-t border-theme-20">
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ type: 'tween', ease: 'easeOut', duration: 0.5 }}
+        className="max-w-7xl mx-auto px-6 relative z-10"
+      >
         
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
-        >
+        <div className="text-center mb-16">
           <span className="text-[11px] font-bold tracking-widest text-theme font-mono uppercase bg-theme-10 px-3 py-1 rounded-full border border-theme-20">
             {STRINGS.projects.badge}
           </span>
@@ -37,15 +37,10 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
           <p className="text-slate-650 max-w-xl mx-auto text-sm md:text-base font-sans">
             {STRINGS.projects.description}
           </p>
-        </motion.div>
+        </div>
 
         {/* Filter Navigation */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="flex justify-center mb-12"
-        >
+        <div className="flex justify-center mb-12">
           <div className="flex p-1.5 rounded-full bg-white/60 border border-theme-30 backdrop-blur-md">
             {(['all', 'mobile', 'automation'] as const).map((category) => {
               const label =
@@ -68,7 +63,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                     <motion.div
                       layoutId="activeFilterTab"
                       className="absolute inset-0 bg-theme-15 border border-theme-20 rounded-full"
-                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                      transition={{ type: 'tween', ease: 'easeOut', duration: 0.25 }}
                     />
                   )}
                   <span className="relative z-10">{label}</span>
@@ -76,7 +71,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
               )
             })}
           </div>
-        </motion.div>
+        </div>
 
         {/* Stacked Cases */}
         <div className="flex flex-col gap-10">
@@ -86,7 +81,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
             ))}
           </AnimatePresence>
         </div>
-      </div>
+      </motion.div>
     </section>
   )
 }

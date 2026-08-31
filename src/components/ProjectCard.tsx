@@ -14,7 +14,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20 }}
-      transition={{ duration: 0.4 }}
+      transition={{ type: 'tween', ease: 'easeOut', duration: 0.4 }}
       className="card-premium rounded-2xl overflow-hidden flex flex-col lg:flex-row shadow-xl border border-sky-200 hover:border-sky-300 transition-[border-color] duration-300"
     >
       {/* Visual Mockup Area */}

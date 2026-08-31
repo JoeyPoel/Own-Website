@@ -80,7 +80,7 @@ export default function AutomationVisualizer() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          transition={{ type: 'tween', ease: 'easeOut', duration: 0.5 }}
           className="text-center mb-16"
         >
           <span className="text-[11px] font-bold tracking-widest text-theme font-mono uppercase bg-theme-10 px-3 py-1 rounded-full border border-theme-20">
@@ -216,7 +216,7 @@ export default function AutomationVisualizer() {
                     key={idx}
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.25 }}
+                    transition={{ type: 'tween', ease: 'easeOut', duration: 0.25 }}
                     className={log.color}
                   >
                     {log.text}

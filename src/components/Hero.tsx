@@ -29,7 +29,7 @@ export default function Hero({ profile }: HeroProps) {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { type: 'spring', stiffness: 120, damping: 20 },
+      transition: { type: 'tween', ease: 'easeOut', duration: 0.4 },
     },
   }
 

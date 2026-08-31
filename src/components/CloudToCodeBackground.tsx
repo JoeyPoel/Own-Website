@@ -17,6 +17,7 @@ interface CloudGroup {
   y: number
   speedX: number
   particles: CloudParticle[]
+  canvas: HTMLCanvasElement
 }
 
 const CODE_SNIPPETS = ['0', '1']
@@ -42,9 +43,25 @@ export default function CloudToCodeBackground() {
 
     window.addEventListener('resize', handleResize)
 
-    // Generate Cloud Formations (Larger, flatter bottom shape)
+    // 1. Pre-render a white soft cloud puff sprite to avoid createRadialGradient calls on every frame
+    const puffCanvas = document.createElement('canvas')
+    puffCanvas.width = 128
+    puffCanvas.height = 128
+    const puffCtx = puffCanvas.getContext('2d')
+    if (puffCtx) {
+      const grad = puffCtx.createRadialGradient(64, 64, 2, 64, 64, 60)
+      grad.addColorStop(0, 'rgba(255, 255, 255, 1)')
+      grad.addColorStop(0.5, 'rgba(255, 255, 255, 0.75)')
+      grad.addColorStop(1, 'rgba(255, 255, 255, 0)')
+      puffCtx.fillStyle = grad
+      puffCtx.beginPath()
+      puffCtx.arc(64, 64, 60, 0, Math.PI * 2)
+      puffCtx.fill()
+    }
+
+    // 2. Generate Cloud Formations with Pre-Rendered canvas shapes
     const clouds: CloudGroup[] = []
-    const cloudCount = Math.max(9, Math.floor(width / 120))
+    const cloudCount = Math.max(7, Math.floor(width / 150))
 
     for (let i = 0; i < cloudCount; i++) {
       // Spread clouds across the viewport and off-screen to the left to create a continuous stream
@@ -52,34 +69,50 @@ export default function CloudToCodeBackground() {
       const baseY = Math.random() * (height * 0.85)
       const speedX = 0.06 + Math.random() * 0.12
       const particles: CloudParticle[] = []
-      const pCount = 15 + Math.floor(Math.random() * 10)
+      const pCount = 8 + Math.floor(Math.random() * 6)
+
+      // Create an off-screen canvas to pre-render this specific cloud shape once on mount
+      const cloudCanvas = document.createElement('canvas')
+      cloudCanvas.width = 600
+      cloudCanvas.height = 350
+      const cCtx = cloudCanvas.getContext('2d')
 
       for (let j = 0; j < pCount; j++) {
         // Flat bottom layout: offset X is wider, offset Y is skewed upwards (restricted positive range)
-        const offsetX = (Math.random() - 0.5) * 190
-        const offsetY = -Math.abs(Math.random() * 55) + 15
+        const offsetX = (Math.random() - 0.5) * 160
+        const offsetY = -Math.abs(Math.random() * 45) + 10
         // Bigger radius
-        const radius = 32 + Math.random() * 32
+        const radius = 38 + Math.random() * 38
         const char = CODE_SNIPPETS[Math.floor(Math.random() * CODE_SNIPPETS.length)]
 
         particles.push({
           x: offsetX,
           y: offsetY,
           radius,
-          speedX: (Math.random() - 0.5) * 0.04,
-          speedY: (Math.random() - 0.5) * 0.04,
+          speedX: 0,
+          speedY: 0,
           char,
           opacity: 0.35 + Math.random() * 0.5,
           size: 11 + Math.floor(Math.random() * 4),
           layer: Math.random() > 0.5 ? 1 : 2
         })
+
+        // Draw particle onto off-screen cloudCanvas (centered at 300, 175)
+        if (cCtx) {
+          cCtx.save()
+          cCtx.globalAlpha = (0.35 + Math.random() * 0.5) * 0.75
+          const size = radius * 2.8
+          cCtx.drawImage(puffCanvas, 300 + offsetX - size / 2, 175 + offsetY - size / 2, size, size)
+          cCtx.restore()
+        }
       }
 
       clouds.push({
         x: baseX,
         y: baseY,
         speedX,
-        particles
+        particles,
+        canvas: cloudCanvas
       })
     }
 
@@ -105,28 +138,18 @@ export default function CloudToCodeBackground() {
       }
     }
 
-    // Pre-render a white soft cloud puff sprite to avoid createRadialGradient calls on every frame
-    const puffCanvas = document.createElement('canvas')
-    puffCanvas.width = 128
-    puffCanvas.height = 128
-    const puffCtx = puffCanvas.getContext('2d')
-    if (puffCtx) {
-      const grad = puffCtx.createRadialGradient(64, 64, 2, 64, 64, 60)
-      grad.addColorStop(0, 'rgba(255, 255, 255, 1)')
-      grad.addColorStop(0.5, 'rgba(255, 255, 255, 0.75)')
-      grad.addColorStop(1, 'rgba(255, 255, 255, 0)')
-      puffCtx.fillStyle = grad
-      puffCtx.beginPath()
-      puffCtx.arc(64, 64, 60, 0, Math.PI * 2)
-      puffCtx.fill()
-    }
-
     let lastTime = 0
     const fpsInterval = 1000 / 40 // Capped at 40 FPS to save CPU/GPU cycles
     let lastScrollY = -1
     let lastWidth = -1
     let lastHeight = -1
-    let cachedSkyGradient: CanvasGradient | null = null
+    let hasDrawnGradient = false
+    let lastCpuTime = 0
+
+    const gradCanvas = document.createElement('canvas')
+    gradCanvas.width = 1
+    gradCanvas.height = 256
+    const gradCtx = gradCanvas.getContext('2d')
 
     // Main Render Loop
     const render = (time?: number) => {
@@ -146,10 +169,11 @@ export default function CloudToCodeBackground() {
       ctx.clearRect(0, 0, width, height)
 
       // 2. Cache Calculations & CSS variable updates unless scroll or size changes
-      if (scrollY !== lastScrollY || width !== lastWidth || height !== lastHeight || !cachedSkyGradient) {
+      if (scrollY !== lastScrollY || width !== lastWidth || height !== lastHeight || !hasDrawnGradient) {
         lastScrollY = scrollY
         lastWidth = width
         lastHeight = height
+        hasDrawnGradient = true
 
         // 1. Interpolate Sky Background Colors (Morning blue sky to soft light sunset/twilight)
         let r1, g1, b1
@@ -191,10 +215,14 @@ export default function CloudToCodeBackground() {
           b3 = Math.round(115 + (155 - 115) * t)
         }
 
-        cachedSkyGradient = ctx.createLinearGradient(0, 0, 0, height)
-        cachedSkyGradient.addColorStop(0, `rgb(${r1}, ${g1}, ${b1})`)
-        cachedSkyGradient.addColorStop(0.5, `rgb(${r2}, ${g2}, ${b2})`)
-        cachedSkyGradient.addColorStop(1, `rgb(${r3}, ${g3}, ${b3})`)
+        if (gradCtx) {
+          const skyGradient = gradCtx.createLinearGradient(0, 0, 0, 256)
+          skyGradient.addColorStop(0, `rgb(${r1}, ${g1}, ${b1})`)
+          skyGradient.addColorStop(0.5, `rgb(${r2}, ${g2}, ${b2})`)
+          skyGradient.addColorStop(1, `rgb(${r3}, ${g3}, ${b3})`)
+          gradCtx.fillStyle = skyGradient
+          gradCtx.fillRect(0, 0, 1, 256)
+        }
 
         // 1.5. Interpolate Dynamic UI Accent Colors
         let ar, ag, ab // Accent primary
@@ -224,18 +252,21 @@ export default function CloudToCodeBackground() {
           sb = Math.round(119 + (6 - 119) * t)
         }
 
-        // Update root CSS custom properties (only runs when scroll changes, preventing layout thrashing)
-        document.documentElement.style.setProperty('--theme-color', `rgb(${ar}, ${ag}, ${ab})`)
-        document.documentElement.style.setProperty('--theme-color-rgb', `${ar}, ${ag}, ${ab}`)
-        document.documentElement.style.setProperty('--theme-accent', `rgb(${sr}, ${sg}, ${sb})`)
-        document.documentElement.style.setProperty('--theme-accent-rgb', `${sr}, ${sg}, ${sb}`)
-        document.documentElement.style.setProperty('--sky-top', `rgb(${r1}, ${g1}, ${b1})`)
-        document.documentElement.style.setProperty('--sky-mid', `rgb(${r2}, ${g2}, ${b2})`)
-        document.documentElement.style.setProperty('--sky-bottom', `rgb(${r3}, ${g3}, ${b3})`)
+        // Update root CSS custom properties at a throttled rate (~15 FPS) to eliminate layout thrashing
+        const currentTime = performance.now()
+        if (currentTime - lastCpuTime > 66 || scrollY === 0 || scrollProgress === 1) {
+          lastCpuTime = currentTime
+          document.documentElement.style.setProperty('--theme-color', `rgb(${ar}, ${ag}, ${ab})`)
+          document.documentElement.style.setProperty('--theme-color-rgb', `${ar}, ${ag}, ${ab}`)
+          document.documentElement.style.setProperty('--theme-accent', `rgb(${sr}, ${sg}, ${sb})`)
+          document.documentElement.style.setProperty('--theme-accent-rgb', `${sr}, ${sg}, ${sb}`)
+          document.documentElement.style.setProperty('--sky-top', `rgb(${r1}, ${g1}, ${b1})`)
+          document.documentElement.style.setProperty('--sky-mid', `rgb(${r2}, ${g2}, ${b2})`)
+          document.documentElement.style.setProperty('--sky-bottom', `rgb(${r3}, ${g3}, ${b3})`)
+        }
       }
 
-      ctx.fillStyle = cachedSkyGradient
-      ctx.fillRect(0, 0, width, height)
+      ctx.drawImage(gradCanvas, 0, 0, width, height)
 
       // Calculate Morph Ratios (stretched transition to morph clouds into code slower)
       const cloudPuffOpacity = Math.max(0, 1 - scrollProgress * 1.05)
@@ -253,40 +284,17 @@ export default function CloudToCodeBackground() {
           // Stagger starting coordinate off-screen to the left so clouds enter one by one at intervals
           cloud.x = -220 - Math.random() * 600
           cloud.y = Math.random() * (height * 0.85)
-          
-          // Reset particles to a tight cluster to clear any long-term shape dispersion
-          cloud.particles.forEach((p) => {
-            p.x = (Math.random() - 0.5) * 190
-            p.y = -Math.abs(Math.random() * 55) + 15
-          })
         }
-
-        // Update particle offsets
-        cloud.particles.forEach((p) => {
-          p.x += p.speedX
-          p.y += p.speedY
-
-          // Gently reverse drift directions if particles drift too far, keeping cloud shape cohesive
-          if (Math.abs(p.x) > 110) p.speedX *= -1
-          if (p.y < -70 || p.y > 35) p.speedY *= -1
-        })
 
         // Check horizontal visibility in the viewport
         const isVisible = cloud.x + 250 > 0 && cloud.x - 250 < width
 
         if (cloudPuffOpacity > 0.01 && isVisible) {
-          cloud.particles.forEach((p) => {
-            const posX = cloud.x + p.x
-            const posY = cloud.y + p.y
-            ctx.save()
-            // Blend opacity
-            ctx.globalAlpha = p.opacity * cloudPuffOpacity * 0.75
-            
-            // Draw pre-rendered sprite scaled to particle radius (128x128 center is 64)
-            const size = p.radius * 2.8
-            ctx.drawImage(puffCanvas, posX - size / 2, posY - size / 2, size, size)
-            ctx.restore()
-          })
+          ctx.save()
+          ctx.globalAlpha = cloudPuffOpacity * 0.75
+          // Draw the pre-rendered cloud shape canvas in a single draw operation
+          ctx.drawImage(cloud.canvas, cloud.x - 300, cloud.y - 175)
+          ctx.restore()
         }
       })
 

@@ -67,7 +67,7 @@ export default function ContactSection() {
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            transition={{ type: 'tween', ease: 'easeOut', duration: 0.5 }}
             className="lg:col-span-5 flex flex-col gap-6"
           >
             <span className="text-[11px] font-bold tracking-widest text-theme font-mono uppercase bg-theme-10 px-3 py-1 rounded-full border border-theme-20 w-max">
@@ -138,7 +138,7 @@ export default function ContactSection() {
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            transition={{ type: 'tween', ease: 'easeOut', duration: 0.5 }}
             className="lg:col-span-7 card-premium p-8 rounded-2xl shadow-xl relative overflow-hidden"
           >
             <AnimatePresence mode="wait">
@@ -179,6 +179,7 @@ export default function ContactSection() {
                             initial={{ opacity: 0, scale: 0.95, width: 0 }}
                             animate={{ opacity: 1, scale: 1, width: '200px' }}
                             exit={{ opacity: 0, scale: 0.95, width: 0 }}
+                            transition={{ type: 'tween', ease: 'easeOut', duration: 0.25 }}
                             type="text"
                             placeholder="Specify stack..."
                             required

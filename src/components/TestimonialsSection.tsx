@@ -22,23 +22,22 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
     visible: {
       opacity: 1,
       y: 0,
-      transition: { type: 'spring', stiffness: 120, damping: 20 },
+      transition: { type: 'tween', ease: 'easeOut', duration: 0.4 },
     },
   }
 
   return (
     <section id="testimonials" className="py-24 relative bg-dot-pattern border-t border-theme-20">
-
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ type: 'tween', ease: 'easeOut', duration: 0.5 }}
+        className="max-w-7xl mx-auto px-6 relative z-10"
+      >
         
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
-        >
+        <div className="text-center mb-16">
           <span className="text-[11px] font-bold tracking-widest text-theme font-mono uppercase bg-theme-10 px-3 py-1 rounded-full border border-theme-20">
             {STRINGS.testimonials.badge}
           </span>
@@ -59,16 +58,10 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
               <span className="font-sans">→</span>
             </a>
           </div>
-        </motion.div>
+        </div>
  
         {/* Testimonials Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8"
-        >
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {testimonials.map((testimonial) => {
             // Define custom outcome badges and avatars based on the company
             let trustBadge = ""
@@ -94,9 +87,8 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
             }
 
             return (
-              <motion.div
+              <div
                 key={testimonial.id}
-                variants={cardVariants}
                 className="card-premium p-8 rounded-2xl flex flex-col justify-between hover:border-theme-30 hover:shadow-theme-10 transition-all duration-300 relative overflow-hidden"
               >
                 <div>
@@ -135,11 +127,11 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
                     </p>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             )
           })}
-        </motion.div>
-      </div>
+        </div>
+      </motion.div>
     </section>
   )
 }

@@ -28,22 +28,22 @@ export default function ServicesSection({ services }: ServicesSectionProps) {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { type: 'spring', stiffness: 120, damping: 20 },
+      transition: { type: 'tween', ease: 'easeOut', duration: 0.4 },
     },
   }
 
   return (
     <section id="services" className="py-24 relative border-t border-theme-20">
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ type: 'tween', ease: 'easeOut', duration: 0.5 }}
+        className="max-w-7xl mx-auto px-6 relative z-10"
+      >
         
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
-        >
+        <div className="text-center mb-16">
           <span className="text-[11px] font-bold tracking-widest text-theme font-mono uppercase bg-theme-10 px-3 py-1 rounded-full border border-theme-20">
             {STRINGS.services.badge}
           </span>
@@ -53,22 +53,15 @@ export default function ServicesSection({ services }: ServicesSectionProps) {
           <p className="text-slate-650 max-w-xl mx-auto text-sm md:text-base font-sans">
             {STRINGS.services.description}
           </p>
-        </motion.div>
+        </div>
 
         {/* Services Cards */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => {
             const Icon = iconsMap[(index + 1).toString() as keyof typeof iconsMap] || Sparkles
             return (
-              <motion.div
+              <div
                 key={service.id}
-                variants={cardVariants}
                 className="card-premium p-8 rounded-2xl flex flex-col justify-between hover:border-theme-30 hover:shadow-theme-10 transition-all duration-300 group"
               >
                 <div>
@@ -85,11 +78,11 @@ export default function ServicesSection({ services }: ServicesSectionProps) {
                     {service.description}
                   </p>
                 </div>
-              </motion.div>
+              </div>
             )
           })}
-        </motion.div>
-      </div>
+        </div>
+      </motion.div>
     </section>
   )
 }

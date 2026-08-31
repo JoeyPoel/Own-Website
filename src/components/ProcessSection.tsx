@@ -54,7 +54,7 @@ export default function ProcessSection() {
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: idx * 0.15 }}
+                  transition={{ type: 'tween', ease: 'easeOut', duration: 0.6, delay: idx * 0.15 }}
                   className="flex flex-col items-center text-center group"
                 >
                   {/* Step Circle Badge */}
