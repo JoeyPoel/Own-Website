@@ -7,9 +7,43 @@ interface ProjectCardProps {
   project: Project
 }
 
+function getLocalFallbackImage(title: string): string | null {
+  const t = title.toLowerCase()
+  if (t.includes('tracks & taps')) {
+    return '/public/tracks&tapsProject.png'
+  }
+  if (t.includes('mainframe pricelist')) {
+    return '/public/pricelist automation.png'
+  }
+  if (t.includes('intelligent document') || t.includes('document understanding')) {
+    return '/public/Document Understanding.webp'
+  }
+  if (t.includes('swapclub')) {
+    return '/public/swapclub.png'
+  }
+  if (t.includes('zoo guide') || t.includes('dept')) {
+    return '/public/DeptChatbot.png'
+  }
+  return null
+}
+
 export default function ProjectCard({ project }: ProjectCardProps) {
+  const [imgSrc, setImgSrc] = useState(project.image)
+  const [triedFallback, setTriedFallback] = useState(false)
   const [imageError, setImageError] = useState(false)
   const isMobile = project.category === 'mobile'
+
+  const handleImageError = () => {
+    if (!triedFallback) {
+      const fallback = getLocalFallbackImage(project.title)
+      if (fallback && fallback !== project.image) {
+        setImgSrc(fallback)
+        setTriedFallback(true)
+        return
+      }
+    }
+    setImageError(true)
+  }
 
   return (
     <motion.div
@@ -29,12 +63,12 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             {/* Screen container */}
             <div className="w-full h-full rounded-[20px] overflow-hidden bg-slate-100 border border-slate-100 relative">
               {imageError ? (
-                <div className="w-full h-full bg-slate-200" />
+                <div className="w-full h-full bg-black" />
               ) : (
                 <img
-                  src={project.image}
+                  src={imgSrc}
                   alt=""
-                  onError={() => setImageError(true)}
+                  onError={handleImageError}
                   className="w-full h-full object-cover opacity-95 select-none pointer-events-none"
                 />
               )}
@@ -54,12 +88,12 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             <div className="relative p-2.5 bg-slate-950 flex-grow flex flex-col justify-between">
               <div className="w-full h-40 bg-black rounded border border-slate-850 flex items-center justify-center overflow-hidden">
                 {imageError ? (
-                  <div className="w-full h-full bg-slate-900/50" />
+                  <div className="w-full h-full bg-black" />
                 ) : (
                   <img
-                    src={project.image}
+                    src={imgSrc}
                     alt=""
-                    onError={() => setImageError(true)}
+                    onError={handleImageError}
                     className="max-w-full max-h-full object-contain opacity-95 select-none pointer-events-none"
                   />
                 )}
@@ -72,7 +106,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           </div>
         )}
       </div>
- 
+
       {/* Case Details */}
       <div className="lg:w-1/2 p-8 flex flex-col justify-between">
         <div>
@@ -92,7 +126,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           <p className="text-slate-650 text-sm leading-relaxed mb-6">
             {project.tagline}
           </p>
- 
+
           <div className="border-t border-sky-100 pt-6 mb-6">
             <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest font-mono block mb-3">
               Technical Highlights
@@ -107,7 +141,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             </ul>
           </div>
         </div>
- 
+
         {/* Action tray */}
         <div className="flex items-center justify-between pt-4 border-t border-sky-100 mt-auto">
           <div className="flex flex-wrap gap-1.5">
@@ -120,7 +154,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
               </span>
             ))}
           </div>
- 
+
           {project.linkUrl && (
             <a
               href={project.linkUrl}
