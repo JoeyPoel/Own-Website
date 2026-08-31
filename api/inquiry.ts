@@ -1,4 +1,4 @@
-import inquiryController from '../src/backend/controllers/inquiryController.js'
+import inquiryController from '../src/backend/controllers/inquiryController'
 
 export default async function handler(req: any, res: any) {
   // Build a Web-standard Request from Node req

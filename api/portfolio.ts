@@ -1,4 +1,4 @@
-import portfolioController from '../src/backend/controllers/portfolioController.js'
+import portfolioController from '../src/backend/controllers/portfolioController'
 
 export default async function handler(req: any, res: any) {
   // Build a Web-standard Request from Node req
