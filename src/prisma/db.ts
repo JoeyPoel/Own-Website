@@ -33,5 +33,17 @@ export const db = postgres<Contract>({
   url: process.env['DATABASE_URL']!,
 });
 
-/** Eagerly-initialized connection promise. Prevents race conditions on first request. */
-export const dbReady: Promise<typeof db.orm.public> = db.connect().then(() => db.orm.public);
+let connectionPromise: Promise<typeof db.orm.public> | null = null;
+
+/** Lazily-initialized connection promise. Prevents top-level crashes on startup. */
+export function getDbReady(): Promise<typeof db.orm.public> {
+  if (!connectionPromise) {
+    connectionPromise = db.connect()
+      .then(() => db.orm.public)
+      .catch((err) => {
+        connectionPromise = null; // reset to allow retry
+        throw err;
+      });
+  }
+  return connectionPromise;
+}
