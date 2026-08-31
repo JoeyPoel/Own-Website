@@ -45,44 +45,44 @@ export default function CloudToCodeBackground() {
 
     // 1. Pre-render a white soft cloud puff sprite to avoid createRadialGradient calls on every frame
     const puffCanvas = document.createElement('canvas')
-    puffCanvas.width = 128
-    puffCanvas.height = 128
+    puffCanvas.width = 256
+    puffCanvas.height = 256
     const puffCtx = puffCanvas.getContext('2d')
     if (puffCtx) {
-      const grad = puffCtx.createRadialGradient(64, 64, 2, 64, 64, 60)
+      const grad = puffCtx.createRadialGradient(128, 128, 4, 128, 128, 120)
       grad.addColorStop(0, 'rgba(255, 255, 255, 1)')
       grad.addColorStop(0.5, 'rgba(255, 255, 255, 0.75)')
       grad.addColorStop(1, 'rgba(255, 255, 255, 0)')
       puffCtx.fillStyle = grad
       puffCtx.beginPath()
-      puffCtx.arc(64, 64, 60, 0, Math.PI * 2)
+      puffCtx.arc(128, 128, 120, 0, Math.PI * 2)
       puffCtx.fill()
     }
 
     // 2. Generate Cloud Formations with Pre-Rendered canvas shapes
     const clouds: CloudGroup[] = []
-    const cloudCount = Math.max(7, Math.floor(width / 150))
+    const cloudCount = Math.max(9, Math.floor(width / 120))
 
     for (let i = 0; i < cloudCount; i++) {
       // Spread clouds across the viewport and off-screen to the left to create a continuous stream
-      const baseX = Math.random() * (width + 600) - 600
-      const baseY = Math.random() * (height * 0.85)
-      const speedX = 0.06 + Math.random() * 0.12
+      const baseX = Math.random() * (width + 700) - 700
+      const baseY = Math.random() * (height * 0.88)
+      const speedX = 0.05 + Math.random() * 0.12
       const particles: CloudParticle[] = []
       const pCount = 8 + Math.floor(Math.random() * 6)
 
       // Create an off-screen canvas to pre-render this specific cloud shape once on mount
       const cloudCanvas = document.createElement('canvas')
-      cloudCanvas.width = 600
-      cloudCanvas.height = 350
+      cloudCanvas.width = 700
+      cloudCanvas.height = 400
       const cCtx = cloudCanvas.getContext('2d')
 
       for (let j = 0; j < pCount; j++) {
         // Flat bottom layout: offset X is wider, offset Y is skewed upwards (restricted positive range)
-        const offsetX = (Math.random() - 0.5) * 160
-        const offsetY = -Math.abs(Math.random() * 45) + 10
-        // Bigger radius
-        const radius = 38 + Math.random() * 38
+        const offsetX = (Math.random() - 0.5) * 210
+        const offsetY = -Math.abs(Math.random() * 55) + 12
+        // Balanced radius for clouds
+        const radius = 45 + Math.random() * 40
         const char = CODE_SNIPPETS[Math.floor(Math.random() * CODE_SNIPPETS.length)]
 
         particles.push({
@@ -93,16 +93,16 @@ export default function CloudToCodeBackground() {
           speedY: 0,
           char,
           opacity: 0.35 + Math.random() * 0.5,
-          size: 11 + Math.floor(Math.random() * 4),
+          size: 12 + Math.floor(Math.random() * 4),
           layer: Math.random() > 0.5 ? 1 : 2
         })
 
-        // Draw particle onto off-screen cloudCanvas (centered at 300, 175)
+        // Draw particle onto off-screen cloudCanvas (centered at 350, 200)
         if (cCtx) {
           cCtx.save()
           cCtx.globalAlpha = (0.35 + Math.random() * 0.5) * 0.75
-          const size = radius * 2.8
-          cCtx.drawImage(puffCanvas, 300 + offsetX - size / 2, 175 + offsetY - size / 2, size, size)
+          const size = radius * 2.9
+          cCtx.drawImage(puffCanvas, 350 + offsetX - size / 2, 200 + offsetY - size / 2, size, size)
           cCtx.restore()
         }
       }
@@ -279,21 +279,21 @@ export default function CloudToCodeBackground() {
         // Drift the entire cloud group horizontally to the right
         cloud.x += cloud.speedX
         
-        const isOffScreenRight = cloud.x - 220 > width
+        const isOffScreenRight = cloud.x - 350 > width
         if (isOffScreenRight) {
           // Stagger starting coordinate off-screen to the left so clouds enter one by one at intervals
-          cloud.x = -220 - Math.random() * 600
-          cloud.y = Math.random() * (height * 0.85)
+          cloud.x = -350 - Math.random() * 700
+          cloud.y = Math.random() * (height * 0.88)
         }
 
         // Check horizontal visibility in the viewport
-        const isVisible = cloud.x + 250 > 0 && cloud.x - 250 < width
+        const isVisible = cloud.x + 350 > 0 && cloud.x - 350 < width
 
         if (cloudPuffOpacity > 0.01 && isVisible) {
           ctx.save()
           ctx.globalAlpha = cloudPuffOpacity * 0.75
           // Draw the pre-rendered cloud shape canvas in a single draw operation
-          ctx.drawImage(cloud.canvas, cloud.x - 300, cloud.y - 175)
+          ctx.drawImage(cloud.canvas, cloud.x - 350, cloud.y - 200)
           ctx.restore()
         }
       })
