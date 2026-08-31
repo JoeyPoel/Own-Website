@@ -11,9 +11,7 @@
 
 html {
   scroll-behavior: smooth;
-  background-color: var(--sky-top, #0284c7);
-  background-image: linear-gradient(to bottom, var(--sky-top, #0284c7), var(--sky-bottom, #bae6fd));
-  background-attachment: fixed;
+  background-color: #ffffff;
   color: #0f172a;
   font-family: var(--font-sans);
   width: 100%;

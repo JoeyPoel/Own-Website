@@ -73,34 +73,31 @@ export default function Navbar({ profile }: NavbarProps) {
           isScrolled ? 'py-3' : 'py-5'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6">
-          <nav className="glass-nav rounded-full px-6 py-2.5 flex items-center justify-between shadow-xl shadow-slate-950/20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <nav className="glass-nav rounded-full px-4 sm:px-6 py-2 sm:py-2.5 flex items-center justify-between shadow-xl shadow-slate-950/20">
             {/* Name + Availability Badge */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               <a 
                 href="#home" 
                 onClick={(e) => handleNavClick(e, '#home')}
-                className="font-bold text-sky-950 tracking-wide font-heading text-sm"
+                className="font-bold text-sky-950 tracking-wide font-heading text-sm whitespace-nowrap shrink-0"
               >
                 {profile.name || 'Joey van der Poel'}
               </a>
-              <div className="hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-full bg-theme-15 border border-theme-30">
+              <div className="hidden xl:flex items-center gap-1.5 px-3 py-1 rounded-full bg-theme-15 border border-theme-30 shrink-0">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-theme opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-theme"></span>
                 </span>
-                <span className="text-[10px] font-bold tracking-wide text-theme font-mono uppercase lg:hidden">
-                  Available for contracts
-                </span>
-                <span className="text-[10px] font-bold tracking-wide text-theme font-mono uppercase hidden lg:inline">
+                <span className="text-[10px] font-bold tracking-wide text-theme font-mono uppercase">
                   {STRINGS.navbar.availabilityFallback}
                 </span>
               </div>
             </div>
 
             {/* Desktop Navigation + CTA (grouped on the right to eliminate whitespace) */}
-            <div className="hidden md:flex items-center gap-6">
-              <div className="flex items-center gap-1">
+            <div className="hidden md:flex items-center gap-2 lg:gap-6 shrink-0">
+              <div className="flex items-center gap-0.5 lg:gap-1">
                 {navLinks.map((link) => {
                   const isActive = activeSection === link.href.substring(1)
                   return (
@@ -108,7 +105,7 @@ export default function Navbar({ profile }: NavbarProps) {
                       key={link.name}
                       href={link.href}
                       onClick={(e) => handleNavClick(e, link.href)}
-                      className={`relative px-4 py-2 text-xs font-bold uppercase tracking-wider transition-colors duration-300 rounded-full ${
+                      className={`relative px-2.5 lg:px-4 py-1.5 lg:py-2 text-[11px] lg:text-xs font-bold uppercase tracking-wider transition-colors duration-300 rounded-full whitespace-nowrap ${
                         isActive ? 'text-sky-950 font-extrabold' : 'text-slate-700 hover:text-sky-950'
                       }`}
                     >
@@ -128,7 +125,7 @@ export default function Navbar({ profile }: NavbarProps) {
               <a
                 href="#contact"
                 onClick={(e) => handleNavClick(e, '#contact')}
-                className="inline-flex items-center gap-1.5 px-5 py-2 overflow-hidden rounded-full bg-theme hover:brightness-110 text-white font-bold text-xs tracking-wider transition-all shadow-theme-10 hover:scale-105"
+                className="inline-flex items-center gap-1.5 px-3.5 lg:px-5 py-1.5 lg:py-2 overflow-hidden rounded-full bg-theme hover:brightness-110 text-white font-bold text-xs tracking-wider transition-all shadow-theme-10 hover:scale-105 whitespace-nowrap shrink-0"
               >
                 <span>{STRINGS.navbar.btnDiscuss}</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
