@@ -74,7 +74,7 @@ export default function AutomationVisualizer() {
   }, [isProcessing])
 
   return (
-    <section id="automation-visualizer" className="py-24 relative border-t border-theme-20 bg-transparent">
+    <section id="automation-visualizer" className="py-24 relative bg-transparent">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -85,7 +85,7 @@ export default function AutomationVisualizer() {
         
         {/* Header */}
         <div className="text-center mb-16">
-          <span className="text-[11px] font-bold tracking-widest text-theme font-mono uppercase bg-theme-10 px-3 py-1 rounded-full border border-theme-20">
+          <span className="text-[11px] font-bold tracking-widest text-theme font-mono uppercase bg-theme-10 px-3 py-1 rounded-full">
             Automatic Tour Generator
           </span>
           <h2 className="text-3xl md:text-5xl font-extrabold font-heading text-slate-850 mt-4 mb-4">
@@ -97,7 +97,7 @@ export default function AutomationVisualizer() {
         </div>
 
         {/* 1. Node Pipeline Diagram */}
-        <div className="bg-white/40 border border-theme-20 rounded-2xl p-6 md:p-8 mb-12 shadow-sm backdrop-blur-md">
+        <div className="bg-white/40 border border-white/70 rounded-2xl p-6 md:p-8 mb-12 shadow-sm backdrop-blur-md">
           <h3 className="text-xs font-bold font-mono text-slate-500 uppercase tracking-widest mb-6 text-center">
             Automatic Tour Generator & Routing Flow
           </h3>
@@ -142,7 +142,7 @@ export default function AutomationVisualizer() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch mb-12">
           
           {/* Left Column: Data Parser visualizer */}
-          <div className="flex flex-col gap-6 p-6 md:p-8 bg-white/50 border border-theme-20 rounded-2xl shadow-xs backdrop-blur-md">
+          <div className="flex flex-col gap-6 p-6 md:p-8 bg-white/50 border border-white/70 rounded-2xl shadow-xs backdrop-blur-md">
             <div className="flex items-center justify-between">
               <h4 className="text-xs font-bold font-mono text-slate-650 uppercase tracking-wide">
                 Live Data Transformation
@@ -163,7 +163,7 @@ export default function AutomationVisualizer() {
               <div className="md:col-span-5 flex flex-col gap-2">
                 <span className="text-[9px] font-mono text-slate-500 uppercase tracking-wider block">tours.csv Row</span>
                 <div className="bg-slate-900 rounded-xl p-3.5 border border-slate-700/50 aspect-[4/3] overflow-auto">
-                  <pre className="text-[10px] text-slate-300 font-mono whitespace-pre-wrapselect-none">
+                  <pre className="text-[10px] text-slate-300 font-mono whitespace-pre-wrap select-none">
                     {rawInput}
                   </pre>
                 </div>
@@ -171,7 +171,7 @@ export default function AutomationVisualizer() {
 
               {/* Parser middle badge */}
               <div className="md:col-span-1 flex justify-center py-2">
-                <div className="px-3 py-1 rounded-lg bg-theme-15 border border-theme-20 text-theme text-[8px] font-bold uppercase tracking-widest font-mono text-center rotate-0 md:-rotate-90 md:whitespace-nowrap shadow-xs">
+                <div className="px-3 py-1 rounded-lg bg-theme-15 border border-theme-30 text-theme text-[8px] font-bold uppercase tracking-widest font-mono text-center rotate-0 md:-rotate-90 md:whitespace-nowrap shadow-xs">
                   Tour Builder
                 </div>
               </div>
@@ -232,15 +232,15 @@ export default function AutomationVisualizer() {
 
         {/* 3. Metric Highlight Tiles */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          <div className="p-5 rounded-2xl bg-white/60 border border-theme-20 shadow-xs text-center">
+          <div className="p-5 rounded-2xl bg-white/60 border border-white/70 shadow-xs text-center">
             <span className="block text-3xl font-extrabold text-theme font-mono mb-1">~2 Hours</span>
             <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider font-mono">Saved Per Tour Generation</span>
           </div>
-          <div className="p-5 rounded-2xl bg-white/60 border border-theme-20 shadow-xs text-center">
+          <div className="p-5 rounded-2xl bg-white/60 border border-white/70 shadow-xs text-center">
             <span className="block text-3xl font-extrabold text-theme font-mono mb-1">Quota-Safe</span>
             <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider font-mono">Optimized Prompt Split-Ups & Model Picking</span>
           </div>
-          <div className="p-5 rounded-2xl bg-white/60 border border-theme-20 shadow-xs text-center">
+          <div className="p-5 rounded-2xl bg-white/60 border border-white/70 shadow-xs text-center">
             <span className="block text-3xl font-extrabold text-theme font-mono mb-1">90%</span>
             <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider font-mono">Automating Creation (Manual Checks)</span>
           </div>

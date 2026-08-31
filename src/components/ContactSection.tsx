@@ -90,7 +90,7 @@ export default function ContactSection() {
   }
 
   return (
-    <section id="contact" className="py-24 relative bg-dot-pattern border-t border-theme-20">
+    <section id="contact" className="py-24 relative bg-dot-pattern">
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
@@ -103,7 +103,7 @@ export default function ContactSection() {
             transition={{ type: 'tween', ease: 'easeOut', duration: 0.5 }}
             className="lg:col-span-5 flex flex-col gap-6 transform-gpu will-change-transform"
           >
-            <span className="text-[11px] font-bold tracking-widest text-theme font-mono uppercase bg-theme-10 px-3 py-1 rounded-full border border-theme-20 w-max">
+            <span className="text-[11px] font-bold tracking-widest text-theme font-mono uppercase bg-theme-10 px-3 py-1 rounded-full w-max">
               {STRINGS.contact.badge}
             </span>
             <h2 className="text-3xl md:text-5xl font-bold font-heading text-slate-850">
@@ -116,7 +116,7 @@ export default function ContactSection() {
             <div className="flex flex-col gap-3 mt-4 max-w-sm">
               <a
                 href="mailto:Joeywognum@gmail.com"
-                className="flex items-center gap-3 p-3.5 rounded-xl bg-white/60 border border-theme-20 hover:border-theme-30 transition-colors group shadow-xs"
+                className="flex items-center gap-3 p-3.5 rounded-xl bg-white/60 border border-white/70 hover:border-white transition-colors group shadow-xs"
               >
                 <Mail className="w-4 h-4 text-theme" />
                 <div>
@@ -129,7 +129,7 @@ export default function ContactSection() {
                 href={STRINGS.links.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 p-3.5 rounded-xl bg-white/60 border border-theme-20 hover:border-theme-30 transition-colors group shadow-xs"
+                className="flex items-center gap-3 p-3.5 rounded-xl bg-white/60 border border-white/70 hover:border-white transition-colors group shadow-xs"
               >
                 <Linkedin className="w-4 h-4 text-theme" />
                 <div>
@@ -142,7 +142,7 @@ export default function ContactSection() {
                 href={STRINGS.links.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 p-3.5 rounded-xl bg-white/60 border border-theme-20 hover:border-theme-30 transition-colors group shadow-xs"
+                className="flex items-center gap-3 p-3.5 rounded-xl bg-white/60 border border-white/70 hover:border-white transition-colors group shadow-xs"
               >
                 <Github className="w-4 h-4 text-theme" />
                 <div>
@@ -155,7 +155,7 @@ export default function ContactSection() {
                 href={STRINGS.links.appStore}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 p-3.5 rounded-xl bg-white/60 border border-theme-20 hover:border-theme-30 transition-colors group shadow-xs"
+                className="flex items-center gap-3 p-3.5 rounded-xl bg-white/60 border border-white/70 hover:border-white transition-colors group shadow-xs"
               >
                 <Smartphone className="w-4 h-4 text-theme" />
                 <div>
@@ -198,7 +198,7 @@ export default function ContactSection() {
                           className={`px-4 py-2 rounded-xl text-xs font-semibold uppercase tracking-wide cursor-pointer transition-all border ${
                             projectType === type
                               ? 'bg-theme-10 border-theme-30 text-theme'
-                              : 'bg-white/60 border-theme-20 text-slate-650 hover:text-sky-950'
+                              : 'bg-white/60 border-slate-200/80 text-slate-650 hover:text-sky-950'
                           }`}
                         >
                           {type}
@@ -218,7 +218,7 @@ export default function ContactSection() {
                             required
                             value={customProjectType}
                             onChange={(e) => setCustomProjectType(e.target.value)}
-                            className="px-3.5 py-2 rounded-xl bg-white/70 border border-theme-30 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-theme text-xs font-sans"
+                            className="px-3.5 py-2 rounded-xl bg-white/70 border border-slate-200 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-theme text-xs font-sans"
                           />
                         )}
                       </AnimatePresence>
@@ -239,7 +239,7 @@ export default function ContactSection() {
                           className={`px-4 py-2 rounded-xl text-xs font-semibold uppercase tracking-wide cursor-pointer transition-all border ${
                             timeline === time
                               ? 'bg-theme-10 border-theme-30 text-theme'
-                              : 'bg-white/60 border-theme-20 text-slate-650 hover:text-sky-950'
+                              : 'bg-white/60 border-slate-200/80 text-slate-650 hover:text-sky-950'
                           }`}
                         >
                           {time}
@@ -262,7 +262,7 @@ export default function ContactSection() {
                         value={formData.name}
                         onChange={handleChange}
                         placeholder={STRINGS.contact.form.namePlaceholder}
-                        className="px-4 py-3 rounded-xl bg-white/70 border border-theme-20 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-theme focus:ring-1 focus:ring-theme transition-all text-sm font-sans"
+                        className="px-4 py-3 rounded-xl bg-white/70 border border-white/70 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-theme focus:ring-1 focus:ring-theme transition-all text-sm font-sans"
                       />
                     </div>
 
@@ -277,7 +277,7 @@ export default function ContactSection() {
                         value={companyName}
                         onChange={(e) => setCompanyName(e.target.value)}
                         placeholder="e.g. Acme Corp"
-                        className="px-4 py-3 rounded-xl bg-white/70 border border-theme-20 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-theme focus:ring-1 focus:ring-theme transition-all text-sm font-sans"
+                        className="px-4 py-3 rounded-xl bg-white/70 border border-white/70 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-theme focus:ring-1 focus:ring-theme transition-all text-sm font-sans"
                       />
                     </div>
                   </div>
@@ -296,7 +296,7 @@ export default function ContactSection() {
                         value={formData.email}
                         onChange={handleChange}
                         placeholder={STRINGS.contact.form.emailPlaceholder}
-                        className="px-4 py-3 rounded-xl bg-white/70 border border-theme-20 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-theme focus:ring-1 focus:ring-theme transition-all text-sm font-sans"
+                        className="px-4 py-3 rounded-xl bg-white/70 border border-white/70 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-theme focus:ring-1 focus:ring-theme transition-all text-sm font-sans"
                       />
                     </div>
 
@@ -311,7 +311,7 @@ export default function ContactSection() {
                         value={phoneNumber}
                         onChange={(e) => setPhoneNumber(e.target.value)}
                         placeholder="e.g. +31 6 12345678"
-                        className="px-4 py-3 rounded-xl bg-white/70 border border-theme-20 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-theme focus:ring-1 focus:ring-theme transition-all text-sm font-sans"
+                        className="px-4 py-3 rounded-xl bg-white/70 border border-white/70 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-theme focus:ring-1 focus:ring-theme transition-all text-sm font-sans"
                       />
                     </div>
                   </div>
@@ -330,14 +330,14 @@ export default function ContactSection() {
                               placeholder="Platform (e.g. LinkedIn)"
                               value={link.platform}
                               onChange={(e) => handleSocialChange(idx, 'platform', e.target.value)}
-                              className="w-1/3 px-3 py-2.5 rounded-xl bg-white/70 border border-theme-20 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-theme focus:ring-1 focus:ring-theme text-xs font-sans"
+                              className="w-1/3 px-3 py-2.5 rounded-xl bg-white/70 border border-white/70 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-theme focus:ring-1 focus:ring-theme text-xs font-sans"
                             />
                             <input
                               type="text"
                               placeholder="URL / Handle"
                               value={link.url}
                               onChange={(e) => handleSocialChange(idx, 'url', e.target.value)}
-                              className="flex-grow px-3 py-2.5 rounded-xl bg-white/70 border border-theme-20 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-theme focus:ring-1 focus:ring-theme text-xs font-sans"
+                              className="flex-grow px-3 py-2.5 rounded-xl bg-white/70 border border-white/70 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-theme focus:ring-1 focus:ring-theme text-xs font-sans"
                             />
                             {socialLinks.length >= 1 && (
                               <button
@@ -355,7 +355,7 @@ export default function ContactSection() {
                     <button
                       type="button"
                       onClick={addSocialLink}
-                      className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white/50 border border-theme-20 text-[10px] font-bold text-slate-650 hover:bg-theme-10 hover:text-theme transition-all cursor-pointer w-max"
+                      className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white/50 border border-slate-200/80 hover:border-theme-30 text-[10px] font-bold text-slate-650 hover:bg-theme-10 hover:text-theme transition-all cursor-pointer w-max"
                     >
                       <Plus className="w-3.5 h-3.5" />
                       <span>Add Social Link</span>
@@ -374,7 +374,7 @@ export default function ContactSection() {
                       value={formData.message}
                       onChange={handleChange}
                       placeholder={STRINGS.contact.form.goalsPlaceholder}
-                      className="px-4 py-3 rounded-xl bg-white/70 border border-theme-20 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-theme focus:ring-1 focus:ring-theme transition-all text-sm font-sans resize-y min-h-[160px]"
+                      className="px-4 py-3 rounded-xl bg-white/70 border border-white/70 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-theme focus:ring-1 focus:ring-theme transition-all text-sm font-sans resize-y min-h-[160px]"
                     />
                   </div>
 

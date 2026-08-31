@@ -17,10 +17,10 @@ export default function ProjectCard({ project }: ProjectCardProps) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20 }}
       transition={{ type: 'tween', ease: 'easeOut', duration: 0.4 }}
-      className="card-premium rounded-2xl overflow-hidden flex flex-col lg:flex-row shadow-xl border border-sky-200 hover:border-sky-300 transition-[border-color] duration-300"
+      className="card-premium rounded-2xl overflow-hidden flex flex-col lg:flex-row shadow-xl border border-white/70 hover:border-white transition-[border-color] duration-300"
     >
       {/* Visual Mockup Area */}
-      <div className="lg:w-1/2 p-8 bg-white/40 flex items-center justify-center border-b lg:border-b-0 lg:border-r border-sky-200/80 min-h-[300px]">
+      <div className="lg:w-1/2 p-8 bg-white/40 flex items-center justify-center border-b lg:border-b-0 lg:border-r border-white/60 min-h-[300px]">
         {isMobile ? (
           /* Same Phone Bezel Container as Tracks Section (scaled down to fit) */
           <div className="relative border-[6px] border-slate-200 bg-white rounded-[28px] p-1 shadow-2xl overflow-hidden flex-shrink-0 w-[160px] aspect-[9/19.5] border-b-[7px]">
@@ -42,9 +42,9 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           </div>
         ) : (
           /* Terminal Window Mockup displaying its own project image */
-          <div className="w-full max-w-sm rounded-xl border border-sky-250 bg-white/90 shadow-2xl overflow-hidden flex flex-col">
+          <div className="w-full max-w-sm rounded-xl border border-white/80 bg-white/90 shadow-2xl overflow-hidden flex flex-col">
             {/* Window controls */}
-            <div className="flex items-center gap-1.5 px-4 py-2.5 bg-slate-50 border-b border-sky-200/60">
+            <div className="flex items-center gap-1.5 px-4 py-2.5 bg-slate-50 border-b border-white/60">
               <div className="w-2 h-2 rounded-full bg-red-400" />
               <div className="w-2 h-2 rounded-full bg-yellow-400" />
               <div className="w-2 h-2 rounded-full bg-green-400" />
@@ -93,7 +93,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
             {project.tagline}
           </p>
 
-          <div className="border-t border-sky-100 pt-6 mb-6">
+          <div className="border-t border-white/60 pt-6 mb-6">
             <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest font-mono block mb-3">
               Technical Highlights
             </span>
@@ -109,12 +109,12 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         </div>
 
         {/* Action tray */}
-        <div className="flex items-center justify-between pt-4 border-t border-sky-100 mt-auto">
+        <div className="flex items-center justify-between pt-4 border-t border-white/60 mt-auto">
           <div className="flex flex-wrap gap-1.5">
             {project.stack.map((tag) => (
               <span
                 key={tag}
-                className="text-[10px] font-mono px-2 py-0.5 bg-white border border-theme-20 text-slate-600 rounded-md"
+                className="text-[10px] font-mono px-2 py-0.5 bg-white border border-slate-200/80 text-slate-600 rounded-md"
               >
                 {tag}
               </span>
@@ -126,7 +126,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
               href={project.linkUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-xs px-3.5 py-2 bg-theme-10 border border-theme-20 text-theme rounded-lg hover:bg-theme hover:text-white transition-colors"
+              className="flex items-center gap-1.5 text-xs px-3.5 py-2 bg-theme-10 border border-theme-30 text-theme rounded-lg hover:bg-theme hover:text-white transition-colors"
             >
               <span>{project.linkLabel ?? 'View Project'}</span>
               <ExternalLink className="w-3.5 h-3.5" />

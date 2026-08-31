@@ -27,7 +27,7 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
   }
 
   return (
-    <section id="testimonials" className="py-24 relative bg-dot-pattern border-t border-theme-20">
+    <section id="testimonials" className="py-24 relative bg-dot-pattern">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -38,7 +38,7 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
         
         {/* Section Header */}
         <div className="text-center mb-16">
-          <span className="text-[11px] font-bold tracking-widest text-theme font-mono uppercase bg-theme-10 px-3 py-1 rounded-full border border-theme-20">
+          <span className="text-[11px] font-bold tracking-widest text-theme font-mono uppercase bg-theme-10 px-3 py-1 rounded-full">
             {STRINGS.testimonials.badge}
           </span>
           <h2 className="text-3xl md:text-5xl font-bold font-heading text-slate-850 mt-4 mb-4">
@@ -89,7 +89,7 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
             return (
               <div
                 key={testimonial.id}
-                className="card-premium p-8 rounded-2xl flex flex-col justify-between hover:border-theme-30 hover:shadow-theme-10 transition-all duration-300 relative overflow-hidden"
+                className="card-premium p-8 rounded-2xl flex flex-col justify-between hover:border-white hover:shadow-theme-10 transition-all duration-300 relative overflow-hidden"
               >
                 <div>
                   <div className="flex items-center justify-between mb-6">
@@ -105,7 +105,7 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
                   </p>
                 </div>
  
-                <div className="border-t border-theme-20 pt-4 flex items-center gap-3">
+                <div className="border-t border-white/60 pt-4 flex items-center gap-3">
                   {/* Clean Initial Avatar or Company Logo */}
                   <div className={`w-10 h-10 rounded-full ${avatarBg} flex items-center justify-center font-bold text-xs font-mono shadow-inner flex-shrink-0 overflow-hidden`}>
                     {logoUrl ? (

@@ -17,7 +17,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
   })
 
   return (
-    <section id="work" className="py-24 relative border-t border-theme-20">
+    <section id="work" className="py-24 relative">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -28,7 +28,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
         
         {/* Section Header */}
         <div className="text-center mb-16">
-          <span className="text-[11px] font-bold tracking-widest text-theme font-mono uppercase bg-theme-10 px-3 py-1 rounded-full border border-theme-20">
+          <span className="text-[11px] font-bold tracking-widest text-theme font-mono uppercase bg-theme-10 px-3 py-1 rounded-full">
             {STRINGS.projects.badge}
           </span>
           <h2 className="text-3xl md:text-5xl font-extrabold font-heading text-slate-850 mt-4 mb-4 drop-shadow-sm">
@@ -41,7 +41,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
 
         {/* Filter Navigation */}
         <div className="flex justify-center mb-12">
-          <div className="flex p-1.5 rounded-full bg-white/60 border border-theme-30 backdrop-blur-md">
+          <div className="flex p-1.5 rounded-full bg-white/60 border border-white/70 backdrop-blur-md">
             {(['all', 'mobile', 'automation'] as const).map((category) => {
               const label =
                 category === 'all'

@@ -7,7 +7,7 @@ export default function ProcessSection() {
       num: "01",
       icon: Target,
       title: "Kickoff & Scope",
-      desc: "I align with you on a short 20-minute call to map out features, construct user flows, determine timelines, and establish fixed targets."
+      desc: "I align with you on a 30 to 60 minute call to map out features, construct user flows, determine timelines, and establish fixed targets."
     },
     {
       num: "02",
@@ -24,12 +24,12 @@ export default function ProcessSection() {
   ]
 
   return (
-    <section id="process" className="py-24 relative border-t border-theme-20 bg-transparent">
+    <section id="process" className="py-24 relative bg-transparent">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
         {/* Section Header */}
         <div className="text-center mb-16">
-          <span className="text-[11px] font-bold tracking-widest text-theme font-mono uppercase bg-theme-10 px-3 py-1 rounded-full border border-theme-20">
+          <span className="text-[11px] font-bold tracking-widest text-theme font-mono uppercase bg-theme-10 px-3 py-1 rounded-full">
             Process Model
           </span>
           <h2 className="text-3xl md:text-5xl font-extrabold font-heading text-slate-850 mt-4 mb-4">
@@ -58,7 +58,7 @@ export default function ProcessSection() {
                   className="flex flex-col items-center text-center group transform-gpu will-change-transform"
                 >
                   {/* Step Circle Badge */}
-                  <div className="relative flex items-center justify-center w-20 h-20 rounded-full bg-white border border-theme-30 shadow-lg group-hover:border-theme group-hover:shadow-theme-10 transition duration-300 mb-8 z-15">
+                  <div className="relative flex items-center justify-center w-20 h-20 rounded-full bg-white border border-white/80 shadow-lg group-hover:border-white group-hover:shadow-theme-10 transition duration-300 mb-8 z-15">
                     {/* Pulsing overlay */}
                     <div className="absolute inset-0 rounded-full bg-theme-10 scale-100 group-hover:scale-110 transition-transform duration-300 opacity-0 group-hover:opacity-100" />
                     

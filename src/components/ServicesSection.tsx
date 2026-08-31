@@ -33,7 +33,7 @@ export default function ServicesSection({ services }: ServicesSectionProps) {
   }
 
   return (
-    <section id="services" className="py-24 relative border-t border-theme-20">
+    <section id="services" className="py-24 relative">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -44,7 +44,7 @@ export default function ServicesSection({ services }: ServicesSectionProps) {
         
         {/* Section Header */}
         <div className="text-center mb-16">
-          <span className="text-[11px] font-bold tracking-widest text-theme font-mono uppercase bg-theme-10 px-3 py-1 rounded-full border border-theme-20">
+          <span className="text-[11px] font-bold tracking-widest text-theme font-mono uppercase bg-theme-10 px-3 py-1 rounded-full">
             {STRINGS.services.badge}
           </span>
           <h2 className="text-3xl md:text-5xl font-extrabold font-heading text-slate-850 mt-4 mb-4 drop-shadow-sm">
@@ -62,11 +62,11 @@ export default function ServicesSection({ services }: ServicesSectionProps) {
             return (
               <div
                 key={service.id}
-                className="card-premium p-8 rounded-2xl flex flex-col justify-between hover:border-theme-30 hover:shadow-theme-10 transition-all duration-300 group"
+                className="card-premium p-8 rounded-2xl flex flex-col justify-between hover:border-white hover:shadow-theme-10 transition-all duration-300 group"
               >
                 <div>
                   <div className="mb-6">
-                    <div className="w-max p-3 bg-white/80 border border-theme-30 rounded-xl text-theme group-hover:scale-110 transition-transform shadow-xs">
+                    <div className="w-max p-3 bg-white/80 border border-white/80 rounded-xl text-theme group-hover:scale-110 transition-transform shadow-xs">
                       <Icon className="w-5 h-5" />
                     </div>
                   </div>

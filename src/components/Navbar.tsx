@@ -161,7 +161,7 @@ export default function Navbar({ profile }: NavbarProps) {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'tween', ease: 'easeOut', duration: 0.3 }}
-              className="fixed top-0 right-0 bottom-0 w-80 max-w-full bg-white/95 border-l border-theme-10 z-50 p-6 flex flex-col justify-between shadow-2xl md:hidden"
+              className="fixed top-0 right-0 bottom-0 w-80 max-w-full bg-white/95 border-l border-white/70 z-50 p-6 flex flex-col justify-between shadow-2xl md:hidden"
             >
               <div className="flex flex-col gap-8">
                 <div className="flex items-center justify-between">

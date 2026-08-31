@@ -11,7 +11,7 @@ export default function TracksSection() {
   ]
 
   return (
-    <section id="tracks" className="py-24 relative border-t border-theme-20">
+    <section id="tracks" className="py-24 relative">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
         {/* Section Header */}
@@ -23,7 +23,7 @@ export default function TracksSection() {
             transition={{ type: 'tween', ease: 'easeOut', duration: 0.5 }}
             className="max-w-2xl transform-gpu will-change-transform"
           >
-            <span className="text-[11px] font-bold tracking-widest text-theme font-mono uppercase bg-theme-10 px-3 py-1 rounded-full border border-theme-20 w-max">
+            <span className="text-[11px] font-bold tracking-widest text-theme font-mono uppercase bg-theme-10 px-3 py-1 rounded-full w-max">
               {STRINGS.tracks.badge}
             </span>
             <h2 className="text-3xl md:text-5xl font-extrabold font-heading text-slate-850 mt-4 mb-4 drop-shadow-sm">
@@ -52,11 +52,11 @@ export default function TracksSection() {
             transition={{ type: 'tween', ease: 'easeOut', duration: 0.5 }}
             className="flex gap-4 transform-gpu will-change-transform"
           >
-            <div className="px-5 py-3 rounded-2xl bg-white/60 border border-theme-20 text-center shadow-xs">
+            <div className="px-5 py-3 rounded-2xl bg-white/60 border border-white/70 text-center shadow-xs">
               <span className="block text-xl font-extrabold text-theme font-mono">{STRINGS.tracks.metricSoloTitle}</span>
               <span className="text-[10px] text-slate-500 font-bold uppercase font-mono tracking-wider">{STRINGS.tracks.metricSoloDesc}</span>
             </div>
-            <div className="px-5 py-3 rounded-2xl bg-white/60 border border-theme-20 text-center shadow-xs">
+            <div className="px-5 py-3 rounded-2xl bg-white/60 border border-white/70 text-center shadow-xs">
               <span className="block text-xl font-extrabold text-theme font-mono">{STRINGS.tracks.metricIosTitle}</span>
               <span className="text-[10px] text-slate-500 font-bold uppercase font-mono tracking-wider">{STRINGS.tracks.metricIosDesc}</span>
             </div>
@@ -65,21 +65,21 @@ export default function TracksSection() {
 
         {/* Feature Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-          <div className="p-6 rounded-2xl bg-white/50 border border-theme-10 shadow-xs">
+          <div className="p-6 rounded-2xl bg-white/50 border border-white/70 shadow-xs">
             <Compass className="w-5 h-5 text-theme mb-3" />
             <h3 className="font-bold text-slate-800 text-sm font-mono uppercase tracking-wide mb-2">{STRINGS.tracks.inspiredTitle}</h3>
             <p className="text-slate-600 text-xs leading-relaxed">
               {STRINGS.tracks.inspiredDesc}
             </p>
           </div>
-          <div className="p-6 rounded-2xl bg-white/50 border border-theme-10 shadow-xs">
+          <div className="p-6 rounded-2xl bg-white/50 border border-white/70 shadow-xs">
             <Award className="w-5 h-5 text-theme mb-3" />
             <h3 className="font-bold text-slate-800 text-sm font-mono uppercase tracking-wide mb-2">{STRINGS.tracks.soloTitle}</h3>
             <p className="text-slate-600 text-xs leading-relaxed">
               {STRINGS.tracks.soloDesc}
             </p>
           </div>
-          <div className="p-6 rounded-2xl bg-white/50 border border-theme-10 shadow-xs">
+          <div className="p-6 rounded-2xl bg-white/50 border border-white/70 shadow-xs">
             <Landmark className="w-5 h-5 text-theme mb-3" />
             <h3 className="font-bold text-slate-800 text-sm font-mono uppercase tracking-wide mb-2">{STRINGS.tracks.aiWorkflowTitle}</h3>
             <p className="text-slate-600 text-xs leading-relaxed">
