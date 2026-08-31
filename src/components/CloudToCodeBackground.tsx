@@ -32,13 +32,20 @@ export default function CloudToCodeBackground() {
     if (!ctx) return
 
     let animationFrameId: number
-    let width = (canvas.width = window.innerWidth)
-    let height = (canvas.height = window.innerHeight)
+    const getViewportDims = () => ({
+      w: Math.max(window.innerWidth, document.documentElement.clientWidth || 0, window.screen?.width || 0),
+      h: Math.max(window.innerHeight, document.documentElement.clientHeight || 0, window.screen?.height || 0),
+    })
+
+    let { w: width, h: height } = getViewportDims()
+    canvas.width = width
+    canvas.height = height
 
     const handleResize = () => {
       if (!canvas) return
-      width = canvas.width = window.innerWidth
-      height = canvas.height = window.innerHeight
+      const dims = getViewportDims()
+      width = canvas.width = dims.w
+      height = canvas.height = dims.h
     }
 
     window.addEventListener('resize', handleResize)
@@ -342,7 +349,18 @@ export default function CloudToCodeBackground() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 w-full h-full min-w-full min-h-full pointer-events-none z-0 transition-opacity duration-300"
+      className="fixed inset-0 pointer-events-none z-0 transition-opacity duration-300"
+      style={{
+        position: 'fixed',
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+        width: '100vw',
+        height: '100vh',
+        minWidth: '100vw',
+        minHeight: '100vh',
+      }}
     />
   )
 }
