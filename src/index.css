@@ -11,7 +11,7 @@
 
 html {
   scroll-behavior: smooth;
-  background-color: #70a5f5; /* Match top sky gradient color */
+  background-color: #ffffff;
   color: #0f172a;
   font-family: var(--font-sans);
   width: 100%;
@@ -24,7 +24,6 @@ body {
   width: 100%;
   min-height: 100%;
   overflow-x: hidden;
-  background-color: #70a5f5;
 }
 
 /* Custom Scrollbar */
