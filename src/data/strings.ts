@@ -90,7 +90,7 @@ export const STRINGS = {
   },
   links: {
     linkedin: "https://www.linkedin.com/in/joey-van-der-poel-974203302/",
-    appStore: "https://apps.apple.com/nl/app/tracks-taps/id6756650785?l=en-GB",
+    appStore: "https://apps.apple.com/nl/app/tracks-taps-gamified-guide/id6756650785?l=en-GB",
     github: "https://github.com/JoeyPoel",
     recommendations: "https://www.linkedin.com/in/joey-van-der-poel-974203302/details/recommendations/?detailScreenTabIndex=0",
     cal: "https://cal.com/joeywognum"

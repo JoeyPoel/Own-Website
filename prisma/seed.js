@@ -64,7 +64,7 @@ async function main() {
         'Robust offline-first synchronization engine',
       ],
       linkLabel: 'iOS App Store Link',
-      linkUrl: 'https://apps.apple.com',
+      linkUrl: 'https://apps.apple.com/nl/app/tracks-taps-gamified-guide/id6756650785?l=en-GB',
       image: '/projects/swift_runner_app.jpg',
       status: 'App Store Published',
     },
