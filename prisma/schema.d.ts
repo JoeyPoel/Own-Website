@@ -33,7 +33,7 @@ import type {
 } from '@prisma/orm-postgres/contract/types';
 
 export type StorageHash =
-  StorageHashBase<'db5c84aba01d7a51fc87f5cb668973cbce96ec4a599bf538e9eb82a6d3548ac3'>;
+  StorageHashBase<'1d3f10c02a7c2cc88b9e1b84faa833d840bfd4b1d644c5c3eaba619ebb0e07e8'>;
 export type ExecutionHash =
   ExecutionHashBase<'21047cdc676554de2175d2e10d7834b519b6b07259f1d9a774762e83757f0d5e'>;
 export type ProfileHash =
@@ -264,6 +264,7 @@ export type FieldOutputTypes = {
     };
     readonly Project: {
       readonly id: CodecTypes['pg/text@1']['output'];
+      readonly order: CodecTypes['pg/int4@1']['output'] | null;
       readonly title: CodecTypes['pg/text@1']['output'];
       readonly category: CodecTypes['pg/text@1']['output'];
       readonly tagline: CodecTypes['pg/text@1']['output'];
@@ -314,6 +315,7 @@ export type FieldInputTypes = {
     };
     readonly Project: {
       readonly id: CodecTypes['pg/text@1']['input'];
+      readonly order: CodecTypes['pg/int4@1']['input'] | null;
       readonly title: CodecTypes['pg/text@1']['input'];
       readonly category: CodecTypes['pg/text@1']['input'];
       readonly tagline: CodecTypes['pg/text@1']['input'];
@@ -369,6 +371,7 @@ export type StorageColumnTypes = {
       readonly image: CodecTypes['pg/text@1']['output'];
       readonly linkLabel: CodecTypes['pg/text@1']['output'] | null;
       readonly linkUrl: CodecTypes['pg/text@1']['output'] | null;
+      readonly order: CodecTypes['pg/int4@1']['output'] | null;
       readonly stack: ReadonlyArray<CodecTypes['pg/text@1']['output']>;
       readonly status: CodecTypes['pg/text@1']['output'] | null;
       readonly tagline: CodecTypes['pg/text@1']['output'];
@@ -419,6 +422,7 @@ export type StorageColumnInputTypes = {
       readonly image: CodecTypes['pg/text@1']['input'];
       readonly linkLabel: CodecTypes['pg/text@1']['input'] | null;
       readonly linkUrl: CodecTypes['pg/text@1']['input'] | null;
+      readonly order: CodecTypes['pg/int4@1']['input'] | null;
       readonly stack: ReadonlyArray<CodecTypes['pg/text@1']['input']>;
       readonly status: CodecTypes['pg/text@1']['input'] | null;
       readonly tagline: CodecTypes['pg/text@1']['input'];
@@ -569,6 +573,15 @@ type ContractBase = Omit<
                   readonly nativeType: 'text';
                   readonly codecId: 'pg/text@1';
                   readonly nullable: false;
+                };
+                readonly order: {
+                  readonly nativeType: 'int4';
+                  readonly codecId: 'pg/int4@1';
+                  readonly nullable: true;
+                  readonly default: {
+                    readonly kind: 'literal';
+                    readonly value: DefaultLiteralValue<'pg/int4@1', 0>;
+                  };
                 };
                 readonly title: {
                   readonly nativeType: 'text';
@@ -822,6 +835,10 @@ type ContractBase = Omit<
                 readonly nullable: false;
                 readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
               };
+              readonly order: {
+                readonly nullable: true;
+                readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/int4@1' };
+              };
               readonly title: {
                 readonly nullable: false;
                 readonly type: { readonly kind: 'scalar'; readonly codecId: 'pg/text@1' };
@@ -867,6 +884,7 @@ type ContractBase = Omit<
               readonly namespaceId: 'public';
               readonly fields: {
                 readonly id: { readonly column: 'id' };
+                readonly order: { readonly column: 'order' };
                 readonly title: { readonly column: 'title' };
                 readonly category: { readonly column: 'category' };
                 readonly tagline: { readonly column: 'tagline' };

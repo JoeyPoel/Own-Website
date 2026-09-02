@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import type { Variants } from 'framer-motion'
 import { Quote } from 'lucide-react'
 import type { Testimonial } from '../data/portfolioData'
 import { STRINGS } from '../data/strings'
@@ -9,22 +8,6 @@ interface TestimonialsSectionProps {
 }
 
 export default function TestimonialsSection({ testimonials }: TestimonialsSectionProps) {
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1 },
-    },
-  }
-
-  const cardVariants: Variants = {
-    hidden: { opacity: 0, y: 15 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { type: 'tween', ease: 'easeOut', duration: 0.4 },
-    },
-  }
 
   return (
     <section id="testimonials" className="py-24 relative bg-dot-pattern">

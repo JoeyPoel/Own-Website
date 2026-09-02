@@ -132,11 +132,19 @@ export default function Navbar({ profile }: NavbarProps) {
               </a>
             </div>
 
-            {/* Mobile Menu Button */}
-            <div className="md:hidden flex items-center">
+            {/* Mobile Menu Button & Discuss CTA */}
+            <div className="md:hidden flex items-center gap-2">
+              <a
+                href="#contact"
+                onClick={(e) => handleNavClick(e, '#contact')}
+                className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-theme hover:brightness-110 text-white font-bold text-[11px] tracking-wider transition-all shadow-theme-10 whitespace-nowrap shrink-0"
+              >
+                <span>{STRINGS.navbar.btnDiscuss}</span>
+                <ArrowUpRight className="w-3 h-3" />
+              </a>
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 text-slate-700 hover:text-sky-950 rounded-lg focus:outline-none"
+                className="p-1.5 text-slate-700 hover:text-sky-950 rounded-lg focus:outline-none"
               >
                 {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </button>

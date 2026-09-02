@@ -19,6 +19,7 @@ export interface Project {
   linkUrl?: string | null
   image: string
   status?: string | null
+  order?: number
 }
 
 export interface Testimonial {
