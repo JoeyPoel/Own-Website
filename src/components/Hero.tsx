@@ -67,14 +67,18 @@ export default function Hero({ profile }: HeroProps) {
           {/* Core Headline */}
           <motion.h1
             variants={itemVariants}
-            className="text-4xl md:text-6xl font-black tracking-tight font-heading text-white max-w-4xl leading-[1.12] mb-6 drop-shadow-md"
+            className="text-4xl md:text-6xl font-black tracking-tight font-heading text-white max-w-4xl leading-[1.12] mb-6"
           >
-            {profile.name} — Building{' '}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-cyan-300 to-sky-400 font-extrabold">
+            <span className="[text-shadow:_0_2px_5px_rgba(15,23,42,0.4)]">
+              {profile.name} — Building{' '}
+            </span>
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-cyan-300 to-sky-400 font-extrabold [filter:drop-shadow(0_2px_5px_rgba(15,23,42,0.4))]">
               {STRINGS.hero.headlineMobileApps}
             </span>{' '}
-            &{' '}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 via-sky-400 to-cyan-300 font-extrabold">
+            <span className="[text-shadow:_0_2px_5px_rgba(15,23,42,0.4)]">
+              &{' '}
+            </span>
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 via-sky-400 to-cyan-300 font-extrabold [filter:drop-shadow(0_2px_5px_rgba(15,23,42,0.4))]">
               {STRINGS.hero.headlineAIAutomations}
             </span>
           </motion.h1>
