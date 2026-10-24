@@ -1,4 +1,4 @@
-/** TypeScript interfaces for portfolio data — consumed by components. */
+/** TypeScript interfaces for portfolio data: consumed by components. */
 
 export interface Profile {
   id?: string

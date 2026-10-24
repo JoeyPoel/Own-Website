@@ -1,7 +1,20 @@
-import { motion } from 'framer-motion'
-import type { Variants } from 'framer-motion'
-import { Zap, ArrowRight, ArrowDown, Code2, Github, Linkedin, Smartphone } from 'lucide-react'
+import React, { useState, useEffect } from 'react'
+import FibreArc from './originkit/ui/hero-68/fibre-arc'
+import PulseLines from './originkit/ui/hero-68/pulse-lines'
+import './originkit/hero-68.css'
 import { STRINGS } from '../data/strings'
+
+const Chevron = () => (
+  <svg width="7" height="12" viewBox="0 0 7 12" aria-hidden="true" className="inline-block shrink-0">
+    <path d="M1 1l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.2" />
+  </svg>
+)
+
+const Arrow = () => (
+  <svg width="16" height="12" viewBox="0 0 16 12" aria-hidden="true" className="inline-block shrink-0">
+    <path d="M0 6h14.5M9.5 1l5 5-5 5" fill="none" stroke="currentColor" strokeWidth="1.3" />
+  </svg>
+)
 
 interface HeroProps {
   profile: {
@@ -12,25 +25,19 @@ interface HeroProps {
   }
 }
 
-export default function Hero({ profile }: HeroProps) {
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.1,
-      },
-    },
-  }
+/**
+ * Hero section built on the Originkit Hero 68 architecture:
+ * Interactive FibreArc WebGL ribbon, ruled 3-column grid with PulseLines,
+ * monumental Instrument Serif typography, and ruled CTA row.
+ *
+ * @param props.profile - Founder metadata.
+ * @returns Clean, spacious Hero 68 section.
+ */
+export default function Hero({ profile }: HeroProps): React.JSX.Element {
+  const scheme = 'dark'
 
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { type: 'tween', ease: 'easeOut', duration: 0.4 },
-    },
+  const RIBBON = {
+    dark: { background: '#050508', ink: '#f4f4f5', glow: 70 },
   }
 
   const handleScroll = (e: React.MouseEvent, targetId: string) => {
@@ -39,134 +46,105 @@ export default function Hero({ profile }: HeroProps) {
   }
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center pt-28 pb-16 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 py-12 z-10 flex flex-col items-center text-center">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="flex flex-col items-center"
-        >
-          {/* Rounded Profile Image */}
-          <motion.div
-            variants={itemVariants}
-            className="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-4 border-white shadow-md mb-6 flex-shrink-0"
-          >
-            <img src="/joey.jpg" alt="Joey van der Poel" className="w-full h-full object-cover" />
-          </motion.div>
+    <section id="home" className="hero-68 relative w-full overflow-hidden">
+      <div className="hero">
+        {/* Interactive FibreArc Canvas Ribbon Background */}
+        <FibreArc
+          {...RIBBON[scheme]}
+          style={{ position: 'absolute', inset: 0 }}
+        />
 
-          {/* Availability Badge */}
-          <motion.div
-            variants={itemVariants}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 border border-theme-20 text-slate-900 text-xs font-bold tracking-wide mb-8 shadow-md backdrop-blur-md"
-          >
-            <Zap className="w-3.5 h-3.5 text-theme fill-theme-10" />
-            <span>{STRINGS.hero.availabilityBadge}</span>
-          </motion.div>
-
-          {/* Core Headline */}
-          <motion.h1
-            variants={itemVariants}
-            className="text-4xl md:text-6xl font-black tracking-tight font-heading text-white max-w-4xl leading-[1.12] mb-6"
-          >
-            <span className="[text-shadow:_0_2px_5px_rgba(15,23,42,0.4)]">
-              {profile.name} — Building{' '}
-            </span>
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-sky-400 via-cyan-300 to-sky-400 font-extrabold [filter:drop-shadow(0_2px_5px_rgba(15,23,42,0.4))]">
-              {STRINGS.hero.headlineMobileApps}
-            </span>{' '}
-            <span className="[text-shadow:_0_2px_5px_rgba(15,23,42,0.4)]">
-              &{' '}
-            </span>
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-300 via-sky-400 to-cyan-300 font-extrabold [filter:drop-shadow(0_2px_5px_rgba(15,23,42,0.4))]">
-              {STRINGS.hero.headlineAIAutomations}
-            </span>
-          </motion.h1>
-
-          {/* Subheading with high readability glass styling */}
-          <motion.p
-            variants={itemVariants}
-            className="text-sm md:text-base text-slate-900 font-semibold max-w-2xl leading-relaxed mb-10 bg-white/50 border border-white/40 shadow-sm px-6 py-4 rounded-2xl backdrop-blur-md"
-          >
-            {STRINGS.hero.subheading}
-          </motion.p>
-
-          {/* Technical Credentials Badges */}
-          <motion.div 
-            variants={itemVariants} 
-            className="flex flex-wrap justify-center gap-3 mb-12 max-w-3xl"
-          >
-            {STRINGS.hero.credentials.map((highlight) => (
-              <span
-                key={highlight}
-                className="px-4 py-2 bg-white/30 border border-white/50 text-slate-900 text-xs font-bold tracking-wide rounded-xl font-mono shadow-sm backdrop-blur-md"
-              >
-                {highlight}
-              </span>
+        {/* Ruled 3-Column Grid with PulseLines */}
+        <div className="grid" aria-hidden="true">
+          <div className="wrap cols">
+            {[99, 66, 33].map((speed) => (
+              <i key={speed}>
+                <PulseLines
+                  gap={100000}
+                  lineWidth={2}
+                  pulseWidth={6}
+                  duration={5}
+                  speed={speed}
+                  backgroundColor="transparent"
+                  lineColor={scheme === 'dark' ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.06)'}
+                  colors={{ paletteCount: 2, color1: '#6A00F4', color2: '#F20089' }}
+                />
+              </i>
             ))}
-          </motion.div>
+          </div>
+          <span className="hline" style={{ top: '29.1%' }} />
+        </div>
 
-          {/* CTAs */}
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto"
-          >
-            <button
-              onClick={(e) => handleScroll(e, '#contact')}
-              className="w-full sm:w-auto px-8 py-4 bg-theme hover:brightness-110 text-white font-bold text-sm tracking-wide rounded-xl flex items-center justify-center gap-2 cursor-pointer transition shadow-theme-10 hover:-translate-y-0.5"
-            >
-              <span>{STRINGS.hero.btnStartProject}</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-
-            <button
-              onClick={(e) => handleScroll(e, '#work')}
-              className="w-full sm:w-auto px-8 py-4 bg-white/80 hover:bg-white border border-theme-30 text-theme font-bold text-sm tracking-wide rounded-xl flex items-center justify-center gap-2 cursor-pointer transition shadow-xs backdrop-blur-md hover:-translate-y-0.5"
-            >
-              <Code2 className="w-4 h-4 text-theme" />
-              <span>{STRINGS.hero.btnExploreCode}</span>
-            </button>
-          </motion.div>
-
-          {/* Social Row */}
-          <motion.div
-            variants={itemVariants}
-            className="flex items-center gap-6 mt-10"
-          >
-            <a
-              href={STRINGS.links.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white hover:text-sky-300 transition-colors flex items-center gap-2 text-xs font-bold font-mono tracking-wider uppercase drop-shadow-sm"
-            >
-              <Linkedin className="w-4 h-4" />
-              <span>LinkedIn</span>
+        {/* Top Ruled Architectural Navigation Bar */}
+        <header className="nav">
+          <div className="wrap nav-inner">
+            {/* Logo / Founder Avatar */}
+            <a href="#home" onClick={(e) => handleScroll(e, '#home')} className="logo flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full overflow-hidden border border-[var(--line-strong)] shrink-0">
+                <img src="/joey.jpg" alt={profile.name} className="w-full h-full object-cover" />
+              </div>
+              <span className="font-semibold text-sm tracking-tight">{profile.name}</span>
             </a>
-            <a
-              href={STRINGS.links.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white hover:text-sky-300 transition-colors flex items-center gap-2 text-xs font-bold font-mono tracking-wider uppercase drop-shadow-sm"
-            >
-              <Github className="w-4 h-4" />
-              <span>GitHub</span>
-            </a>
-            <a
-              href={STRINGS.links.appStore}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-white hover:text-sky-300 transition-colors flex items-center gap-2 text-xs font-bold font-mono tracking-wider uppercase drop-shadow-sm"
-            >
-              <Smartphone className="w-4 h-4" />
-              <span>App Store</span>
-            </a>
-          </motion.div>
-        </motion.div>
-      </div>
 
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-70">
-        <span className="text-[10px] tracking-widest text-theme font-bold uppercase font-mono">{STRINGS.hero.scrollIndicator}</span>
-        <ArrowDown className="w-4 h-4 text-theme animate-bounce" />
+            {/* Desktop Navigation Links */}
+            <nav className="links">
+              {STRINGS.navbar.links.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={(e) => handleScroll(e, link.href)}
+                >
+                  {link.name}
+                </a>
+              ))}
+            </nav>
+
+            {/* Action Button */}
+            <div className="actions">
+              <a
+                href="#contact"
+                onClick={(e) => handleScroll(e, '#contact')}
+                className="btn btn-sm cursor-pointer"
+              >
+                <span>{STRINGS.hero.btnPartnerUp}</span>
+                <Chevron />
+              </a>
+            </div>
+          </div>
+        </header>
+
+        {/* Hero 68 Content */}
+        <div className="content">
+          <h1 className="wrap headline">
+            {STRINGS.hero.headlineTitle}
+          </h1>
+
+          {/* Ruled CTA & Lede Row */}
+          <div className="cta-row">
+            <div className="wrap cta-inner">
+              <a
+                href="#contact"
+                onClick={(e) => handleScroll(e, '#contact')}
+                className="btn btn-lg cursor-pointer"
+              >
+                <span>{STRINGS.hero.btnPartnerUp}</span>
+                <Arrow />
+              </a>
+              <p className="lede">
+                {STRINGS.hero.subheading}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Atmospheric feathered transition blending Hero into About section */}
+        <div 
+          className="absolute inset-x-0 bottom-0 h-44 pointer-events-none z-10"
+          style={{
+            background: 'linear-gradient(to bottom, transparent 0%, var(--bg) 100%)',
+          }}
+          aria-hidden="true"
+        />
       </div>
     </section>
   )

@@ -1,29 +1,58 @@
 import { useState, useEffect } from 'react'
-import CloudToCodeBackground from './components/CloudToCodeBackground'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import AboutSection from './components/AboutSection'
 import TracksSection from './components/TracksSection'
-import AutomationVisualizer from './components/AutomationVisualizer'
-import ServicesSection from './components/ServicesSection'
-import ProcessSection from './components/ProcessSection'
-import ProjectsSection from './components/ProjectsSection'
+import LostSoulsSection from './components/LostSoulsSection'
+import ConnectCulturesSection from './components/ConnectCulturesSection'
+import CreativeOfferingsSection from './components/CreativeOfferingsSection'
 import TestimonialsSection from './components/TestimonialsSection'
 import ContactSection from './components/ContactSection'
-import type { Profile, Service, Project, Testimonial } from './data/portfolioData'
+import LazySection from './components/common/LazySection'
+import type { Profile, Testimonial } from './data/portfolioData'
 import { STRINGS } from './data/strings'
+
 const defaultProfile: Profile = {
   name: 'Joey van der Poel',
-  role: 'Full-Stack Mobile App Developer & AI Automation Engineer',
+  role: 'Entrepreneur, Founder & Creative Technologist',
   location: 'Medemblik / Amsterdam, Netherlands',
-  availability: 'Available for freelance contracts & small business builds',
+  availability: 'Available for venture co-founding & bespoke builds',
 }
 
+const defaultTestimonials: Testimonial[] = [
+  {
+    id: '1',
+    quote: 'Joey took real ownership without needing much direction. Communication was clear and practical, deadlines were consistently met, and he brought a steady, solution-focused energy.',
+    author: 'Megan de Klein',
+    role: 'Co-Founder',
+    company: 'The Swap Club',
+  },
+  {
+    id: '2',
+    quote: 'Joey pushed the boundaries of the assignment by integrating AI features such as a chatbot and a custom image recognition model. He approached the stack with curiosity and depth.',
+    author: 'Ramon Nagelhout',
+    role: 'Product Owner',
+    company: 'DEPT®',
+  },
+  {
+    id: '3',
+    quote: 'Highly eager to learn, quickly grasps new concepts and consistently takes a solution-oriented approach. His application of AI within our workflows proved particularly valuable.',
+    author: 'Sarah Otto',
+    role: 'Team Lead',
+    company: 'Tata Steel',
+  },
+]
+
+/**
+ * Master Root Application Component assembled using the Originkit Hero 68 design system:
+ * Unifies the entire portfolio with warm sandstone / luxury void palette,
+ * Instrument Serif typography, ruled hairline architecture, and founder venture showcases.
+ *
+ * @returns Master React application.
+ */
 export default function App() {
   const [profile, setProfile] = useState<Profile>(defaultProfile)
-  const [services, setServices] = useState<Service[]>([])
-  const [projects, setProjects] = useState<Project[]>([])
-  const [testimonials, setTestimonials] = useState<Testimonial[]>([])
+  const [testimonials, setTestimonials] = useState<Testimonial[]>(defaultTestimonials)
 
   useEffect(() => {
     const fetchPortfolio = async () => {
@@ -32,76 +61,85 @@ export default function App() {
         if (!res.ok) throw new Error(`API error ${res.status}`)
         const data = await res.json()
         if (data.profile) setProfile(data.profile)
-        if (data.services?.length) setServices(data.services)
-        if (data.projects?.length) {
-          const parsedProjects = data.projects.map((p: any) => ({
-            ...p,
-            order: p.order !== undefined && p.order !== null ? Number(p.order) : undefined,
-            stack: typeof p.stack === 'string' ? JSON.parse(p.stack) : p.stack,
-            highlights: typeof p.highlights === 'string' ? JSON.parse(p.highlights) : p.highlights
-          }))
-          setProjects(parsedProjects)
-        }
         if (data.testimonials?.length) setTestimonials(data.testimonials)
       } catch (err) {
-        console.warn('Failed to load portfolio data from API:', err)
+        console.warn('Portfolio API unavailable; using fallback founder data:', err)
       }
     }
     fetchPortfolio()
   }, [])
 
   return (
-    <div className="min-h-screen w-full overflow-x-hidden relative text-slate-800 selection:bg-sky-500/30 selection:text-sky-950">
-      {/* Dynamic Animated Cloud to Code Background Canvas */}
-      <CloudToCodeBackground />
+    <div className="min-h-screen w-full relative bg-[var(--bg)] text-[var(--ink)] font-sans-tight selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black">
+      {/* Subtle Analog Grain / Physical Texture Overlay Unifying All Sections */}
+      <div
+        className="fixed inset-0 pointer-events-none z-30 opacity-[0.035] mix-blend-overlay"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+        }}
+        aria-hidden="true"
+      />
 
-      {/* Floating Header Navigation */}
+      {/* Floating Architectural Navigation Bar */}
       <Navbar profile={profile} />
 
       {/* Main Page Sections */}
       <main className="relative z-10 w-full">
+        {/* Originkit Hero 68 Section */}
         <Hero profile={profile} />
+
+        {/* The Founder Mindset & Story */}
         <AboutSection />
-        <TracksSection />
-        <AutomationVisualizer />
-        <ServicesSection services={services} />
-        <ProcessSection />
-        <ProjectsSection projects={projects} />
-        <TestimonialsSection testimonials={testimonials} />
-        <ContactSection />
+
+        {/* Published Venture: Tracks & Taps (CloudSky Living Background) */}
+        <LazySection id="tracks" minHeight="100vh">
+          <TracksSection />
+        </LazySection>
+
+        {/* The Dream Company: Connect Cultures (3D Earth & Cosmic Starfield Hero) */}
+        <LazySection id="connectcultures" minHeight="100vh">
+          <ConnectCulturesSection />
+        </LazySection>
+
+        {/* Current Active Venture: LØST SØULS (Underground Techno Rave Hero) */}
+        <LazySection id="lostsouls" minHeight="100vh">
+          <LostSoulsSection />
+        </LazySection>
+
+        {/* Bespoke Creative & Technical Capabilities */}
+        <LazySection id="creative-offerings" minHeight="700px">
+          <CreativeOfferingsSection />
+        </LazySection>
+
+        {/* Feedback from Past Teams & Leaders (Preserved) */}
+        <LazySection id="testimonials" minHeight="500px">
+          <TestimonialsSection testimonials={testimonials} />
+        </LazySection>
+
+        {/* Partnership & Collaboration Contact Planner */}
+        <LazySection id="contact" minHeight="750px">
+          <ContactSection />
+        </LazySection>
       </main>
 
-      {/* Footer Links */}
-      <footer className="relative z-10 w-full py-8 bg-white/30">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-slate-500 font-mono">
-            &copy; {new Date().getFullYear()} Joey van der Poel. All rights reserved.
+      {/* Architectural Ruled Footer */}
+      <footer className="relative z-10 w-full py-12 border-t border-[var(--line)] bg-[var(--bg)] text-[var(--ink)]">
+        <div className="max-w-[1254px] mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+          <p className="text-xs font-mono opacity-65">
+            &copy; {new Date().getFullYear()} {profile.name} &bull; {STRINGS.footer.tagline}
           </p>
-          <div className="flex items-center gap-6">
-            <a
-              href={STRINGS.links.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs font-bold text-slate-650 hover:text-theme transition-colors font-mono uppercase tracking-wider"
-            >
-              LinkedIn
-            </a>
-            <a
-              href={STRINGS.links.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs font-bold text-slate-650 hover:text-theme transition-colors font-mono uppercase tracking-wider"
-            >
-              GitHub
-            </a>
-            <a
-              href={STRINGS.links.appStore}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs font-bold text-slate-650 hover:text-theme transition-colors font-mono uppercase tracking-wider"
-            >
-              Tracks & Taps
-            </a>
+          <div className="flex flex-wrap items-center justify-center gap-6 text-xs font-mono uppercase tracking-wider">
+            {STRINGS.footer.links.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:opacity-60 transition-opacity"
+              >
+                {link.name}
+              </a>
+            ))}
           </div>
         </div>
       </footer>
