@@ -24,7 +24,7 @@ export const STRINGS = {
       { label: "Projects", href: "#projects" },
       { label: "Experience", href: "#experience" },
       { label: "Capabilities", href: "#creative-offerings" },
-      { label: "Feedback", href: "#testimonials" },
+      { label: "Testimonials", href: "#testimonials" },
       { label: "Contact", href: "#contact" }
     ]
   },
@@ -39,7 +39,7 @@ export const STRINGS = {
       { name: "Projects", href: "#projects" },
       { name: "Experience", href: "#experience" },
       { name: "Capabilities", href: "#creative-offerings" },
-      { name: "Feedback", href: "#testimonials" },
+      { name: "Testimonials", href: "#testimonials" },
     ]
   },
 
