@@ -132,6 +132,32 @@ img {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* View Transition API: eliminates any text flickering or color flashing */
+::view-transition-old(root) {
+  animation: 350ms cubic-bezier(0.4, 0, 0.2, 1) both theme-fade-out;
+}
+::view-transition-new(root) {
+  animation: 350ms cubic-bezier(0.4, 0, 0.2, 1) both theme-fade-in;
+}
+
+@keyframes theme-fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+@keyframes theme-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* While capturing clean theme snapshots, bypass intermediate element CSS transitions */
+html.is-switching-theme,
+html.is-switching-theme *,
+html.is-switching-theme *::before,
+html.is-switching-theme *::after {
+  transition: none !important;
+  animation-duration: 0s !important;
+}
+
 /* Disable transitions during initial page load to eliminate switching animation */
 .preload,
 .preload * {

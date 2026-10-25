@@ -143,18 +143,6 @@ export default function TabsCard({
                           {item.description}
                         </p>
 
-                        {item.tags && (
-                          <div className="mt-3.5 flex flex-wrap gap-1.5">
-                            {item.tags.split(',').map((tag) => (
-                              <span
-                                key={tag.trim()}
-                                className="text-[10px] font-mono tracking-wider px-2 py-0.5 bg-[#a3b5c4]/10 dark:bg-[#a3b5c4]/15 rounded text-[var(--ink)] dark:text-[#a3b5c4] border border-[#a3b5c4]/25"
-                              >
-                                {tag.trim()}
-                              </span>
-                            ))}
-                          </div>
-                        )}
                       </motion.div>
                     )}
                   </AnimatePresence>

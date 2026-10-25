@@ -80,7 +80,7 @@ export default function ContactSection(): React.JSX.Element {
       id="contact"
       className="pt-0 pb-0 relative border-t border-[var(--line)] bg-[var(--bg)] text-[var(--ink)] overflow-hidden"
     >
-      <div className="max-w-[1440px] mx-auto px-5 sm:px-8">
+      <div className="max-w-[1254px] mx-auto px-5 sm:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-end">
           
           {/* Left Column: Minimal Editorial Heading & Direct Channels */}

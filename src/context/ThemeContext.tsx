@@ -42,13 +42,29 @@ export function ThemeProvider({ children }: { children: React.ReactNode }): Reac
   }
 
   const setTheme = (nextTheme: Theme) => {
-    applyDomTheme(nextTheme)
+    const root = document.documentElement
+    const hasViewTransition = typeof document !== 'undefined' && 'startViewTransition' in document
+
+    if (hasViewTransition) {
+      root.classList.add('is-switching-theme')
+      // @ts-expect-error View Transitions API is standard in modern Chromium/Safari
+      const transition = document.startViewTransition(() => {
+        applyDomTheme(nextTheme)
+        setThemeState(nextTheme)
+      })
+      transition.finished.finally(() => {
+        root.classList.remove('is-switching-theme')
+      })
+    } else {
+      applyDomTheme(nextTheme)
+      setThemeState(nextTheme)
+    }
+
     try {
       localStorage.setItem(THEME_STORAGE_KEY, nextTheme)
     } catch {
       // ignore
     }
-    setThemeState(nextTheme)
   }
 
   const toggleTheme = () => {
