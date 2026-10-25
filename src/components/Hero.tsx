@@ -123,7 +123,7 @@ export default function Hero({ profile }: HeroProps): React.JSX.Element {
             transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           >
             <p className="mt-5 sm:mt-7 text-sm sm:text-base lg:text-lg font-normal leading-relaxed text-[var(--lede)] max-w-lg">
-              Currently pursuing an MSc in Applied AI, Joey works with ambitious founders and teams to engineer intelligent systems, performant mobile apps, and digital platforms that feel natural, intentional, and high-impact.
+              Currently pursuing an MSc in Applied AI, I work with ambitious founders and teams to engineer intelligent systems, performant mobile apps, and digital platforms that feel natural, intentional, and high-impact.
             </p>
           </motion.div>
 
@@ -185,6 +185,9 @@ export default function Hero({ profile }: HeroProps): React.JSX.Element {
         </div>
 
       </div>
+
+      {/* ─── Ground Plane Baseline Divider (Anchors Joey's cut-off feet) ─── */}
+      <div className="absolute inset-x-0 bottom-0 w-full h-px bg-[var(--line)] z-20 pointer-events-none" aria-hidden="true" />
     </section>
   )
 }

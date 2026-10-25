@@ -7,7 +7,7 @@ const VENTURE_TABS: TabItem[] = [
     title: 'Tracks & Taps',
     subtitle: 'Your Gamified Tour Guide',
     description:
-      'Transforming standard walking routes into outdoor scavenger hunts & city adventures. Solved via real-world landmarks, medieval weighing houses, and historic canals with multi-language voice narration.',
+      'Transforming standard walking routes into outdoor scavenger hunts & city adventures. Solved through real-world landmarks, interactive challenges, and trivia, complete with translation into all languages.',
     tags: 'App Store 5.0 ★, iOS Adventure, Scavenger Hunts',
     badge: 'Live App',
     buttonText: 'Download on App Store',
@@ -39,7 +39,7 @@ const VENTURE_TABS: TabItem[] = [
     title: 'LØST SØULS',
     subtitle: 'Techno Event Startup',
     description:
-      'An underground techno music and event startup in development. Dedicated to high-energy rhythm, dark intimate spaces, acoustic scenography, and raw sound culture.',
+      'A community-driven underground rave collective in development. An uncommercialized space with no VIP enclosures: a place to stay present, get lost in high-pressure sound, and provide a proving ground for emerging talent.',
     tags: '145-160 BPM, Underground Techno, Community Driven',
     badge: 'Event Startup',
     buttonText: 'Explore lostsouls-events.com',

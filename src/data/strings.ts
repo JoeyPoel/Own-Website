@@ -69,7 +69,7 @@ export const STRINGS = {
     cardCCCta: "View Vision",
     cardLSTag: "Event Startup",
     cardLSTitle: "LØST SØULS",
-    cardLSDesc: "Techno event startup currently in development. Focused on intimate spaces and sound culture.",
+    cardLSDesc: "Community-driven underground rave collective focused on uncommercialized spaces and emerging talent.",
     cardLSCta: "View Concept"
   },
 
