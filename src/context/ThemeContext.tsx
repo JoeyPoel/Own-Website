@@ -21,18 +21,8 @@ const THEME_STORAGE_KEY = 'jp_portfolio_theme'
  * @returns Master ThemeProvider wrapping context.
  */
 export function ThemeProvider({ children }: { children: React.ReactNode }): React.JSX.Element {
-  const [theme, setThemeState] = useState<Theme>(() => {
-    try {
-      const stored = localStorage.getItem(THEME_STORAGE_KEY)
-      if (stored === 'dark' || stored === 'light') {
-        return stored
-      }
-    } catch {
-      // ignore localStorage security errors
-    }
-    // Default to white/light theme as requested
-    return 'light'
-  })
+  // Always initialize to white/light mode on initial load as requested
+  const [theme, setThemeState] = useState<Theme>('light')
 
   const setTheme = (nextTheme: Theme) => {
     setThemeState(nextTheme)
@@ -46,6 +36,14 @@ export function ThemeProvider({ children }: { children: React.ReactNode }): Reac
   const toggleTheme = () => {
     setTheme(theme === 'light' ? 'dark' : 'light')
   }
+
+  useEffect(() => {
+    // Remove preload class shortly after mount to allow seamless transitions on user toggle
+    const timer = setTimeout(() => {
+      document.body.classList.remove('preload')
+    }, 60)
+    return () => clearTimeout(timer)
+  }, [])
 
   useEffect(() => {
     const root = document.documentElement

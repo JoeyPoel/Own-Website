@@ -1,16 +1,26 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap");
 @import "tailwindcss";
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *, .dark, .dark *));
 @import "./originkit-section-theme.css";
 
 :root {
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-champagne: #fce9c7;
+  --color-slate-mist: #a3b5c4;
+
   --bg: #ffffff;
-  --ink: #09090b;
-  --lede: #52525b;
-  --btn-bg: #09090b;
+  --ink: #000000;
+  --lede: #4f5d6b;
+  --accent-warm: #fce9c7;
+  --accent-cool: #a3b5c4;
+  --btn-bg: #000000;
   --btn-fg: #ffffff;
-  --btn-hover: #18181b;
+  --btn-hover: #1a1a1a;
   --line: rgba(0, 0, 0, 0.08);
   --line-strong: rgba(0, 0, 0, 0.16);
+  --highlight-champagne: rgba(252, 233, 199, 0.4);
+  --highlight-mist: rgba(163, 181, 196, 0.25);
   --wrap: 1254px;
   --gut: 30px;
   --theme-color: #ffffff;
@@ -24,15 +34,19 @@ html.dark,
 :root.dark,
 [data-theme="dark"],
 [data-scheme="dark"] {
-  --bg: #050508;
-  --ink: #f4f4f5;
-  --lede: #a1a1aa;
-  --btn-bg: #f4f4f5;
-  --btn-fg: #050508;
-  --btn-hover: #e4e4e7;
-  --line: rgba(255, 255, 255, 0.08);
-  --line-strong: rgba(255, 255, 255, 0.16);
-  --theme-color: #050508;
+  --bg: #000000;
+  --ink: #ffffff;
+  --lede: #a3b5c4;
+  --accent-warm: #fce9c7;
+  --accent-cool: #a3b5c4;
+  --btn-bg: #fce9c7;
+  --btn-fg: #000000;
+  --btn-hover: #ffffff;
+  --line: rgba(163, 181, 196, 0.14);
+  --line-strong: rgba(252, 233, 199, 0.3);
+  --highlight-champagne: rgba(252, 233, 199, 0.15);
+  --highlight-mist: rgba(163, 181, 196, 0.15);
+  --theme-color: #000000;
   color-scheme: dark;
 }
 
@@ -44,6 +58,7 @@ html {
   width: 100%;
   min-height: 100%;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 200ms ease-out, color 200ms ease-out;
 }
 
 body {
@@ -54,6 +69,17 @@ body {
   overflow-x: hidden;
   background-color: var(--bg);
   color: var(--ink);
+  transition: background-color 200ms ease-out, color 200ms ease-out;
+}
+
+/* Disable transitions during initial page load to eliminate switching animation */
+.preload,
+.preload * {
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
 }
 
 /* Custom Minimal Scrollbar */
@@ -71,7 +97,17 @@ body {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--ink);
+  background: #a3b5c4;
+}
+
+::selection {
+  background: #a3b5c4;
+  color: #000000;
+}
+
+*:focus-visible {
+  outline: 2px solid #a3b5c4;
+  outline-offset: 2px;
 }
 
 /* Architectural Ruled Grid Utilities (Hero 68 Design Language) */

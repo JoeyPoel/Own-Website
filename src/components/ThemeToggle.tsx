@@ -32,25 +32,25 @@ export default function ThemeToggle({ className = '', showLabel = false }: Theme
         <AnimatePresence mode="wait" initial={false}>
           {isDark ? (
             <motion.div
-              key="moon"
+              key="sun"
               initial={{ rotate: -90, scale: 0.5, opacity: 0 }}
               animate={{ rotate: 0, scale: 1, opacity: 1 }}
               exit={{ rotate: 90, scale: 0.5, opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="flex items-center justify-center text-amber-300"
+              className="flex items-center justify-center text-[#fce9c7]"
             >
-              <Moon className="w-4 h-4" />
+              <Sun className="w-4 h-4" />
             </motion.div>
           ) : (
             <motion.div
-              key="sun"
+              key="moon"
               initial={{ rotate: 90, scale: 0.5, opacity: 0 }}
               animate={{ rotate: 0, scale: 1, opacity: 1 }}
               exit={{ rotate: -90, scale: 0.5, opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="flex items-center justify-center text-amber-500"
+              className="flex items-center justify-center text-[#a3b5c4]"
             >
-              <Sun className="w-4 h-4" />
+              <Moon className="w-4 h-4" />
             </motion.div>
           )}
         </AnimatePresence>

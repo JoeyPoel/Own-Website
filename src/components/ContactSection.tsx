@@ -1,500 +1,350 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { CheckCircle2, Mail, Linkedin, Github, Smartphone, Globe, Music, Plus, Trash2, Send, Clock, Sparkles, MapPin, ShieldAlert } from 'lucide-react'
+import { ArrowUpRight, Copy, Check, Mail, Linkedin, Github, Send } from 'lucide-react'
 import { STRINGS } from '../data/strings'
+import { useTheme } from '../context/ThemeContext'
 
-const collaborationIcons: Record<string, React.ElementType> = {
-  tracks: Smartphone,
-  lostsouls: Music,
-  connectcultures: Globe,
-  bespoke: Sparkles,
-  other: Mail,
+interface ContactFormState {
+  name: string
+  email: string
+  message: string
 }
 
-const collaborationOptions = STRINGS.contact.collaborationOptions.map((opt) => ({
-  ...opt,
-  icon: collaborationIcons[opt.id] || Mail,
-}))
-
-const timelineOptions = STRINGS.contact.timelineOptions
-
 /**
- * ContactSection styled with Framer Marketplace "Collaboration Terminal" aesthetics:
- * Segmented venture selector with dynamic pills, timeline chips, direct founder credentials,
- * and high-contrast inputs.
+ * Minimalist Contact Section aligned with the Unboxed Editorial Design System:
+ * Offers maximum clarity with zero database dependencies. Features direct 1-click email copy,
+ * social gateways, a streamlined 3-field note composer, and theme-adaptive graduation photography.
  *
- * @returns {JSX.Element} Interactive collaboration terminal section.
+ * @returns {React.JSX.Element} Minimalist contact section.
  */
 export default function ContactSection(): React.JSX.Element {
-  const [selectedVenture, setSelectedVenture] = useState<string>(collaborationOptions[0].id)
-  const [selectedTimeline, setSelectedTimeline] = useState<string>(timelineOptions[0])
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' })
-  const [companyName, setCompanyName] = useState('')
-  const [phoneNumber, setPhoneNumber] = useState('')
-  const [socialLinks, setSocialLinks] = useState<{ platform: string; url: string }[]>([])
-  const [customVenture, setCustomVenture] = useState('')
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSuccess, setIsSuccess] = useState(false)
-  const [errorMsg, setErrorMsg] = useState('')
+  const { theme } = useTheme()
+  const isDark = theme === 'dark'
+  const [formData, setFormData] = useState<ContactFormState>({ name: '', email: '', message: '' })
+  const [copied, setCopied] = useState<boolean>(false)
+  const [submitted, setSubmitted] = useState<boolean>(false)
 
-  const addSocialLink = () => {
-    setSocialLinks([...socialLinks, { platform: '', url: '' }])
-  }
-
-  const removeSocialLink = (index: number) => {
-    setSocialLinks(socialLinks.filter((_, i) => i !== index))
-  }
-
-  const handleSocialChange = (index: number, field: 'platform' | 'url', value: string) => {
-    const updated = [...socialLinks]
-    updated[index][field] = value
-    setSocialLinks(updated)
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!formData.name || !formData.email || !formData.message) return
-
-    setIsSubmitting(true)
-    setErrorMsg('')
+  /**
+   * Copies the direct email address to the user's clipboard and displays a temporary confirmation.
+   */
+  const handleCopyEmail = async (): Promise<void> => {
     try {
-      const activeOption = collaborationOptions.find((o) => o.id === selectedVenture)
-      const projectType = selectedVenture === 'other' && customVenture
-        ? `Other: ${customVenture}`
-        : activeOption?.label || selectedVenture
-
-      const formattedLinks = socialLinks
-        .filter((link) => link.platform.trim() || link.url.trim())
-        .reduce((acc, link) => {
-          const key = link.platform.trim() || 'Link'
-          acc[key] = link.url.trim()
-          return acc
-        }, {} as Record<string, string>)
-
-      const hasLinks = Object.keys(formattedLinks).length > 0
-
-      const response = await fetch('/api/inquiry', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
-          projectType,
-          budget: 'Partner / Client Inquiry',
-          timeline: selectedTimeline,
-          phone: phoneNumber.trim() || undefined,
-          links: hasLinks ? formattedLinks : undefined,
-          company: companyName.trim() || undefined,
-        }),
-      })
-
-      const result = await response.json()
-      if (!response.ok) {
-        throw new Error(result.error || 'Failed to transmit collaboration inquiry')
-      }
-
-      setIsSuccess(true)
-      setFormData({ name: '', email: '', message: '' })
-      setCompanyName('')
-      setPhoneNumber('')
-      setSocialLinks([])
-      setCustomVenture('')
-      setTimeout(() => setIsSuccess(false), 7000)
-    } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : STRINGS.contact.errorMessageDefault
-      setErrorMsg(message)
-    } finally {
-      setIsSubmitting(false)
+      await navigator.clipboard.writeText(STRINGS.contact.directEmailValue)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2500)
+    } catch {
+      // Fallback if clipboard API is restricted
+      window.location.href = `mailto:${STRINGS.contact.directEmailValue}`
     }
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  /**
+   * Handles user submission by composing a mailto draft and confirming client-side delivery.
+   *
+   * @param {React.FormEvent} e - Form submission event.
+   */
+  const handleSubmit = (e: React.FormEvent): void => {
+    e.preventDefault()
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) return
+
+    const subject = encodeURIComponent(`Portfolio Inquiry from ${formData.name.trim()}`)
+    const body = encodeURIComponent(
+      `Name: ${formData.name.trim()}\nEmail: ${formData.email.trim()}\n\nMessage:\n${formData.message.trim()}`
+    )
+
+    // Open user's email client directly without any intermediary database
+    window.location.href = `mailto:${STRINGS.contact.directEmailValue}?subject=${subject}&body=${body}`
+    setSubmitted(true)
+  }
+
+  /**
+   * Updates state for form input controls.
+   *
+   * @param {React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>} e - Change event.
+   */
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
+  /**
+   * Resets form state to compose another note.
+   */
+  const handleReset = (): void => {
+    setFormData({ name: '', email: '', message: '' })
+    setSubmitted(false)
+  }
+
   return (
-    <section id="contact" className="py-24 sm:py-32 relative border-t border-[var(--line)] bg-[var(--bg)] text-[var(--ink)] overflow-hidden">
-      <div className="max-w-[1254px] mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+    <section
+      id="contact"
+      className="pt-0 pb-0 relative border-t border-[var(--line)] bg-[var(--bg)] text-[var(--ink)] overflow-hidden"
+    >
+      <div className="max-w-[1440px] mx-auto px-6 sm:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-end">
           
-          {/* Left Column: Founder Status & Direct Transmission Gateways */}
+          {/* Left Column: Minimal Editorial Heading & Direct Channels */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ type: 'tween', ease: 'easeOut', duration: 0.5 }}
-            className="lg:col-span-5 flex flex-col gap-6"
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-4 flex flex-col gap-7 pt-12 sm:pt-16 lg:pt-20 pb-12 sm:pb-16 relative z-10"
           >
             <div>
-              <div className="flex flex-wrap items-center gap-2 mb-4">
-                <span className="text-[10px] font-mono tracking-widest uppercase px-2.5 py-1 bg-black/5 dark:bg-white/10 border border-[var(--line)]">
-                  {STRINGS.contact.chapterBadge}
-                </span>
-                <span className="text-[10px] font-bold tracking-widest font-mono uppercase px-2.5 py-1 bg-black/5 dark:bg-white/10 border border-[var(--line)] inline-flex items-center gap-1.5">
-                  <Sparkles className="w-3 h-3 text-blue-500" />
-                  <span>{STRINGS.contact.badge}</span>
-                </span>
+              <div className="inline-flex items-center gap-2 mb-4 px-3 py-1 border border-[#a3b5c4]/30 text-[11px] font-mono tracking-widest uppercase text-[#a3b5c4]">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#a3b5c4] animate-pulse" />
+                <span>{STRINGS.contact.chapterBadge}</span>
               </div>
-              <h2 className="font-editorial text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.04] tracking-tight mb-3">
-                {STRINGS.contact.title}
+              <h2 className="font-editorial text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-normal leading-[1.04] tracking-tight mb-4 text-[var(--ink)]">
+                Let's build <span className="italic font-normal">together.</span>
               </h2>
-              <p className="text-[var(--lede)] text-sm sm:text-base leading-relaxed">
+              <p className="text-[var(--lede)] text-sm sm:text-base leading-relaxed max-w-md">
                 {STRINGS.contact.description}
               </p>
             </div>
 
-            {/* Live Availability Capsule */}
-            <div className="p-5 card-ruled rounded-sm shadow-md flex items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
-                <span className="relative flex h-3 w-3">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500" />
-                </span>
-                <div>
-                  <span className="text-xs font-mono font-bold uppercase tracking-wider block">
-                    {STRINGS.contact.statusTitle}
-                  </span>
-                  <span className="text-[11px] text-[var(--lede)]">
-                    {STRINGS.contact.statusSub}
-                  </span>
-                </div>
-              </div>
-              <MapPin className="w-4 h-4 opacity-50 shrink-0" />
-            </div>
-
-            {/* Direct Gateway Links */}
+            {/* Direct Contact Channels */}
             <div className="flex flex-col gap-3">
-              <a
-                href={`mailto:${STRINGS.contact.directEmailValue}`}
-                className="p-4 card-ruled flex items-center justify-between group hover:border-[var(--line-strong)] hover:shadow-md transition-all duration-300"
-              >
-                <div className="flex items-center gap-3.5">
-                  <div className="p-2.5 bg-black/5 dark:bg-white/10 border border-[var(--line)] shrink-0">
-                    <Mail className="w-4 h-4 text-[var(--ink)]" />
+              {/* Primary Email Quick Card */}
+              <div className="p-4 border border-[var(--line-strong)] hover:border-[#a3b5c4]/40 bg-black/[0.02] dark:bg-white/[0.02] flex items-center justify-between gap-4 transition-all">
+                <a
+                  href={`mailto:${STRINGS.contact.directEmailValue}?subject=Let's%20Build%20Together`}
+                  className="flex items-center gap-3 min-w-0 group"
+                  title="Send email directly"
+                >
+                  <div className="p-2 border border-[#a3b5c4]/30 bg-[var(--bg)] text-[#a3b5c4]">
+                    <Mail className="w-4 h-4" />
                   </div>
-                  <div>
-                    <span className="text-[9px] font-mono uppercase tracking-widest opacity-60 block">
+                  <div className="min-w-0">
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-[#a3b5c4] block font-semibold">
                       {STRINGS.contact.directEmailTitle}
                     </span>
-                    <span className="text-xs font-semibold">
+                    <span className="text-sm font-semibold truncate block group-hover:text-[#a3b5c4] transition-colors">
                       {STRINGS.contact.directEmailValue}
                     </span>
                   </div>
-                </div>
-                <Send className="w-4 h-4 opacity-40 group-hover:translate-x-1 transition-transform" />
-              </a>
+                </a>
 
-              <a
-                href={STRINGS.links.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-4 card-ruled flex items-center justify-between group hover:border-[var(--line-strong)] hover:shadow-md transition-all duration-300"
-              >
-                <div className="flex items-center gap-3.5">
-                  <div className="p-2.5 bg-black/5 dark:bg-white/10 border border-[var(--line)] shrink-0">
-                    <Linkedin className="w-4 h-4 text-[var(--ink)]" />
-                  </div>
-                  <div>
-                    <span className="text-[9px] font-mono uppercase tracking-widest opacity-60 block">
-                      {STRINGS.contact.linkedinTitle}
-                    </span>
-                    <span className="text-xs font-semibold">
-                      {STRINGS.contact.linkedinValue}
-                    </span>
-                  </div>
-                </div>
-                <span className="text-xs font-mono opacity-50">&rarr;</span>
-              </a>
+                <button
+                  type="button"
+                  onClick={handleCopyEmail}
+                  className="p-2.5 border border-[#a3b5c4]/25 hover:border-[#a3b5c4] bg-[var(--bg)] text-[var(--ink)] hover:bg-[#a3b5c4]/10 transition-all cursor-pointer flex items-center gap-1.5 text-xs font-mono shrink-0"
+                  title="Copy email to clipboard"
+                  aria-label="Copy email address"
+                >
+                  {copied ? (
+                    <>
+                      <Check className="w-3.5 h-3.5 text-[#a3b5c4]" />
+                      <span className="text-[11px] text-[var(--ink)] dark:text-[#a3b5c4] font-medium">Copied</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-3.5 h-3.5 opacity-60" />
+                      <span className="text-[11px] opacity-75">Copy</span>
+                    </>
+                  )}
+                </button>
+              </div>
 
-              <a
-                href={STRINGS.links.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-4 card-ruled flex items-center justify-between group hover:border-[var(--line-strong)] hover:shadow-md transition-all duration-300"
-              >
-                <div className="flex items-center gap-3.5">
-                  <div className="p-2.5 bg-black/5 dark:bg-white/10 border border-[var(--line)] shrink-0">
-                    <Github className="w-4 h-4 text-[var(--ink)]" />
+              {/* Minimal Social Gateways */}
+              <div className="grid grid-cols-2 gap-3">
+                <a
+                  href={STRINGS.links.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-3.5 border border-[var(--line)] hover:border-[#a3b5c4]/40 bg-black/[0.02] dark:bg-white/[0.02] flex items-center justify-between group transition-all"
+                >
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <Linkedin className="w-4 h-4 text-[var(--ink)] group-hover:text-[#a3b5c4] shrink-0 transition-colors" />
+                    <span className="text-xs font-semibold truncate group-hover:text-[#a3b5c4] transition-colors">LinkedIn</span>
                   </div>
-                  <div>
-                    <span className="text-[9px] font-mono uppercase tracking-widest opacity-60 block">
-                      {STRINGS.contact.githubTitle}
-                    </span>
-                    <span className="text-xs font-semibold">
-                      {STRINGS.contact.githubValue}
-                    </span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-[var(--lede)] group-hover:text-[#a3b5c4] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </a>
+
+                <a
+                  href={STRINGS.links.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-3.5 border border-[var(--line)] hover:border-[#a3b5c4]/40 bg-black/[0.02] dark:bg-white/[0.02] flex items-center justify-between group transition-all"
+                >
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <Github className="w-4 h-4 text-[var(--ink)] group-hover:text-[#a3b5c4] shrink-0 transition-colors" />
+                    <span className="text-xs font-semibold truncate group-hover:text-[#a3b5c4] transition-colors">GitHub</span>
                   </div>
-                </div>
-                <span className="text-xs font-mono opacity-50">&rarr;</span>
-              </a>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-[var(--lede)] group-hover:text-[#a3b5c4] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </a>
+              </div>
+            </div>
+
+            {/* Live Availability Telemetry Capsule */}
+            <div className="pt-4 border-t border-[var(--line)] flex items-center gap-3">
+              <span className="relative flex h-2.5 w-2.5 shrink-0">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#a3b5c4] opacity-75" />
+                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#a3b5c4]" />
+              </span>
+              <p className="text-xs font-mono text-[var(--lede)]">
+                Reply within 24 hours
+              </p>
             </div>
           </motion.div>
 
-          {/* Right Column: Framer Intake Terminal */}
+          {/* Center Column: Clean 3-Field Direct Note Composer */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ type: 'tween', ease: 'easeOut', duration: 0.5, delay: 0.1 }}
-            className="lg:col-span-7 p-8 sm:p-10 card-ruled rounded-sm shadow-2xl border border-[var(--line-strong)]"
+            transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-5 p-6 sm:p-8 border border-[var(--line)] hover:border-[#a3b5c4]/40 transition-colors bg-black/[0.015] dark:bg-white/[0.015] my-10 sm:my-14 lg:my-16 relative z-10"
           >
             <AnimatePresence mode="wait">
-              {!isSuccess ? (
+              {!submitted ? (
                 <motion.form
-                  key="intake-form"
+                  key="note-form"
                   onSubmit={handleSubmit}
-                  className="flex flex-col gap-6"
+                  className="flex flex-col gap-4"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                 >
-                  {/* Step 1: Venture Category Selection Pills */}
-                  <div className="flex flex-col gap-3">
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-mono uppercase tracking-wider font-bold">
-                        {STRINGS.contact.step1Title}
-                      </span>
-                      <span className="text-[10px] font-mono opacity-50">
-                        {STRINGS.contact.step1Hint}
-                      </span>
-                    </div>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                      {collaborationOptions.map((opt) => {
-                        const Icon = opt.icon
-                        const isSelected = selectedVenture === opt.id
-                        return (
-                          <button
-                            key={opt.id}
-                            type="button"
-                            onClick={() => setSelectedVenture(opt.id)}
-                            className={`p-3.5 text-left border rounded-sm transition-all duration-200 flex items-center gap-3 cursor-pointer ${
-                              isSelected
-                                ? 'bg-[var(--btn-bg)] text-[var(--btn-fg)] border-[var(--btn-bg)] shadow-md font-medium'
-                                : 'bg-black/5 dark:bg-white/5 border-[var(--line)] text-[var(--ink)] hover:border-[var(--line-strong)]'
-                            }`}
-                          >
-                            <Icon className={`w-4 h-4 shrink-0 ${isSelected ? 'text-[var(--btn-fg)]' : 'opacity-70'}`} />
-                            <div className="min-w-0 flex-1">
-                              <span className="block text-xs font-semibold truncate leading-tight">
-                                {opt.label.split('(')[0]}
-                              </span>
-                              <span className="block text-[10px] opacity-75 truncate mt-0.5">
-                                {opt.label.includes('(') ? `(${opt.label.split('(')[1]}` : opt.category}
-                              </span>
-                            </div>
-                          </button>
-                        )
-                      })}
-                    </div>
-
-                    {selectedVenture === 'other' && (
-                      <input
-                        type="text"
-                        placeholder={STRINGS.contact.otherPlaceholder}
-                        required
-                        value={customVenture}
-                        onChange={(e) => setCustomVenture(e.target.value)}
-                        className="mt-2 px-4 py-2.5 text-xs border border-[var(--line-strong)] bg-black/5 dark:bg-white/5 text-[var(--ink)] focus:outline-none focus:border-[var(--ink)] font-sans"
-                      />
-                    )}
-                  </div>
-
-                  {/* Step 2: Desired Timeline Pills */}
-                  <div className="flex flex-col gap-2.5">
-                    <span className="text-xs font-mono uppercase tracking-wider font-bold flex items-center gap-2">
-                      <Clock className="w-3.5 h-3.5 opacity-60" />
-                      <span>{STRINGS.contact.step2Title}</span>
+                  <div className="flex items-center justify-between pb-2 border-b border-[var(--line)]">
+                    <span className="text-xs font-mono uppercase tracking-wider font-semibold text-[var(--ink)]">
+                      Quick Message
                     </span>
-                    <div className="flex flex-wrap gap-2">
-                      {timelineOptions.map((t) => (
-                        <button
-                          key={t}
-                          type="button"
-                          onClick={() => setSelectedTimeline(t)}
-                          className={`px-3.5 py-1.5 rounded-full text-xs font-mono transition-colors cursor-pointer border ${
-                            selectedTimeline === t
-                              ? 'bg-[var(--ink)] text-[var(--bg)] border-[var(--ink)] font-bold'
-                              : 'bg-transparent border-[var(--line)] text-[var(--lede)] hover:border-[var(--line-strong)] hover:text-[var(--ink)]'
-                          }`}
-                        >
-                          {t}
-                        </button>
-                      ))}
-                    </div>
+                    <span className="text-[11px] font-mono text-[#a3b5c4]">
+                      Direct &bull; No Database
+                    </span>
                   </div>
 
-                  {/* Step 3: Name and Organization */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {/* Name and Email side-by-side */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                     <div className="flex flex-col gap-1.5">
-                      <label htmlFor="name" className="text-xs font-mono uppercase tracking-wider font-bold">
-                        {STRINGS.contact.step3NameLabel}
+                      <label htmlFor="contact-name" className="text-[11px] font-mono uppercase tracking-wider text-[var(--lede)]">
+                        {STRINGS.contact.nameLabel} <span className="text-[#a3b5c4]">*</span>
                       </label>
                       <input
-                        id="name"
+                        id="contact-name"
                         type="text"
                         name="name"
                         required
                         value={formData.name}
                         onChange={handleChange}
-                        placeholder={STRINGS.contact.step3NamePlaceholder}
-                        className="px-4 py-3 bg-black/5 dark:bg-white/5 border border-[var(--line-strong)] focus:outline-none focus:border-[var(--ink)] text-sm font-sans rounded-sm"
+                        placeholder={STRINGS.contact.namePlaceholder}
+                        className="px-3.5 py-2.5 text-sm font-sans bg-transparent border border-[var(--line-strong)] text-[var(--ink)] placeholder:text-[var(--lede)]/50 focus:outline-none focus:border-[#a3b5c4] focus:ring-1 focus:ring-[#a3b5c4]/40 transition-colors rounded-none"
                       />
                     </div>
 
                     <div className="flex flex-col gap-1.5">
-                      <label htmlFor="company" className="text-xs font-mono uppercase tracking-wider font-bold">
-                        {STRINGS.contact.step3CompanyLabel}
+                      <label htmlFor="contact-email" className="text-[11px] font-mono uppercase tracking-wider text-[var(--lede)]">
+                        {STRINGS.contact.emailLabel} <span className="text-[#a3b5c4]">*</span>
                       </label>
                       <input
-                        id="company"
-                        type="text"
-                        name="company"
-                        value={companyName}
-                        onChange={(e) => setCompanyName(e.target.value)}
-                        placeholder={STRINGS.contact.step3CompanyPlaceholder}
-                        className="px-4 py-3 bg-black/5 dark:bg-white/5 border border-[var(--line-strong)] focus:outline-none focus:border-[var(--ink)] text-sm font-sans rounded-sm"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Step 4: Email and Phone Number */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="flex flex-col gap-1.5">
-                      <label htmlFor="email" className="text-xs font-mono uppercase tracking-wider font-bold">
-                        {STRINGS.contact.step4EmailLabel}
-                      </label>
-                      <input
-                        id="email"
+                        id="contact-email"
                         type="email"
                         name="email"
                         required
                         value={formData.email}
                         onChange={handleChange}
-                        placeholder={STRINGS.contact.step4EmailPlaceholder}
-                        className="px-4 py-3 bg-black/5 dark:bg-white/5 border border-[var(--line-strong)] focus:outline-none focus:border-[var(--ink)] text-sm font-sans rounded-sm"
-                      />
-                    </div>
-
-                    <div className="flex flex-col gap-1.5">
-                      <label htmlFor="phone" className="text-xs font-mono uppercase tracking-wider font-bold">
-                        {STRINGS.contact.step4PhoneLabel}
-                      </label>
-                      <input
-                        id="phone"
-                        type="tel"
-                        name="phone"
-                        value={phoneNumber}
-                        onChange={(e) => setPhoneNumber(e.target.value)}
-                        placeholder={STRINGS.contact.step4PhonePlaceholder}
-                        className="px-4 py-3 bg-black/5 dark:bg-white/5 border border-[var(--line-strong)] focus:outline-none focus:border-[var(--ink)] text-sm font-sans rounded-sm"
+                        placeholder={STRINGS.contact.emailPlaceholder}
+                        className="px-3.5 py-2.5 text-sm font-sans bg-transparent border border-[var(--line-strong)] text-[var(--ink)] placeholder:text-[var(--lede)]/50 focus:outline-none focus:border-[#a3b5c4] focus:ring-1 focus:ring-[#a3b5c4]/40 transition-colors rounded-none"
                       />
                     </div>
                   </div>
 
-                  {/* Step 5: Social / Portfolio Link Adder */}
-                  <div className="flex flex-col gap-2">
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-mono uppercase tracking-wider font-bold">
-                        {STRINGS.contact.step5LinksLabel}
-                      </span>
-                    </div>
-                    {socialLinks.length > 0 && (
-                      <div className="flex flex-col gap-2">
-                        {socialLinks.map((link, idx) => (
-                          <div key={idx} className="flex gap-2 items-center">
-                            <input
-                              type="text"
-                              placeholder="Platform / Label"
-                              value={link.platform}
-                              onChange={(e) => handleSocialChange(idx, 'platform', e.target.value)}
-                              className="w-1/3 px-3 py-2 text-xs bg-black/5 dark:bg-white/5 border border-[var(--line-strong)] focus:outline-none focus:border-[var(--ink)] font-mono"
-                            />
-                            <input
-                              type="text"
-                              placeholder="https://..."
-                              value={link.url}
-                              onChange={(e) => handleSocialChange(idx, 'url', e.target.value)}
-                              className="flex-grow px-3 py-2 text-xs bg-black/5 dark:bg-white/5 border border-[var(--line-strong)] focus:outline-none focus:border-[var(--ink)] font-mono"
-                            />
-                            <button
-                              type="button"
-                              onClick={() => removeSocialLink(idx)}
-                              className="p-2 border border-red-500/30 text-red-500 hover:bg-red-500/10 cursor-pointer"
-                              title="Remove link"
-                            >
-                              <Trash2 className="w-3.5 h-3.5" />
-                            </button>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                    <button
-                      type="button"
-                      onClick={addSocialLink}
-                      className="flex items-center gap-1.5 px-3 py-1.5 border border-[var(--line-strong)] text-[11px] font-mono uppercase tracking-wider hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer w-max"
-                    >
-                      <Plus className="w-3.5 h-3.5" />
-                      <span>{STRINGS.contact.step5AddLinkBtn}</span>
-                    </button>
-                  </div>
-
-                  {/* Step 6: Message Field */}
+                  {/* Message Field */}
                   <div className="flex flex-col gap-1.5">
-                    <label htmlFor="message" className="text-xs font-mono uppercase tracking-wider font-bold">
-                      {STRINGS.contact.step6MessageLabel}
+                    <label htmlFor="contact-message" className="text-[11px] font-mono uppercase tracking-wider text-[var(--lede)]">
+                      {STRINGS.contact.messageLabel} <span className="text-[#a3b5c4]">*</span>
                     </label>
                     <textarea
-                      id="message"
+                      id="contact-message"
                       name="message"
                       required
-                      rows={4}
+                      rows={3}
                       value={formData.message}
                       onChange={handleChange}
-                      placeholder={STRINGS.contact.step6MessagePlaceholder}
-                      className="px-4 py-3 bg-black/5 dark:bg-white/5 border border-[var(--line-strong)] focus:outline-none focus:border-[var(--ink)] text-sm font-sans resize-y min-h-[120px] rounded-sm"
+                      placeholder={STRINGS.contact.messagePlaceholder}
+                      className="px-3.5 py-2.5 text-sm font-sans bg-transparent border border-[var(--line-strong)] text-[var(--ink)] placeholder:text-[var(--lede)]/50 focus:outline-none focus:border-[#a3b5c4] focus:ring-1 focus:ring-[#a3b5c4]/40 transition-colors rounded-none resize-y min-h-[95px]"
                     />
                   </div>
 
-                  {errorMsg && (
-                    <div className="p-3.5 border border-red-500/40 bg-red-500/5 text-red-600 dark:text-red-400 text-xs font-mono flex items-center gap-2">
-                      <ShieldAlert className="w-4 h-4 shrink-0" />
-                      <span>{errorMsg}</span>
-                    </div>
-                  )}
-
                   {/* Submit Button */}
-                  <div className="pt-2">
+                  <div className="pt-1">
                     <button
                       type="submit"
-                      disabled={isSubmitting}
-                      className="btn-originkit text-sm py-4 w-full justify-between shadow-xl"
+                      className="w-full py-3 px-6 bg-[var(--btn-bg)] text-[var(--btn-fg)] font-sans font-medium text-xs tracking-wider uppercase flex items-center justify-center gap-2 hover:opacity-90 transition-opacity cursor-pointer shadow-sm group"
                     >
-                      <span>{isSubmitting ? STRINGS.contact.btnSubmitting : STRINGS.contact.btnSubmit}</span>
-                      <Send className="w-4 h-4" />
+                      <span>{STRINGS.contact.btnSubmit}</span>
+                      <Send className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                     </button>
                   </div>
                 </motion.form>
               ) : (
                 <motion.div
-                  key="success"
-                  initial={{ opacity: 0, scale: 0.95 }}
+                  key="note-sent"
+                  initial={{ opacity: 0, scale: 0.98 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0 }}
-                  className="py-16 text-center"
+                  className="py-10 text-center flex flex-col items-center justify-center gap-4"
                 >
-                  <CheckCircle2 className="w-16 h-16 mx-auto mb-4 text-emerald-500" />
-                  <h3 className="font-editorial text-3xl sm:text-4xl font-bold mb-2">
-                    {STRINGS.contact.successTitle}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-[var(--lede)] max-w-sm mx-auto leading-relaxed">
-                    {STRINGS.contact.successDesc}
-                  </p>
+                  <div className="w-12 h-12 rounded-full border border-[#a3b5c4]/40 bg-[#a3b5c4]/15 flex items-center justify-center text-[#a3b5c4]">
+                    <Check className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h3 className="font-editorial text-2xl sm:text-3xl font-medium mb-1.5 text-[var(--ink)]">
+                      {STRINGS.contact.successTitle}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-[var(--lede)] max-w-sm mx-auto leading-relaxed">
+                      {STRINGS.contact.successDesc}
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={handleReset}
+                    className="mt-2 px-4 py-2 border border-[var(--line-strong)] hover:border-[#a3b5c4] text-xs font-mono uppercase tracking-wider text-[var(--ink)] hover:bg-[#a3b5c4]/10 transition-colors cursor-pointer"
+                  >
+                    {STRINGS.contact.resetBtn}
+                  </button>
                 </motion.div>
               )}
             </AnimatePresence>
+          </motion.div>
+
+          {/* Right Column: Graduation Portrait Standing Directly on Footer */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            className="lg:col-span-3 flex justify-center lg:justify-end items-end w-full relative z-0 pointer-events-none self-end"
+          >
+            <div className="relative flex items-end justify-center lg:justify-end">
+              {/* Subtle Ambient Radial Glow */}
+              <div
+                className="absolute bottom-12 right-2 sm:right-6 w-56 h-56 sm:w-64 sm:h-64 rounded-full blur-[90px] pointer-events-none opacity-30 dark:opacity-45"
+                style={{ background: 'radial-gradient(circle, rgba(163,181,196,0.4) 0%, transparent 70%)' }}
+              />
+
+              {/* Light Mode: Joey Graduation on Pure White Background */}
+              <img
+                src="/GraduationWhiteBackground.jpg"
+                alt="Joey van der Poel Graduation"
+                className={`h-[480px] sm:h-[540px] lg:h-[590px] xl:h-[615px] 2xl:h-[630px] w-auto max-w-none object-contain object-bottom select-none pointer-events-none transition-opacity duration-200 ease-out mix-blend-multiply translate-y-[1px] ${
+                  isDark ? 'opacity-0 pointer-events-none' : 'opacity-100'
+                }`}
+                loading="lazy"
+              />
+
+              {/* Dark Mode: Joey Graduation on Pure Black Background */}
+              <img
+                src="/GraduationBlackBackground.jpg"
+                alt="Joey van der Poel Graduation"
+                className={`absolute inset-0 w-full h-full object-contain object-bottom select-none pointer-events-none transition-opacity duration-200 ease-out mix-blend-screen translate-y-[1px] ${
+                  isDark ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                }`}
+                loading="lazy"
+              />
+            </div>
           </motion.div>
 
         </div>

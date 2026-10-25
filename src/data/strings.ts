@@ -6,7 +6,7 @@
 
 export const STRINGS = {
   hero: {
-    chapterBadge: "01 • PROFILE",
+    chapterBadge: "PROFILE",
     availabilityBadge: "Founder • Builder • Creative Technologist",
     headlineStart: "Joey van der Poel",
     headlineTitle: "Builder & Founder",
@@ -21,33 +21,30 @@ export const STRINGS = {
     btnPartnerUp: "Get in Touch",
     scrollIndicator: "SCROLL",
     quickAnchors: [
-      { label: "Tracks & Taps", href: "#tracks" },
-      { label: "Connect Cultures", href: "#connectcultures" },
-      { label: "LØST SØULS", href: "#lostsouls" },
+      { label: "Projects", href: "#projects" },
+      { label: "Experience", href: "#experience" },
       { label: "Capabilities", href: "#creative-offerings" },
+      { label: "Feedback", href: "#testimonials" },
       { label: "Contact", href: "#contact" }
     ]
   },
 
   navbar: {
     availabilityFallback: "Founder & Creative Technologist",
-    founderRoleBadge: "Founder",
-    btnDiscuss: "Let's Talk",
+    founderRoleBadge: "Founder & AI Engineer",
+    btnDiscuss: "Get in Touch",
     btnCollaborate: "Contact",
-    navigationLabel: "MENU",
+    navigationLabel: "NAVIGATION",
     links: [
-      { name: "About", href: "#about" },
-      { name: "Tracks & Taps", href: "#tracks" },
-      { name: "Connect Cultures", href: "#connectcultures" },
-      { name: "LØST SØULS", href: "#lostsouls" },
+      { name: "Projects", href: "#projects" },
+      { name: "Experience", href: "#experience" },
       { name: "Capabilities", href: "#creative-offerings" },
       { name: "Feedback", href: "#testimonials" },
-      { name: "Contact", href: "#contact" }
     ]
   },
 
   about: {
-    chapterBadge: "02 • FOUNDER STORY",
+    chapterBadge: "FOUNDER STORY",
     badge: "ABOUT",
     title: "More Than A Developer : A Founder Who Ships",
     description: "I like taking ideas from zero to production. Code is just one part of the equation: design, community, and shipping real products are what drive me.",
@@ -77,7 +74,7 @@ export const STRINGS = {
   },
 
   creativity: {
-    chapterBadge: "04 • WHAT I BUILD",
+    chapterBadge: "WHAT I BUILD",
     badge: "CAPABILITIES",
     title: "What I Build",
     description: "Beside my own ventures, I partner with forward-thinking teams to build high-end digital products.",
@@ -141,7 +138,7 @@ export const STRINGS = {
   },
 
   testimonials: {
-    chapterBadge: "05 • FEEDBACK",
+    chapterBadge: "FEEDBACK",
     badge: "RECOMMENDATIONS",
     verifiedReviewsPill: "VERIFIED REVIEWS",
     title: "Client & Team Feedback",
@@ -162,62 +159,40 @@ export const STRINGS = {
   },
 
   contact: {
-    chapterBadge: "06 • GET IN TOUCH",
-    badge: "COLLABORATE",
+    chapterBadge: "GET IN TOUCH",
+    badge: "CONTACT",
     title: "Let's Build Together",
-    description: "Whether you want to partner on a venture, collaborate on rave events, co-found Connect Cultures, or hire me to build a product.",
+    description: "Have a venture idea, need a mobile or AI product built, or want to collaborate? Send a direct note or reach out via email.",
     statusTitle: "Available for Ventures & Builds",
-    statusSub: "Direct reply within 24 hours",
-    directEmailTitle: "Email",
+    statusSub: "Reply within 24 hours",
+    directEmailTitle: "Direct Email",
     directEmailValue: "Joeywognum@gmail.com",
     linkedinTitle: "LinkedIn",
     linkedinValue: "Joey van der Poel",
     githubTitle: "GitHub",
     githubValue: "github.com/JoeyPoel",
-    step1Title: "Select a topic *",
-    step1Hint: "Choose one",
-    step2Title: "Target timeline",
-    step3NameLabel: "Name *",
-    step3NamePlaceholder: "Your name",
-    step3CompanyLabel: "Company / Project (Optional)",
-    step3CompanyPlaceholder: "Brand, startup, or venue",
-    step4EmailLabel: "Email *",
-    step4EmailPlaceholder: "your@email.com",
-    step4PhoneLabel: "Phone / WhatsApp (Optional)",
-    step4PhonePlaceholder: "+31 6 12345678",
-    step5LinksLabel: "Links or Deck (Optional)",
-    step5AddLinkBtn: "Add Link",
-    step6MessageLabel: "Message *",
-    step6MessagePlaceholder: "Tell me about your project, idea, or partnership vision...",
-    otherPlaceholder: "Please describe your topic...",
-    errorMessageDefault: "Something went wrong. Please try again or email directly.",
-    btnSubmitting: "Sending...",
+    nameLabel: "Your Name",
+    namePlaceholder: "e.g. Alex Miller",
+    emailLabel: "Your Email",
+    emailPlaceholder: "alex@example.com",
+    messageLabel: "Message",
+    messagePlaceholder: "Tell me about your idea, project, or venture...",
     btnSubmit: "Send Message",
-    successTitle: "Message Sent",
-    successDesc: "Thank you for reaching out. I will get back to you within 24 hours.",
-    collaborationOptions: [
-      { id: "tracks", label: "Tracks & Taps (Marketing & Growth Partner)", category: "Mobile App" },
-      { id: "lostsouls", label: "LØST SØULS (Startup Collaborator / Venue Partner)", category: "Music Startup" },
-      { id: "connectcultures", label: "Connect Cultures (Co-Founder / Partner)", category: "Travel Venture" },
-      { id: "bespoke", label: "Bespoke Build (Web / App / AI)", category: "Client Project" },
-      { id: "other", label: "Other Venture / Opportunity", category: "General" }
-    ],
-    timelineOptions: [
-      "Immediate / Priority",
-      "Within 1-2 Months",
-      "Flexible"
-    ]
+    btnCopy: "Copy Email",
+    copiedFeedback: "Copied to clipboard",
+    successTitle: "Ready in your mail client",
+    successDesc: "Your email client has been launched with your note. You can also reach me directly at Joeywognum@gmail.com.",
+    resetBtn: "Send another note",
   },
 
   wayfinder: {
     ariaLabel: "Portfolio Journey Navigation",
     steps: [
-      { id: "about", num: "01", label: "Story", href: "#about" },
-      { id: "tracks", num: "02", label: "Tracks & Taps", href: "#tracks" },
-      { id: "connectcultures", num: "03", label: "Connect Cultures", href: "#connectcultures" },
-      { id: "lostsouls", num: "04", label: "LØST SØULS", href: "#lostsouls" },
-      { id: "creative-offerings", num: "05", label: "Capabilities", href: "#creative-offerings" },
-      { id: "contact", num: "06", label: "Contact", href: "#contact" }
+      { id: "tracks", num: "01", label: "Tracks & Taps", href: "#tracks" },
+      { id: "connectcultures", num: "02", label: "Connect Cultures", href: "#connectcultures" },
+      { id: "lostsouls", num: "03", label: "LØST SØULS", href: "#lostsouls" },
+      { id: "creative-offerings", num: "04", label: "Capabilities", href: "#creative-offerings" },
+      { id: "contact", num: "05", label: "Contact", href: "#contact" }
     ]
   },
 

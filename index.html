@@ -1,17 +1,27 @@
 <!doctype html>
-<html lang="en" class="dark" data-scheme="dark">
+<html lang="en" class="light" data-theme="light" data-scheme="light">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="theme-color" content="#050508" />
+    <meta name="theme-color" content="#ffffff" />
     <link rel="icon" type="image/jpeg" href="/joey.jpg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <title>Joey van der Poel | Mobile Developer & AI Automation Engineer</title>
-
+    <script>
+      (function() {
+        try {
+          document.documentElement.classList.remove('dark');
+          document.documentElement.classList.add('light');
+          document.documentElement.setAttribute('data-theme', 'light');
+          document.documentElement.setAttribute('data-scheme', 'light');
+          document.documentElement.style.colorScheme = 'light';
+        } catch (e) {}
+      })();
+    </script>
   </head>
-  <body>
+  <body class="preload">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
