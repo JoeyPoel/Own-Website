@@ -25,7 +25,7 @@ export default function CreativeOfferingsSection(): React.JSX.Element {
   }
 
   return (
-    <section id="creative-offerings" className="py-12 sm:py-24 lg:py-32 relative bg-[var(--bg)] text-[var(--ink)] overflow-hidden">
+    <section id="creative-offerings" className="py-12 sm:py-24 lg:py-32 relative bg-[var(--bg)] text-[var(--ink)] overflow-hidden transition-colors duration-400 ease-in-out">
       {/* Top subtle atmospheric feather completing the blend from the rave void into normal canvas */}
       <div 
         className="absolute inset-x-0 top-0 h-48 pointer-events-none z-0"
@@ -40,10 +40,6 @@ export default function CreativeOfferingsSection(): React.JSX.Element {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 sm:gap-8 mb-8 sm:mb-12">
           <div className="max-w-2xl">
-            <span className="text-[10px] font-bold tracking-[0.2em] font-mono uppercase px-3 py-1 bg-black/5 dark:bg-white/10 border border-[#a3b5c4]/30 inline-flex items-center gap-2 mb-3 sm:mb-4 rounded-sm shadow-sm">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#a3b5c4] animate-pulse" />
-              <span>{STRINGS.creativity.chapterBadge}</span>
-            </span>
             <h2 className="font-editorial text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.04] tracking-tight mb-2 sm:mb-4">
               {STRINGS.creativity.title}
             </h2>

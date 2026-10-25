@@ -24,13 +24,31 @@ export function ThemeProvider({ children }: { children: React.ReactNode }): Reac
   // Always initialize to white/light mode on initial load as requested
   const [theme, setThemeState] = useState<Theme>('light')
 
+  const applyDomTheme = (nextTheme: Theme) => {
+    const root = document.documentElement
+    if (nextTheme === 'dark') {
+      root.classList.add('dark')
+      root.classList.remove('light')
+      root.setAttribute('data-theme', 'dark')
+      root.setAttribute('data-scheme', 'dark')
+      root.style.colorScheme = 'dark'
+    } else {
+      root.classList.add('light')
+      root.classList.remove('dark')
+      root.setAttribute('data-theme', 'light')
+      root.setAttribute('data-scheme', 'light')
+      root.style.colorScheme = 'light'
+    }
+  }
+
   const setTheme = (nextTheme: Theme) => {
-    setThemeState(nextTheme)
+    applyDomTheme(nextTheme)
     try {
       localStorage.setItem(THEME_STORAGE_KEY, nextTheme)
     } catch {
       // ignore
     }
+    setThemeState(nextTheme)
   }
 
   const toggleTheme = () => {
@@ -46,20 +64,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }): Reac
   }, [])
 
   useEffect(() => {
-    const root = document.documentElement
-    if (theme === 'dark') {
-      root.classList.add('dark')
-      root.classList.remove('light')
-      root.setAttribute('data-theme', 'dark')
-      root.setAttribute('data-scheme', 'dark')
-      root.style.colorScheme = 'dark'
-    } else {
-      root.classList.add('light')
-      root.classList.remove('dark')
-      root.setAttribute('data-theme', 'light')
-      root.setAttribute('data-scheme', 'light')
-      root.style.colorScheme = 'light'
-    }
+    applyDomTheme(theme)
   }, [theme])
 
   const contextValue = useMemo(

@@ -58,7 +58,6 @@ html {
   width: 100%;
   min-height: 100%;
   -webkit-font-smoothing: antialiased;
-  transition: background-color 200ms ease-out, color 200ms ease-out;
 }
 
 body {
@@ -69,7 +68,68 @@ body {
   overflow-x: hidden;
   background-color: var(--bg);
   color: var(--ink);
-  transition: background-color 200ms ease-out, color 200ms ease-out;
+}
+
+@property --bg {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #ffffff;
+}
+@property --ink {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #000000;
+}
+@property --lede {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #4f5d6b;
+}
+@property --line {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: rgba(0, 0, 0, 0.08);
+}
+@property --line-strong {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: rgba(0, 0, 0, 0.16);
+}
+
+/* Master Smooth Theme Transition Pipeline (Synchronized 400ms ease-in-out) */
+html,
+body,
+header,
+nav,
+section,
+main,
+footer,
+.card-ruled {
+  transition-property: background-color, border-color, color;
+  transition-duration: 400ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+a,
+span,
+button,
+input,
+textarea,
+svg {
+  transition-property: color, border-color, fill, stroke, opacity;
+  transition-duration: 400ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+img {
+  transition-property: opacity;
+  transition-duration: 400ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Disable transitions during initial page load to eliminate switching animation */

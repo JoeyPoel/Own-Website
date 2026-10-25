@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { Quote, Star, CheckCircle, ExternalLink, ShieldCheck, Award } from 'lucide-react'
+import { Quote, Star, ExternalLink } from 'lucide-react'
 import type { Testimonial } from '../data/portfolioData'
 import { STRINGS } from '../data/strings'
 
@@ -17,7 +17,7 @@ interface TestimonialsSectionProps {
  */
 export default function TestimonialsSection({ testimonials }: TestimonialsSectionProps): React.JSX.Element {
   return (
-    <section id="testimonials" className="py-14 sm:py-24 lg:py-32 relative border-t border-[var(--line)] bg-[var(--bg)] text-[var(--ink)] overflow-hidden">
+    <section id="testimonials" className="py-14 sm:py-24 lg:py-32 relative border-t border-[var(--line)] bg-[var(--bg)] text-[var(--ink)] overflow-hidden transition-colors duration-400 ease-in-out">
       {/* Background Subtle Radial Accent using Slate Mist */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.06] dark:opacity-[0.10]" aria-hidden="true">
         <div
@@ -31,16 +31,6 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
         {/* Section Header with Trust Rating Capsule */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 sm:gap-8 mb-8 sm:mb-14">
           <div className="max-w-2xl">
-            <div className="flex flex-wrap items-center gap-2 mb-3 sm:mb-4">
-              <span className="text-[10px] font-bold tracking-[0.2em] font-mono uppercase px-3 py-1 bg-black/5 dark:bg-white/10 border border-[#a3b5c4]/30 inline-flex items-center gap-2 rounded-sm shadow-sm">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#a3b5c4] animate-pulse" />
-                <span>{STRINGS.testimonials.chapterBadge}</span>
-              </span>
-              <span className="text-[10px] font-mono tracking-widest uppercase px-2.5 py-1 bg-[#a3b5c4]/15 text-[var(--ink)] dark:text-[#a3b5c4] border border-[#a3b5c4]/30 font-bold inline-flex items-center gap-1.5 rounded-sm">
-                <CheckCircle className="w-3 h-3 text-[#a3b5c4]" />
-                <span>{STRINGS.testimonials.verifiedReviewsPill}</span>
-              </span>
-            </div>
 
             <h2 className="font-editorial text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.04] tracking-tight mb-2 sm:mb-3">
               {STRINGS.testimonials.title}
@@ -76,7 +66,7 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
         </div>
 
         {/* Testimonials 3-Column Framer Bento Matrix */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-10 sm:mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           {testimonials.map((testimonial, idx) => {
             let trustBadge = STRINGS.testimonials.fallbackTrustBadge
             let initial = 'MK'
@@ -167,21 +157,6 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
           })}
         </div>
 
-        {/* Bottom Trust Directives Strip */}
-        <div className="p-6 bg-[var(--bg)]/80 border border-[var(--line)] rounded-sm grid grid-cols-1 sm:grid-cols-3 gap-6 text-center font-mono text-xs">
-          <div className="flex items-center justify-center gap-2">
-            <CheckCircle className="w-4 h-4 text-[#fce9c7]" />
-            <span>{STRINGS.testimonials.trustItem1}</span>
-          </div>
-          <div className="flex items-center justify-center gap-2">
-            <Award className="w-4 h-4 text-[#a3b5c4]" />
-            <span>{STRINGS.testimonials.trustItem2}</span>
-          </div>
-          <div className="flex items-center justify-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-[#fce9c7]" />
-            <span>{STRINGS.testimonials.trustItem3}</span>
-          </div>
-        </div>
 
       </div>
     </section>

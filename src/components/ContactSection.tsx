@@ -92,10 +92,6 @@ export default function ContactSection(): React.JSX.Element {
             className="lg:col-span-4 flex flex-col gap-5 sm:gap-7 pt-8 sm:pt-14 lg:pt-20 pb-2 sm:pb-6 lg:pb-16 relative z-10"
           >
             <div>
-              <div className="inline-flex items-center gap-2 mb-3 sm:mb-4 px-3 py-1 border border-[#a3b5c4]/30 text-[10px] sm:text-[11px] font-mono tracking-widest uppercase text-[#a3b5c4]">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#a3b5c4] animate-pulse" />
-                <span>{STRINGS.contact.chapterBadge}</span>
-              </div>
               <h2 className="font-editorial text-3xl xs:text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-normal leading-[1.04] tracking-tight mb-3 sm:mb-4 text-[var(--ink)]">
                 Let's build <span className="italic font-normal">together.</span>
               </h2>
@@ -177,16 +173,6 @@ export default function ContactSection(): React.JSX.Element {
               </div>
             </div>
 
-            {/* Live Availability Telemetry Capsule */}
-            <div className="pt-3 sm:pt-4 border-t border-[var(--line)] flex items-center gap-2.5 sm:gap-3">
-              <span className="relative flex h-2.5 w-2.5 shrink-0">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#a3b5c4] opacity-75" />
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#a3b5c4]" />
-              </span>
-              <p className="text-xs font-mono text-[var(--lede)]">
-                Reply within 24 hours
-              </p>
-            </div>
           </motion.div>
 
           {/* Center Column: Clean 3-Field Direct Note Composer */}
@@ -210,9 +196,6 @@ export default function ContactSection(): React.JSX.Element {
                   <div className="flex items-center justify-between pb-2 border-b border-[var(--line)]">
                     <span className="text-xs font-mono uppercase tracking-wider font-semibold text-[var(--ink)]">
                       Quick Message
-                    </span>
-                    <span className="text-[10px] sm:text-[11px] font-mono text-[#a3b5c4]">
-                      Direct &bull; No Database
                     </span>
                   </div>
 
@@ -329,20 +312,22 @@ export default function ContactSection(): React.JSX.Element {
               <img
                 src="/GraduationWhiteBackground.jpg"
                 alt="Joey van der Poel Graduation"
-                className={`h-[320px] xs:h-[370px] sm:h-[480px] lg:h-[590px] xl:h-[615px] 2xl:h-[630px] w-auto max-w-none object-contain object-bottom select-none pointer-events-none transition-opacity duration-200 ease-out mix-blend-multiply translate-y-[1px] ${
+                className={`h-[320px] xs:h-[370px] sm:h-[480px] lg:h-[590px] xl:h-[615px] 2xl:h-[630px] w-auto max-w-none object-contain object-bottom select-none pointer-events-none transition-opacity duration-400 ease-in-out mix-blend-multiply translate-y-[1px] ${
                   isDark ? 'opacity-0 pointer-events-none' : 'opacity-100'
                 }`}
-                loading="lazy"
+                loading="eager"
+                decoding="async"
               />
 
               {/* Dark Mode: Joey Graduation on Pure Black Background */}
               <img
                 src="/GraduationBlackBackground.jpg"
                 alt="Joey van der Poel Graduation"
-                className={`absolute inset-0 w-full h-full object-contain object-bottom select-none pointer-events-none transition-opacity duration-200 ease-out mix-blend-screen translate-y-[1px] ${
+                className={`absolute inset-0 w-full h-full object-contain object-bottom select-none pointer-events-none transition-opacity duration-400 ease-in-out mix-blend-screen translate-y-[1px] ${
                   isDark ? 'opacity-100' : 'opacity-0 pointer-events-none'
                 }`}
-                loading="lazy"
+                loading="eager"
+                decoding="async"
               />
             </div>
           </motion.div>

@@ -252,7 +252,7 @@ export default function ExperienceTimelineSection(): React.JSX.Element {
   return (
     <section
       id="experience"
-      className="py-12 sm:py-24 lg:py-32 relative border-t border-[var(--line)] bg-[var(--bg)] text-[var(--ink)] overflow-hidden transition-colors duration-300"
+      className="py-12 sm:py-24 lg:py-32 relative border-t border-[var(--line)] bg-[var(--bg)] text-[var(--ink)] overflow-hidden transition-colors duration-400 ease-in-out"
     >
       {/* Background Subtle Radial Accent using Slate Mist */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.06] dark:opacity-[0.10]" aria-hidden="true">
@@ -269,12 +269,6 @@ export default function ExperienceTimelineSection(): React.JSX.Element {
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-8 sm:mb-14">
           <div>
-            <div className="mb-3 sm:mb-4">
-              <span className="text-[10px] font-bold tracking-[0.2em] font-mono uppercase px-3 py-1 bg-black/5 dark:bg-white/10 border border-[#a3b5c4]/30 inline-flex items-center gap-2 rounded-sm shadow-xs">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#a3b5c4] animate-pulse" />
-                <span>CAREER & EXPERIENCE TIMELINE</span>
-              </span>
-            </div>
 
             <h2 className="font-editorial text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.04] tracking-tight">
               Engineering Journey

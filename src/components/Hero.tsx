@@ -41,13 +41,13 @@ export default function Hero({ profile }: HeroProps): React.JSX.Element {
   return (
     <section
       id="home"
-      className="relative w-full min-h-[520px] xs:min-h-[560px] sm:min-h-[100dvh] max-h-[620px] sm:max-h-none flex flex-col bg-[var(--bg)] text-[var(--ink)] transition-colors duration-200 overflow-hidden"
+      className="relative w-full min-h-[520px] xs:min-h-[560px] sm:min-h-[100dvh] max-h-[620px] sm:max-h-none flex flex-col bg-[var(--bg)] text-[var(--ink)] transition-colors duration-400 overflow-hidden"
     >
       {/* ─── Ambient Atmospheric Glow in Background using Champagne #FCE9C7 ─── */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
         {/* Warm Champagne Radial Illumination */}
         <div
-          className="absolute top-[25%] right-[5%] w-[45vw] h-[45vh] max-w-[650px] max-h-[650px] rounded-full blur-[160px] opacity-15 dark:opacity-20 transition-opacity"
+          className="absolute top-[25%] right-[5%] w-[45vw] h-[45vh] max-w-[650px] max-h-[650px] rounded-full blur-[160px] opacity-15 dark:opacity-20 transition-opacity duration-400"
           style={{ background: 'radial-gradient(circle, #fce9c7 0%, transparent 70%)' }}
         />
       </div>
@@ -68,7 +68,7 @@ export default function Hero({ profile }: HeroProps): React.JSX.Element {
         <img
           src="/JoeyWhiteBackground.jpg"
           alt={profile.name}
-          className={`w-full h-full object-contain object-bottom transition-opacity duration-200 ease-out mix-blend-multiply ${
+          className={`w-full h-full object-contain object-bottom transition-opacity duration-400 ease-in-out mix-blend-multiply ${
             isDark ? 'opacity-0 pointer-events-none' : 'opacity-100'
           }`}
           loading="eager"
@@ -79,7 +79,7 @@ export default function Hero({ profile }: HeroProps): React.JSX.Element {
         <img
           src="/JoeyBlackBackground.jpg"
           alt={profile.name}
-          className={`absolute inset-0 w-full h-full object-contain object-bottom transition-opacity duration-200 ease-out mix-blend-screen ${
+          className={`absolute inset-0 w-full h-full object-contain object-bottom transition-opacity duration-400 ease-in-out mix-blend-screen ${
             isDark ? 'opacity-100' : 'opacity-0 pointer-events-none'
           }`}
           loading="eager"

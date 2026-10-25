@@ -30,8 +30,8 @@ export const STRINGS = {
   },
 
   navbar: {
-    availabilityFallback: "Founder & Creative Technologist",
-    founderRoleBadge: "Founder & AI Engineer",
+    availabilityFallback: "Mobile Developer & AI Engineer",
+    founderRoleBadge: "Mobile Developer & AI Engineer",
     btnDiscuss: "Get in Touch",
     btnCollaborate: "Contact",
     navigationLabel: "NAVIGATION",
@@ -141,7 +141,7 @@ export const STRINGS = {
     chapterBadge: "FEEDBACK",
     badge: "RECOMMENDATIONS",
     verifiedReviewsPill: "VERIFIED REVIEWS",
-    title: "Client & Team Feedback",
+    title: "Testimonials",
     description: "Recommendations from leaders at The Swap Club, DEPT®, and Tata Steel.",
     ratingValue: "5.0 / 5.0 Rating",
     ratingVerifyLink: "Verify on LinkedIn",
@@ -197,7 +197,7 @@ export const STRINGS = {
   },
 
   footer: {
-    tagline: "Founder & Creative Technologist",
+    tagline: "Mobile Developer & AI Engineer",
     allRightsReserved: "All rights reserved.",
     links: [
       { name: "Connect Cultures", href: "https://www.connectcultures.world/" },

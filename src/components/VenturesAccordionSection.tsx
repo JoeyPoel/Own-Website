@@ -98,7 +98,7 @@ export default function VenturesAccordionSection(): React.JSX.Element {
   }, [syncHashToActive])
 
   return (
-    <section id="projects" className="relative pt-12 pb-16 sm:pt-28 sm:pb-32 bg-[var(--bg)] text-[var(--ink)] overflow-hidden transition-colors duration-300">
+    <section id="projects" className="relative pt-12 pb-16 sm:pt-28 sm:pb-32 bg-[var(--bg)] text-[var(--ink)] overflow-hidden transition-colors duration-400 ease-in-out">
       {/* Anchor landmarks for navigation */}
       <div id="ventures" className="absolute -top-24" aria-hidden="true" />
       <div id="tracks" className="absolute -top-24" aria-hidden="true" />
@@ -126,12 +126,6 @@ export default function VenturesAccordionSection(): React.JSX.Element {
         {/* Section Header: Chapter Badge & Headline */}
         <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-4 sm:gap-6 mb-6 sm:mb-10">
           <div>
-            <div className="mb-3 sm:mb-4">
-              <span className="text-[10px] font-bold tracking-[0.2em] font-mono uppercase px-3 py-1 bg-black/5 dark:bg-white/10 border border-[#a3b5c4]/30 inline-flex items-center gap-2 rounded-sm shadow-sm">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#a3b5c4] animate-pulse" />
-                <span>SELECTED PROJECTS & PRODUCTS</span>
-              </span>
-            </div>
 
             <h2 className="font-editorial text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.04] tracking-tight">
               Selected Projects

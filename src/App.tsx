@@ -54,7 +54,7 @@ export default function App() {
 
   return (
     <ThemeProvider>
-      <div className="min-h-screen w-full relative bg-[var(--bg)] text-[var(--ink)] font-sans-tight selection:bg-[#a3b5c4] selection:text-[#000000] dark:selection:bg-[#a3b5c4] dark:selection:text-[#000000] transition-colors duration-300">
+      <div className="min-h-screen w-full relative bg-[var(--bg)] text-[var(--ink)] font-sans-tight selection:bg-[#a3b5c4] selection:text-[#000000] dark:selection:bg-[#a3b5c4] dark:selection:text-[#000000] transition-colors duration-400 ease-in-out">
         {/* Subtle Analog Grain / Physical Texture Overlay Unifying All Sections */}
         <div
           className="fixed inset-0 pointer-events-none z-30 opacity-[0.02] dark:opacity-[0.035] mix-blend-overlay"

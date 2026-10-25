@@ -21,22 +21,24 @@ export default function ThemeToggle({ className = '', showLabel = false }: Theme
   const isDark = theme === 'dark'
 
   return (
-    <button
+    <motion.button
       type="button"
       onClick={toggleTheme}
+      whileHover={{ scale: 1.06 }}
+      whileTap={{ scale: 0.92 }}
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
       title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-      className={`relative inline-flex items-center gap-2 p-2 rounded-full border border-[var(--line-strong)] bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/15 text-[var(--ink)] transition-colors cursor-pointer shadow-sm ${className}`}
+      className={`relative inline-flex items-center gap-2 p-2 rounded-full border border-[var(--line-strong)] bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/15 text-[var(--ink)] cursor-pointer shadow-sm group select-none ${className}`}
     >
       <div className="relative w-4 h-4 flex items-center justify-center overflow-hidden">
         <AnimatePresence mode="wait" initial={false}>
           {isDark ? (
             <motion.div
               key="sun"
-              initial={{ rotate: -90, scale: 0.5, opacity: 0 }}
+              initial={{ rotate: -90, scale: 0, opacity: 0 }}
               animate={{ rotate: 0, scale: 1, opacity: 1 }}
-              exit={{ rotate: 90, scale: 0.5, opacity: 0 }}
-              transition={{ duration: 0.2 }}
+              exit={{ rotate: 90, scale: 0, opacity: 0 }}
+              transition={{ type: 'spring', stiffness: 320, damping: 22 }}
               className="flex items-center justify-center text-[#fce9c7]"
             >
               <Sun className="w-4 h-4" />
@@ -44,10 +46,10 @@ export default function ThemeToggle({ className = '', showLabel = false }: Theme
           ) : (
             <motion.div
               key="moon"
-              initial={{ rotate: 90, scale: 0.5, opacity: 0 }}
+              initial={{ rotate: 90, scale: 0, opacity: 0 }}
               animate={{ rotate: 0, scale: 1, opacity: 1 }}
-              exit={{ rotate: -90, scale: 0.5, opacity: 0 }}
-              transition={{ duration: 0.2 }}
+              exit={{ rotate: -90, scale: 0, opacity: 0 }}
+              transition={{ type: 'spring', stiffness: 320, damping: 22 }}
               className="flex items-center justify-center text-[#a3b5c4]"
             >
               <Moon className="w-4 h-4" />
@@ -61,6 +63,6 @@ export default function ThemeToggle({ className = '', showLabel = false }: Theme
           {isDark ? 'Dark' : 'Light'}
         </span>
       )}
-    </button>
+    </motion.button>
   )
 }
