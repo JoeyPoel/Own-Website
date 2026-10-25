@@ -1,16 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300..700&family=Instrument+Serif:ital@0;1&display=swap");
 
 .hero-68 {
-  --bg: #050508;
-  --ink: #f4f4f5;
-  --lede: #a1a1aa;
-  --btn-bg: #f4f4f5;
-  --btn-fg: #050508;
-  --btn-hover: #e4e4e7;
-  --line: rgba(255, 255, 255, 0.08);
+  --bg: #ffffff;
+  --ink: #09090b;
+  --lede: #52525b;
+  --btn-bg: #09090b;
+  --btn-fg: #ffffff;
+  --btn-hover: #18181b;
+  --line: rgba(0, 0, 0, 0.08);
   --wrap: 1254px;
   --gut: 30px;
-  color-scheme: dark;
+  color-scheme: light;
   background: var(--bg);
   color: var(--ink);
   font-family: "Inter Tight", system-ui, sans-serif;
@@ -19,8 +19,19 @@
   position: relative;
   isolation: isolate;
 }
+.hero-68[data-scheme="light"],
+html:not(.dark) .hero-68 {
+  --bg: #ffffff;
+  --ink: #09090b;
+  --lede: #52525b;
+  --btn-bg: #09090b;
+  --btn-fg: #ffffff;
+  --btn-hover: #18181b;
+  --line: rgba(0, 0, 0, 0.08);
+  color-scheme: light;
+}
 .hero-68[data-scheme="dark"],
-.hero-68:not([data-scheme="light"]) {
+html.dark .hero-68 {
   --bg: #050508;
   --ink: #f4f4f5;
   --lede: #a1a1aa;

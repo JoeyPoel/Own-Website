@@ -3,6 +3,27 @@
 @import "./originkit-section-theme.css";
 
 :root {
+  --bg: #ffffff;
+  --ink: #09090b;
+  --lede: #52525b;
+  --btn-bg: #09090b;
+  --btn-fg: #ffffff;
+  --btn-hover: #18181b;
+  --line: rgba(0, 0, 0, 0.08);
+  --line-strong: rgba(0, 0, 0, 0.16);
+  --wrap: 1254px;
+  --gut: 30px;
+  --theme-color: #ffffff;
+  --font-serif: "Instrument Serif", Georgia, serif;
+  --font-sans: "Inter Tight", system-ui, -apple-system, sans-serif;
+  --font-mono: "DM Mono", "JetBrains Mono", monospace;
+  color-scheme: light;
+}
+
+html.dark,
+:root.dark,
+[data-theme="dark"],
+[data-scheme="dark"] {
   --bg: #050508;
   --ink: #f4f4f5;
   --lede: #a1a1aa;
@@ -11,12 +32,7 @@
   --btn-hover: #e4e4e7;
   --line: rgba(255, 255, 255, 0.08);
   --line-strong: rgba(255, 255, 255, 0.16);
-  --wrap: 1254px;
-  --gut: 30px;
   --theme-color: #050508;
-  --font-serif: "Instrument Serif", Georgia, serif;
-  --font-sans: "Inter Tight", system-ui, -apple-system, sans-serif;
-  --font-mono: "DM Mono", "JetBrains Mono", monospace;
   color-scheme: dark;
 }
 
@@ -73,12 +89,13 @@ body {
 
 /* Ruled Container Cards */
 .card-ruled {
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(0, 0, 0, 0.02);
   border: 1px solid var(--line);
   backdrop-filter: blur(16px);
   transition: all 0.25s ease;
 }
 
+html.dark .card-ruled,
 .dark .card-ruled,
 [data-scheme="dark"] .card-ruled {
   background: rgba(255, 255, 255, 0.03);
@@ -150,8 +167,6 @@ body {
   --ls-color-blue-iceStrobe: #E0F7FF;
   --ls-color-mono-pureWhite: #ffffff;
   --ls-color-mono-silver: #cbd5e1;
-  --ls-glow-laser-subtle: 0 0 16px rgba(0, 140, 255, 0.4);
-  --ls-glow-laser-intense: 0 0 25px rgba(0, 140, 255, 0.8), 0 0 60px rgba(0, 68, 255, 0.45);
 }
 
 .laser-glow-text {
@@ -160,31 +175,4 @@ body {
     0 0 12px var(--ls-color-blue-laserCyan), 
     0 0 28px var(--ls-color-blue-electric), 
     0 0 55px var(--ls-color-blue-cobalt);
-}
-
-.laser-glow-box {
-  box-shadow: var(--ls-glow-laser-intense);
-}
-
-.laser-subtle-box {
-  box-shadow: var(--ls-glow-laser-subtle);
-}
-
-/* Connect Cultures Atmosphere Animations */
-@keyframes horizonBreathe {
-  0%, 100% { transform: scale(1); filter: blur(60px) brightness(1); }
-  50% { transform: scale(1.08); filter: blur(75px) brightness(1.25); }
-}
-
-@keyframes pulseSubtle {
-  0%, 100% { opacity: 0.35; transform: scale(1); }
-  50% { opacity: 0.95; transform: scale(1.06); }
-}
-
-.animate-horizon-breathe {
-  animation: horizonBreathe 8s ease-in-out infinite;
-}
-
-.animate-pulse-subtle {
-  animation: pulseSubtle 4s ease-in-out infinite;
 }

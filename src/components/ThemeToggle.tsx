@@ -1,0 +1,66 @@
+import React from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Sun, Moon } from 'lucide-react'
+import { useTheme } from '../context/ThemeContext'
+
+interface ThemeToggleProps {
+  className?: string
+  showLabel?: boolean
+}
+
+/**
+ * Interactive toggle button allowing visitors to switch between default light theme and dark mode.
+ * Matches Originkit architectural hairline borders and smooth micro-animations.
+ *
+ * @param props.className - Optional additional classes.
+ * @param props.showLabel - Whether to show the text label next to the icon.
+ * @returns Master ThemeToggle button component.
+ */
+export default function ThemeToggle({ className = '', showLabel = false }: ThemeToggleProps): React.JSX.Element {
+  const { theme, toggleTheme } = useTheme()
+  const isDark = theme === 'dark'
+
+  return (
+    <button
+      type="button"
+      onClick={toggleTheme}
+      aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+      title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+      className={`relative inline-flex items-center gap-2 p-2 rounded-full border border-[var(--line-strong)] bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/15 text-[var(--ink)] transition-colors cursor-pointer shadow-sm ${className}`}
+    >
+      <div className="relative w-4 h-4 flex items-center justify-center overflow-hidden">
+        <AnimatePresence mode="wait" initial={false}>
+          {isDark ? (
+            <motion.div
+              key="moon"
+              initial={{ rotate: -90, scale: 0.5, opacity: 0 }}
+              animate={{ rotate: 0, scale: 1, opacity: 1 }}
+              exit={{ rotate: 90, scale: 0.5, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="flex items-center justify-center text-amber-300"
+            >
+              <Moon className="w-4 h-4" />
+            </motion.div>
+          ) : (
+            <motion.div
+              key="sun"
+              initial={{ rotate: 90, scale: 0.5, opacity: 0 }}
+              animate={{ rotate: 0, scale: 1, opacity: 1 }}
+              exit={{ rotate: -90, scale: 0.5, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="flex items-center justify-center text-amber-500"
+            >
+              <Sun className="w-4 h-4" />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
+      {showLabel && (
+        <span className="text-xs font-mono uppercase tracking-wider pr-1">
+          {isDark ? 'Dark' : 'Light'}
+        </span>
+      )}
+    </button>
+  )
+}

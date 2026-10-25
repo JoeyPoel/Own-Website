@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
+import ThemeToggle from './ThemeToggle'
 import { STRINGS } from '../data/strings'
 
 const navLinks = STRINGS.navbar.links
@@ -119,6 +120,8 @@ export default function Navbar({ profile }: NavbarProps) {
                   })}
                 </nav>
 
+                <ThemeToggle />
+
                 <a
                   href="#contact"
                   onClick={(e) => handleNavClick(e, '#contact')}
@@ -129,8 +132,9 @@ export default function Navbar({ profile }: NavbarProps) {
                 </a>
               </div>
 
-              {/* Mobile Menu Button */}
-              <div className="lg:hidden flex items-center gap-3">
+              {/* Mobile Menu Button & Theme Toggle */}
+              <div className="lg:hidden flex items-center gap-2">
+                <ThemeToggle />
                 <a
                   href="#contact"
                   onClick={(e) => handleNavClick(e, '#contact')}

@@ -76,113 +76,8 @@ export const STRINGS = {
     cardLSCta: "View Concept"
   },
 
-  tracks: {
-    chapterBadge: "03 • VENTURE : TRACKS & TAPS",
-    badge: "IOS APP",
-    liveStatus: "LIVE ON APP STORE",
-    title: "Tracks & Taps",
-    tagline: "Gamified walking quests and terrace discovery on iOS.",
-    description: "Born from my travels exploring world cities on foot. Built and shipped solo to the App Store with native mobile performance and an automated content pipeline.",
-    btnDownload: "App Store",
-    btnPartner: "Growth Partnership",
-    metricSoloTitle: "Solo Built",
-    metricSoloDesc: "Concept to App Store",
-    metricIosTitle: "Live on iOS",
-    metricIosDesc: "Apple App Store",
-    inspiredTitle: "Travel & Exploration",
-    inspiredDesc: "Interactive walking routes that turn city exploration into an engaging experience with local stops.",
-    soloTitle: "Solo Engineering",
-    soloDesc: "Designed, coded, and published independently to the Apple App Store.",
-    aiWorkflowTitle: "Automated Pipeline",
-    aiWorkflowDesc: "Checkpoints, trivia, and local terrace data curated and verified with custom automated scripts.",
-    partnerBadge: "Partner Search",
-    partnerNeedTitle: "Seeking a Marketing & Growth Partner",
-    partnerNeedDesc: "The app is live and polished. I am looking for a partner with strong growth marketing and distribution skills to scale it together.",
-    btnDiscussPartner: "Discuss Partnership",
-    galleryTitle: "APP SCREENS",
-    galleryScrollHint: "DRAG TO BROWSE",
-    screenshots: [
-      {
-        src: "/tracks1.png",
-        title: "Quest Hub",
-        subtitle: "Curated walking routes",
-        tag: "Explore",
-        alt: "Tracks & Taps - Adventure Selection & Route Details"
-      },
-      {
-        src: "/tracks2.png",
-        title: "Live Checkpoints",
-        subtitle: "Historical trivia & quizzes",
-        tag: "Trivia",
-        alt: "Tracks & Taps - Historical Challenges & Questions"
-      },
-      {
-        src: "/tracks3.png",
-        title: "City Compass",
-        subtitle: "Interactive navigation map",
-        tag: "Map",
-        alt: "Tracks & Taps - Amsterdam Interactive Map Navigation"
-      },
-      {
-        src: "/tracks4.png",
-        title: "Terrace Discovery",
-        subtitle: "Local drinks & rewards",
-        tag: "Rewards",
-        alt: "Tracks & Taps - Explore & Cultural Stops"
-      }
-    ]
-  },
-
-  connectCultures: {
-    chapterBadge: "04 • THE DREAM : CONNECT CULTURES",
-    badge: "THE DREAM COMPANY",
-    lookingForBadge: "CO-FOUNDER SEARCH",
-    brandFirst: "CONNECT",
-    brandSecond: "CULTURES.",
-    tagline: "A stranger is simply a friend you haven't met yet.",
-    subTagline: "Opening living rooms and sharing tables across borders.",
-    description: "Connect Cultures is the company I am determined to build. Inspired by solo journeys through Spain, Egypt, Turkey, Poland, and Bulgaria, where I learned that sitting at a kitchen table with locals changes everything. A platform connecting travelers with real homes, local meals, and shared living rooms.",
-    founderVisionTitle: "The Founder Vision",
-    founderVisionDesc: "I want to replace tourist bubbles with authentic hospitality. Looking for co-founders, travel network partners, and mission-aligned supporters.",
-    btnExploreLive: "connectcultures.world",
-    btnCoFound: "Co-Found With Me",
-    pillar1Title: "Real Hospitality",
-    pillar1Desc: "Opening kitchen tables and homes to travelers seeking genuine cultural immersion.",
-    pillar2Title: "Human Connection",
-    pillar2Desc: "Breaking bread across languages to share authentic local stories.",
-    pillar3Title: "Co-Founders Wanted",
-    pillar3Desc: "Looking for operations leads and community builders to launch the first cohorts.",
-    websiteUrl: "https://www.connectcultures.world/"
-  },
-
-  lostsouls: {
-    chapterBadge: "05 • IN PROGRESS : LØST SØULS",
-    badge: "EVENT STARTUP",
-    activeVenturePill: "STARTUP IN PROGRESS • TECHNO VENTURE",
-    brandTitle: "LØST SØULS",
-    subtitle: "FIRST EDITION IN DEVELOPMENT",
-    placeholderWaitlist: "ENTER EMAIL FOR UPDATES",
-    waitlistSuccessTitle: "REGISTERED",
-    waitlistSuccessDesc: "You will receive updates and launch details directly.",
-    waitlistInvalidError: "Please enter a valid email address.",
-    founderVisionTitle: "The Concept",
-    founderVisionDesc: "LØST SØULS is a music and event startup currently in development. Focused on high-energy underground techno, dark intimate spaces, and curated sound culture. Currently building the community and preparing the initial edition.",
-    tags: [
-      "145-160 BPM",
-      "No Phones Policy",
-      "Underground Techno",
-      "In Development"
-    ],
-    btnVisitSite: "lostsouls-events.com",
-    btnCoOrganize: "Collaborate With Me",
-    telemetryCommunity: "Community In Progress",
-    telemetryScenography: "Sound & Scenography",
-    telemetryScrollNext: "SCROLL TO CAPABILITIES ↓",
-    websiteUrl: "https://lostsouls-events.com/"
-  },
-
   creativity: {
-    chapterBadge: "06 • WHAT I BUILD",
+    chapterBadge: "04 • WHAT I BUILD",
     badge: "CAPABILITIES",
     title: "What I Build",
     description: "Beside my own ventures, I partner with forward-thinking teams to build high-end digital products.",
@@ -246,7 +141,7 @@ export const STRINGS = {
   },
 
   testimonials: {
-    chapterBadge: "07 • FEEDBACK",
+    chapterBadge: "05 • FEEDBACK",
     badge: "RECOMMENDATIONS",
     verifiedReviewsPill: "VERIFIED REVIEWS",
     title: "Client & Team Feedback",
@@ -267,7 +162,7 @@ export const STRINGS = {
   },
 
   contact: {
-    chapterBadge: "08 • GET IN TOUCH",
+    chapterBadge: "06 • GET IN TOUCH",
     badge: "COLLABORATE",
     title: "Let's Build Together",
     description: "Whether you want to partner on a venture, collaborate on rave events, co-found Connect Cultures, or hire me to build a product.",
@@ -332,7 +227,7 @@ export const STRINGS = {
     links: [
       { name: "Connect Cultures", href: "https://www.connectcultures.world/" },
       { name: "LØST SØULS", href: "https://lostsouls-events.com/" },
-      { name: "Tracks & Taps", href: "https://apps.apple.com/nl/app/tracks-taps-gamified-guide/id6756650785?l=en-GB" },
+      { name: "Tracks & Taps", href: "https://apps.apple.com/nl/app/tracks-taps-your-tour-guide/id6756650785?l=en-GB" },
       { name: "LinkedIn", href: "https://www.linkedin.com/in/joey-van-der-poel-974203302/" },
       { name: "GitHub", href: "https://github.com/JoeyPoel" }
     ]
@@ -340,7 +235,7 @@ export const STRINGS = {
 
   links: {
     linkedin: "https://www.linkedin.com/in/joey-van-der-poel-974203302/",
-    appStore: "https://apps.apple.com/nl/app/tracks-taps-gamified-guide/id6756650785?l=en-GB",
+    appStore: "https://apps.apple.com/nl/app/tracks-taps-your-tour-guide/id6756650785?l=en-GB",
     github: "https://github.com/JoeyPoel",
     recommendations: "https://www.linkedin.com/in/joey-van-der-poel-974203302/details/recommendations/?detailScreenTabIndex=0",
     connectCultures: "https://www.connectcultures.world/",

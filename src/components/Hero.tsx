@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import FibreArc from './originkit/ui/hero-68/fibre-arc'
 import PulseLines from './originkit/ui/hero-68/pulse-lines'
+import ThemeToggle from './ThemeToggle'
+import { useTheme } from '../context/ThemeContext'
 import './originkit/hero-68.css'
 import { STRINGS } from '../data/strings'
 
@@ -29,15 +31,18 @@ interface HeroProps {
  * Hero section built on the Originkit Hero 68 architecture:
  * Interactive FibreArc WebGL ribbon, ruled 3-column grid with PulseLines,
  * monumental Instrument Serif typography, and ruled CTA row.
+ * Adapts seamlessly between default white theme and dark mode.
  *
  * @param props.profile - Founder metadata.
  * @returns Clean, spacious Hero 68 section.
  */
 export default function Hero({ profile }: HeroProps): React.JSX.Element {
-  const scheme = 'dark'
+  const { theme } = useTheme()
+  const isDark = theme === 'dark'
 
   const RIBBON = {
     dark: { background: '#050508', ink: '#f4f4f5', glow: 70 },
+    light: { background: '#ffffff', ink: '#09090b', glow: 35 },
   }
 
   const handleScroll = (e: React.MouseEvent, targetId: string) => {
@@ -46,11 +51,11 @@ export default function Hero({ profile }: HeroProps): React.JSX.Element {
   }
 
   return (
-    <section id="home" className="hero-68 relative w-full overflow-hidden">
+    <section id="home" className="hero-68 relative w-full overflow-hidden" data-scheme={theme}>
       <div className="hero">
         {/* Interactive FibreArc Canvas Ribbon Background */}
         <FibreArc
-          {...RIBBON[scheme]}
+          {...RIBBON[theme]}
           style={{ position: 'absolute', inset: 0 }}
         />
 
@@ -66,7 +71,7 @@ export default function Hero({ profile }: HeroProps): React.JSX.Element {
                   duration={5}
                   speed={speed}
                   backgroundColor="transparent"
-                  lineColor={scheme === 'dark' ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.06)'}
+                  lineColor={isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.07)'}
                   colors={{ paletteCount: 2, color1: '#6A00F4', color2: '#F20089' }}
                 />
               </i>
@@ -99,8 +104,9 @@ export default function Hero({ profile }: HeroProps): React.JSX.Element {
               ))}
             </nav>
 
-            {/* Action Button */}
-            <div className="actions">
+            {/* Action Button & Theme Toggle */}
+            <div className="actions flex items-center gap-3">
+              <ThemeToggle />
               <a
                 href="#contact"
                 onClick={(e) => handleScroll(e, '#contact')}

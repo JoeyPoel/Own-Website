@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react'
+import { ThemeProvider } from './context/ThemeContext'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import AboutSection from './components/AboutSection'
-import TracksSection from './components/TracksSection'
-import LostSoulsSection from './components/LostSoulsSection'
-import ConnectCulturesSection from './components/ConnectCulturesSection'
+import VenturesAccordionSection from './components/VenturesAccordionSection'
 import CreativeOfferingsSection from './components/CreativeOfferingsSection'
 import TestimonialsSection from './components/TestimonialsSection'
 import ContactSection from './components/ContactSection'
@@ -70,79 +69,69 @@ export default function App() {
   }, [])
 
   return (
-    <div className="min-h-screen w-full relative bg-[var(--bg)] text-[var(--ink)] font-sans-tight selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black">
-      {/* Subtle Analog Grain / Physical Texture Overlay Unifying All Sections */}
-      <div
-        className="fixed inset-0 pointer-events-none z-30 opacity-[0.035] mix-blend-overlay"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-        }}
-        aria-hidden="true"
-      />
+    <ThemeProvider>
+      <div className="min-h-screen w-full relative bg-[var(--bg)] text-[var(--ink)] font-sans-tight selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black transition-colors duration-300">
+        {/* Subtle Analog Grain / Physical Texture Overlay Unifying All Sections */}
+        <div
+          className="fixed inset-0 pointer-events-none z-30 opacity-[0.02] dark:opacity-[0.035] mix-blend-overlay"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+          }}
+          aria-hidden="true"
+        />
 
-      {/* Floating Architectural Navigation Bar */}
-      <Navbar profile={profile} />
+        {/* Floating Architectural Navigation Bar */}
+        <Navbar profile={profile} />
 
-      {/* Main Page Sections */}
-      <main className="relative z-10 w-full">
-        {/* Originkit Hero 68 Section */}
-        <Hero profile={profile} />
+        {/* Main Page Sections */}
+        <main className="relative z-10 w-full">
+          {/* Originkit Hero 68 Section */}
+          <Hero profile={profile} />
 
-        {/* The Founder Mindset & Story */}
-        <AboutSection />
+          {/* The Founder Mindset & Story */}
+          <AboutSection />
 
-        {/* Published Venture: Tracks & Taps (CloudSky Living Background) */}
-        <LazySection id="tracks" minHeight="100vh">
-          <TracksSection />
-        </LazySection>
+          {/* Interactive Venture Showcase: Swatch Accordion (Tracks & Taps, Connect Cultures, Lost Souls) */}
+          <VenturesAccordionSection />
 
-        {/* The Dream Company: Connect Cultures (3D Earth & Cosmic Starfield Hero) */}
-        <LazySection id="connectcultures" minHeight="100vh">
-          <ConnectCulturesSection />
-        </LazySection>
+          {/* Bespoke Creative & Technical Capabilities */}
+          <LazySection id="creative-offerings" minHeight="700px">
+            <CreativeOfferingsSection />
+          </LazySection>
 
-        {/* Current Active Venture: LØST SØULS (Underground Techno Rave Hero) */}
-        <LazySection id="lostsouls" minHeight="100vh">
-          <LostSoulsSection />
-        </LazySection>
+          {/* Feedback from Past Teams & Leaders (Preserved) */}
+          <LazySection id="testimonials" minHeight="500px">
+            <TestimonialsSection testimonials={testimonials} />
+          </LazySection>
 
-        {/* Bespoke Creative & Technical Capabilities */}
-        <LazySection id="creative-offerings" minHeight="700px">
-          <CreativeOfferingsSection />
-        </LazySection>
+          {/* Partnership & Collaboration Contact Planner */}
+          <LazySection id="contact" minHeight="750px">
+            <ContactSection />
+          </LazySection>
+        </main>
 
-        {/* Feedback from Past Teams & Leaders (Preserved) */}
-        <LazySection id="testimonials" minHeight="500px">
-          <TestimonialsSection testimonials={testimonials} />
-        </LazySection>
-
-        {/* Partnership & Collaboration Contact Planner */}
-        <LazySection id="contact" minHeight="750px">
-          <ContactSection />
-        </LazySection>
-      </main>
-
-      {/* Architectural Ruled Footer */}
-      <footer className="relative z-10 w-full py-12 border-t border-[var(--line)] bg-[var(--bg)] text-[var(--ink)]">
-        <div className="max-w-[1254px] mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
-          <p className="text-xs font-mono opacity-65">
-            &copy; {new Date().getFullYear()} {profile.name} &bull; {STRINGS.footer.tagline}
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-6 text-xs font-mono uppercase tracking-wider">
-            {STRINGS.footer.links.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:opacity-60 transition-opacity"
-              >
-                {link.name}
-              </a>
-            ))}
+        {/* Architectural Ruled Footer */}
+        <footer className="relative z-10 w-full py-12 border-t border-[var(--line)] bg-[var(--bg)] text-[var(--ink)] transition-colors">
+          <div className="max-w-[1254px] mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+            <p className="text-xs font-mono opacity-65">
+              &copy; {new Date().getFullYear()} {profile.name} &bull; {STRINGS.footer.tagline}
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-6 text-xs font-mono uppercase tracking-wider">
+              {STRINGS.footer.links.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:opacity-60 transition-opacity"
+                >
+                  {link.name}
+                </a>
+              ))}
+            </div>
           </div>
-        </div>
-      </footer>
-    </div>
+        </footer>
+      </div>
+    </ThemeProvider>
   )
 }
