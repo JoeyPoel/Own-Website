@@ -166,57 +166,66 @@ export default function TabsCard({
 
         {/* ─── Right Showcase Panel ─── */}
         <div className="flex-1 rounded-[22px] sm:rounded-[26px] bg-[#a3b5c4]/20 dark:bg-[#a3b5c4]/15 p-2.5 sm:p-3 flex flex-col transition-colors duration-300 relative overflow-hidden min-h-[340px] sm:min-h-[440px] lg:min-h-[500px]">
-          <div className="relative w-full h-full flex-1 rounded-[16px] sm:rounded-[20px] overflow-hidden bg-black/5 dark:bg-black/40 border border-[#a3b5c4]/30 dark:border-[#a3b5c4]/25">
+          <div className="relative w-full h-full flex-1 rounded-[16px] sm:rounded-[20px] overflow-hidden bg-[#0d1117] border border-[#a3b5c4]/30 dark:border-[#a3b5c4]/25">
             
-            {/* Cross-fading Active Venture Screenshot */}
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeItem.id}
-                initial={{ opacity: 0, scale: 0.98 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 1.01 }}
-                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                className="absolute inset-0 w-full h-full"
-              >
-                <img
-                  src={activeItem.image.src}
-                  alt={activeItem.image.alt}
-                  className="w-full h-full object-cover object-top"
-                  loading="eager"
-                />
+            {/* Seamless Pre-rendered Stacked Cross-fade (Zero White Flash) */}
+            {items.map((item) => {
+              const isActive = item.id === activeItem.id
 
-                {/* Ambient Bottom Gradient for Contrast */}
-                <div
-                  className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-black/85 via-black/40 to-transparent pointer-events-none"
-                  aria-hidden="true"
-                />
+              return (
+                <motion.div
+                  key={item.id}
+                  initial={false}
+                  animate={{
+                    opacity: isActive ? 1 : 0,
+                    scale: isActive ? 1 : 1.015,
+                  }}
+                  transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                  className={`absolute inset-0 w-full h-full will-change-[opacity,transform] ${
+                    isActive ? 'z-10 pointer-events-auto' : 'z-0 pointer-events-none'
+                  }`}
+                >
+                  <img
+                    src={item.image.src}
+                    alt={item.image.alt}
+                    className="w-full h-full object-cover object-top"
+                    loading="eager"
+                    decoding="async"
+                  />
 
-                {/* Bottom Venture Action Bar */}
-                <div className="absolute inset-x-0 bottom-0 p-5 sm:p-7 z-10 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
-                  <div>
-                    {activeItem.subtitle && (
-                      <span className="text-[10px] sm:text-xs font-mono uppercase tracking-widest text-[#a3b5c4] block mb-1">
-                        {activeItem.subtitle}
-                      </span>
-                    )}
-                    <h4 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
-                      {activeItem.title}
-                    </h4>
+                  {/* Ambient Bottom Gradient for Contrast */}
+                  <div
+                    className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-black/85 via-black/40 to-transparent pointer-events-none"
+                    aria-hidden="true"
+                  />
+
+                  {/* Bottom Venture Action Bar */}
+                  <div className="absolute inset-x-0 bottom-0 p-5 sm:p-7 z-10 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
+                    <div>
+                      {item.subtitle && (
+                        <span className="text-[10px] sm:text-xs font-mono uppercase tracking-widest text-[#a3b5c4] block mb-1">
+                          {item.subtitle}
+                        </span>
+                      )}
+                      <h4 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                        {item.title}
+                      </h4>
+                    </div>
+
+                    {/* Launch Venture CTA */}
+                    <a
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#fce9c7] text-[#000000] hover:bg-[#ffffff] text-xs sm:text-sm font-bold tracking-wide transition-all duration-200 shadow-xl group hover:scale-[1.02]"
+                    >
+                      <span>{item.buttonText}</span>
+                      <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </a>
                   </div>
-
-                  {/* Launch Venture CTA */}
-                  <a
-                    href={activeItem.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#fce9c7] text-[#000000] hover:bg-[#ffffff] text-xs sm:text-sm font-bold tracking-wide transition-all duration-200 shadow-xl group hover:scale-[1.02]"
-                  >
-                    <span>{activeItem.buttonText}</span>
-                    <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </a>
-                </div>
-              </motion.div>
-            </AnimatePresence>
+                </motion.div>
+              )
+            })}
 
           </div>
         </div>
