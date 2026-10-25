@@ -65,7 +65,7 @@ export const STRINGS = {
     cardTracksCta: "View App",
     cardCCTag: "Dream Company",
     cardCCTitle: "Connect Cultures",
-    cardCCDesc: "Global cultural homestay platform. Seeking co-founders and mission partners.",
+    cardCCDesc: "Not yet an actual company, but my dream company and personal ambition to make a reality.",
     cardCCCta: "View Vision",
     cardLSTag: "Event Startup",
     cardLSTitle: "LØST SØULS",
@@ -80,29 +80,29 @@ export const STRINGS = {
     description: "Beside my own ventures, I partner with forward-thinking teams to build high-end digital products.",
     categories: [
       { id: "all", label: "All" },
-      { id: "web", label: "Web & 3D" },
+      { id: "web", label: "Web Applications" },
       { id: "mobile", label: "Mobile Apps" },
       { id: "ai", label: "AI & Automations" }
     ],
     btnRequest: "Start a Project",
     manifestoQuote: "I don't just write code: I build products from the ground up and care about every detail.",
-    manifestoSub: "Whether you need a flagship website, an iOS/Android app, an automated AI workflow, or want to partner on a venture: let's connect.",
+    manifestoSub: "Whether you need a website, an iOS/Android app, an automated AI workflow, or want to partner on a venture: let's connect.",
     btnDiscussCollab: "Let's Collaborate",
     offerings: [
       {
         id: "web",
         category: "web",
-        badge: "Web & 3D",
-        metric: "60-120 FPS WebGL",
-        title: "Flagship Websites & 3D",
-        desc: "Bespoke digital experiences with smooth 3D interactions, editorial typography, and fast performance. Built from scratch without generic templates.",
+        badge: "Web Applications",
+        metric: "Fast & Fluid Motion",
+        title: "Modern Websites & Web Apps",
+        desc: "Bespoke digital experiences with editorial typography, fluid micro-animations, and fast performance. Engineered from scratch with modern frontend architecture.",
         deliverables: [
-          "Interactive WebGL & Three.js",
-          "Responsive Layouts & Micro-Animations",
+          "Custom Responsive Layouts & Interactions",
+          "Component-Driven Architecture & Clean Code",
           "Fast Performance & SEO Optimization",
-          "Modern Headless Architecture"
+          "End-to-End TypeScript Type Safety"
         ],
-        techStack: ["Three.js", "React", "TypeScript", "TailwindCSS", "WebGL", "Vite"]
+        techStack: ["React", "TypeScript", "TailwindCSS", "Vite", "Framer Motion", "Next.js"]
       },
       {
         id: "mobile",

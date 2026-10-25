@@ -35,7 +35,7 @@ const defaultTestimonials: Testimonial[] = [
   {
     id: '3',
     quote: 'Highly eager to learn, quickly grasps new concepts and consistently takes a solution-oriented approach. His application of AI within our workflows proved particularly valuable.',
-    author: 'Sarah Otto',
+    author: 'Sarah Lee Otto',
     role: 'Team Lead',
     company: 'Tata Steel',
   },

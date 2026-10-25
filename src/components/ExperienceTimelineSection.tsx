@@ -252,7 +252,7 @@ export default function ExperienceTimelineSection(): React.JSX.Element {
   return (
     <section
       id="experience"
-      className="py-24 sm:py-32 relative border-t border-[var(--line)] bg-[var(--bg)] text-[var(--ink)] overflow-hidden transition-colors duration-300"
+      className="py-12 sm:py-24 lg:py-32 relative border-t border-[var(--line)] bg-[var(--bg)] text-[var(--ink)] overflow-hidden transition-colors duration-300"
     >
       {/* Background Subtle Radial Accent using Slate Mist */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.06] dark:opacity-[0.10]" aria-hidden="true">
@@ -264,23 +264,23 @@ export default function ExperienceTimelineSection(): React.JSX.Element {
         />
       </div>
 
-      <div className="max-w-[1254px] mx-auto px-6 relative z-10">
+      <div className="max-w-[1254px] mx-auto px-5 sm:px-6 relative z-10">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-8 sm:mb-14">
           <div>
-            <div className="mb-4">
+            <div className="mb-3 sm:mb-4">
               <span className="text-[10px] font-bold tracking-[0.2em] font-mono uppercase px-3 py-1 bg-black/5 dark:bg-white/10 border border-[#a3b5c4]/30 inline-flex items-center gap-2 rounded-sm shadow-xs">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#a3b5c4] animate-pulse" />
                 <span>CAREER & EXPERIENCE TIMELINE</span>
               </span>
             </div>
 
-            <h2 className="font-editorial text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.04] tracking-tight">
+            <h2 className="font-editorial text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.04] tracking-tight">
               Engineering Journey
             </h2>
 
-            <p className="text-[var(--lede)] text-sm sm:text-base leading-relaxed max-w-2xl mt-3">
+            <p className="text-[var(--lede)] text-xs sm:text-base leading-relaxed max-w-2xl mt-2 sm:mt-3">
               Hands-on enterprise engineering, startup publishing, and academic leadership.
               Click or scrub through the milestones below.
             </p>
@@ -288,7 +288,7 @@ export default function ExperienceTimelineSection(): React.JSX.Element {
         </div>
 
         {/* ─── 1. Flowing Interactive Progress Scrubber Rail ─── */}
-        <div className="relative mb-14 max-w-5xl mx-auto overflow-x-auto pb-4 pt-2">
+        <div className="relative mb-8 sm:mb-14 max-w-5xl mx-auto overflow-x-auto pb-3 pt-2">
           <div className="grid grid-cols-6 min-w-[680px] relative">
             {MILESTONES.map((m, idx) => {
               const isSelected = activeIdx === idx
@@ -352,7 +352,7 @@ export default function ExperienceTimelineSection(): React.JSX.Element {
         </div>
 
         {/* ─── 2. Dual-Panel Experience Dispatch & 3D Archival Card ─── */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center p-6 sm:p-10 lg:p-12 border border-[var(--line)] bg-black/[0.015] dark:bg-white/[0.015] rounded-sm shadow-xl">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center p-4 sm:p-10 lg:p-12 border border-[var(--line)] bg-black/[0.015] dark:bg-white/[0.015] rounded-sm shadow-xl">
           
           {/* Left Column: Milestone Narrative Dispatch */}
           <div className="lg:col-span-7 overflow-hidden">
@@ -446,7 +446,7 @@ export default function ExperienceTimelineSection(): React.JSX.Element {
             className="lg:col-span-5 flex flex-col items-center select-none w-full"
             style={{ perspective: 1200 }}
           >
-            <div className="relative w-full max-w-[420px] min-h-[360px] sm:min-h-[400px] flex items-center justify-center">
+            <div className="relative w-full max-w-[420px] min-h-[280px] xs:min-h-[340px] sm:min-h-[400px] flex items-center justify-center">
               <AnimatePresence mode="popLayout" custom={direction}>
                 <motion.div
                   key={activeMilestone.id}

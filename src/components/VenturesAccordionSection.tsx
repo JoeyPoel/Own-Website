@@ -21,18 +21,18 @@ const VENTURE_TABS: TabItem[] = [
   {
     id: 'connectcultures',
     title: 'Connect Cultures',
-    subtitle: 'The Dream Platform',
+    subtitle: 'The Dream Venture',
     description:
-      'A global cultural hospitality collective connecting travelers with real homes, local meals, and shared living rooms across borders. Replacing tourist bubbles with authentic human connection.',
-    tags: 'Cultural Homestays, Shared Tables, Global Community',
-    badge: 'Platform',
+      'Connect Cultures is not yet an actual company, but my dream company and personal ambition to make a reality: a global cultural collective connecting travelers with real local homes, shared meals, and authentic living rooms across borders.',
+    tags: 'Dream Company, Cultural Homestays, Shared Tables, Global Community',
+    badge: 'Dream Company',
     buttonText: 'Explore connectcultures.world',
     link: 'https://www.connectcultures.world/',
     image: {
       src: '/connectcultures_preview.png',
       alt: 'Connect Cultures 3D Earth and Global Hospitality Platform',
     },
-    rating: 'Global Platform',
+    rating: 'Dream Company Vision',
   },
   {
     id: 'lostsouls',
@@ -40,8 +40,8 @@ const VENTURE_TABS: TabItem[] = [
     subtitle: 'Techno Event Startup',
     description:
       'A community-driven underground rave collective in development. An uncommercialized space with no VIP enclosures: a place to stay present, get lost in high-pressure sound, and provide a proving ground for emerging talent.',
-    tags: '145-160 BPM, Underground Techno, Community Driven',
-    badge: 'Event Startup',
+    tags: '145-160 BPM, Underground Techno, In Development',
+    badge: 'In Development',
     buttonText: 'Explore lostsouls-events.com',
     link: 'https://lostsouls-events.com/',
     image: {
@@ -98,7 +98,7 @@ export default function VenturesAccordionSection(): React.JSX.Element {
   }, [syncHashToActive])
 
   return (
-    <section id="projects" className="relative pt-24 pb-28 sm:pt-32 sm:pb-36 bg-[var(--bg)] text-[var(--ink)] overflow-hidden transition-colors duration-300">
+    <section id="projects" className="relative pt-12 pb-16 sm:pt-28 sm:pb-32 bg-[var(--bg)] text-[var(--ink)] overflow-hidden transition-colors duration-300">
       {/* Anchor landmarks for navigation */}
       <div id="ventures" className="absolute -top-24" aria-hidden="true" />
       <div id="tracks" className="absolute -top-24" aria-hidden="true" />
@@ -122,24 +122,23 @@ export default function VenturesAccordionSection(): React.JSX.Element {
         />
       </div>
 
-      <div className="max-w-[1254px] mx-auto px-6 relative z-10">
+      <div className="max-w-[1254px] mx-auto px-5 sm:px-6 relative z-10">
         {/* Section Header: Chapter Badge & Headline */}
-        <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6 mb-10">
+        <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-4 sm:gap-6 mb-6 sm:mb-10">
           <div>
-            <div className="mb-4">
+            <div className="mb-3 sm:mb-4">
               <span className="text-[10px] font-bold tracking-[0.2em] font-mono uppercase px-3 py-1 bg-black/5 dark:bg-white/10 border border-[#a3b5c4]/30 inline-flex items-center gap-2 rounded-sm shadow-sm">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#a3b5c4] animate-pulse" />
                 <span>SELECTED PROJECTS & PRODUCTS</span>
               </span>
             </div>
 
-            <h2 className="font-editorial text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.04] tracking-tight">
+            <h2 className="font-editorial text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.04] tracking-tight">
               Selected Projects
             </h2>
 
-            <p className="text-[var(--lede)] text-sm sm:text-base leading-relaxed max-w-2xl mt-3">
-              Explore my published iOS app, cultural hospitality platform, and underground event startup.
-              Hover or tap any tab to inspect.
+            <p className="text-[var(--lede)] text-xs sm:text-base leading-relaxed max-w-2xl mt-2 sm:mt-3">
+              Explore my published iOS app, dream company vision, and underground event startup in development. Hover or tap any tab to inspect.
             </p>
           </div>
         </div>

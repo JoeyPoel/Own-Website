@@ -25,7 +25,7 @@ export default function CreativeOfferingsSection(): React.JSX.Element {
   }
 
   return (
-    <section id="creative-offerings" className="py-24 sm:py-32 relative bg-[var(--bg)] text-[var(--ink)] overflow-hidden">
+    <section id="creative-offerings" className="py-12 sm:py-24 lg:py-32 relative bg-[var(--bg)] text-[var(--ink)] overflow-hidden">
       {/* Top subtle atmospheric feather completing the blend from the rave void into normal canvas */}
       <div 
         className="absolute inset-x-0 top-0 h-48 pointer-events-none z-0"
@@ -35,26 +35,26 @@ export default function CreativeOfferingsSection(): React.JSX.Element {
         aria-hidden="true"
       />
 
-      <div className="max-w-[1254px] mx-auto px-6 relative z-10">
+      <div className="max-w-[1254px] mx-auto px-5 sm:px-6 relative z-10">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 sm:gap-8 mb-8 sm:mb-12">
           <div className="max-w-2xl">
-            <span className="text-[10px] font-bold tracking-[0.2em] font-mono uppercase px-3 py-1 bg-black/5 dark:bg-white/10 border border-[#a3b5c4]/30 inline-flex items-center gap-2 mb-4 rounded-sm shadow-sm">
+            <span className="text-[10px] font-bold tracking-[0.2em] font-mono uppercase px-3 py-1 bg-black/5 dark:bg-white/10 border border-[#a3b5c4]/30 inline-flex items-center gap-2 mb-3 sm:mb-4 rounded-sm shadow-sm">
               <span className="w-1.5 h-1.5 rounded-full bg-[#a3b5c4] animate-pulse" />
               <span>{STRINGS.creativity.chapterBadge}</span>
             </span>
-            <h2 className="font-editorial text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.04] tracking-tight mb-4">
+            <h2 className="font-editorial text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.04] tracking-tight mb-2 sm:mb-4">
               {STRINGS.creativity.title}
             </h2>
-            <p className="text-[var(--lede)] text-base sm:text-lg leading-relaxed">
+            <p className="text-[var(--lede)] text-xs sm:text-base lg:text-lg leading-relaxed">
               {STRINGS.creativity.description}
             </p>
           </div>
         </div>
 
         {/* 3-Column Framer Bento Matrix */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 mb-10 sm:mb-16">
           <AnimatePresence mode="popLayout">
             {offerings.map((item, idx) => {
               const Icon = iconMap[item.id] || Globe
@@ -66,7 +66,7 @@ export default function CreativeOfferingsSection(): React.JSX.Element {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.96 }}
                   transition={{ duration: 0.4, delay: idx * 0.05 }}
-                  className="p-8 sm:p-9 card-ruled flex flex-col justify-between group rounded-sm shadow-xl hover:-translate-y-2 hover:shadow-2xl hover:border-[#a3b5c4]/40 transition-all duration-300 relative overflow-hidden"
+                  className="p-5 sm:p-9 card-ruled flex flex-col justify-between group rounded-sm shadow-xl hover:-translate-y-2 hover:shadow-2xl hover:border-[#a3b5c4]/40 transition-all duration-300 relative overflow-hidden"
                 >
                   {/* Top Bar with Icon & Live Metric Pill */}
                   <div>

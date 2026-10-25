@@ -78,9 +78,9 @@ export default function Navbar({ profile }: NavbarProps): React.JSX.Element {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -80, opacity: 0 }}
             transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed top-0 left-0 right-0 z-50 bg-[var(--bg)]/90 backdrop-blur-md border-b border-[var(--line)] py-3 shadow-xs transition-colors"
+            className="fixed top-0 left-0 right-0 z-50 bg-[var(--bg)]/90 backdrop-blur-md border-b border-[var(--line)] py-2.5 sm:py-3 shadow-xs transition-colors"
           >
-            <div className="max-w-[1440px] mx-auto px-6 sm:px-10 lg:px-16 flex items-center justify-between">
+            <div className="max-w-[1440px] mx-auto px-4 sm:px-10 lg:px-16 flex items-center justify-between">
               
               {/* Left: Founder Avatar & Identity */}
               <a

@@ -17,7 +17,7 @@ interface TestimonialsSectionProps {
  */
 export default function TestimonialsSection({ testimonials }: TestimonialsSectionProps): React.JSX.Element {
   return (
-    <section id="testimonials" className="py-24 sm:py-32 relative border-t border-[var(--line)] bg-[var(--bg)] text-[var(--ink)] overflow-hidden">
+    <section id="testimonials" className="py-14 sm:py-24 lg:py-32 relative border-t border-[var(--line)] bg-[var(--bg)] text-[var(--ink)] overflow-hidden">
       {/* Background Subtle Radial Accent using Slate Mist */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.06] dark:opacity-[0.10]" aria-hidden="true">
         <div
@@ -26,12 +26,12 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
         />
       </div>
 
-      <div className="max-w-[1254px] mx-auto px-6 relative z-10">
+      <div className="max-w-[1254px] mx-auto px-5 sm:px-6 relative z-10">
         
         {/* Section Header with Trust Rating Capsule */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-14">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 sm:gap-8 mb-8 sm:mb-14">
           <div className="max-w-2xl">
-            <div className="flex items-center gap-2 mb-4">
+            <div className="flex flex-wrap items-center gap-2 mb-3 sm:mb-4">
               <span className="text-[10px] font-bold tracking-[0.2em] font-mono uppercase px-3 py-1 bg-black/5 dark:bg-white/10 border border-[#a3b5c4]/30 inline-flex items-center gap-2 rounded-sm shadow-sm">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#a3b5c4] animate-pulse" />
                 <span>{STRINGS.testimonials.chapterBadge}</span>
@@ -42,17 +42,17 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
               </span>
             </div>
 
-            <h2 className="font-editorial text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.04] tracking-tight mb-3">
+            <h2 className="font-editorial text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.04] tracking-tight mb-2 sm:mb-3">
               {STRINGS.testimonials.title}
             </h2>
 
-            <p className="text-[var(--lede)] text-base sm:text-lg leading-relaxed">
+            <p className="text-[var(--lede)] text-sm sm:text-base lg:text-lg leading-relaxed">
               {STRINGS.testimonials.description}
             </p>
           </div>
 
           {/* Framer Star Rating Capsule */}
-          <div className="p-4 bg-[var(--bg)]/90 backdrop-blur-xl border border-[var(--line-strong)] rounded-sm shadow-lg flex flex-col sm:flex-row items-center gap-4 shrink-0">
+          <div className="p-3.5 sm:p-4 bg-[var(--bg)]/90 backdrop-blur-xl border border-[var(--line-strong)] rounded-sm shadow-lg flex flex-col sm:flex-row items-center gap-3 sm:gap-4 shrink-0">
             <div className="flex items-center gap-1 text-[#fce9c7]">
               {[...Array(5)].map((_, i) => (
                 <Star key={i} className="w-4 h-4 fill-[#fce9c7] text-[#fce9c7]" />
@@ -76,27 +76,29 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
         </div>
 
         {/* Testimonials 3-Column Framer Bento Matrix */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-10 sm:mb-16">
           {testimonials.map((testimonial, idx) => {
             let trustBadge = STRINGS.testimonials.fallbackTrustBadge
             let initial = 'MK'
             let logoUrl = ''
-            let projectRole = STRINGS.testimonials.fallbackRole
+            let isDept = false
+            let projectRole = STRINGS.testimonials.roleSwap
 
             if (testimonial.company.toLowerCase().includes('swap')) {
               trustBadge = STRINGS.testimonials.badgeSwap
               initial = 'MK'
-              logoUrl = '/swapclub.jpg'
+              logoUrl = '/swapclub_logo.jpg'
               projectRole = STRINGS.testimonials.roleSwap
             } else if (testimonial.company.toLowerCase().includes('dept')) {
               trustBadge = STRINGS.testimonials.badgeDept
               initial = 'RN'
               logoUrl = '/dept.jpg'
               projectRole = STRINGS.testimonials.roleDept
+              isDept = true
             } else if (testimonial.company.toLowerCase().includes('tata')) {
               trustBadge = STRINGS.testimonials.badgeTata
-              initial = 'SO'
-              logoUrl = '/tata.png'
+              initial = 'SLO'
+              logoUrl = '/tatasteel_logo.png'
               projectRole = STRINGS.testimonials.roleTata
             }
 
@@ -107,38 +109,42 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
-                className="p-8 sm:p-9 card-ruled flex flex-col justify-between group rounded-sm shadow-xl hover:-translate-y-2 hover:shadow-2xl hover:border-[#a3b5c4]/40 transition-all duration-300 relative overflow-hidden"
+                className="p-6 sm:p-9 card-ruled flex flex-col justify-between group rounded-sm shadow-xl hover:-translate-y-2 hover:shadow-2xl hover:border-[#a3b5c4]/40 transition-all duration-300 relative overflow-hidden"
               >
                 <div>
                   {/* Top Bar with Quote Icon and Project Badge */}
-                  <div className="flex items-center justify-between mb-6">
-                    <Quote className="w-7 h-7 text-[#fce9c7] opacity-80" />
+                  <div className="flex items-center justify-between mb-5 sm:mb-6">
+                    <Quote className="w-6 h-6 sm:w-7 sm:h-7 text-[#fce9c7] opacity-80" />
                     <span className="text-[10px] font-mono uppercase px-2.5 py-1 bg-[#a3b5c4]/15 border border-[#a3b5c4]/30 text-[var(--ink)] dark:text-[#a3b5c4] font-medium tracking-wider">
                       {trustBadge}
                     </span>
                   </div>
 
                   {/* 5-Star Micro Bar */}
-                  <div className="flex items-center gap-1 mb-4 text-[#fce9c7]">
+                  <div className="flex items-center gap-1 mb-3.5 sm:mb-4 text-[#fce9c7]">
                     {[...Array(5)].map((_, i) => (
                       <Star key={i} className="w-3 h-3 fill-[#fce9c7] text-[#fce9c7]" />
                     ))}
                   </div>
 
                   {/* Quote Body */}
-                  <p className="text-sm sm:text-base leading-relaxed mb-8 italic text-[var(--lede)] font-sans">
+                  <p className="text-xs sm:text-base leading-relaxed mb-6 sm:mb-8 italic text-[var(--lede)] font-sans">
                     "{testimonial.quote}"
                   </p>
                 </div>
 
                 {/* Author Info & Verified Company Badge */}
-                <div className="border-t border-[var(--line)] pt-5 flex items-center gap-4">
-                  <div className="w-11 h-11 border border-[var(--line-strong)] flex items-center justify-center font-bold text-xs font-mono shrink-0 overflow-hidden bg-black/5 dark:bg-white/5 rounded-full shadow-inner">
+                <div className="border-t border-[var(--line)] pt-4 sm:pt-5 flex items-center gap-3.5 sm:gap-4">
+                  <div
+                    className={`w-11 h-11 border border-[var(--line-strong)] flex items-center justify-center font-bold text-xs font-mono shrink-0 overflow-hidden rounded-full shadow-inner ${
+                      isDept ? 'bg-black p-0' : 'bg-white dark:bg-white/10 p-1'
+                    }`}
+                  >
                     {logoUrl ? (
                       <img
                         src={logoUrl}
                         alt={`${testimonial.company} Logo`}
-                        className="w-full h-full object-cover"
+                        className={`w-full h-full ${isDept ? 'object-cover scale-110' : 'object-contain'}`}
                       />
                     ) : (
                       <span className="text-[var(--ink)]">{initial}</span>
