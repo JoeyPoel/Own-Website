@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ArrowUpRight, Copy, Check, Mail, Linkedin, Github, Send } from 'lucide-react'
+import { ArrowUpRight, Copy, Check, Mail, Linkedin, Github, Send, Loader2 } from 'lucide-react'
 import { STRINGS } from '../data/strings'
 import { useTheme } from '../context/ThemeContext'
 
@@ -23,6 +23,8 @@ export default function ContactSection(): React.JSX.Element {
   const [formData, setFormData] = useState<ContactFormState>({ name: '', email: '', message: '' })
   const [copied, setCopied] = useState<boolean>(false)
   const [submitted, setSubmitted] = useState<boolean>(false)
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
+  const [errorMsg, setErrorMsg] = useState<string | null>(null)
 
   /**
    * Copies the direct email address to the user's clipboard and displays a temporary confirmation.
@@ -39,22 +41,43 @@ export default function ContactSection(): React.JSX.Element {
   }
 
   /**
-   * Handles user submission by composing a mailto draft and confirming client-side delivery.
+   * Handles user submission by dispatching inquiry data to /api/inquiry without database dependency.
    *
    * @param {React.FormEvent} e - Form submission event.
    */
-  const handleSubmit = (e: React.FormEvent): void => {
+  const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault()
     if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) return
 
-    const subject = encodeURIComponent(`Portfolio Inquiry from ${formData.name.trim()}`)
-    const body = encodeURIComponent(
-      `Name: ${formData.name.trim()}\nEmail: ${formData.email.trim()}\n\nMessage:\n${formData.message.trim()}`
-    )
+    setIsSubmitting(true)
+    setErrorMsg(null)
 
-    // Open user's email client directly without any intermediary database
-    window.location.href = `mailto:${STRINGS.contact.directEmailValue}?subject=${subject}&body=${body}`
-    setSubmitted(true)
+    try {
+      const response = await fetch('/api/inquiry', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          message: formData.message.trim(),
+        }),
+      })
+
+      const data = await response.json().catch(() => ({}))
+
+      if (!response.ok) {
+        throw new Error(data.error || STRINGS.contact.errorGeneric)
+      }
+
+      setSubmitted(true)
+    } catch (err: any) {
+      console.error('[ContactSection Error]', err)
+      setErrorMsg(err?.message || STRINGS.contact.errorGeneric)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   /**
@@ -72,6 +95,7 @@ export default function ContactSection(): React.JSX.Element {
    */
   const handleReset = (): void => {
     setFormData({ name: '', email: '', message: '' })
+    setErrorMsg(null)
     setSubmitted(false)
   }
 
@@ -251,14 +275,30 @@ export default function ContactSection(): React.JSX.Element {
                     />
                   </div>
 
+                  {errorMsg && (
+                    <div className="p-3 border border-red-500/30 bg-red-500/10 text-red-600 dark:text-red-400 text-xs font-mono leading-relaxed">
+                      {errorMsg}
+                    </div>
+                  )}
+
                   {/* Submit Button */}
                   <div className="pt-1">
                     <button
                       type="submit"
-                      className="w-full py-3 px-6 bg-[var(--btn-bg)] text-[var(--btn-fg)] font-sans font-medium text-xs tracking-wider uppercase flex items-center justify-center gap-2 hover:opacity-90 transition-opacity cursor-pointer shadow-sm group"
+                      disabled={isSubmitting}
+                      className="w-full py-3 px-6 bg-[var(--btn-bg)] text-[var(--btn-fg)] font-sans font-medium text-xs tracking-wider uppercase flex items-center justify-center gap-2 hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-all cursor-pointer shadow-sm group"
                     >
-                      <span>{STRINGS.contact.btnSubmit}</span>
-                      <Send className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                          <span>{STRINGS.contact.btnSubmitting}</span>
+                        </>
+                      ) : (
+                        <>
+                          <span>{STRINGS.contact.btnSubmit}</span>
+                          <Send className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                        </>
+                      )}
                     </button>
                   </div>
                 </motion.form>

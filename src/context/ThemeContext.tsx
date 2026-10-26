@@ -47,8 +47,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }): Reac
 
     if (hasViewTransition) {
       root.classList.add('is-switching-theme')
-      // @ts-expect-error View Transitions API is standard in modern Chromium/Safari
-      const transition = document.startViewTransition(() => {
+      const transition = (document as any).startViewTransition(() => {
         applyDomTheme(nextTheme)
         setThemeState(nextTheme)
       })
