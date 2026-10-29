@@ -1,7 +1,7 @@
 import React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Globe, Smartphone, Cpu, ArrowRight, Check, Zap } from 'lucide-react'
-import { STRINGS } from '../data/strings'
+import { useLanguage } from '../context/LanguageContext'
 
 
 const iconMap: Record<string, React.ElementType> = {
@@ -17,7 +17,8 @@ const iconMap: Record<string, React.ElementType> = {
  * @returns {JSX.Element} Interactive creative offerings section.
  */
 export default function CreativeOfferingsSection(): React.JSX.Element {
-  const offerings = STRINGS.creativity.offerings
+  const { strings } = useLanguage()
+  const offerings = strings.creativity.offerings
 
   const handleScroll = (e: React.MouseEvent, targetId: string) => {
     e.preventDefault()
@@ -41,10 +42,10 @@ export default function CreativeOfferingsSection(): React.JSX.Element {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 sm:gap-8 mb-8 sm:mb-12">
           <div className="max-w-2xl">
             <h2 className="font-editorial text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.04] tracking-tight mb-2 sm:mb-4">
-              {STRINGS.creativity.title}
+              {strings.creativity.title}
             </h2>
             <p className="text-[var(--lede)] text-xs sm:text-base lg:text-lg leading-relaxed">
-              {STRINGS.creativity.description}
+              {strings.creativity.description}
             </p>
           </div>
         </div>
@@ -116,7 +117,7 @@ export default function CreativeOfferingsSection(): React.JSX.Element {
                       onClick={(e) => handleScroll(e, '#contact')}
                       className="btn-originkit text-xs py-3 w-full shadow-sm"
                     >
-                      <span>{STRINGS.creativity.btnRequest}</span>
+                      <span>{strings.creativity.btnRequest}</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </button>
                   </div>
@@ -138,16 +139,16 @@ export default function CreativeOfferingsSection(): React.JSX.Element {
             <Zap className="w-5 h-5 text-[#a3b5c4]" />
           </div>
           <p className="font-editorial text-2xl sm:text-3xl lg:text-4xl font-normal leading-snug">
-            "{STRINGS.creativity.manifestoQuote}"
+            "{strings.creativity.manifestoQuote}"
           </p>
           <p className="text-xs sm:text-sm text-[var(--lede)] max-w-xl leading-relaxed">
-            {STRINGS.creativity.manifestoSub}
+            {strings.creativity.manifestoSub}
           </p>
           <button
             onClick={(e) => handleScroll(e, '#contact')}
             className="btn-originkit text-xs py-3.5 px-8 mt-2 shadow-lg"
           >
-            <span>{STRINGS.creativity.btnDiscussCollab}</span>
+            <span>{strings.creativity.btnDiscussCollab}</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </motion.div>

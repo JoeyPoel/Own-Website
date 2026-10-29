@@ -1,56 +1,36 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback, useMemo } from 'react'
 import TabsCard, { type TabItem } from './TabsCard'
+import { useLanguage } from '../context/LanguageContext'
 
-const VENTURE_TABS: TabItem[] = [
-  {
-    id: 'tracks',
+const PROJECT_MEDIA: Record<
+  string,
+  { link: string; image: { src: string; alt: string }; title: string }
+> = {
+  tracks: {
     title: 'Tracks & Taps',
-    subtitle: 'Your Gamified Tour Guide',
-    description:
-      'Transforming standard walking routes into outdoor scavenger hunts & city adventures. Solved through real-world landmarks, interactive challenges, and trivia, complete with translation into all languages.',
-    tags: 'App Store 5.0 ★, iOS Adventure, Scavenger Hunts',
-    badge: 'Live App',
-    buttonText: 'Download on App Store',
     link: 'https://apps.apple.com/nl/app/tracks-taps-your-tour-guide/id6756650785?l=en-GB',
     image: {
       src: '/tracks_preview.jpg',
       alt: 'Tracks & Taps Amsterdam Canal Tour Guide & Scavenger Hunt',
     },
-    rating: '5.0 ★ (4 Ratings)',
   },
-  {
-    id: 'connectcultures',
+  connectcultures: {
     title: 'Connect Cultures',
-    subtitle: 'The Dream Company',
-    description:
-      'Connect Cultures is not yet an actual company, but my dream company and personal ambition to make a reality: a global cultural collective connecting travelers with real local homes, shared meals, and authentic living rooms across borders.',
-    tags: 'Dream Company, Cultural Homestays, Shared Tables, Global Community',
-    badge: 'Dream Company',
-    buttonText: 'Explore connectcultures.world',
     link: 'https://www.connectcultures.world/',
     image: {
       src: '/connectcultures_preview.png',
       alt: 'Connect Cultures 3D Earth and Global Hospitality Platform',
     },
-    rating: 'Dream Company Vision',
   },
-  {
-    id: 'lostsouls',
+  lostsouls: {
     title: 'LØST SØULS',
-    subtitle: 'Techno Event Startup',
-    description:
-      'A community-driven underground rave collective in development. An uncommercialized space with no VIP enclosures: a place to stay present, get lost in high-pressure sound, and provide a proving ground for emerging talent.',
-    tags: '145-160 BPM, Underground Techno, In Development',
-    badge: 'In Development',
-    buttonText: 'Explore lostsouls-events.com',
     link: 'https://lostsouls-events.com/',
     image: {
       src: '/lostsouls_preview.png',
       alt: 'LØST SØULS Underground Techno Rave Void',
     },
-    rating: 'Nightlife Startup',
   },
-]
+}
 
 /**
  * Derives the initial active tab ID based on the URL hash.
@@ -72,13 +52,31 @@ function getInitialActiveId(): string {
  * Tracks and Taps (live App Store iOS app), Connect Cultures (global hospitality platform),
  * and LØST SØULS (underground techno event startup).
  *
- * Features inverted superellipse fillet corners, smooth spring transitions,
- * responsive mobile stacking, and hash-based deep linking.
+ * Fully reactive to English and Dutch language localization.
  *
  * @returns {React.JSX.Element} Master Projects showcase section.
  */
 export default function VenturesAccordionSection(): React.JSX.Element {
+  const { strings } = useLanguage()
   const [activeId, setActiveId] = useState<string>(getInitialActiveId)
+
+  const items = useMemo<TabItem[]>(() => {
+    return strings.projects.tabs.map((tab) => {
+      const media = PROJECT_MEDIA[tab.id]
+      return {
+        id: tab.id,
+        title: media?.title || tab.id,
+        subtitle: tab.subtitle,
+        description: tab.description,
+        tags: tab.tags,
+        badge: tab.badge,
+        buttonText: tab.buttonText,
+        link: media?.link || '#',
+        image: media?.image || { src: '', alt: '' },
+        rating: tab.rating,
+      }
+    })
+  }, [strings.projects.tabs])
 
   // Listen to hash changes to select the corresponding project tab
   const syncHashToActive = useCallback(() => {
@@ -126,20 +124,19 @@ export default function VenturesAccordionSection(): React.JSX.Element {
         {/* Section Header: Chapter Badge & Headline */}
         <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-4 sm:gap-6 mb-6 sm:mb-10">
           <div>
-
             <h2 className="font-editorial text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.04] tracking-tight">
-              Selected Projects
+              {strings.projects.title}
             </h2>
 
             <p className="text-[var(--lede)] text-xs sm:text-base leading-relaxed max-w-2xl mt-2 sm:mt-3">
-              Explore my published iOS app, dream company vision, and underground event startup in development. Hover or tap any tab to inspect.
+              {strings.projects.description}
             </p>
           </div>
         </div>
 
         {/* Master Framer Tabs Card Component */}
         <TabsCard
-          items={VENTURE_TABS}
+          items={items}
           activeId={activeId}
           onSelect={setActiveId}
         />

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowUpRight, Copy, Check, Mail, Linkedin, Github, Send, Loader2 } from 'lucide-react'
-import { STRINGS } from '../data/strings'
+import { useLanguage } from '../context/LanguageContext'
 import { useTheme } from '../context/ThemeContext'
 
 interface ContactFormState {
@@ -14,11 +14,13 @@ interface ContactFormState {
  * Minimalist Contact Section aligned with the Unboxed Editorial Design System:
  * Offers maximum clarity with zero database dependencies. Features direct 1-click email copy,
  * social gateways, a streamlined 3-field note composer, and theme-adaptive graduation photography.
+ * Fully reactive to active language localization.
  *
  * @returns {React.JSX.Element} Minimalist contact section.
  */
 export default function ContactSection(): React.JSX.Element {
   const { theme } = useTheme()
+  const { strings } = useLanguage()
   const isDark = theme === 'dark'
   const [formData, setFormData] = useState<ContactFormState>({ name: '', email: '', message: '' })
   const [copied, setCopied] = useState<boolean>(false)
@@ -31,12 +33,12 @@ export default function ContactSection(): React.JSX.Element {
    */
   const handleCopyEmail = async (): Promise<void> => {
     try {
-      await navigator.clipboard.writeText(STRINGS.contact.directEmailValue)
+      await navigator.clipboard.writeText(strings.contact.directEmailValue)
       setCopied(true)
       setTimeout(() => setCopied(false), 2500)
     } catch {
       // Fallback if clipboard API is restricted
-      window.location.href = `mailto:${STRINGS.contact.directEmailValue}`
+      window.location.href = `mailto:${strings.contact.directEmailValue}`
     }
   }
 
@@ -68,13 +70,13 @@ export default function ContactSection(): React.JSX.Element {
       const data = await response.json().catch(() => ({}))
 
       if (!response.ok) {
-        throw new Error(data.error || STRINGS.contact.errorGeneric)
+        throw new Error(data.error || strings.contact.errorGeneric)
       }
 
       setSubmitted(true)
     } catch (err: any) {
       console.error('[ContactSection Error]', err)
-      setErrorMsg(err?.message || STRINGS.contact.errorGeneric)
+      setErrorMsg(err?.message || strings.contact.errorGeneric)
     } finally {
       setIsSubmitting(false)
     }
@@ -120,7 +122,7 @@ export default function ContactSection(): React.JSX.Element {
                 Let's build <span className="italic font-normal">together.</span>
               </h2>
               <p className="text-[var(--lede)] text-xs sm:text-base leading-relaxed max-w-md">
-                {STRINGS.contact.description}
+                {strings.contact.description}
               </p>
             </div>
 
@@ -129,7 +131,7 @@ export default function ContactSection(): React.JSX.Element {
               {/* Primary Email Quick Card */}
               <div className="p-3.5 sm:p-4 border border-[var(--line-strong)] hover:border-[#a3b5c4]/40 bg-black/[0.02] dark:bg-white/[0.02] flex items-center justify-between gap-3 sm:gap-4 transition-all">
                 <a
-                  href={`mailto:${STRINGS.contact.directEmailValue}?subject=Let's%20Build%20Together`}
+                  href={`mailto:${strings.contact.directEmailValue}?subject=Let's%20Build%20Together`}
                   className="flex items-center gap-2.5 sm:gap-3 min-w-0 group"
                   title="Send email directly"
                 >
@@ -138,10 +140,10 @@ export default function ContactSection(): React.JSX.Element {
                   </div>
                   <div className="min-w-0">
                     <span className="text-[9px] sm:text-[10px] font-mono uppercase tracking-widest text-[#a3b5c4] block font-semibold">
-                      {STRINGS.contact.directEmailTitle}
+                      {strings.contact.directEmailTitle}
                     </span>
                     <span className="text-xs sm:text-sm font-semibold truncate block group-hover:text-[#a3b5c4] transition-colors">
-                      {STRINGS.contact.directEmailValue}
+                      {strings.contact.directEmailValue}
                     </span>
                   </div>
                 </a>
@@ -170,7 +172,7 @@ export default function ContactSection(): React.JSX.Element {
               {/* Minimal Social Gateways */}
               <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
                 <a
-                  href={STRINGS.links.linkedin}
+                  href={strings.links.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-3 sm:p-3.5 border border-[var(--line)] hover:border-[#a3b5c4]/40 bg-black/[0.02] dark:bg-white/[0.02] flex items-center justify-between group transition-all"
@@ -183,7 +185,7 @@ export default function ContactSection(): React.JSX.Element {
                 </a>
 
                 <a
-                  href={STRINGS.links.github}
+                  href={strings.links.github}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-3 sm:p-3.5 border border-[var(--line)] hover:border-[#a3b5c4]/40 bg-black/[0.02] dark:bg-white/[0.02] flex items-center justify-between group transition-all"
@@ -227,7 +229,7 @@ export default function ContactSection(): React.JSX.Element {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-3.5">
                     <div className="flex flex-col gap-1.5">
                       <label htmlFor="contact-name" className="text-[11px] font-mono uppercase tracking-wider text-[var(--lede)]">
-                        {STRINGS.contact.nameLabel} <span className="text-[#a3b5c4]">*</span>
+                        {strings.contact.nameLabel} <span className="text-[#a3b5c4]">*</span>
                       </label>
                       <input
                         id="contact-name"
@@ -236,14 +238,14 @@ export default function ContactSection(): React.JSX.Element {
                         required
                         value={formData.name}
                         onChange={handleChange}
-                        placeholder={STRINGS.contact.namePlaceholder}
+                        placeholder={strings.contact.namePlaceholder}
                         className="px-3.5 py-2.5 text-sm font-sans bg-transparent border border-[var(--line-strong)] text-[var(--ink)] placeholder:text-[var(--lede)]/50 focus:outline-none focus:border-[#a3b5c4] focus:ring-1 focus:ring-[#a3b5c4]/40 transition-colors rounded-none"
                       />
                     </div>
 
                     <div className="flex flex-col gap-1.5">
                       <label htmlFor="contact-email" className="text-[11px] font-mono uppercase tracking-wider text-[var(--lede)]">
-                        {STRINGS.contact.emailLabel} <span className="text-[#a3b5c4]">*</span>
+                        {strings.contact.emailLabel} <span className="text-[#a3b5c4]">*</span>
                       </label>
                       <input
                         id="contact-email"
@@ -252,7 +254,7 @@ export default function ContactSection(): React.JSX.Element {
                         required
                         value={formData.email}
                         onChange={handleChange}
-                        placeholder={STRINGS.contact.emailPlaceholder}
+                        placeholder={strings.contact.emailPlaceholder}
                         className="px-3.5 py-2.5 text-sm font-sans bg-transparent border border-[var(--line-strong)] text-[var(--ink)] placeholder:text-[var(--lede)]/50 focus:outline-none focus:border-[#a3b5c4] focus:ring-1 focus:ring-[#a3b5c4]/40 transition-colors rounded-none"
                       />
                     </div>
@@ -261,7 +263,7 @@ export default function ContactSection(): React.JSX.Element {
                   {/* Message Field */}
                   <div className="flex flex-col gap-1.5">
                     <label htmlFor="contact-message" className="text-[11px] font-mono uppercase tracking-wider text-[var(--lede)]">
-                      {STRINGS.contact.messageLabel} <span className="text-[#a3b5c4]">*</span>
+                      {strings.contact.messageLabel} <span className="text-[#a3b5c4]">*</span>
                     </label>
                     <textarea
                       id="contact-message"
@@ -270,7 +272,7 @@ export default function ContactSection(): React.JSX.Element {
                       rows={3}
                       value={formData.message}
                       onChange={handleChange}
-                      placeholder={STRINGS.contact.messagePlaceholder}
+                      placeholder={strings.contact.messagePlaceholder}
                       className="px-3.5 py-2.5 text-sm font-sans bg-transparent border border-[var(--line-strong)] text-[var(--ink)] placeholder:text-[var(--lede)]/50 focus:outline-none focus:border-[#a3b5c4] focus:ring-1 focus:ring-[#a3b5c4]/40 transition-colors rounded-none resize-y min-h-[90px]"
                     />
                   </div>
@@ -291,11 +293,11 @@ export default function ContactSection(): React.JSX.Element {
                       {isSubmitting ? (
                         <>
                           <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                          <span>{STRINGS.contact.btnSubmitting}</span>
+                          <span>{strings.contact.btnSubmitting}</span>
                         </>
                       ) : (
                         <>
-                          <span>{STRINGS.contact.btnSubmit}</span>
+                          <span>{strings.contact.btnSubmit}</span>
                           <Send className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                         </>
                       )}
@@ -315,10 +317,10 @@ export default function ContactSection(): React.JSX.Element {
                   </div>
                   <div>
                     <h3 className="font-editorial text-2xl sm:text-3xl font-medium mb-1.5 text-[var(--ink)]">
-                      {STRINGS.contact.successTitle}
+                      {strings.contact.successTitle}
                     </h3>
                     <p className="text-xs sm:text-sm text-[var(--lede)] max-w-sm mx-auto leading-relaxed">
-                      {STRINGS.contact.successDesc}
+                      {strings.contact.successDesc}
                     </p>
                   </div>
                   <button
@@ -326,7 +328,7 @@ export default function ContactSection(): React.JSX.Element {
                     onClick={handleReset}
                     className="mt-2 px-4 py-2 border border-[var(--line-strong)] hover:border-[#a3b5c4] text-xs font-mono uppercase tracking-wider text-[var(--ink)] hover:bg-[#a3b5c4]/10 transition-colors cursor-pointer"
                   >
-                    {STRINGS.contact.resetBtn}
+                    {strings.contact.resetBtn}
                   </button>
                 </motion.div>
               )}

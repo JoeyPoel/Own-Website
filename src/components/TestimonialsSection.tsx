@@ -1,21 +1,25 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { Quote, Star, ExternalLink } from 'lucide-react'
+import { Star, ExternalLink } from 'lucide-react'
 import type { Testimonial } from '../data/portfolioData'
-import { STRINGS } from '../data/strings'
+import { useLanguage } from '../context/LanguageContext'
 
 interface TestimonialsSectionProps {
-  testimonials: Testimonial[]
+  testimonials?: Testimonial[]
 }
 
 /**
  * TestimonialsSection ("the feedback part") styled with Framer Marketplace "Wall of Love" aesthetics:
  * Star rating capsule, trust metrics bar, company identity stamps, and verified endorsement pills.
+ * Supports reactive multi-language quotes and translation provenance notice.
  *
  * @param props.testimonials - Verified client and manager testimonials.
  * @returns {JSX.Element} Framer Wall of Love feedback section.
  */
 export default function TestimonialsSection({ testimonials }: TestimonialsSectionProps): React.JSX.Element {
+  const { strings } = useLanguage()
+  const displayItems = strings.testimonials.items || testimonials || []
+
   return (
     <section id="testimonials" className="py-14 sm:py-24 lg:py-32 relative border-t border-[var(--line)] bg-[var(--bg)] text-[var(--ink)] overflow-hidden transition-colors duration-400 ease-in-out">
       {/* Background Subtle Radial Accent using Slate Mist */}
@@ -33,11 +37,11 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
           <div className="max-w-2xl">
 
             <h2 className="font-editorial text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.04] tracking-tight mb-2 sm:mb-3">
-              {STRINGS.testimonials.title}
+              {strings.testimonials.title}
             </h2>
 
             <p className="text-[var(--lede)] text-sm sm:text-base lg:text-lg leading-relaxed">
-              {STRINGS.testimonials.description}
+              {strings.testimonials.description}
             </p>
           </div>
 
@@ -50,15 +54,15 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
             </div>
             <div className="border-t sm:border-t-0 sm:border-l border-[var(--line)] pt-2 sm:pt-0 sm:pl-4 text-center sm:text-left">
               <span className="block font-mono text-xs font-bold uppercase tracking-wider text-[var(--ink)]">
-                {STRINGS.testimonials.ratingValue}
+                {strings.testimonials.ratingValue}
               </span>
               <a
-                href={STRINGS.links.recommendations}
+                href={strings.links.recommendations}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-[10px] font-mono text-[#a3b5c4] hover:text-[#fce9c7] inline-flex items-center gap-1 mt-0.5 transition-colors font-medium"
               >
-                <span>{STRINGS.testimonials.ratingVerifyLink}</span>
+                <span>{strings.testimonials.ratingVerifyLink}</span>
                 <ExternalLink className="w-3 h-3" />
               </a>
             </div>
@@ -67,29 +71,29 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
 
         {/* Testimonials 3-Column Framer Bento Matrix */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-          {testimonials.map((testimonial, idx) => {
-            let trustBadge = STRINGS.testimonials.fallbackTrustBadge
+          {displayItems.map((testimonial, idx) => {
+            let trustBadge = strings.testimonials.fallbackTrustBadge
             let initial = 'MK'
             let logoUrl = ''
             let isDept = false
-            let projectRole = STRINGS.testimonials.roleSwap
+            let projectRole = strings.testimonials.roleSwap
 
             if (testimonial.company.toLowerCase().includes('swap')) {
-              trustBadge = STRINGS.testimonials.badgeSwap
+              trustBadge = strings.testimonials.badgeSwap
               initial = 'MK'
               logoUrl = '/swapclub_logo.jpg'
-              projectRole = STRINGS.testimonials.roleSwap
+              projectRole = strings.testimonials.roleSwap
             } else if (testimonial.company.toLowerCase().includes('dept')) {
-              trustBadge = STRINGS.testimonials.badgeDept
+              trustBadge = strings.testimonials.badgeDept
               initial = 'RN'
               logoUrl = '/dept.jpg'
-              projectRole = STRINGS.testimonials.roleDept
+              projectRole = strings.testimonials.roleDept
               isDept = true
             } else if (testimonial.company.toLowerCase().includes('tata')) {
-              trustBadge = STRINGS.testimonials.badgeTata
+              trustBadge = strings.testimonials.badgeTata
               initial = 'SLO'
               logoUrl = '/tatasteel_logo.png'
-              projectRole = STRINGS.testimonials.roleTata
+              projectRole = strings.testimonials.roleTata
             }
 
             return (
@@ -102,10 +106,16 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
                 className="p-6 sm:p-9 card-ruled flex flex-col justify-between group rounded-sm shadow-xl hover:-translate-y-2 hover:shadow-2xl hover:border-[#a3b5c4]/40 transition-all duration-300 relative overflow-hidden"
               >
                 <div>
-                  {/* Top Bar with Quote Icon and Project Badge */}
-                  <div className="flex items-center justify-between mb-5 sm:mb-6">
-                    <Quote className="w-6 h-6 sm:w-7 sm:h-7 text-[#fce9c7] opacity-80" />
-                    <span className="text-[10px] font-mono uppercase px-2.5 py-1 bg-[#a3b5c4]/15 border border-[#a3b5c4]/30 text-[var(--ink)] dark:text-[#a3b5c4] font-medium tracking-wider">
+                  {/* Top Bar with Optional Translation Notice and Project Badge */}
+                  <div className="flex items-center justify-between gap-2 mb-5 sm:mb-6">
+                    {strings.testimonials.translationNotice ? (
+                      <span className="text-[9px] sm:text-[10px] font-mono tracking-wider text-[#a3b5c4] bg-[#a3b5c4]/10 border border-[#a3b5c4]/20 px-2 py-0.5 whitespace-nowrap">
+                        {strings.testimonials.translationNotice}
+                      </span>
+                    ) : (
+                      <span />
+                    )}
+                    <span className="text-[9px] sm:text-[10px] font-mono uppercase px-2 py-1 bg-[#a3b5c4]/15 border border-[#a3b5c4]/30 text-[var(--ink)] dark:text-[#a3b5c4] font-medium tracking-wider whitespace-nowrap">
                       {trustBadge}
                     </span>
                   </div>

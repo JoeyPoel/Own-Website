@@ -1,4 +1,5 @@
 import { ThemeProvider } from './context/ThemeContext'
+import { LanguageProvider, useLanguage } from './context/LanguageContext'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import VenturesAccordionSection from './components/VenturesAccordionSection'
@@ -8,7 +9,6 @@ import TestimonialsSection from './components/TestimonialsSection'
 import ContactSection from './components/ContactSection'
 import LazySection from './components/common/LazySection'
 import type { Profile, Testimonial } from './data/portfolioData'
-import { STRINGS } from './data/strings'
 
 const defaultProfile: Profile = {
   name: 'Joey van der Poel',
@@ -42,6 +42,39 @@ const defaultTestimonials: Testimonial[] = [
 ]
 
 /**
+ * Architectural Ruled Footer reactive to active language context.
+ *
+ * @param props.profileName - Founder's name.
+ * @returns {React.JSX.Element} Localized footer.
+ */
+function Footer({ profileName }: { profileName: string }): React.JSX.Element {
+  const { strings } = useLanguage()
+
+  return (
+    <footer className="relative z-10 w-full py-12 border-t border-[var(--line)] bg-[var(--bg)] text-[var(--ink)] transition-colors">
+      <div className="max-w-[1254px] mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+        <p className="text-xs font-mono opacity-75">
+          &copy; {new Date().getFullYear()} {profileName} &bull; <span className="text-[#a3b5c4] font-medium">{strings.footer.tagline}</span>
+        </p>
+        <div className="flex flex-wrap items-center justify-center gap-6 text-xs font-mono uppercase tracking-wider">
+          {strings.footer.links.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#a3b5c4] transition-colors"
+            >
+              {link.name}
+            </a>
+          ))}
+        </div>
+      </div>
+    </footer>
+  )
+}
+
+/**
  * Master Root Application Component assembled using the Originkit Hero 68 design system:
  * Unifies the entire portfolio with warm sandstone / luxury void palette,
  * Instrument Serif typography, ruled hairline architecture, and founder company showcases.
@@ -54,70 +87,54 @@ export default function App() {
 
   return (
     <ThemeProvider>
-      <div className="min-h-screen w-full relative bg-[var(--bg)] text-[var(--ink)] font-sans-tight selection:bg-[#a3b5c4] selection:text-[#000000] dark:selection:bg-[#a3b5c4] dark:selection:text-[#000000] transition-colors duration-400 ease-in-out">
-        {/* Subtle Analog Grain / Physical Texture Overlay Unifying All Sections */}
-        <div
-          className="fixed inset-0 pointer-events-none z-30 opacity-[0.02] dark:opacity-[0.035] mix-blend-overlay"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-          }}
-          aria-hidden="true"
-        />
+      <LanguageProvider>
+        <div className="min-h-screen w-full relative bg-[var(--bg)] text-[var(--ink)] font-sans-tight selection:bg-[#a3b5c4] selection:text-[#000000] dark:selection:bg-[#a3b5c4] dark:selection:text-[#000000] transition-colors duration-400 ease-in-out">
+          {/* Subtle Analog Grain / Physical Texture Overlay Unifying All Sections */}
+          <div
+            className="fixed inset-0 pointer-events-none z-30 opacity-[0.02] dark:opacity-[0.035] mix-blend-overlay"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+            }}
+            aria-hidden="true"
+          />
 
-        {/* Floating Architectural Navigation Bar */}
-        <Navbar profile={profile} />
+          {/* Floating Architectural Navigation Bar */}
+          <Navbar profile={profile} />
 
-        {/* Main Page Sections */}
-        <main className="relative z-10 w-full">
-          {/* Originkit Hero 68 Section */}
-          <Hero profile={profile} />
+          {/* Main Page Sections */}
+          <main className="relative z-10 w-full">
+            {/* Originkit Hero 68 Section */}
+            <Hero profile={profile} />
 
-          {/* Interactive Company Showcase: Framer Tabs Card (Tracks & Taps, Connect Cultures, Lost Souls) */}
-          <VenturesAccordionSection />
+            {/* Interactive Company Showcase: Framer Tabs Card (Tracks & Taps, Connect Cultures, Lost Souls) */}
+            <VenturesAccordionSection />
 
-          {/* Interactive Experience & Career Flowing Timeline */}
-          <LazySection id="experience" minHeight="650px">
-            <ExperienceTimelineSection />
-          </LazySection>
+            {/* Interactive Experience & Career Flowing Timeline */}
+            <LazySection id="experience" minHeight="650px">
+              <ExperienceTimelineSection />
+            </LazySection>
 
-          {/* Bespoke Creative & Technical Capabilities */}
-          <LazySection id="creative-offerings" minHeight="700px">
-            <CreativeOfferingsSection />
-          </LazySection>
+            {/* Bespoke Creative & Technical Capabilities */}
+            <LazySection id="creative-offerings" minHeight="700px">
+              <CreativeOfferingsSection />
+            </LazySection>
 
-          {/* Feedback from Past Teams & Leaders (Preserved) */}
-          <LazySection id="testimonials" minHeight="500px">
-            <TestimonialsSection testimonials={testimonials} />
-          </LazySection>
+            {/* Feedback from Past Teams & Leaders (Preserved) */}
+            <LazySection id="testimonials" minHeight="500px">
+              <TestimonialsSection testimonials={testimonials} />
+            </LazySection>
 
-          {/* Partnership & Collaboration Contact Planner */}
-          <LazySection id="contact" minHeight="750px">
-            <ContactSection />
-          </LazySection>
-        </main>
+            {/* Partnership & Collaboration Contact Planner */}
+            <LazySection id="contact" minHeight="750px">
+              <ContactSection />
+            </LazySection>
+          </main>
 
-        {/* Architectural Ruled Footer */}
-        <footer className="relative z-10 w-full py-12 border-t border-[var(--line)] bg-[var(--bg)] text-[var(--ink)] transition-colors">
-          <div className="max-w-[1254px] mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
-            <p className="text-xs font-mono opacity-75">
-              &copy; {new Date().getFullYear()} {profile.name} &bull; <span className="text-[#a3b5c4] font-medium">{STRINGS.footer.tagline}</span>
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-6 text-xs font-mono uppercase tracking-wider">
-              {STRINGS.footer.links.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-[#a3b5c4] transition-colors"
-                >
-                  {link.name}
-                </a>
-              ))}
-            </div>
-          </div>
-        </footer>
-      </div>
+          {/* Architectural Ruled Footer */}
+          <Footer profileName={profile.name} />
+        </div>
+      </LanguageProvider>
     </ThemeProvider>
   )
 }
+

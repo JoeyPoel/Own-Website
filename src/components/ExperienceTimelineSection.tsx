@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useMemo } from 'react'
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import {
   Calendar,
@@ -7,6 +7,7 @@ import {
   MapPin,
   CheckCircle2,
 } from 'lucide-react'
+import { useLanguage } from '../context/LanguageContext'
 
 export interface TimelineMilestone {
   id: string
@@ -75,7 +76,7 @@ const MILESTONES: TimelineMilestone[] = [
     shortName: 'TATA STEEL',
     role: 'Strategic HR Analytics & RPA Engineer',
     period: 'Sep 2024 – Jun 2026',
-    type: 'Enterprise Systems • 1 yr 10 mnd',
+    type: 'Enterprise Systems • 1 yr 10 mo',
     location: 'IJmuiden, NL (Hybrid)',
     headline: 'SAP SuccessFactors Restructuring & Core RPA Pipelines',
     summary:
@@ -139,7 +140,7 @@ const MILESTONES: TimelineMilestone[] = [
     shortName: 'YoungOnes',
     role: 'Independent Freelance Professional',
     period: 'Feb 2023 – Mar 2025',
-    type: 'Freelance Operations • 2 yr 2 mnd',
+    type: 'Freelance Operations • 2 yr 2 mo',
     location: 'North Holland, NL',
     headline: 'Dynamic On-Demand Operations & Adaptability',
     summary:
@@ -164,23 +165,40 @@ const MILESTONES: TimelineMilestone[] = [
  * @returns {React.JSX.Element} Interactive career timeline section.
  */
 export default function ExperienceTimelineSection(): React.JSX.Element {
+  const { strings } = useLanguage()
   const [activeIdx, setActiveIdx] = useState<number>(0)
   const [direction, setDirection] = useState<number>(1)
 
-  const activeMilestone = MILESTONES[activeIdx]
+  const localizedMilestones = useMemo<TimelineMilestone[]>(() => {
+    return MILESTONES.map((m) => {
+      const localized = strings.experience?.milestones?.find((item) => item.id === m.id)
+      if (!localized) return m
+      return {
+        ...m,
+        role: localized.role,
+        type: localized.type,
+        headline: localized.headline,
+        summary: localized.summary,
+        highlights: localized.highlights,
+        caption: localized.caption,
+      }
+    })
+  }, [strings.experience])
+
+  const activeMilestone = localizedMilestones[activeIdx] ?? localizedMilestones[0]
 
   /**
    * Advances to next milestone.
    */
   const handleNext = React.useCallback((): void => {
     setActiveIdx((prev) => {
-      if (prev < MILESTONES.length - 1) {
+      if (prev < localizedMilestones.length - 1) {
         setDirection(1)
         return prev + 1
       }
       return prev
     })
-  }, [])
+  }, [localizedMilestones.length])
 
   /**
    * Rewinds to previous milestone.
@@ -271,12 +289,11 @@ export default function ExperienceTimelineSection(): React.JSX.Element {
           <div>
 
             <h2 className="font-editorial text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.04] tracking-tight">
-              Engineering Journey
+              {strings.experience.title}
             </h2>
 
             <p className="text-[var(--lede)] text-xs sm:text-base leading-relaxed max-w-2xl mt-2 sm:mt-3">
-              Hands-on enterprise engineering, startup publishing, and academic leadership.
-              Click or scrub through the milestones below.
+              {strings.experience.description}
             </p>
           </div>
         </div>
@@ -284,7 +301,7 @@ export default function ExperienceTimelineSection(): React.JSX.Element {
         {/* ─── 1. Flowing Interactive Progress Scrubber Rail ─── */}
         <div className="relative mb-8 sm:mb-14 max-w-5xl mx-auto overflow-x-auto pb-3 pt-2">
           <div className="grid grid-cols-6 min-w-[680px] relative">
-            {MILESTONES.map((m, idx) => {
+            {localizedMilestones.map((m, idx) => {
               const isSelected = activeIdx === idx
               const isPassed = idx < activeIdx
 
@@ -292,7 +309,7 @@ export default function ExperienceTimelineSection(): React.JSX.Element {
                 <div key={m.id} className="relative flex flex-col items-center">
                   
                   {/* Connecting Rail Segment to next ball */}
-                  {idx < MILESTONES.length - 1 && (
+                  {idx < localizedMilestones.length - 1 && (
                     <div className="absolute top-[20px] -translate-y-1/2 left-1/2 w-full h-[2px] bg-[var(--line)] pointer-events-none z-0">
                       <motion.div
                         className="h-full bg-[#a3b5c4] origin-left"

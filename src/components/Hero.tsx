@@ -2,6 +2,9 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import { useTheme } from '../context/ThemeContext'
+import { useLanguage } from '../context/LanguageContext'
+import LanguageToggle from './LanguageToggle'
+import ThemeToggle from './ThemeToggle'
 
 interface HeroProps {
   profile: {
@@ -18,13 +21,14 @@ interface HeroProps {
  * - JoeyWhiteBackground.jpg for light mode
  * - JoeyBlackBackground.jpg for dark mode
  * Clearly emphasizes Joey's pursuit of an MSc in Applied AI, mobile engineering craft,
- * and featured products.
+ * and featured products. Fully responsive to active language localization.
  *
  * @param props.profile - Founder metadata.
  * @returns {React.JSX.Element} Master Full-Screen Editorial Hero Component.
  */
 export default function Hero({ profile }: HeroProps): React.JSX.Element {
   const { theme } = useTheme()
+  const { strings } = useLanguage()
   const isDark = theme === 'dark'
 
   /**
@@ -56,9 +60,15 @@ export default function Hero({ profile }: HeroProps): React.JSX.Element {
       <header className="relative z-20 w-full max-w-[1254px] mx-auto px-5 sm:px-6 pt-7 sm:pt-9 flex items-center justify-between gap-4">
         {/* Left: Founder Role & Academic Specialization */}
         <div className="flex items-center gap-2.5 text-xs sm:text-sm font-sans tracking-tight">
-          <span className="font-semibold text-[var(--ink)]">Mobile Developer & AI Engineer</span>
+          <span className="font-semibold text-[var(--ink)]">{strings.hero.roleBadge}</span>
           <span className="opacity-30">/</span>
-          <span className="text-[#a3b5c4] font-medium">MSc Applied AI Candidate</span>
+          <span className="text-[#a3b5c4] font-medium">{strings.hero.academicBadge}</span>
+        </div>
+
+        {/* Right: Language Toggle & Theme Toggle for instant hero accessibility */}
+        <div className="flex items-center gap-2">
+          <LanguageToggle />
+          <ThemeToggle />
         </div>
       </header>
 
@@ -100,9 +110,9 @@ export default function Hero({ profile }: HeroProps): React.JSX.Element {
             transition={{ duration: 0.6, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
           >
             <h1 className="text-3xl sm:text-5xl lg:text-[72px] xl:text-[80px] font-bold tracking-[-0.035em] leading-[1.04] sm:leading-[1.02] text-[var(--ink)]">
-              Software & products <br />
+              {strings.hero.headlineMain} <br />
               <span className="font-editorial italic font-normal text-[var(--ink)] opacity-95">
-                for bold visions.
+                {strings.hero.headlineItalic}
               </span>
             </h1>
           </motion.div>
@@ -114,7 +124,7 @@ export default function Hero({ profile }: HeroProps): React.JSX.Element {
             transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           >
             <p className="mt-3.5 sm:mt-7 text-xs sm:text-base lg:text-lg font-normal leading-relaxed text-[var(--lede)] max-w-[310px] xs:max-w-[340px] sm:max-w-lg">
-              Currently pursuing an MSc in Applied AI, I work with ambitious founders and teams to engineer intelligent systems, performant mobile apps, and digital platforms that feel natural, intentional, and high-impact.
+              {strings.hero.bio}
             </p>
           </motion.div>
 
@@ -130,7 +140,7 @@ export default function Hero({ profile }: HeroProps): React.JSX.Element {
               onClick={(e) => handleScroll(e, '#projects')}
               className="btn-originkit text-xs sm:text-sm py-2.5 px-4 sm:py-3 sm:px-6 shadow-sm group shrink-0"
             >
-              <span>See my work</span>
+              <span>{strings.hero.btnWork}</span>
               <ArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
 
@@ -139,7 +149,7 @@ export default function Hero({ profile }: HeroProps): React.JSX.Element {
               onClick={(e) => handleScroll(e, '#contact')}
               className="btn-originkit-outline text-xs sm:text-sm py-2.5 px-4 sm:py-3 sm:px-6 shrink-0"
             >
-              <span>Let's collaborate</span>
+              <span>{strings.hero.btnContact}</span>
             </a>
           </motion.div>
 

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, ArrowUpRight } from 'lucide-react'
 import ThemeToggle from './ThemeToggle'
-import { STRINGS } from '../data/strings'
+import LanguageToggle from './LanguageToggle'
+import { useLanguage } from '../context/LanguageContext'
 
 interface NavbarProps {
   profile: {
@@ -16,16 +17,18 @@ interface NavbarProps {
  * Permanently accessible fixed top bar with glassmorphism backdrop upon scroll.
  * Accurately synchronized with current page sections (#projects, #creative-offerings, #testimonials, #contact).
  * Styled with the 4-color palette (FFFFFF, 000000, FCE9C7, A3B5C4).
+ * Includes global ThemeToggle and LanguageToggle (EN / NL).
  *
  * @param props.profile - Founder metadata.
  * @returns {React.JSX.Element} Clean navigation bar.
  */
 export default function Navbar({ profile }: NavbarProps): React.JSX.Element {
+  const { strings } = useLanguage()
   const [activeSection, setActiveSection] = useState<string>('home')
   const [isScrolled, setIsScrolled] = useState<boolean>(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false)
 
-  const navLinks = STRINGS.navbar.links
+  const navLinks = strings.navbar.links
 
   useEffect(() => {
     const sectionIds = ['home', ...navLinks.map((link) => link.href.substring(1)), 'contact']
@@ -101,7 +104,7 @@ export default function Navbar({ profile }: NavbarProps): React.JSX.Element {
                 {profile.name}
               </span>
               <span className="hidden md:inline-block text-[10px] font-mono uppercase tracking-widest text-[#a3b5c4]">
-                &bull; {STRINGS.navbar.founderRoleBadge}
+                &bull; {strings.navbar.founderRoleBadge}
               </span>
             </div>
           </a>
@@ -136,8 +139,9 @@ export default function Navbar({ profile }: NavbarProps): React.JSX.Element {
             })}
           </nav>
 
-          {/* Right: Actions (Theme Toggle & Contact CTA) */}
-          <div className="hidden lg:flex items-center gap-3.5">
+          {/* Right: Actions (Language Toggle, Theme Toggle & Contact CTA) */}
+          <div className="hidden lg:flex items-center gap-3">
+            <LanguageToggle />
             <ThemeToggle />
 
             <a
@@ -145,13 +149,14 @@ export default function Navbar({ profile }: NavbarProps): React.JSX.Element {
               onClick={(e) => handleNavClick(e, '#contact')}
               className="btn-originkit text-xs py-2 px-4 shadow-xs group"
             >
-              <span>{STRINGS.navbar.btnDiscuss}</span>
+              <span>{strings.navbar.btnDiscuss}</span>
               <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </a>
           </div>
 
           {/* Mobile Right Controls */}
           <div className="lg:hidden flex items-center gap-2">
+            <LanguageToggle />
             <ThemeToggle />
 
             <a
@@ -159,7 +164,7 @@ export default function Navbar({ profile }: NavbarProps): React.JSX.Element {
               onClick={(e) => handleNavClick(e, '#contact')}
               className="btn-originkit text-[11px] py-1.5 px-3"
             >
-              <span>{STRINGS.navbar.btnCollaborate}</span>
+              <span>{strings.navbar.btnCollaborate}</span>
             </a>
 
             <button
@@ -198,7 +203,7 @@ export default function Navbar({ profile }: NavbarProps): React.JSX.Element {
               <div className="flex flex-col gap-6">
                 <div className="flex items-center justify-between border-b border-[var(--line)] pb-4">
                   <span className="font-mono font-bold text-xs uppercase tracking-widest text-[var(--lede)]">
-                    {STRINGS.navbar.navigationLabel}
+                    {strings.navbar.navigationLabel}
                   </span>
                   <button
                     type="button"
@@ -237,12 +242,18 @@ export default function Navbar({ profile }: NavbarProps): React.JSX.Element {
               </div>
 
               <div className="flex flex-col gap-3 pt-6 border-t border-[var(--line)]">
+                <div className="flex items-center justify-between pb-1">
+                  <span className="text-[11px] font-mono uppercase tracking-wider text-[var(--lede)]">
+                    Taal / Language
+                  </span>
+                  <LanguageToggle />
+                </div>
                 <a
                   href="#contact"
                   onClick={(e) => handleNavClick(e, '#contact')}
                   className="btn-originkit text-xs py-3 w-full justify-center gap-2"
                 >
-                  <span>{STRINGS.navbar.btnDiscuss}</span>
+                  <span>{strings.navbar.btnDiscuss}</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
                 </a>
               </div>
