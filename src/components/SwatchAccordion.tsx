@@ -415,7 +415,7 @@ export default function SwatchAccordion({
                 id={triggerId}
                 type="button"
                 className="swa-trigger"
-                aria-label={item.title || `Venture ${index + 1}`}
+                aria-label={item.title || `Company ${index + 1}`}
                 aria-expanded={isOpen}
                 aria-controls={panelId}
                 onClick={() => open(index)}

@@ -21,7 +21,7 @@ const VENTURE_TABS: TabItem[] = [
   {
     id: 'connectcultures',
     title: 'Connect Cultures',
-    subtitle: 'The Dream Venture',
+    subtitle: 'The Dream Company',
     description:
       'Connect Cultures is not yet an actual company, but my dream company and personal ambition to make a reality: a global cultural collective connecting travelers with real local homes, shared meals, and authentic living rooms across borders.',
     tags: 'Dream Company, Cultural Homestays, Shared Tables, Global Community',

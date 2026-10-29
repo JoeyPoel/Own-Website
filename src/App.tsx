@@ -44,7 +44,7 @@ const defaultTestimonials: Testimonial[] = [
 /**
  * Master Root Application Component assembled using the Originkit Hero 68 design system:
  * Unifies the entire portfolio with warm sandstone / luxury void palette,
- * Instrument Serif typography, ruled hairline architecture, and founder venture showcases.
+ * Instrument Serif typography, ruled hairline architecture, and founder company showcases.
  *
  * @returns Master React application.
  */
@@ -72,7 +72,7 @@ export default function App() {
           {/* Originkit Hero 68 Section */}
           <Hero profile={profile} />
 
-          {/* Interactive Venture Showcase: Framer Tabs Card (Tracks & Taps, Connect Cultures, Lost Souls) */}
+          {/* Interactive Company Showcase: Framer Tabs Card (Tracks & Taps, Connect Cultures, Lost Souls) */}
           <VenturesAccordionSection />
 
           {/* Interactive Experience & Career Flowing Timeline */}

@@ -13,7 +13,7 @@ export const STRINGS = {
     subheading: "I design and build software, mobile apps, and real-world experiences. From solo-publishing iOS apps to developing event startups and building cultural platforms.",
     credentials: [
       "Techno Event Startup (LØST SØULS)",
-      "Connect Cultures (The Dream Venture)",
+      "Connect Cultures (The Dream Company)",
       "Tracks & Taps (Live on iOS App Store)",
       "MSc Applied AI & BSc Software Engineering"
     ],
@@ -77,7 +77,7 @@ export const STRINGS = {
     chapterBadge: "WHAT I BUILD",
     badge: "CAPABILITIES",
     title: "What I Build",
-    description: "Beside my own ventures, I partner with forward-thinking teams to build high-end digital products.",
+    description: "Beside my own companies, I partner with forward-thinking teams to build high-end digital products.",
     categories: [
       { id: "all", label: "All" },
       { id: "web", label: "Web Applications" },
@@ -86,7 +86,7 @@ export const STRINGS = {
     ],
     btnRequest: "Start a Project",
     manifestoQuote: "I don't just write code: I build products from the ground up and care about every detail.",
-    manifestoSub: "Whether you need a website, an iOS/Android app, an automated AI workflow, or want to partner on a venture: let's connect.",
+    manifestoSub: "Whether you need a website, an iOS/Android app, an automated AI workflow, or want to partner on a company: let's connect.",
     btnDiscussCollab: "Let's Collaborate",
     offerings: [
       {
@@ -162,8 +162,8 @@ export const STRINGS = {
     chapterBadge: "GET IN TOUCH",
     badge: "CONTACT",
     title: "Let's Build Together",
-    description: "Have a venture idea, need a mobile or AI product built, or want to collaborate? Send a direct note or reach out via email.",
-    statusTitle: "Available for Ventures & Builds",
+    description: "Have a company idea, need a mobile or AI product built, or want to collaborate? Send a direct note or reach out via email.",
+    statusTitle: "Available for Companies & Builds",
     statusSub: "Reply within 24 hours",
     directEmailTitle: "Direct Email",
     directEmailValue: "Joeywognum@gmail.com",
@@ -176,7 +176,7 @@ export const STRINGS = {
     emailLabel: "Your Email",
     emailPlaceholder: "alex@example.com",
     messageLabel: "Message",
-    messagePlaceholder: "Tell me about your idea, project, or venture...",
+    messagePlaceholder: "Tell me about your idea, project, or company...",
     btnSubmit: "Send Message",
     btnSubmitting: "Sending...",
     btnCopy: "Copy Email",

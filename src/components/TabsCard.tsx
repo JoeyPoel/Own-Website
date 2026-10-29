@@ -65,10 +65,10 @@ const springTransition = {
  * Faithfully replicates the Framer "Tabs card" component (qs9tZHZbw.js):
  * - Vertical interactive tabs on the left with expandable description on active state
  * - Signature inverted superellipse fillet corners merging active tab into the showcase card
- * - Right showcase panel displaying active venture screenshot, telemetry tags, and launch link
+ * - Right showcase panel displaying active company screenshot, telemetry tags, and launch link
  * - Responsive mobile fallback stacking tabs cleanly with animated preview panel
  *
- * @param props.items - List of venture tab items.
+ * @param props.items - List of company tab items.
  * @param props.activeId - Currently selected item ID.
  * @param props.onSelect - Callback fired when a tab is clicked or hovered.
  * @returns {React.JSX.Element} Interactive Tabs Card component.
@@ -187,7 +187,7 @@ export default function TabsCard({
                     aria-hidden="true"
                   />
 
-                  {/* Bottom Venture Action Bar */}
+                  {/* Bottom Company Action Bar */}
                   <div className="absolute inset-x-0 bottom-0 p-5 sm:p-7 z-10 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
                     <div>
                       {item.subtitle && (
@@ -200,7 +200,7 @@ export default function TabsCard({
                       </h4>
                     </div>
 
-                    {/* Launch Venture CTA */}
+                    {/* Launch Company CTA */}
                     <a
                       href={item.link}
                       target="_blank"
