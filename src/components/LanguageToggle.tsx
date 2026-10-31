@@ -40,14 +40,14 @@ export default function LanguageToggle({ className = '' }: LanguageToggleProps):
             title={`Switch to ${item.title}`}
             className={`relative z-10 px-2 py-1 text-[11px] font-mono font-bold tracking-wider rounded-full transition-colors cursor-pointer ${
               isActive
-                ? 'text-[#000000]'
+                ? 'text-[#000000] dark:text-white'
                 : 'text-[var(--lede)] hover:text-[var(--ink)]'
             }`}
           >
             {isActive && (
               <motion.span
                 layoutId="language-toggle-pill"
-                className="absolute inset-0 rounded-full bg-[#fce9c7] shadow-xs -z-10"
+                className="absolute inset-0 rounded-full bg-[#fce9c7] dark:bg-[#a3b5c4]/30 dark:border dark:border-[#a3b5c4]/50 shadow-xs -z-10"
                 transition={{ type: 'spring', stiffness: 420, damping: 30 }}
               />
             )}

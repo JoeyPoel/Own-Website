@@ -21,7 +21,7 @@
   --line-strong: rgba(0, 0, 0, 0.16);
   --highlight-champagne: rgba(252, 233, 199, 0.4);
   --highlight-mist: rgba(163, 181, 196, 0.25);
-  --wrap: 1254px;
+  --wrap: 1440px;
   --gut: 30px;
   --theme-color: #ffffff;
   --font-serif: "Instrument Serif", Georgia, serif;
@@ -134,10 +134,10 @@ img {
 
 /* View Transition API: eliminates any text flickering or color flashing */
 ::view-transition-old(root) {
-  animation: 350ms cubic-bezier(0.4, 0, 0.2, 1) both theme-fade-out;
+  animation: 180ms cubic-bezier(0.4, 0, 0.2, 1) both theme-fade-out;
 }
 ::view-transition-new(root) {
-  animation: 350ms cubic-bezier(0.4, 0, 0.2, 1) both theme-fade-in;
+  animation: 180ms cubic-bezier(0.4, 0, 0.2, 1) both theme-fade-in;
 }
 
 @keyframes theme-fade-out {
@@ -149,13 +149,11 @@ img {
   to { opacity: 1; }
 }
 
-/* While capturing clean theme snapshots, bypass intermediate element CSS transitions */
-html.is-switching-theme,
-html.is-switching-theme *,
-html.is-switching-theme *::before,
-html.is-switching-theme *::after {
+/* While capturing clean theme snapshots, bypass intermediate element CSS transitions (excluding interactive theme toggle) */
+html.is-switching-theme *:not([data-theme-toggle], [data-theme-toggle] *),
+html.is-switching-theme *:not([data-theme-toggle], [data-theme-toggle] *)::before,
+html.is-switching-theme *:not([data-theme-toggle], [data-theme-toggle] *)::after {
   transition: none !important;
-  animation-duration: 0s !important;
 }
 
 /* Disable transitions during initial page load to eliminate switching animation */

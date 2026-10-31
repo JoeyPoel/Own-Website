@@ -57,7 +57,7 @@ export default function Hero({ profile }: HeroProps): React.JSX.Element {
       </div>
 
       {/* ─── Top Architectural Bar at Hero (No Navbar at Hero) ─── */}
-      <header className="relative z-20 w-full max-w-[1254px] mx-auto px-5 sm:px-6 pt-7 sm:pt-9 flex items-center justify-between gap-4">
+      <header className="relative z-20 w-full max-w-[1440px] mx-auto px-4 sm:px-10 lg:px-16 pt-7 sm:pt-9 flex items-center justify-between gap-4">
         {/* Left: Founder Role & Academic Specialization */}
         <div className="flex items-center gap-2.5 text-xs sm:text-sm font-sans tracking-tight">
           <span className="font-semibold text-[var(--ink)]">{strings.hero.roleBadge}</span>
@@ -98,10 +98,10 @@ export default function Hero({ profile }: HeroProps): React.JSX.Element {
       </div>
 
       {/* ─── Central Content Stage ─── */}
-      <div className="relative z-20 w-full max-w-[1254px] mx-auto px-5 sm:px-6 flex-1 flex flex-col justify-start pt-3 sm:pt-10 lg:pt-14 pb-4 sm:pb-12">
+      <div className="relative z-20 w-full max-w-[1440px] mx-auto px-4 sm:px-10 lg:px-16 flex-1 flex flex-col justify-start pt-3 sm:pt-10 lg:pt-14 pb-4 sm:pb-12">
         
         {/* Left Column: Headlines & Story (Top anchored to eliminate massive whitespace above) */}
-        <div className="w-full max-w-full sm:max-w-xl lg:max-w-2xl z-20">
+        <div className="w-full max-w-full sm:max-w-xl lg:max-w-2xl xl:max-w-3xl z-20">
 
           {/* Main Headline */}
           <motion.div

@@ -52,7 +52,7 @@ function Footer({ profileName }: { profileName: string }): React.JSX.Element {
 
   return (
     <footer className="relative z-10 w-full py-12 border-t border-[var(--line)] bg-[var(--bg)] text-[var(--ink)] transition-colors">
-      <div className="max-w-[1254px] mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-10 lg:px-16 flex flex-col md:flex-row items-center justify-between gap-6">
         <p className="text-xs font-mono opacity-75">
           &copy; {new Date().getFullYear()} {profileName} &bull; <span className="text-[#a3b5c4] font-medium">{strings.footer.tagline}</span>
         </p>
@@ -61,6 +61,7 @@ function Footer({ profileName }: { profileName: string }): React.JSX.Element {
             <a
               key={link.name}
               href={link.href}
+              download={link.href.endsWith('.pdf') ? 'Resume_Joey_van_der_Poel.pdf' : undefined}
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-[#a3b5c4] transition-colors"

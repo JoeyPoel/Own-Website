@@ -106,7 +106,7 @@ export default function ContactSection(): React.JSX.Element {
       id="contact"
       className="pt-0 pb-0 relative border-t border-[var(--line)] bg-[var(--bg)] text-[var(--ink)] overflow-hidden"
     >
-      <div className="max-w-[1254px] mx-auto px-5 sm:px-6">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-10 lg:px-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-end">
           
           {/* Left Column: Minimal Editorial Heading & Direct Channels */}
@@ -119,7 +119,8 @@ export default function ContactSection(): React.JSX.Element {
           >
             <div>
               <h2 className="font-editorial text-3xl xs:text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-normal leading-[1.04] tracking-tight mb-3 sm:mb-4 text-[var(--ink)]">
-                Let's build <span className="italic font-normal">together.</span>
+                {strings.contact.title.replace(strings.contact.titleItalic, '').trim()}{' '}
+                <span className="italic font-normal">{strings.contact.titleItalic}</span>
               </h2>
               <p className="text-[var(--lede)] text-xs sm:text-base leading-relaxed max-w-md">
                 {strings.contact.description}
@@ -152,18 +153,18 @@ export default function ContactSection(): React.JSX.Element {
                   type="button"
                   onClick={handleCopyEmail}
                   className="p-2 sm:p-2.5 border border-[#a3b5c4]/25 hover:border-[#a3b5c4] bg-[var(--bg)] text-[var(--ink)] hover:bg-[#a3b5c4]/10 transition-all cursor-pointer flex items-center gap-1.5 text-xs font-mono shrink-0"
-                  title="Copy email to clipboard"
-                  aria-label="Copy email address"
+                  title={strings.contact.btnCopy}
+                  aria-label={strings.contact.btnCopy}
                 >
                   {copied ? (
                     <>
                       <Check className="w-3.5 h-3.5 text-[#a3b5c4]" />
-                      <span className="text-[10px] sm:text-[11px] text-[var(--ink)] dark:text-[#a3b5c4] font-medium">Copied</span>
+                      <span className="text-[10px] sm:text-[11px] text-[var(--ink)] dark:text-[#a3b5c4] font-medium">{strings.contact.copiedFeedback}</span>
                     </>
                   ) : (
                     <>
                       <Copy className="w-3.5 h-3.5 opacity-60" />
-                      <span className="text-[10px] sm:text-[11px] opacity-75">Copy</span>
+                      <span className="text-[10px] sm:text-[11px] opacity-75">{strings.contact.copyBtn}</span>
                     </>
                   )}
                 </button>
@@ -221,7 +222,7 @@ export default function ContactSection(): React.JSX.Element {
                 >
                   <div className="flex items-center justify-between pb-2 border-b border-[var(--line)]">
                     <span className="text-xs font-mono uppercase tracking-wider font-semibold text-[var(--ink)]">
-                      Quick Message
+                      {strings.contact.quickMessageTitle}
                     </span>
                   </div>
 
@@ -302,6 +303,9 @@ export default function ContactSection(): React.JSX.Element {
                         </>
                       )}
                     </button>
+                    <p className="mt-3 text-[11px] font-sans text-[var(--lede)] leading-relaxed text-center sm:text-left opacity-80">
+                      {strings.contact.privacyNote}
+                    </p>
                   </div>
                 </motion.form>
               ) : (

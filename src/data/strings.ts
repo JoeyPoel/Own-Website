@@ -5,6 +5,11 @@
  */
 
 export const STRINGS = {
+  meta: {
+    title: "Joey van der Poel | Mobile Developer & AI Automation Engineer",
+    description: "Joey van der Poel is a Mobile Developer and AI Automation Engineer (MSc Applied AI candidate) building high-impact iOS apps, AI workflows, and digital platforms.",
+  },
+
   hero: {
     chapterBadge: "PROFILE",
     availabilityBadge: "Founder • Builder • Creative Technologist",
@@ -82,12 +87,12 @@ export const STRINGS = {
 
   projects: {
     title: "Selected Projects",
-    description: "Explore my published iOS app, my dream company vision, and underground event startup in development. Hover or tap any tab to inspect.",
+    description: "Explore my published iOS app, my vision for Connect Cultures, and an underground events concept in development.",
     tabs: [
       {
         id: "tracks",
         subtitle: "Your Gamified Tour Guide",
-        description: "Transforming standard walking routes into outdoor scavenger hunts & city adventures. Solved through real-world landmarks, interactive challenges, and trivia, complete with translation into all languages.",
+        description: "Turn city walks into interactive scavenger hunts with real-world landmarks, challenges, and trivia. The app is available in multiple languages.",
         tags: "App Store 5.0 ★, iOS Adventure, Scavenger Hunts",
         badge: "Live App",
         buttonText: "Download on App Store",
@@ -117,37 +122,77 @@ export const STRINGS = {
   experience: {
     title: "Engineering Journey",
     description: "Hands-on enterprise engineering, startup publishing, and academic leadership. Click or scrub through the milestones below.",
+    downloadCvBtn: "Download Resume",
+    prevBtn: "Prev",
+    nextBtn: "Next",
+    counterOf: "of",
     milestones: [
       {
         id: 'auas',
         role: 'Student Mentor',
         type: 'Academic • Parttime',
+        period: 'Sep 2026 – Present',
+        location: 'Amsterdam, NL',
         headline: 'Mentoring Future AI & Software Engineers',
-        summary: 'Guiding students through core applied AI curricula, delivering structural feedback on algorithmic implementations, and coaching students on software design principles.',
+        summary: 'Guiding students through core applied AI curricula, providing constructive feedback on algorithms and software design, and coaching cohorts in foundational computer science.',
         highlights: [
           'Delivered constructive technical reviews on code quality and AI models',
           'Coached cohorts in software design patterns and mathematical problem-solving',
           'Fostered collaborative engineering habits and autonomous troubleshooting',
         ],
-        caption: 'University of Applied Sciences',
+        caption: 'Amsterdam University of Applied Sciences',
+      },
+      {
+        id: 'swap-club',
+        role: 'Mobile Application Developer',
+        type: 'Circular Economy • Internship',
+        period: 'Nov 2025 – Jan 2026',
+        location: 'Amsterdam, NL (Hybrid)',
+        headline: 'Cross-Platform React Native App for Circular Economy',
+        summary: 'Engineered the mobile client for The Swap Club, focusing on strict architectural stability, modular design patterns, and real-time inventory trading flows.',
+        highlights: [
+          'Built production client in React Native with Expo and end-to-end TypeScript strict typing',
+          'Architected reactive state flows and Supabase PostgreSQL data persistence',
+          'Enforced component-driven reusability and strict linting standards from day one',
+        ],
+        caption: 'The Swap Club',
       },
       {
         id: 'tracks-taps',
         role: 'Founder & Lead Developer',
         type: 'Product Owner • Solo Build',
+        period: 'Jun 2025 – Present',
+        location: 'App Store Worldwide',
         headline: 'Solo-Engineered Travel Quest App Live on iOS App Store',
-        summary: 'Spent over a year architecting, building, and deploying Tracks&Taps solo from initial wireframes to production release on the Apple App Store.',
+        summary: 'Spent over a year architecting, building, and deploying Tracks & Taps solo from initial wireframes to production release on the Apple App Store.',
         highlights: [
           'Engineered cross-platform mobile client with offline-first local caching',
-          'Integrated gamified real-world scavenger quests, canals, and Pub Golf challenges',
+          'Built interactive scavenger hunts, canal routes, and Pub Golf challenges',
           'Navigated complete Apple App Store review, TestFlight cycles, and StoreKit deployment',
         ],
-        caption: 'Tracks&Taps',
+        caption: 'Tracks & Taps',
+      },
+      {
+        id: 'dept',
+        role: 'Android Developer',
+        type: 'Agency Project • 5-Person Team',
+        period: 'Mar 2025 – Jun 2025',
+        location: 'Rotterdam, NL (Hybrid)',
+        headline: 'Native Kotlin App with OpenAI & Universal Accessibility',
+        summary: 'Engineered a native Android application prioritizing intelligent AI integration, geospatial features with Mapbox, and full TalkBack screen reader accessibility.',
+        highlights: [
+          'Built native dynamic UI with Jetpack Compose featuring TalkBack support, high-contrast display options, and scalable text',
+          'Integrated intelligent OpenAI chatbot API and custom on-device computer vision models',
+          'Implemented real-time authentication and cloud synchronization with Firebase and Mapbox SDK',
+        ],
+        caption: 'DEPT® Global Agency',
       },
       {
         id: 'tata-steel',
         role: 'Strategic HR Analytics & RPA Engineer',
         type: 'Enterprise Systems • 1 yr 10 mo',
+        period: 'Sep 2024 – Jun 2026',
+        location: 'IJmuiden, NL (Hybrid)',
         headline: 'SAP SuccessFactors Restructuring & Core RPA Pipelines',
         summary: 'Graduation research diagnosing and optimizing Tata Steel talent pipelines within SAP SuccessFactors, coupled with building enterprise-scale document understanding automations.',
         highlights: [
@@ -156,43 +201,19 @@ export const STRINGS = {
           'Automated legacy mainframe price lists, eliminating 90% of repetitive manual data entry',
           'Spearheaded TSP Non-Prime order automation and executed critical server migrations',
         ],
-        caption: 'TATA STEEL',
-      },
-      {
-        id: 'swap-club',
-        role: 'Mobile Application Developer',
-        type: 'Circular Economy • Internship',
-        headline: 'Cross-Platform React Native App for Circular Economy',
-        summary: 'Engineered the mobile client for The SwapClub, focusing on strict architectural stability, modular design patterns, and real-time inventory trading flows.',
-        highlights: [
-          'Built production client in React Native with Expo and end-to-end TypeScript strict typing',
-          'Architected reactive state flows and Supabase PostgreSQL data persistence',
-          'Enforced component-driven reusability and strict linting standards from day one',
-        ],
-        caption: 'The SwapClub',
-      },
-      {
-        id: 'dept',
-        role: 'Android Developer',
-        type: 'Agency Project • 5-Person Team',
-        headline: 'Native Kotlin App with OpenAI & Universal Accessibility',
-        summary: 'Engineered a native Android application prioritizing intelligent AI integration, geospatial features with Mapbox, and full TalkBack screen reader accessibility.',
-        highlights: [
-          'Built native dynamic UI with Jetpack Compose featuring full TalkBack and high-contrast scaling',
-          'Integrated intelligent OpenAI chatbot API and custom on-device computer vision models',
-          'Implemented real-time authentication and cloud synchronization with Firebase and Mapbox SDK',
-        ],
-        caption: 'DEPT® Global Agency',
+        caption: 'Tata Steel',
       },
       {
         id: 'youngones',
         role: 'Independent Freelance Professional',
         type: 'Freelance Operations • 2 yr 2 mo',
+        period: 'Feb 2023 – Mar 2025',
+        location: 'North Holland, NL',
         headline: 'Dynamic On-Demand Operations & Adaptability',
-        summary: 'Executed diverse commercial operations across retail, events, and logistics while managing full entrepreneurial responsibilities, invoicing, and tax accounting.',
+        summary: 'Executed diverse commercial operations across retail, events, and logistics while managing independent scheduling, client administration, and invoicing.',
         highlights: [
-          'Demonstrated rapid adaptability across varied fast-paced customer-facing environments',
-          'Managed full independent freelance administration, financial reporting, and invoicing',
+          'Demonstrated rapid adaptability across fast-paced event, retail, and logistics environments',
+          'Managed full independent freelance administration, bookkeeping, and invoicing',
           'Cultivated hands-on problem-solving, real-time crisis triage, and team coordination',
         ],
         caption: 'YoungOnes Platform',
@@ -204,7 +225,7 @@ export const STRINGS = {
     chapterBadge: "WHAT I BUILD",
     badge: "CAPABILITIES",
     title: "What I Build",
-    description: "Beside my own companies, I partner with forward-thinking teams to build high-end digital products.",
+    description: "Alongside my own ventures, I help teams build high-quality digital products.",
     categories: [
       { id: "all", label: "All" },
       { id: "web", label: "Web Applications" },
@@ -213,7 +234,7 @@ export const STRINGS = {
     ],
     btnRequest: "Start a Project",
     manifestoQuote: "I don't just write code: I build products from the ground up and care about every detail.",
-    manifestoSub: "Whether you need a website, an iOS/Android app, an automated AI workflow, or want to partner on a company: let's connect.",
+    manifestoSub: "Whether you need a website, an iOS/Android app, an automated AI workflow, or want to partner on a new venture: let's connect.",
     btnDiscussCollab: "Let's Collaborate",
     offerings: [
       {
@@ -270,8 +291,9 @@ export const STRINGS = {
     verifiedReviewsPill: "VERIFIED REVIEWS",
     title: "Testimonials",
     description: "Recommendations from leaders at The Swap Club, DEPT®, and Tata Steel.",
-    ratingValue: "5.0 / 5.0 Rating",
-    ratingVerifyLink: "Verify on LinkedIn",
+    ratingValue: "3 Recommendations",
+    ratingSub: "Verified on LinkedIn",
+    ratingVerifyLink: "View on LinkedIn",
     trustItem1: "On-Time Production Delivery",
     trustItem2: "Direct Founder Ownership",
     trustItem3: "Technical & Practical Rigor",
@@ -312,9 +334,10 @@ export const STRINGS = {
   contact: {
     chapterBadge: "GET IN TOUCH",
     badge: "CONTACT",
-    title: "Let's Build Together",
-    description: "Have a company idea, need a mobile or AI product built, or want to collaborate? Send a direct note or reach out via email.",
-    statusTitle: "Available for Companies & Builds",
+    title: "Let's build together.",
+    titleItalic: "together.",
+    description: "Have a venture idea, need a mobile or AI product built, or want to collaborate? Send a direct note or reach out via email.",
+    statusTitle: "Available for Ventures & Digital Products",
     statusSub: "Reply within 24 hours",
     directEmailTitle: "Direct Email",
     directEmailValue: "Joeywognum@gmail.com",
@@ -322,14 +345,17 @@ export const STRINGS = {
     linkedinValue: "Joey van der Poel",
     githubTitle: "GitHub",
     githubValue: "github.com/JoeyPoel",
+    quickMessageTitle: "Quick Message",
     nameLabel: "Your Name",
     namePlaceholder: "e.g. Alex Miller",
     emailLabel: "Your Email",
     emailPlaceholder: "alex@example.com",
     messageLabel: "Message",
-    messagePlaceholder: "Tell me about your idea, project, or company...",
+    messagePlaceholder: "Tell me about your idea, project, or venture...",
+    privacyNote: "Your name, email address, and message are used solely to reply to your inquiry. No personal data is stored in databases or shared with third parties.",
     btnSubmit: "Send Message",
     btnSubmitting: "Sending...",
+    copyBtn: "Copy",
     btnCopy: "Copy Email",
     copiedFeedback: "Copied to clipboard",
     successTitle: "Message Sent!",
@@ -353,6 +379,7 @@ export const STRINGS = {
     tagline: "Mobile Developer & AI Engineer",
     allRightsReserved: "All rights reserved.",
     links: [
+      { name: "Resume", href: "/Resume_Joey_van_der_Poel.pdf" },
       { name: "Connect Cultures", href: "https://www.connectcultures.world/" },
       { name: "LØST SØULS", href: "https://lostsouls-events.com/" },
       { name: "Tracks & Taps", href: "https://apps.apple.com/nl/app/tracks-taps-your-tour-guide/id6756650785?l=en-GB" },
@@ -362,6 +389,7 @@ export const STRINGS = {
   },
 
   links: {
+    cv: "/Resume_Joey_van_der_Poel.pdf",
     linkedin: "https://www.linkedin.com/in/joey-van-der-poel-974203302/",
     appStore: "https://apps.apple.com/nl/app/tracks-taps-your-tour-guide/id6756650785?l=en-GB",
     github: "https://github.com/JoeyPoel",
@@ -386,6 +414,11 @@ export const STRINGS_EN: PortfolioStrings = STRINGS
  * Mirrors STRINGS 1:1 with natural, editorial-grade Dutch copy.
  */
 export const STRINGS_NL: PortfolioStrings = {
+  meta: {
+    title: "Joey van der Poel | Mobile Developer & AI Automation Engineer",
+    description: "Joey van der Poel is een Mobile Developer en AI Automation Engineer (MSc Applied AI) die hoogwaardige mobiele apps, AI-workflows en digitale platformen bouwt.",
+  },
+
   hero: {
     chapterBadge: "PROFIEL",
     availabilityBadge: "Founder • Builder • Creative Technologist",
@@ -468,7 +501,7 @@ export const STRINGS_NL: PortfolioStrings = {
       {
         id: "tracks",
         subtitle: "Interactieve reisgids & speurtochten",
-        description: "Maakt van traditionele stadswandelingen interactieve speurtochten. Navigeer langs bezienswaardigheden, los raadsels op en voltooi uitdagingen, beschikbaar in meerdere talen.",
+        description: "Maakt van traditionele stadswandelingen interactieve speurtochten. Navigeer langs bezienswaardigheden, los raadsels op en voltooi uitdagingen. De app is beschikbaar in meerdere talen.",
         tags: "App Store 5.0 ★, iOS Avontuur, Speurtochten",
         badge: "Live in App Store",
         buttonText: "Bekijk in App Store",
@@ -497,12 +530,18 @@ export const STRINGS_NL: PortfolioStrings = {
 
   experience: {
     title: "Mijn ervaring",
-    description: "Praktijkervaring bij toonaangevende organisaties, zelfstandig gelanceerde producten en het mentoren van studenten. Klik of blader door de tijdlijn hieronder.",
+    description: "Praktijkervaring bij toonaangevende organisaties, zelfstandig gelanceerde producten en het begeleiden van studenten. Klik of blader door de tijdlijn hieronder.",
+    downloadCvBtn: "Download CV",
+    prevBtn: "Vorige",
+    nextBtn: "Volgende",
+    counterOf: "van",
     milestones: [
       {
         id: 'auas',
         role: 'Studentmentor',
         type: 'Academisch • Deeltijd',
+        period: 'Sep 2026 – heden',
+        location: 'Amsterdam, NL',
         headline: 'Begeleiding van toekomstige AI- & software-engineers',
         summary: 'Begeleiden van studenten bij de lesstof van Applied AI, inhoudelijke feedback geven op algoritmes en studenten coachen in softwareontwerp.',
         highlights: [
@@ -513,22 +552,56 @@ export const STRINGS_NL: PortfolioStrings = {
         caption: 'Hogeschool van Amsterdam',
       },
       {
+        id: 'swap-club',
+        role: 'Mobile Application Developer',
+        type: 'Circulaire economie • Stage',
+        period: 'Nov 2025 – Jan 2026',
+        location: 'Amsterdam, NL (Hybride)',
+        headline: 'Cross-platform React Native-app voor de circulaire economie',
+        summary: 'De mobiele app voor The Swap Club gebouwd, met een stabiele architectuur en soepele ruilprocessen.',
+        highlights: [
+          'Complete productie-app gebouwd met React Native, Expo en TypeScript',
+          'Supabase PostgreSQL-database en realtime datastromen opgezet',
+          'Herbruikbare componenten en nette codestandaarden vanaf dag één gehanteerd',
+        ],
+        caption: 'The Swap Club',
+      },
+      {
         id: 'tracks-taps',
         role: 'Oprichter & Lead Developer',
         type: 'Eigen project • Solo build',
-        headline: 'Zelfstandig ontwikkelde reis-app live in de App Store',
-        summary: 'Ruim een jaar zelfstandig gebouwd aan Tracks&Taps: van de allereerste schetsen tot de release in de Apple App Store.',
+        period: 'Jun 2025 – heden',
+        location: 'Wereldwijd in de App Store',
+        headline: 'Zelfstandig ontwikkelde reisapp live in de App Store',
+        summary: 'Ruim een jaar zelfstandig gebouwd aan Tracks & Taps: van de allereerste schetsen tot de release in de Apple App Store.',
         highlights: [
           'Cross-platform app gebouwd die ook offline snel en soepel blijft werken',
-          'Interactieve speurtochten, Amsterdamse grachtenroutes en challenges geïntegreerd',
+          'Interactieve speurtochten, routes langs de grachten en challenges geïntegreerd',
           'Het hele traject doorlopen: van TestFlight en App Store review tot betalingen via StoreKit',
         ],
-        caption: 'Tracks&Taps',
+        caption: 'Tracks & Taps',
+      },
+      {
+        id: 'dept',
+        role: 'Android Developer',
+        type: 'Bureauproject • 5-koppig team',
+        period: 'Mar 2025 – Jun 2025',
+        location: 'Rotterdam, NL (Hybride)',
+        headline: 'Native Kotlin-app met OpenAI en universele toegankelijkheid',
+        summary: 'Een native Android-app ontwikkeld met AI-integratie, kaarten via Mapbox en volledige toegankelijkheid voor schermlezers (TalkBack).',
+        highlights: [
+          'Dynamische native UI gebouwd met Jetpack Compose, voorzien van TalkBack-ondersteuning, opties voor hoog contrast en schaalbare tekst',
+          'OpenAI-chatbot-API en on-device computervisiemodellen geïntegreerd',
+          'Realtime authenticatie en cloudsynchronisatie gerealiseerd via Firebase en de Mapbox SDK',
+        ],
+        caption: 'DEPT® Global Agency',
       },
       {
         id: 'tata-steel',
         role: 'Strategic HR Analytics & RPA Engineer',
         type: 'Enterprise Systems • 1 jr 10 mnd',
+        period: 'Sep 2024 – Jun 2026',
+        location: 'IJmuiden, NL (Hybride)',
         headline: 'Verbetering SAP SuccessFactors & automatisering met RPA',
         summary: 'Afstudeeronderzoek naar het verbeteren van talentprocessen binnen SAP SuccessFactors, plus de bouw van automatiseringen met documentherkenning.',
         highlights: [
@@ -540,41 +613,17 @@ export const STRINGS_NL: PortfolioStrings = {
         caption: 'Tata Steel',
       },
       {
-        id: 'swap-club',
-        role: 'Mobile Application Developer',
-        type: 'Circulaire economie • Stage',
-        headline: 'Cross-platform React Native app voor de circulaire economie',
-        summary: 'De mobiele app voor The SwapClub gebouwd, met een stabiele architectuur en soepele ruilprocessen.',
-        highlights: [
-          'Complete productie-app gebouwd met React Native, Expo en TypeScript',
-          'Supabase PostgreSQL-database en realtime datastromen opgezet',
-          'Herbruikbare componenten en nette codestandaarden vanaf dag één gehanteerd',
-        ],
-        caption: 'The SwapClub',
-      },
-      {
-        id: 'dept',
-        role: 'Android Developer',
-        type: 'Bureauproject • 5-koppig team',
-        headline: 'Native Kotlin-app met OpenAI en universele toegankelijkheid',
-        summary: 'Een native Android-app ontwikkeld met AI-integratie, kaarten via Mapbox en volledige toegankelijkheid voor schermlezers (TalkBack).',
-        highlights: [
-          'Dynamische native UI gebouwd met Jetpack Compose, voorzien van TalkBack en hoog-contrastweergave',
-          'OpenAI chatbot-API en on-device computervisie-modellen geïntegreerd',
-          'Real-time authenticatie en cloudsynchronisatie gerealiseerd via Firebase en de Mapbox SDK',
-        ],
-        caption: 'DEPT® Global Agency',
-      },
-      {
         id: 'youngones',
         role: 'Zelfstandig ondernemer / Freelancer',
         type: 'Freelance werkzaamheden • 2 jr 2 mnd',
+        period: 'Feb 2023 – Mar 2025',
+        location: 'Noord-Holland, NL',
         headline: 'Zelfstandig werken & snel schakelen',
-        summary: 'Uiteenlopende opdrachten uitgevoerd bij evenementen, retail en logistiek, inclusief eigen administratie en facturatie.',
+        summary: 'Uiteenlopende opdrachten uitgevoerd bij evenementen, retail en logistiek, inclusief zelfstandige planning, administratie en facturatie.',
         highlights: [
-          'Snel kunnen schakelen in drukke en klantgerichte omgevingen',
-          'Zelfstandig de planning, administratie en facturatie geregeld',
-          'Praktisch leren meedenken en problemen direct oplossen op de werkvloer',
+          'Snel kunnen schakelen in drukke omgevingen binnen evenementen, retail en logistiek',
+          'Zelfstandig de planning, administratie en facturatie verzorgd',
+          'Praktisch leren meedenken en direct problemen oplossen op de werkvloer',
         ],
         caption: 'YoungOnes Platform',
       },
@@ -603,9 +652,9 @@ export const STRINGS_NL: PortfolioStrings = {
         badge: "Webapplicaties",
         metric: "Snel & vloeiend",
         title: "Moderne websites & webapplicaties",
-        desc: "Maatwerk digitale ervaringen met verfijnde typografie, subtiele micro-animaties en optimale prestaties. Vanaf de grond opgebouwd met moderne webtechnologieën.",
+        desc: "Digitale ervaringen op maat, met verfijnde typografie, subtiele animaties en snelle laadtijden. Gebouwd met moderne webtechnologieën.",
         deliverables: [
-          "Maatwerk designs met soepele animaties en interacties",
+          "Ontwerpen op maat met soepele animaties en interacties",
           "Modulaire componenten-architectuur en schone code",
           "Snelle laadtijden en goede vindbaarheid in Google (SEO)",
           "Volledige typeveiligheid met TypeScript"
@@ -621,7 +670,7 @@ export const STRINGS_NL: PortfolioStrings = {
         desc: "Soepele iOS- en Android-apps die logisch in elkaar zitten, ook offline goed werken en klaar zijn voor de App Store.",
         deliverables: [
           "Publicatie in de App Store & Google Play",
-          "Offline data-opslag en cloud-synchronisatie",
+          "Offline dataopslag en cloudsynchronisatie",
           "Verfijnde animaties en haptische feedback",
           "Integratie van native sensoren en apparaatfuncties"
         ],
@@ -632,11 +681,11 @@ export const STRINGS_NL: PortfolioStrings = {
         category: "ai",
         badge: "AI-systemen",
         metric: "Slimme automatisering",
-        title: "AI & workflow-automatisering",
-        desc: "Slimme data-pipelines, AI-assistenten en computer vision-modellen die saai herhaalwerk wegnemen en processen een stuk sneller maken.",
+        title: "AI & workflowautomatisering",
+        desc: "Slimme datapijplijnen, AI-assistenten en beeldherkenningsmodellen die saai herhaalwerk wegnemen en processen een stuk sneller maken.",
         deliverables: [
-          "Geautomatiseerde data- en content-pipelines",
-          "Computer vision en beeldherkenningsmodellen",
+          "Geautomatiseerde data- en contentpijplijnen",
+          "Beeldherkennings- en computervisiemodellen",
           "Op maat ontwikkelde AI-workflows en assistenten",
           "Robuuste API-koppelingen en clouddiensten"
         ],
@@ -651,17 +700,18 @@ export const STRINGS_NL: PortfolioStrings = {
     verifiedReviewsPill: "GEVERIFIEERDE REVIEWS",
     title: "Aanbevelingen",
     description: "Ervaringen van opdrachtgevers en teamleiders bij The Swap Club, DEPT® en Tata Steel.",
-    ratingValue: "5.0 / 5.0 Beoordeling",
+    ratingValue: "3 Aanbevelingen",
+    ratingSub: "Geverifieerd op LinkedIn",
     ratingVerifyLink: "Bekijk op LinkedIn",
     trustItem1: "Oplevering binnen de afgesproken deadline",
     trustItem2: "Echte betrokkenheid en direct eigenaarschap",
     trustItem3: "Pragmatische aanpak met technische diepgang",
     badgeSwap: "Mobiele app MVP",
-    badgeDept: "AI Chatbot & Vision",
-    badgeTata: "Workflow-automatisering",
+    badgeDept: "AI-chatbot & beeldherkenning",
+    badgeTata: "Workflowautomatisering",
     roleSwap: "iOS / Android App",
-    roleDept: "AI Chatbot & Computer Vision",
-    roleTata: "Geautomatiseerde pipeline",
+    roleDept: "AI-chatbot & computer vision",
+    roleTata: "Geautomatiseerde pijplijn",
     fallbackTrustBadge: "Geverifieerd project",
     fallbackRole: "Engineering & oplevering",
     translationNotice: "Vertaald uit het Engels",
@@ -693,7 +743,8 @@ export const STRINGS_NL: PortfolioStrings = {
   contact: {
     chapterBadge: "CONTACT",
     badge: "KENNISMAKEN",
-    title: "Laten we samen bouwen",
+    title: "Laten we samen bouwen.",
+    titleItalic: "bouwen.",
     description: "Heb je een goed idee, zoek je een ontwikkelaar voor een app of AI-oplossing, of wil je sparren over een samenwerking? Stuur gerust een bericht of mail direct.",
     statusTitle: "Beschikbaar voor nieuwe projecten & samenwerkingen",
     statusSub: "Reactie binnen 24 uur",
@@ -703,14 +754,17 @@ export const STRINGS_NL: PortfolioStrings = {
     linkedinValue: "Joey van der Poel",
     githubTitle: "GitHub",
     githubValue: "github.com/JoeyPoel",
+    quickMessageTitle: "Kort bericht",
     nameLabel: "Jouw naam",
     namePlaceholder: "Bijvoorbeeld Alex de Vries",
     emailLabel: "Jouw e-mailadres",
     emailPlaceholder: "alex@bedrijf.nl",
     messageLabel: "Jouw bericht",
     messagePlaceholder: "Vertel over jouw idee of project...",
+    privacyNote: "Je naam, e-mailadres en bericht worden uitsluitend gebruikt om je aanvraag te beantwoorden. Er worden geen persoonsgegevens in databases opgeslagen of met derden gedeeld.",
     btnSubmit: "Verstuur bericht",
     btnSubmitting: "Bezig met verzenden...",
+    copyBtn: "Kopiëren",
     btnCopy: "Kopieer e-mailadres",
     copiedFeedback: "Gekopieerd naar klembord",
     successTitle: "Bericht verzonden!",
@@ -734,6 +788,7 @@ export const STRINGS_NL: PortfolioStrings = {
     tagline: "Mobile Developer & AI Engineer",
     allRightsReserved: "Alle rechten voorbehouden.",
     links: [
+      { name: "CV", href: "/Resume_Joey_van_der_Poel.pdf" },
       { name: "Connect Cultures", href: "https://www.connectcultures.world/" },
       { name: "LØST SØULS", href: "https://lostsouls-events.com/" },
       { name: "Tracks & Taps", href: "https://apps.apple.com/nl/app/tracks-taps-your-tour-guide/id6756650785?l=en-GB" },
@@ -743,6 +798,7 @@ export const STRINGS_NL: PortfolioStrings = {
   },
 
   links: {
+    cv: "/Resume_Joey_van_der_Poel.pdf",
     linkedin: "https://www.linkedin.com/in/joey-van-der-poel-974203302/",
     appStore: "https://apps.apple.com/nl/app/tracks-taps-your-tour-guide/id6756650785?l=en-GB",
     github: "https://github.com/JoeyPoel",
@@ -751,4 +807,3 @@ export const STRINGS_NL: PortfolioStrings = {
     lostSouls: "https://lostsouls-events.com/"
   }
 } satisfies PortfolioStrings
-

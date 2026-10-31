@@ -120,7 +120,7 @@ export default function VenturesAccordionSection(): React.JSX.Element {
         />
       </div>
 
-      <div className="max-w-[1254px] mx-auto px-5 sm:px-6 relative z-10">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-10 lg:px-16 relative z-10">
         {/* Section Header: Chapter Badge & Headline */}
         <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-4 sm:gap-6 mb-6 sm:mb-10">
           <div>

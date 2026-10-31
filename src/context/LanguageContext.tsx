@@ -47,15 +47,31 @@ export function LanguageProvider({ children }: { children: React.ReactNode }): R
     setLanguage(language === 'en' ? 'nl' : 'en')
   }, [language, setLanguage])
 
-  useEffect(() => {
-    if (typeof document !== 'undefined') {
-      document.documentElement.lang = language
-    }
-  }, [language])
-
   const strings = useMemo<PortfolioStrings>(() => {
     return language === 'nl' ? STRINGS_NL : STRINGS
   }, [language])
+
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      document.documentElement.lang = language
+      document.title = strings.meta.title
+
+      const metaDesc = document.querySelector('meta[name="description"]')
+      if (metaDesc) {
+        metaDesc.setAttribute('content', strings.meta.description)
+      }
+
+      const ogTitle = document.querySelector('meta[property="og:title"]')
+      if (ogTitle) {
+        ogTitle.setAttribute('content', strings.meta.title)
+      }
+
+      const ogDesc = document.querySelector('meta[property="og:description"]')
+      if (ogDesc) {
+        ogDesc.setAttribute('content', strings.meta.description)
+      }
+    }
+  }, [language, strings.meta])
 
   const contextValue = useMemo<LanguageContextType>(
     () => ({

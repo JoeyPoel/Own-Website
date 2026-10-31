@@ -36,7 +36,7 @@ export default function CreativeOfferingsSection(): React.JSX.Element {
         aria-hidden="true"
       />
 
-      <div className="max-w-[1254px] mx-auto px-5 sm:px-6 relative z-10">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-10 lg:px-16 relative z-10">
         
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 sm:gap-8 mb-8 sm:mb-12">

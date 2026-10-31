@@ -117,7 +117,7 @@ export default function Navbar({ profile }: NavbarProps): React.JSX.Element {
 
               return (
                 <a
-                  key={link.name}
+                  key={link.href}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
                   className={`text-xs uppercase font-mono tracking-wider transition-all relative py-1 ${
@@ -222,7 +222,7 @@ export default function Navbar({ profile }: NavbarProps): React.JSX.Element {
 
                     return (
                       <a
-                        key={link.name}
+                        key={link.href}
                         href={link.href}
                         onClick={(e) => handleNavClick(e, link.href)}
                         className={`text-base font-sans py-2.5 border-b border-[var(--line)] flex items-center justify-between ${

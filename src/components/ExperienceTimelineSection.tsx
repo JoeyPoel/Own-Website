@@ -6,6 +6,7 @@ import {
   ChevronLeft,
   MapPin,
   CheckCircle2,
+  Download,
 } from 'lucide-react'
 import { useLanguage } from '../context/LanguageContext'
 
@@ -30,8 +31,8 @@ const MILESTONES: TimelineMilestone[] = [
   {
     id: 'auas',
     num: '01',
-    company: 'University of Applied Sciences',
-    shortName: 'Univ. Applied Sci',
+    company: 'Amsterdam University of Applied Sciences',
+    shortName: 'AUAS',
     role: 'Student Mentor',
     period: 'Sep 2026 – Present',
     type: 'Academic • Parttime',
@@ -45,35 +46,77 @@ const MILESTONES: TimelineMilestone[] = [
       'Fostered collaborative engineering habits and autonomous troubleshooting',
     ],
     skills: ['Applied AI', 'Code Review', 'Academic Mentorship', 'Python'],
-    imageUrl: '/auas_logo.jpg',
-    caption: 'University of Applied Sciences',
+    imageUrl: '/hva_logo.png',
+    caption: 'Amsterdam University of Applied Sciences',
+  },
+  {
+    id: 'swap-club',
+    num: '02',
+    company: 'The Swap Club',
+    shortName: 'The Swap Club',
+    role: 'Mobile Application Developer',
+    period: 'Nov 2025 – Jan 2026',
+    type: 'Circular Economy • Internship',
+    location: 'Amsterdam, NL (Hybrid)',
+    headline: 'Cross-Platform React Native App for Circular Economy',
+    summary:
+      'Engineered the mobile client for The Swap Club, focusing on strict architectural stability, modular design patterns, and real-time inventory trading flows.',
+    highlights: [
+      'Built production client in React Native with Expo and end-to-end TypeScript strict typing',
+      'Architected reactive state flows and Supabase PostgreSQL data persistence',
+      'Enforced component-driven reusability and strict linting standards from day one',
+    ],
+    skills: ['React Native', 'Expo', 'TypeScript', 'Supabase', 'PostgreSQL', 'Clean Architecture'],
+    imageUrl: '/swapclub_logo.jpg',
+    caption: 'The Swap Club',
   },
   {
     id: 'tracks-taps',
-    num: '02',
-    company: 'Tracks&Taps',
-    shortName: 'Tracks&Taps',
+    num: '03',
+    company: 'Tracks & Taps',
+    shortName: 'Tracks & Taps',
     role: 'Founder & Lead Developer',
     period: 'Jun 2025 – Present',
     type: 'Product Owner • Solo Build',
     location: 'App Store Worldwide',
     headline: 'Solo-Engineered Travel Quest App Live on iOS App Store',
     summary:
-      'Spent over a year architecting, building, and deploying Tracks&Taps solo from initial wireframes to production release on the Apple App Store.',
+      'Spent over a year architecting, building, and deploying Tracks & Taps solo from initial wireframes to production release on the Apple App Store.',
     highlights: [
       'Engineered cross-platform mobile client with offline-first local caching',
-      'Integrated gamified real-world scavenger quests, canals, and Pub Golf challenges',
+      'Integrated gamified real-world scavenger quests, canal routes, and Pub Golf challenges',
       'Navigated complete Apple App Store review, TestFlight cycles, and StoreKit deployment',
     ],
     skills: ['React Native', 'Expo', 'TypeScript', 'App Store Publishing', 'StoreKit'],
     imageUrl: '/tracks_icon.png',
-    caption: 'Tracks&Taps',
+    caption: 'Tracks & Taps',
+  },
+  {
+    id: 'dept',
+    num: '04',
+    company: 'DEPT®',
+    shortName: 'DEPT®',
+    role: 'Android Developer',
+    period: 'Mar 2025 – Jun 2025',
+    type: 'Agency Project • 5-Person Team',
+    location: 'Rotterdam, NL (Hybrid)',
+    headline: 'Native Kotlin App with OpenAI & Universal Accessibility',
+    summary:
+      'Engineered a native Android application prioritizing intelligent AI integration, geospatial features with Mapbox, and full TalkBack screen reader accessibility.',
+    highlights: [
+      'Built native dynamic UI with Jetpack Compose featuring TalkBack support, high-contrast display options, and scalable text',
+      'Integrated intelligent OpenAI chatbot API and custom on-device computer vision models',
+      'Implemented real-time authentication and cloud synchronization with Firebase and Mapbox SDK',
+    ],
+    skills: ['Kotlin', 'Jetpack Compose', 'OpenAI API', 'Computer Vision', 'Firebase', 'Mapbox SDK'],
+    imageUrl: '/dept.jpg',
+    caption: 'DEPT® Global Agency',
   },
   {
     id: 'tata-steel',
-    num: '03',
-    company: 'TATA STEEL',
-    shortName: 'TATA STEEL',
+    num: '05',
+    company: 'Tata Steel',
+    shortName: 'Tata Steel',
     role: 'Strategic HR Analytics & RPA Engineer',
     period: 'Sep 2024 – Jun 2026',
     type: 'Enterprise Systems • 1 yr 10 mo',
@@ -89,49 +132,7 @@ const MILESTONES: TimelineMilestone[] = [
     ],
     skills: ['SAP SuccessFactors', 'Enterprise RPA', 'Document Understanding', 'OCR Pipelines', 'Process Redesign'],
     imageUrl: '/tatasteel_logo.png',
-    caption: 'TATA STEEL',
-  },
-  {
-    id: 'swap-club',
-    num: '04',
-    company: 'The SwapClub',
-    shortName: 'The SwapClub',
-    role: 'Mobile Application Developer',
-    period: 'Nov 2025 – Jan 2026',
-    type: 'Circular Economy • Internship',
-    location: 'Amsterdam, NL (Hybrid)',
-    headline: 'Cross-Platform React Native App for Circular Economy',
-    summary:
-      'Engineered the mobile client for The SwapClub, focusing on strict architectural stability, modular design patterns, and real-time inventory trading flows.',
-    highlights: [
-      'Built production client in React Native with Expo and end-to-end TypeScript strict typing',
-      'Architected reactive state flows and Supabase PostgreSQL data persistence',
-      'Enforced component-driven reusability and strict linting standards from day one',
-    ],
-    skills: ['React Native', 'Expo', 'TypeScript', 'Supabase', 'PostgreSQL', 'Clean Architecture'],
-    imageUrl: '/swapclub_logo.jpg',
-    caption: 'The SwapClub',
-  },
-  {
-    id: 'dept',
-    num: '05',
-    company: 'DEPT®',
-    shortName: 'DEPT®',
-    role: 'Android Developer',
-    period: 'Mar 2025 – Jun 2025',
-    type: 'Agency Project • 5-Person Team',
-    location: 'Rotterdam, NL (Hybrid)',
-    headline: 'Native Kotlin App with OpenAI & Universal Accessibility',
-    summary:
-      'Engineered a native Android application prioritizing intelligent AI integration, geospatial features with Mapbox, and full TalkBack screen reader accessibility.',
-    highlights: [
-      'Built native dynamic UI with Jetpack Compose featuring full TalkBack and high-contrast scaling',
-      'Integrated intelligent OpenAI chatbot API and custom on-device computer vision models',
-      'Implemented real-time authentication and cloud synchronization with Firebase and Mapbox SDK',
-    ],
-    skills: ['Kotlin', 'Jetpack Compose', 'OpenAI API', 'Computer Vision', 'Firebase', 'Mapbox SDK'],
-    imageUrl: '/dept.jpg',
-    caption: 'DEPT® Global Agency',
+    caption: 'Tata Steel',
   },
   {
     id: 'youngones',
@@ -144,10 +145,10 @@ const MILESTONES: TimelineMilestone[] = [
     location: 'North Holland, NL',
     headline: 'Dynamic On-Demand Operations & Adaptability',
     summary:
-      'Executed diverse commercial operations across retail, events, and logistics while managing full entrepreneurial responsibilities, invoicing, and tax accounting.',
+      'Executed diverse commercial operations across retail, events, and logistics while managing independent scheduling, client administration, and invoicing.',
     highlights: [
-      'Demonstrated rapid adaptability across varied fast-paced customer-facing environments',
-      'Managed full independent freelance administration, financial reporting, and invoicing',
+      'Demonstrated rapid adaptability across fast-paced event, retail, and logistics environments',
+      'Managed full independent freelance administration, bookkeeping, and invoicing',
       'Cultivated hands-on problem-solving, real-time crisis triage, and team coordination',
     ],
     skills: ['Entrepreneurial Agility', 'Operations', 'Client Relations', 'Financial Accounting'],
@@ -159,8 +160,8 @@ const MILESTONES: TimelineMilestone[] = [
 /**
  * ExperienceTimelineSection:
  * Framer-grade Flowing Timeline and Archival Experience Section.
- * Synthesized from ConnectCultures with interactive progress rail, connected milestone nodes,
- * 3D perspective mouse tilt memory card, and concise LinkedIn achievements.
+ * Features chronological progression sorted strictly by start date, interactive progress rail,
+ * connected milestone nodes, 3D perspective mouse tilt memory card, and localized telemetry.
  *
  * @returns {React.JSX.Element} Interactive career timeline section.
  */
@@ -169,21 +170,27 @@ export default function ExperienceTimelineSection(): React.JSX.Element {
   const [activeIdx, setActiveIdx] = useState<number>(0)
   const [direction, setDirection] = useState<number>(1)
 
+  const isDutch = strings.experience.prevBtn === 'Vorige'
+
   const localizedMilestones = useMemo<TimelineMilestone[]>(() => {
     return MILESTONES.map((m) => {
       const localized = strings.experience?.milestones?.find((item) => item.id === m.id)
       if (!localized) return m
       return {
         ...m,
+        company: localized.caption ?? m.company,
+        shortName: m.id === 'auas' ? (isDutch ? 'HvA' : 'AUAS') : m.shortName,
         role: localized.role,
         type: localized.type,
         headline: localized.headline,
         summary: localized.summary,
         highlights: localized.highlights,
         caption: localized.caption,
+        period: localized.period ?? m.period,
+        location: localized.location ?? m.location,
       }
     })
-  }, [strings.experience])
+  }, [strings.experience, isDutch])
 
   const activeMilestone = localizedMilestones[activeIdx] ?? localizedMilestones[0]
 
@@ -282,12 +289,11 @@ export default function ExperienceTimelineSection(): React.JSX.Element {
         />
       </div>
 
-      <div className="max-w-[1254px] mx-auto px-5 sm:px-6 relative z-10">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-10 lg:px-16 relative z-10">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 sm:gap-6 mb-8 sm:mb-14">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-6 mb-8 sm:mb-14">
           <div>
-
             <h2 className="font-editorial text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.04] tracking-tight">
               {strings.experience.title}
             </h2>
@@ -296,10 +302,23 @@ export default function ExperienceTimelineSection(): React.JSX.Element {
               {strings.experience.description}
             </p>
           </div>
+
+          {/* Direct Resume / CV Download Action */}
+          <a
+            href="/Resume_Joey_van_der_Poel.pdf"
+            download="Resume_Joey_van_der_Poel.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-4 py-2.5 bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/15 border border-[var(--line-strong)] hover:border-[#a3b5c4] text-xs font-mono font-semibold tracking-wider uppercase text-[var(--ink)] transition-all shrink-0 cursor-pointer shadow-xs group rounded-sm self-start sm:self-end"
+            title={strings.experience.downloadCvBtn}
+          >
+            <Download className="w-4 h-4 text-[#a3b5c4] group-hover:-translate-y-0.5 transition-transform" />
+            <span>{strings.experience.downloadCvBtn}</span>
+          </a>
         </div>
 
         {/* ─── 1. Flowing Interactive Progress Scrubber Rail ─── */}
-        <div className="relative mb-8 sm:mb-14 max-w-5xl mx-auto overflow-x-auto pb-3 pt-2">
+        <div className="relative mb-8 sm:mb-14 max-w-6xl mx-auto overflow-x-auto pb-3 pt-2">
           <div className="grid grid-cols-6 min-w-[680px] relative">
             {localizedMilestones.map((m, idx) => {
               const isSelected = activeIdx === idx
@@ -499,41 +518,36 @@ export default function ExperienceTimelineSection(): React.JSX.Element {
                   }}
                   className="w-full border border-[var(--line-strong)] bg-[var(--bg)] p-3 shadow-xl will-change-transform group"
                 >
-                  {/* Architectural Logo Showcase Stage */}
-                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-black/[0.02] dark:bg-white/[0.02] border border-[var(--line)] flex flex-col items-center justify-center p-6 sm:p-8">
-                    {/* Subtle dot matrix watermark */}
-                    <div
-                      className="absolute inset-0 opacity-[0.18] dark:opacity-[0.08] pointer-events-none"
-                      style={{
-                        backgroundImage: 'radial-gradient(var(--line-strong) 1px, transparent 1px)',
-                        backgroundSize: '16px 16px',
-                      }}
-                    />
-
-                    {/* Centered Logo Badge Pedestal */}
-                    <div className="relative z-10 w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden bg-white dark:bg-[#0c0c0d] border border-[var(--line-strong)] shadow-md flex items-center justify-center p-3.5 transition-transform duration-300 group-hover:scale-105">
+                  {/* Polaroid Visual Container */}
+                  <div className="relative w-full aspect-[4/3] overflow-hidden bg-white border border-[var(--line)]">
+                    <div className="absolute inset-0 flex items-center justify-center p-6 pb-16">
                       <img
                         src={activeMilestone.imageUrl}
-                        alt={`${activeMilestone.company} logo`}
-                        className="w-full h-full object-contain rounded-lg"
-                        loading="lazy"
+                        alt={activeMilestone.caption}
+                        className="max-w-full max-h-full object-contain transition-transform duration-700 ease-out group-hover:scale-105"
                       />
                     </div>
 
-                    {/* Telemetry pill & caption */}
-                    <div className="mt-4 text-center z-10">
-                      <span className="font-mono text-[9px] tracking-widest uppercase bg-[#fce9c7] text-[#000000] font-bold px-2 py-0.5 inline-block mb-1">
-                        {activeMilestone.period}
-                      </span>
-                      <p className="font-editorial text-sm sm:text-base font-medium text-[var(--ink)]">
+                    {/* Ambient Subtle Vignette */}
+                    <div
+                      className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent pointer-events-none"
+                      aria-hidden="true"
+                    />
+
+                    {/* Bottom Floating Title */}
+                    <div className="absolute inset-x-0 bottom-0 p-4">
+                      <span className="font-mono text-[10px] uppercase tracking-widest text-[#fce9c7] block">
                         {activeMilestone.caption}
+                      </span>
+                      <p className="font-editorial text-lg text-white font-normal line-clamp-1">
+                        {activeMilestone.headline}
                       </p>
                     </div>
                   </div>
 
                   {/* Card Telemetry Footer */}
                   <div className="pt-3 px-1 flex items-center justify-between font-mono text-[11px] text-[var(--lede)]">
-                    <span className="truncate max-w-[200px]">{activeMilestone.company}</span>
+                    <span className="truncate max-w-[200px]">{activeMilestone.caption}</span>
                     <span className="text-[#a3b5c4] font-bold">
                       {activeMilestone.num} / 06
                     </span>
@@ -548,23 +562,25 @@ export default function ExperienceTimelineSection(): React.JSX.Element {
                 type="button"
                 disabled={activeIdx === 0}
                 onClick={handlePrev}
+                aria-label={strings.experience.prevBtn}
                 className="inline-flex items-center gap-1.5 px-4 py-2 border border-[var(--line-strong)] text-xs font-mono font-semibold text-[var(--ink)] disabled:opacity-30 hover:bg-[var(--line)] transition-all cursor-pointer shadow-xs"
               >
                 <ChevronLeft className="w-4 h-4" />
-                <span>Prev</span>
+                <span>{strings.experience.prevBtn}</span>
               </button>
 
               <span className="font-mono text-xs font-semibold text-[var(--ink)]">
-                {activeIdx + 1} of {MILESTONES.length}
+                {activeIdx + 1} {strings.experience.counterOf} {MILESTONES.length}
               </span>
 
               <button
                 type="button"
                 disabled={activeIdx === MILESTONES.length - 1}
                 onClick={handleNext}
+                aria-label={strings.experience.nextBtn}
                 className="inline-flex items-center gap-1.5 px-4 py-2 bg-[var(--btn-bg)] text-[var(--btn-fg)] text-xs font-mono font-semibold disabled:opacity-30 hover:opacity-90 transition-all cursor-pointer shadow-xs"
               >
-                <span>Next</span>
+                <span>{strings.experience.nextBtn}</span>
                 <ChevronRight className="w-4 h-4" />
               </button>
             </div>

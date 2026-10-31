@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { Star, ExternalLink } from 'lucide-react'
+import { ExternalLink, Linkedin, CheckCircle2 } from 'lucide-react'
 import type { Testimonial } from '../data/portfolioData'
 import { useLanguage } from '../context/LanguageContext'
 
@@ -10,7 +10,7 @@ interface TestimonialsSectionProps {
 
 /**
  * TestimonialsSection ("the feedback part") styled with Framer Marketplace "Wall of Love" aesthetics:
- * Star rating capsule, trust metrics bar, company identity stamps, and verified endorsement pills.
+ * Verified LinkedIn recommendation trust badge, company identity stamps, and authentic endorsement pills.
  * Supports reactive multi-language quotes and translation provenance notice.
  *
  * @param props.testimonials - Verified client and manager testimonials.
@@ -30,12 +30,11 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
         />
       </div>
 
-      <div className="max-w-[1254px] mx-auto px-5 sm:px-6 relative z-10">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-10 lg:px-16 relative z-10">
         
-        {/* Section Header with Trust Rating Capsule */}
+        {/* Section Header with Verified Recommendation Capsule */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 sm:gap-8 mb-8 sm:mb-14">
           <div className="max-w-2xl">
-
             <h2 className="font-editorial text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.04] tracking-tight mb-2 sm:mb-3">
               {strings.testimonials.title}
             </h2>
@@ -45,16 +44,15 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
             </p>
           </div>
 
-          {/* Framer Star Rating Capsule */}
+          {/* LinkedIn Verified Recommendations Capsule */}
           <div className="p-3.5 sm:p-4 bg-[var(--bg)]/90 backdrop-blur-xl border border-[var(--line-strong)] rounded-sm shadow-lg flex flex-col sm:flex-row items-center gap-3 sm:gap-4 shrink-0">
-            <div className="flex items-center gap-1 text-[#fce9c7]">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-4 h-4 fill-[#fce9c7] text-[#fce9c7]" />
-              ))}
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#0a66c2]/10 border border-[#0a66c2]/30 text-[#0a66c2] dark:text-[#70b5f9]">
+              <Linkedin className="w-4 h-4 shrink-0" />
+              <span className="text-xs font-mono font-bold tracking-wider">{strings.testimonials.ratingValue}</span>
             </div>
             <div className="border-t sm:border-t-0 sm:border-l border-[var(--line)] pt-2 sm:pt-0 sm:pl-4 text-center sm:text-left">
               <span className="block font-mono text-xs font-bold uppercase tracking-wider text-[var(--ink)]">
-                {strings.testimonials.ratingValue}
+                {strings.testimonials.ratingSub}
               </span>
               <a
                 href={strings.links.recommendations}
@@ -120,11 +118,12 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
                     </span>
                   </div>
 
-                  {/* 5-Star Micro Bar */}
-                  <div className="flex items-center gap-1 mb-3.5 sm:mb-4 text-[#fce9c7]">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-3 h-3 fill-[#fce9c7] text-[#fce9c7]" />
-                    ))}
+                  {/* Verified Endorsement Tag */}
+                  <div className="flex items-center gap-1.5 mb-3.5 sm:mb-4 text-[#a3b5c4]">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#a3b5c4]" />
+                    <span className="text-[10px] font-mono tracking-wider uppercase font-medium">
+                      {strings.testimonials.ratingSub}
+                    </span>
                   </div>
 
                   {/* Quote Body */}
@@ -137,7 +136,9 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
                 <div className="border-t border-[var(--line)] pt-4 sm:pt-5 flex items-center gap-3.5 sm:gap-4">
                   <div
                     className={`w-11 h-11 border border-[var(--line-strong)] flex items-center justify-center font-bold text-xs font-mono shrink-0 overflow-hidden rounded-full shadow-inner ${
-                      isDept ? 'bg-black p-0' : 'bg-white dark:bg-white/10 p-1'
+                      isDept
+                        ? 'bg-black p-0 border-[#a3b5c4]/30'
+                        : 'bg-white p-1.5 border-black/10 dark:border-white/20'
                     }`}
                   >
                     {logoUrl ? (
@@ -166,7 +167,6 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
             )
           })}
         </div>
-
 
       </div>
     </section>

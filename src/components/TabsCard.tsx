@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 
@@ -62,16 +62,16 @@ const springTransition = {
 
 /**
  * TabsCard Component:
- * Faithfully replicates the Framer "Tabs card" component (qs9tZHZbw.js):
+ * Replicates the interactive Framer "Tabs card" component with complete WAI-ARIA tablist accessibility:
  * - Vertical interactive tabs on the left with expandable description on active state
+ * - Full keyboard navigation (Arrow keys, Home, End, Enter/Space) and visible focus rings
  * - Signature inverted superellipse fillet corners merging active tab into the showcase card
- * - Right showcase panel displaying active company screenshot, telemetry tags, and launch link
- * - Responsive mobile fallback stacking tabs cleanly with animated preview panel
+ * - Right showcase tabpanel displaying active project screenshot, telemetry tags, and launch link
  *
  * @param props.items - List of company tab items.
  * @param props.activeId - Currently selected item ID.
- * @param props.onSelect - Callback fired when a tab is clicked or hovered.
- * @returns {React.JSX.Element} Interactive Tabs Card component.
+ * @param props.onSelect - Callback fired when a tab is clicked or focused.
+ * @returns {React.JSX.Element} Fully accessible interactive Tabs Card component.
  */
 export default function TabsCard({
   items,
@@ -80,25 +80,70 @@ export default function TabsCard({
   className = '',
 }: TabsCardProps): React.JSX.Element {
   const activeItem = items.find((it) => it.id === activeId) ?? items[0]
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
+
+  /**
+   * Handles keyboard navigation across the tab list.
+   */
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLButtonElement>, currentIndex: number): void => {
+      let nextIndex = -1
+
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+        nextIndex = (currentIndex + 1) % items.length
+      } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+        nextIndex = (currentIndex - 1 + items.length) % items.length
+      } else if (e.key === 'Home') {
+        nextIndex = 0
+      } else if (e.key === 'End') {
+        nextIndex = items.length - 1
+      }
+
+      if (nextIndex >= 0) {
+        e.preventDefault()
+        const targetTab = items[nextIndex]
+        if (targetTab) {
+          onSelect(targetTab.id)
+          tabRefs.current[nextIndex]?.focus()
+        }
+      }
+    },
+    [items, onSelect]
+  )
 
   return (
     <div
-      className={`w-full max-w-[1240px] mx-auto rounded-[28px] border border-[#a3b5c4]/40 dark:border-[#a3b5c4]/30 bg-[var(--bg)] p-3 sm:p-5 shadow-[0_4px_30px_rgba(163,181,196,0.12)] transition-colors duration-300 ${className}`}
+      className={`w-full max-w-[1440px] mx-auto rounded-[28px] border border-[#a3b5c4]/40 dark:border-[#a3b5c4]/30 bg-[var(--bg)] p-3 sm:p-5 shadow-[0_4px_30px_rgba(163,181,196,0.12)] transition-colors duration-300 ${className}`}
     >
       <div className="flex flex-col lg:flex-row items-stretch gap-0 min-h-[460px] lg:min-h-[500px]">
         
         {/* ─── Left Tabs Navigation Column ─── */}
-        <div className="w-full lg:w-[360px] xl:w-[400px] shrink-0 flex flex-col justify-center py-4 lg:py-6 pr-0 lg:pr-0 z-10">
-          <div className="flex flex-col gap-1.5 sm:gap-2">
-            {items.map((item) => {
+        <div className="w-full lg:w-[380px] xl:w-[420px] shrink-0 flex flex-col justify-center py-4 lg:py-6 pr-0 lg:pr-0 z-10">
+          <div
+            role="tablist"
+            aria-orientation="vertical"
+            aria-label="Selected Projects"
+            className="flex flex-col gap-1.5 sm:gap-2"
+          >
+            {items.map((item, index) => {
               const isActive = item.id === activeItem.id
 
               return (
-                <div
+                <button
                   key={item.id}
+                  ref={(el) => {
+                    tabRefs.current[index] = el
+                  }}
+                  type="button"
+                  role="tab"
+                  id={`project-tab-${item.id}`}
+                  aria-selected={isActive}
+                  aria-controls={`project-panel-${item.id}`}
+                  tabIndex={isActive ? 0 : -1}
                   onClick={() => onSelect(item.id)}
                   onMouseEnter={() => onSelect(item.id)}
-                  className={`relative cursor-pointer select-none transition-all duration-300 p-5 sm:p-6 lg:p-7 ${
+                  onKeyDown={(e) => handleKeyDown(e, index)}
+                  className={`relative text-left w-full cursor-pointer select-none transition-all duration-300 p-5 sm:p-6 lg:p-7 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#a3b5c4] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--bg)] ${
                     isActive
                       ? 'bg-[#a3b5c4]/20 dark:bg-[#a3b5c4]/15 border-l-2 border-[#a3b5c4] rounded-2xl lg:rounded-l-2xl lg:rounded-r-none z-20 shadow-sm'
                       : 'bg-transparent hover:bg-black/[0.02] dark:hover:bg-white/[0.03] rounded-2xl text-[var(--lede)] opacity-70 hover:opacity-100 z-10'
@@ -142,18 +187,23 @@ export default function TabsCard({
                         <p className="mt-3 text-xs sm:text-sm leading-relaxed text-[#4f5d6b] dark:text-[#a3b5c4] font-normal">
                           {item.description}
                         </p>
-
                       </motion.div>
                     )}
                   </AnimatePresence>
-                </div>
+                </button>
               )
             })}
           </div>
         </div>
 
         {/* ─── Right Showcase Panel ─── */}
-        <div className="flex-1 rounded-[22px] sm:rounded-[26px] bg-[#a3b5c4]/20 dark:bg-[#a3b5c4]/15 p-2.5 sm:p-3 flex flex-col transition-colors duration-300 relative overflow-hidden min-h-[340px] sm:min-h-[440px] lg:min-h-[500px]">
+        <div
+          role="tabpanel"
+          id={`project-panel-${activeItem.id}`}
+          aria-labelledby={`project-tab-${activeItem.id}`}
+          tabIndex={0}
+          className="flex-1 rounded-[22px] sm:rounded-[26px] bg-[#a3b5c4]/20 dark:bg-[#a3b5c4]/15 p-2.5 sm:p-3 flex flex-col transition-colors duration-300 relative overflow-hidden min-h-[340px] sm:min-h-[440px] lg:min-h-[500px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#a3b5c4]"
+        >
           <div className="relative w-full h-full flex-1 rounded-[16px] sm:rounded-[20px] overflow-hidden bg-[#0d1117] border border-[#a3b5c4]/30 dark:border-[#a3b5c4]/25">
             
             {/* Seamless Pre-rendered Stacked Cross-fade (Zero White Flash) */}
