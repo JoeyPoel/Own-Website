@@ -61,7 +61,7 @@ function Footer({ profileName }: { profileName: string }): React.JSX.Element {
             <a
               key={link.name}
               href={link.href}
-              download={link.href.endsWith('.pdf') ? 'Resume_Joey_van_der_Poel.pdf' : undefined}
+              download={link.href.endsWith('.pdf') ? 'CV_Joey_van_der_Poel.pdf' : undefined}
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-[#a3b5c4] transition-colors"

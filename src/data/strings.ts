@@ -122,7 +122,7 @@ export const STRINGS = {
   experience: {
     title: "Engineering Journey",
     description: "Hands-on enterprise engineering, startup publishing, and academic leadership. Click or scrub through the milestones below.",
-    downloadCvBtn: "Download Resume",
+    downloadCvBtn: "Download CV",
     prevBtn: "Prev",
     nextBtn: "Next",
     counterOf: "of",
@@ -141,6 +141,13 @@ export const STRINGS = {
           'Fostered collaborative engineering habits and autonomous troubleshooting',
         ],
         caption: 'Amsterdam University of Applied Sciences',
+        researchPaper: {
+          badge: 'Preprint • ResearchGate',
+          title: 'Comparative Evaluation of mmWave Radar Data Representations for Contactless Fall Detection in Ambient Assisted Living',
+          doi: '10.13140/RG.2.2.14739.85289',
+          url: 'https://doi.org/10.13140/RG.2.2.14739.85289',
+          label: 'View Research Preprint (DOI)',
+        },
       },
       {
         id: 'swap-club',
@@ -379,7 +386,8 @@ export const STRINGS = {
     tagline: "Mobile Developer & AI Engineer",
     allRightsReserved: "All rights reserved.",
     links: [
-      { name: "Resume", href: "/Resume_Joey_van_der_Poel.pdf" },
+      { name: "CV", href: "/CV_Joey_van_der_Poel.pdf" },
+      { name: "Research", href: "https://doi.org/10.13140/RG.2.2.14739.85289" },
       { name: "Connect Cultures", href: "https://www.connectcultures.world/" },
       { name: "LØST SØULS", href: "https://lostsouls-events.com/" },
       { name: "Tracks & Taps", href: "https://apps.apple.com/nl/app/tracks-taps-your-tour-guide/id6756650785?l=en-GB" },
@@ -389,7 +397,8 @@ export const STRINGS = {
   },
 
   links: {
-    cv: "/Resume_Joey_van_der_Poel.pdf",
+    cv: "/CV_Joey_van_der_Poel.pdf",
+    research: "https://doi.org/10.13140/RG.2.2.14739.85289",
     linkedin: "https://www.linkedin.com/in/joey-van-der-poel-974203302/",
     appStore: "https://apps.apple.com/nl/app/tracks-taps-your-tour-guide/id6756650785?l=en-GB",
     github: "https://github.com/JoeyPoel",
@@ -550,6 +559,13 @@ export const STRINGS_NL: PortfolioStrings = {
           'Studenten geholpen om zelfstandig problemen op te lossen en nette code te schrijven',
         ],
         caption: 'Hogeschool van Amsterdam',
+        researchPaper: {
+          badge: 'Preprint • ResearchGate',
+          title: 'Comparative Evaluation of mmWave Radar Data Representations for Contactless Fall Detection in Ambient Assisted Living',
+          doi: '10.13140/RG.2.2.14739.85289',
+          url: 'https://doi.org/10.13140/RG.2.2.14739.85289',
+          label: 'Bekijk onderzoekspaper (DOI)',
+        },
       },
       {
         id: 'swap-club',
@@ -788,7 +804,8 @@ export const STRINGS_NL: PortfolioStrings = {
     tagline: "Mobile Developer & AI Engineer",
     allRightsReserved: "Alle rechten voorbehouden.",
     links: [
-      { name: "CV", href: "/Resume_Joey_van_der_Poel.pdf" },
+      { name: "CV", href: "/CV_Joey_van_der_Poel.pdf" },
+      { name: "Onderzoek", href: "https://doi.org/10.13140/RG.2.2.14739.85289" },
       { name: "Connect Cultures", href: "https://www.connectcultures.world/" },
       { name: "LØST SØULS", href: "https://lostsouls-events.com/" },
       { name: "Tracks & Taps", href: "https://apps.apple.com/nl/app/tracks-taps-your-tour-guide/id6756650785?l=en-GB" },
@@ -798,7 +815,8 @@ export const STRINGS_NL: PortfolioStrings = {
   },
 
   links: {
-    cv: "/Resume_Joey_van_der_Poel.pdf",
+    cv: "/CV_Joey_van_der_Poel.pdf",
+    research: "https://doi.org/10.13140/RG.2.2.14739.85289",
     linkedin: "https://www.linkedin.com/in/joey-van-der-poel-974203302/",
     appStore: "https://apps.apple.com/nl/app/tracks-taps-your-tour-guide/id6756650785?l=en-GB",
     github: "https://github.com/JoeyPoel",

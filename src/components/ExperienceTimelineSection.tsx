@@ -7,8 +7,18 @@ import {
   MapPin,
   CheckCircle2,
   Download,
+  FileText,
+  ExternalLink,
 } from 'lucide-react'
 import { useLanguage } from '../context/LanguageContext'
+
+export interface ResearchPaper {
+  badge: string
+  title: string
+  doi: string
+  url: string
+  label?: string
+}
 
 export interface TimelineMilestone {
   id: string
@@ -25,6 +35,7 @@ export interface TimelineMilestone {
   skills: string[]
   imageUrl: string
   caption: string
+  researchPaper?: ResearchPaper
 }
 
 const MILESTONES: TimelineMilestone[] = [
@@ -48,6 +59,14 @@ const MILESTONES: TimelineMilestone[] = [
     skills: ['Applied AI', 'Code Review', 'Academic Mentorship', 'Python'],
     imageUrl: '/hva_logo.png',
     caption: 'Amsterdam University of Applied Sciences',
+    researchPaper: {
+      badge: 'Preprint • ResearchGate',
+      title:
+        'Comparative Evaluation of mmWave Radar Data Representations for Contactless Fall Detection in Ambient Assisted Living',
+      doi: '10.13140/RG.2.2.14739.85289',
+      url: 'https://doi.org/10.13140/RG.2.2.14739.85289',
+      label: 'View Research Preprint (DOI)',
+    },
   },
   {
     id: 'swap-club',
@@ -188,6 +207,7 @@ export default function ExperienceTimelineSection(): React.JSX.Element {
         caption: localized.caption,
         period: localized.period ?? m.period,
         location: localized.location ?? m.location,
+        researchPaper: localized.researchPaper ?? m.researchPaper,
       }
     })
   }, [strings.experience, isDutch])
@@ -303,10 +323,10 @@ export default function ExperienceTimelineSection(): React.JSX.Element {
             </p>
           </div>
 
-          {/* Direct Resume / CV Download Action */}
+          {/* Direct CV Download Action */}
           <a
-            href="/Resume_Joey_van_der_Poel.pdf"
-            download="Resume_Joey_van_der_Poel.pdf"
+            href="/CV_Joey_van_der_Poel.pdf"
+            download="CV_Joey_van_der_Poel.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-4 py-2.5 bg-black/5 dark:bg-white/10 hover:bg-black/10 dark:hover:bg-white/15 border border-[var(--line-strong)] hover:border-[#a3b5c4] text-xs font-mono font-semibold tracking-wider uppercase text-[var(--ink)] transition-all shrink-0 cursor-pointer shadow-xs group rounded-sm self-start sm:self-end"
@@ -452,6 +472,37 @@ export default function ExperienceTimelineSection(): React.JSX.Element {
                     </div>
                   ))}
                 </div>
+
+                {/* Research Preprint Publication Callout */}
+                {activeMilestone.researchPaper && (
+                  <div className="p-3.5 sm:p-4 border border-[#a3b5c4]/30 bg-[#a3b5c4]/5 dark:bg-[#a3b5c4]/10 rounded-xs space-y-2.5 transition-colors">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <span className="inline-flex items-center gap-1.5 px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider font-semibold bg-[#a3b5c4]/20 border border-[#a3b5c4]/35 text-[var(--ink)] dark:text-[#fce9c7] rounded-xs">
+                        <FileText className="w-3 h-3 text-[#a3b5c4]" />
+                        {activeMilestone.researchPaper.badge}
+                      </span>
+                      <span className="font-mono text-[10px] text-[var(--lede)]">
+                        DOI: {activeMilestone.researchPaper.doi}
+                      </span>
+                    </div>
+
+                    <p className="font-editorial text-sm sm:text-base text-[var(--ink)] leading-snug font-normal">
+                      &ldquo;{activeMilestone.researchPaper.title}&rdquo;
+                    </p>
+
+                    <div className="pt-0.5">
+                      <a
+                        href={activeMilestone.researchPaper.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-[var(--ink)] hover:text-[#a3b5c4] underline decoration-[var(--line-strong)] hover:decoration-[#a3b5c4] underline-offset-4 transition-colors group/link"
+                      >
+                        <span>{activeMilestone.researchPaper.label ?? 'View Research Preprint (DOI)'}</span>
+                        <ExternalLink className="w-3 h-3 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform text-[#a3b5c4]" />
+                      </a>
+                    </div>
+                  </div>
+                )}
 
                 {/* Skills Tags */}
                 <div className="flex flex-wrap gap-1.5 pt-2">
