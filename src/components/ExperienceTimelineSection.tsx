@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useMemo } from 'react'
+import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react'
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import {
   Calendar,
@@ -245,10 +245,47 @@ export default function ExperienceTimelineSection(): React.JSX.Element {
    *
    * @param idx - Target milestone index.
    */
-  const handleSelect = (idx: number): void => {
-    setDirection(idx > activeIdx ? 1 : -1)
-    setActiveIdx(idx)
-  }
+  const handleSelect = useCallback((idx: number): void => {
+    setActiveIdx((prev) => {
+      setDirection(idx > prev ? 1 : -1)
+      return idx
+    })
+  }, [])
+
+  // Listen for navigation requests from other sections (e.g. Creative Offerings "View in Timeline")
+  useEffect(() => {
+    const onNavigate = (e: Event): void => {
+      const customEvent = e as CustomEvent<{ milestoneId?: string }>
+      const targetId = customEvent.detail?.milestoneId?.toLowerCase()
+      if (!targetId) return
+      const idx = localizedMilestones.findIndex((m) => m.id.toLowerCase() === targetId)
+      if (idx !== -1) {
+        handleSelect(idx)
+      }
+    }
+
+    const checkHash = (): void => {
+      const hash = window.location.hash.toLowerCase()
+      if (!hash) return
+      // Support #experience?milestone=dept or #experience-dept or #dept
+      for (let i = 0; i < localizedMilestones.length; i++) {
+        const id = localizedMilestones[i].id.toLowerCase()
+        if (hash.includes(id)) {
+          handleSelect(i)
+          break
+        }
+      }
+    }
+
+    window.addEventListener('navigate-experience', onNavigate)
+    window.addEventListener('hashchange', checkHash)
+    checkHash()
+
+    return () => {
+      window.removeEventListener('navigate-experience', onNavigate)
+      window.removeEventListener('hashchange', checkHash)
+    }
+  }, [localizedMilestones, handleSelect])
 
   // 3D Perspective Tilt on archival card
   const cardRef = useRef<HTMLDivElement | null>(null)

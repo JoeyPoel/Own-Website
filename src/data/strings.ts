@@ -240,6 +240,11 @@ export const STRINGS = {
       { id: "ai", label: "AI & Automations" }
     ],
     btnRequest: "Start a Project",
+    btnViewWork: "View Work",
+    modalTitle: "Selected Work",
+    modalSubtitle: "Shipped products, open-source tools, and enterprise automation systems.",
+    modalClose: "Close",
+    modalAllCategories: "All Work",
     manifestoQuote: "I don't just write code: I build products from the ground up and care about every detail.",
     manifestoSub: "Whether you need a website, an iOS/Android app, an automated AI workflow, or want to partner on a new venture: let's connect.",
     btnDiscussCollab: "Let's Collaborate",
@@ -257,7 +262,45 @@ export const STRINGS = {
           "Fast Performance & SEO Optimization",
           "End-to-End TypeScript Type Safety"
         ],
-        techStack: ["React", "TypeScript", "TailwindCSS", "Vite", "Framer Motion", "Next.js"]
+        techStack: ["React", "TypeScript", "TailwindCSS", "Vite", "Framer Motion", "Next.js"],
+        projects: [
+          {
+            id: "connectcultures",
+            title: "Connect Cultures",
+            subtitle: "Global Cultural Discovery Platform",
+            badge: "Web Platform",
+            description: "Interactive 3D Earth and cultural storytelling platform designed to bridge cultural divides and celebrate world traditions.",
+            imageUrl: "/connectcultures_preview.png",
+            techStack: ["Next.js", "Three.js", "TypeScript", "TailwindCSS"],
+            link: "https://www.connectcultures.world/",
+            linkText: "Visit Live Site",
+            isExternal: true
+          },
+          {
+            id: "voltclip",
+            title: "VØLTCLIP",
+            subtitle: "Precision Lightning Detection & Buffer Slicer",
+            badge: "Open Source Tool",
+            description: "Automated strike isolation tool with ±1.0s buffered clip extraction, quadrant differential analysis, and streetlamp rejection.",
+            imageUrl: "/voltclip.jpg",
+            techStack: ["Python", "OpenCV", "Video Analysis", "React"],
+            link: "https://github.com/JoeyPoel/Video-Lighnting-Detection",
+            linkText: "View on GitHub",
+            isExternal: true
+          },
+          {
+            id: "lostsouls",
+            title: "LØST SØULS",
+            subtitle: "Underground Rave Collective",
+            badge: "Event Startup",
+            description: "A community-driven underground rave collective in development with high-pressure sound, dark minimalist aesthetic, and ticketing flow.",
+            imageUrl: "/lostsouls_preview.png",
+            techStack: ["React", "TypeScript", "Framer Motion", "TailwindCSS"],
+            link: "https://lostsouls-events.com/",
+            linkText: "Visit Live Site",
+            isExternal: true
+          }
+        ]
       },
       {
         id: "mobile",
@@ -272,7 +315,33 @@ export const STRINGS = {
           "Fluid Animations & Haptics",
           "Native Device Sensor Integration"
         ],
-        techStack: ["React Native", "Expo", "Swift", "Supabase", "StoreKit", "Mapbox"]
+        techStack: ["React Native", "Expo", "Swift", "Supabase", "StoreKit", "Mapbox"],
+        projects: [
+          {
+            id: "tracks-taps",
+            title: "Tracks & Taps",
+            subtitle: "Interactive City Quest & Tour Guide",
+            badge: "iOS App Store Live",
+            description: "Solo-engineered iOS travel app featuring gamified city scavenger quests, canal routes, Pub Golf challenges, and offline caching.",
+            imageUrl: "/tracks_preview.jpg",
+            techStack: ["React Native", "Expo", "TypeScript", "StoreKit", "Mapbox"],
+            link: "https://apps.apple.com/nl/app/tracks-taps-your-tour-guide/id6756650785?l=en-GB",
+            linkText: "View on App Store",
+            isExternal: true
+          },
+          {
+            id: "dept-zoo",
+            title: "DEPT® Zoo AI App",
+            subtitle: "School Project @ DEPT® Agency",
+            badge: "Native Android App",
+            description: "Built as a university project at DEPT® global agency: native Android app combining an interactive zoo AI guide, on-device animal computer vision recognition, Mapbox geospatial routing, and full TalkBack screen reader accessibility.",
+            imageUrl: "/DeptChatbot.png",
+            techStack: ["Kotlin", "Jetpack Compose", "OpenAI API", "Computer Vision", "Mapbox", "TalkBack"],
+            link: "https://github.com/JoeyPoel/Dept-Zoo",
+            linkText: "View on GitHub",
+            isExternal: true
+          }
+        ]
       },
       {
         id: "ai",
@@ -287,7 +356,21 @@ export const STRINGS = {
           "Custom AI Workflows & Assistants",
           "API Integrations & Cloud Services"
         ],
-        techStack: ["Python", "PyTorch", "OpenAI / Claude API", "LangChain", "FastAPI", "Docker"]
+        techStack: ["Python", "PyTorch", "OpenAI / Claude API", "LangChain", "FastAPI", "Docker"],
+        projects: [
+          {
+            id: "tata-document-understanding",
+            title: "Tata Steel Order Automation",
+            subtitle: "Document Understanding & RPA",
+            badge: "Enterprise RPA Pipeline",
+            description: "Engineered at Tata Steel: automated pipeline scanning non-standard PDF customer order confirmations, extracting tabular and unstructured data using Document Understanding models, and automatically booking orders into SAP systems.",
+            imageUrl: "/Document Understanding.webp",
+            techStack: ["Document Understanding", "SAP SuccessFactors", "OCR Pipelines", "RPA", "Python"],
+            link: "#experience?milestone=tata-steel",
+            linkText: "View in Timeline",
+            isExternal: false
+          }
+        ]
       }
     ]
   },
@@ -658,6 +741,11 @@ export const STRINGS_NL: PortfolioStrings = {
       { id: "ai", label: "AI & automatisering" }
     ],
     btnRequest: "Start een project",
+    btnViewWork: "Bekijk werk",
+    modalTitle: "Geselecteerd werk",
+    modalSubtitle: "Gerealiseerde producten, open-source tools en geautomatiseerde enterprise-systemen.",
+    modalClose: "Sluiten",
+    modalAllCategories: "Alle projecten",
     manifestoQuote: "Ik schrijf niet zomaar code: ik bouw producten van de grond af op en besteed aandacht aan ieder detail.",
     manifestoSub: "Of je nu een moderne website zoekt, een native app, een slimme AI-workflow, of wilt sparren over een samenwerking: laten we kennismaken.",
     btnDiscussCollab: "Laten we samenwerken",
@@ -675,7 +763,45 @@ export const STRINGS_NL: PortfolioStrings = {
           "Snelle laadtijden en goede vindbaarheid in Google (SEO)",
           "Volledige typeveiligheid met TypeScript"
         ],
-        techStack: ["React", "TypeScript", "TailwindCSS", "Vite", "Framer Motion", "Next.js"]
+        techStack: ["React", "TypeScript", "TailwindCSS", "Vite", "Framer Motion", "Next.js"],
+        projects: [
+          {
+            id: "connectcultures",
+            title: "Connect Cultures",
+            subtitle: "Wereldwijd cultureel ontdekkingsplatform",
+            badge: "Webplatform",
+            description: "Interactieve 3D-wereldbol en cultureel platform dat culturen verbindt en tradities viert met vloeiende typografie en animaties.",
+            imageUrl: "/connectcultures_preview.png",
+            techStack: ["Next.js", "Three.js", "TypeScript", "TailwindCSS"],
+            link: "https://www.connectcultures.world/",
+            linkText: "Bezoek website",
+            isExternal: true
+          },
+          {
+            id: "voltclip",
+            title: "VØLTCLIP",
+            subtitle: "Nauwkeurige bliksemdetectie & videoslicer",
+            badge: "Open-source tool",
+            description: "Geautomatiseerde tool voor bliksemdetectie met ±1,0s gebufferde clip-extractie, differentiële kwadrantanalyse en straatlantaarnfiltering.",
+            imageUrl: "/voltclip.jpg",
+            techStack: ["Python", "OpenCV", "Video Analysis", "React"],
+            link: "https://github.com/JoeyPoel/Video-Lighnting-Detection",
+            linkText: "Bekijk op GitHub",
+            isExternal: true
+          },
+          {
+            id: "lostsouls",
+            title: "LØST SØULS",
+            subtitle: "Underground rave-collectief",
+            badge: "Evenementen-startup",
+            description: "Een community-gedreven rave-collectief in ontwikkeling met focus op pure sound, geen VIP-ruimtes en een donkere minimalistische esthetiek.",
+            imageUrl: "/lostsouls_preview.png",
+            techStack: ["React", "TypeScript", "Framer Motion", "TailwindCSS"],
+            link: "https://lostsouls-events.com/",
+            linkText: "Bezoek website",
+            isExternal: true
+          }
+        ]
       },
       {
         id: "mobile",
@@ -690,7 +816,33 @@ export const STRINGS_NL: PortfolioStrings = {
           "Verfijnde animaties en haptische feedback",
           "Integratie van native sensoren en apparaatfuncties"
         ],
-        techStack: ["React Native", "Expo", "Swift", "Supabase", "StoreKit", "Mapbox"]
+        techStack: ["React Native", "Expo", "Swift", "Supabase", "StoreKit", "Mapbox"],
+        projects: [
+          {
+            id: "tracks-taps",
+            title: "Tracks & Taps",
+            subtitle: "Interactieve stadswandelingen & speurtochten",
+            badge: "In de App Store",
+            description: "Zelfstandig gebouwde iOS-app in de Apple App Store met interactieve speurtochten, grachtenroutes, Pub Golf-uitdagingen en offline caching.",
+            imageUrl: "/tracks_preview.jpg",
+            techStack: ["React Native", "Expo", "TypeScript", "StoreKit", "Mapbox"],
+            link: "https://apps.apple.com/nl/app/tracks-taps-your-tour-guide/id6756650785?l=en-GB",
+            linkText: "Bekijk in App Store",
+            isExternal: true
+          },
+          {
+            id: "dept-zoo",
+            title: "DEPT® Zoo AI-app",
+            subtitle: "Studieproject bij DEPT®",
+            badge: "Native Android-app",
+            description: "Gebouwd als studieproject bij DEPT®: native Android-app met een interactieve AI-gids voor dierentuinen, computervisie voor dierherkenning, Mapbox-navigatie en volledige TalkBack-toegankelijkheid.",
+            imageUrl: "/DeptChatbot.png",
+            techStack: ["Kotlin", "Jetpack Compose", "OpenAI API", "Computer Vision", "Mapbox", "TalkBack"],
+            link: "https://github.com/JoeyPoel/Dept-Zoo",
+            linkText: "Bekijk op GitHub",
+            isExternal: true
+          }
+        ]
       },
       {
         id: "ai",
@@ -705,7 +857,21 @@ export const STRINGS_NL: PortfolioStrings = {
           "Op maat ontwikkelde AI-workflows en assistenten",
           "Robuuste API-koppelingen en clouddiensten"
         ],
-        techStack: ["Python", "PyTorch", "OpenAI / Claude API", "LangChain", "FastAPI", "Docker"]
+        techStack: ["Python", "PyTorch", "OpenAI / Claude API", "LangChain", "FastAPI", "Docker"],
+        projects: [
+          {
+            id: "tata-document-understanding",
+            title: "Tata Steel orderautomatisering",
+            subtitle: "Document Understanding & RPA",
+            badge: "Enterprise RPA-pijplijn",
+            description: "Ontwikkeld bij Tata Steel: geautomatiseerde pijplijn die PDF-orders scant, tabulaire en ongestructureerde data extraheert met Document Understanding-modellen en orders direct inboekt in SAP.",
+            imageUrl: "/Document Understanding.webp",
+            techStack: ["Document Understanding", "SAP SuccessFactors", "OCR Pipelines", "RPA", "Python"],
+            link: "#experience?milestone=tata-steel",
+            linkText: "Bekijk in tijdlijn",
+            isExternal: false
+          }
+        ]
       }
     ]
   },
