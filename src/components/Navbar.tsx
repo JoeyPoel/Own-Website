@@ -33,28 +33,44 @@ export default function Navbar({ profile }: NavbarProps): React.JSX.Element {
   useEffect(() => {
     const sectionIds = ['home', ...navLinks.map((link) => link.href.substring(1)), 'contact']
 
-    const handleScroll = (): void => {
+    let rafId: number | null = null
+
+    const checkScroll = (): void => {
+      const scrollY = window.scrollY
       const heroElement = document.getElementById('home')
       const heroBottom = heroElement ? heroElement.offsetHeight - 100 : window.innerHeight * 0.75
-      setIsScrolled(window.scrollY > heroBottom)
+      const nextScrolled = scrollY > heroBottom
+      setIsScrolled((prev) => (prev !== nextScrolled ? nextScrolled : prev))
 
-      const scrollPosition = window.scrollY + 160
+      const scrollPosition = scrollY + 160
       for (let i = sectionIds.length - 1; i >= 0; i--) {
         const id = sectionIds[i]
         const element = document.getElementById(id)
         if (element) {
           const top = element.offsetTop
           if (scrollPosition >= top) {
-            setActiveSection(id)
+            setActiveSection((prev) => (prev !== id ? id : prev))
             break
           }
         }
       }
+      rafId = null
+    }
+
+    const handleScroll = (): void => {
+      if (rafId === null) {
+        rafId = window.requestAnimationFrame(checkScroll)
+      }
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
-    handleScroll()
-    return () => window.removeEventListener('scroll', handleScroll)
+    checkScroll()
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      if (rafId !== null) {
+        window.cancelAnimationFrame(rafId)
+      }
+    }
   }, [navLinks])
 
   /**

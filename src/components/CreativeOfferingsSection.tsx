@@ -372,7 +372,9 @@ export default function CreativeOfferingsSection(): React.JSX.Element {
                           <img
                             src={proj.imageUrl}
                             alt={proj.title}
-                            className={`w-full h-full transition-transform duration-700 ease-out group-hover:scale-105 ${
+                            loading="lazy"
+                            decoding="async"
+                            className={`w-full h-full transition-transform duration-500 ease-out group-hover:scale-105 transform-gpu ${
                               proj.imageUrl.includes('DeptChatbot')
                                 ? 'object-contain p-2 bg-[#0c0e14]'
                                 : 'object-cover'

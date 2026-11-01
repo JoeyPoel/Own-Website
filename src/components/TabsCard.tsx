@@ -207,7 +207,7 @@ export default function TabsCard({
           <div className="relative w-full h-full flex-1 rounded-[16px] sm:rounded-[20px] overflow-hidden bg-[#0d1117] border border-[#a3b5c4]/30 dark:border-[#a3b5c4]/25">
             
             {/* Seamless Pre-rendered Stacked Cross-fade (Zero White Flash) */}
-            {items.map((item) => {
+            {items.map((item, itemIdx) => {
               const isActive = item.id === activeItem.id
 
               return (
@@ -216,18 +216,17 @@ export default function TabsCard({
                   initial={false}
                   animate={{
                     opacity: isActive ? 1 : 0,
-                    scale: isActive ? 1 : 1.015,
-                  }}
+}}
                   transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                  className={`absolute inset-0 w-full h-full will-change-[opacity,transform] ${
-                    isActive ? 'z-10 pointer-events-auto' : 'z-0 pointer-events-none'
+                  className={`absolute inset-0 w-full h-full transform-gpu ${
+                    isActive ? 'z-10 pointer-events-auto opacity-100' : 'z-0 pointer-events-none opacity-0'
                   }`}
                 >
                   <img
                     src={item.image.src}
                     alt={item.image.alt}
                     className="w-full h-full object-cover object-top"
-                    loading="eager"
+                    loading={itemIdx === 0 ? "eager" : "lazy"}
                     decoding="async"
                   />
 

@@ -110,22 +110,6 @@ footer,
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-h1,
-h2,
-h3,
-h4,
-p,
-a,
-span,
-button,
-input,
-textarea,
-svg {
-  transition-property: color, border-color, fill, stroke, opacity;
-  transition-duration: 400ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
 img {
   transition-property: opacity;
   transition-duration: 400ms;

@@ -361,7 +361,7 @@ export default function ContactSection(): React.JSX.Element {
                 className={`h-[320px] xs:h-[370px] sm:h-[480px] lg:h-[590px] xl:h-[615px] 2xl:h-[630px] w-auto max-w-none object-contain object-bottom select-none pointer-events-none transition-opacity duration-400 ease-in-out mix-blend-multiply translate-y-[1px] ${
                   isDark ? 'opacity-0 pointer-events-none' : 'opacity-100'
                 }`}
-                loading="eager"
+                loading="lazy"
                 decoding="async"
               />
 
@@ -369,10 +369,10 @@ export default function ContactSection(): React.JSX.Element {
               <img
                 src="/GraduationBlackBackground.jpg"
                 alt="Joey van der Poel Graduation"
-                className={`absolute inset-0 w-full h-full object-contain object-bottom select-none pointer-events-none transition-opacity duration-400 ease-in-out mix-blend-screen translate-y-[1px] ${
+                className={`absolute inset-0 w-full h-full object-contain object-bottom select-none pointer-events-none transition-opacity duration-400 ease-in-out mix-blend-screen translate-y-[1px] transform-gpu ${
                   isDark ? 'opacity-100' : 'opacity-0 pointer-events-none'
                 }`}
-                loading="eager"
+                loading="lazy"
                 decoding="async"
               />
             </div>

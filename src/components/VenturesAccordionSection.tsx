@@ -106,7 +106,7 @@ export default function VenturesAccordionSection(): React.JSX.Element {
       {/* Subtle Ambient Glow Behind Card */}
       <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none" aria-hidden="true">
         <div
-          className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[1100px] h-[600px] opacity-30 blur-[150px] rounded-full transition-all duration-700"
+          className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[450px] opacity-25 blur-[75px] rounded-full transform-gpu will-change-transform pointer-events-none"
           style={{
             background: 'radial-gradient(circle, rgba(163, 181, 196, 0.35) 0%, transparent 70%)',
           }}

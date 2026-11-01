@@ -92,7 +92,7 @@ export default function App() {
         <div className="min-h-screen w-full relative bg-[var(--bg)] text-[var(--ink)] font-sans-tight selection:bg-[#a3b5c4] selection:text-[#000000] dark:selection:bg-[#a3b5c4] dark:selection:text-[#000000] transition-colors duration-400 ease-in-out">
           {/* Subtle Analog Grain / Physical Texture Overlay Unifying All Sections */}
           <div
-            className="fixed inset-0 pointer-events-none z-30 opacity-[0.02] dark:opacity-[0.035] mix-blend-overlay"
+            className="fixed inset-0 pointer-events-none z-30 opacity-[0.015] dark:opacity-[0.025] transform-gpu will-change-transform"
             style={{
               backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
             }}

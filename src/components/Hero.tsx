@@ -51,7 +51,7 @@ export default function Hero({ profile }: HeroProps): React.JSX.Element {
       <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
         {/* Warm Champagne Radial Illumination */}
         <div
-          className="absolute top-[25%] right-[5%] w-[45vw] h-[45vh] max-w-[650px] max-h-[650px] rounded-full blur-[160px] opacity-15 dark:opacity-20 transition-opacity duration-400"
+          className="absolute top-[25%] right-[5%] w-[45vw] h-[45vh] max-w-[650px] max-h-[650px] rounded-full blur-[80px] opacity-15 dark:opacity-20 transition-opacity duration-400 transform-gpu will-change-transform"
           style={{ background: 'radial-gradient(circle, #fce9c7 0%, transparent 70%)' }}
         />
       </div>
@@ -73,12 +73,12 @@ export default function Hero({ profile }: HeroProps): React.JSX.Element {
       </header>
 
       {/* ─── Seamless Studio Portrait (Commanding Scale, Zero Massive White Space) ─── */}
-      <div className="absolute right-[-14%] xs:right-[-10%] sm:right-[-2%] md:right-[0%] lg:right-[2%] xl:right-[4%] bottom-0 z-10 pointer-events-none select-none h-[420px] xs:h-[480px] sm:h-[88vh] md:h-[105vh] lg:h-[122vh] xl:h-[132vh] min-h-[380px] sm:min-h-[700px] lg:min-h-[840px] max-h-[520px] sm:max-h-[1180px] w-auto aspect-[765/1024]">
+      <div className="absolute right-[-14%] xs:right-[-10%] sm:right-[-2%] md:right-[0%] lg:right-[2%] xl:right-[4%] bottom-0 z-10 pointer-events-none select-none h-[420px] xs:h-[480px] sm:h-[88vh] md:h-[105vh] lg:h-[122vh] xl:h-[132vh] min-h-[380px] sm:min-h-[700px] lg:min-h-[840px] max-h-[520px] sm:max-h-[1180px] w-auto aspect-[765/1024] transform-gpu">
         {/* Light Mode: Joey on Pure White Background */}
         <img
           src="/JoeyWhiteBackground.jpg"
           alt={profile.name}
-          className={`w-full h-full object-contain object-bottom transition-opacity duration-400 ease-in-out mix-blend-multiply ${
+          className={`w-full h-full object-contain object-bottom transition-opacity duration-400 ease-in-out mix-blend-multiply transform-gpu ${
             isDark ? 'opacity-0 pointer-events-none' : 'opacity-100'
           }`}
           loading="eager"
@@ -89,7 +89,7 @@ export default function Hero({ profile }: HeroProps): React.JSX.Element {
         <img
           src="/JoeyBlackBackground.jpg"
           alt={profile.name}
-          className={`absolute inset-0 w-full h-full object-contain object-bottom transition-opacity duration-400 ease-in-out mix-blend-screen ${
+          className={`absolute inset-0 w-full h-full object-contain object-bottom transition-opacity duration-400 ease-in-out mix-blend-screen transform-gpu ${
             isDark ? 'opacity-100' : 'opacity-0 pointer-events-none'
           }`}
           loading="eager"

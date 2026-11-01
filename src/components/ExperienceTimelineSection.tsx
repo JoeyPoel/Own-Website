@@ -289,6 +289,7 @@ export default function ExperienceTimelineSection(): React.JSX.Element {
 
   // 3D Perspective Tilt on archival card
   const cardRef = useRef<HTMLDivElement | null>(null)
+  const cardRectRef = useRef<DOMRect | null>(null)
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
   const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-8, 8]), {
@@ -300,14 +301,21 @@ export default function ExperienceTimelineSection(): React.JSX.Element {
     damping: 22,
   })
 
+  const handlePointerEnter = (): void => {
+    if (cardRef.current) {
+      cardRectRef.current = cardRef.current.getBoundingClientRect()
+    }
+  }
+
   const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>): void => {
     if (e.pointerType !== 'mouse' || !cardRef.current) return
-    const rect = cardRef.current.getBoundingClientRect()
+    const rect = cardRectRef.current ?? cardRef.current.getBoundingClientRect()
     mouseX.set((e.clientX - rect.left) / rect.width - 0.5)
     mouseY.set((e.clientY - rect.top) / rect.height - 0.5)
   }
 
   const handlePointerLeave = (): void => {
+    cardRectRef.current = null
     mouseX.set(0)
     mouseY.set(0)
   }
@@ -339,7 +347,7 @@ export default function ExperienceTimelineSection(): React.JSX.Element {
       {/* Background Subtle Radial Accent using Slate Mist */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.06] dark:opacity-[0.10]" aria-hidden="true">
         <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1100px] h-[600px] blur-[150px] rounded-full"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[450px] blur-[75px] rounded-full transform-gpu will-change-transform"
           style={{
             background: 'radial-gradient(circle, rgba(163,181,196,0.35) 0%, transparent 70%)',
           }}
@@ -559,6 +567,7 @@ export default function ExperienceTimelineSection(): React.JSX.Element {
           {/* Right Column: 3D Perspective Tilt Memory Card */}
           <div
             ref={cardRef}
+            onPointerEnter={handlePointerEnter}
             onPointerMove={handlePointerMove}
             onPointerLeave={handlePointerLeave}
             className="lg:col-span-5 flex flex-col items-center select-none w-full"

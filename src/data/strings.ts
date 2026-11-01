@@ -281,11 +281,11 @@ export const STRINGS = {
             title: "VØLTCLIP",
             subtitle: "Precision Lightning Detection & Buffer Slicer",
             badge: "Open Source Tool",
-            description: "Automated strike isolation tool with ±1.0s buffered clip extraction, quadrant differential analysis, and streetlamp rejection.",
+            description: "Automated strike isolation tool powered by a YOLO11 model with ±1.0s buffered clip extraction, quadrant differential analysis, and streetlamp rejection.",
             imageUrl: "/voltclip.jpg",
-            techStack: ["Python", "OpenCV", "Video Analysis", "React"],
-            link: "https://github.com/JoeyPoel/Video-Lighnting-Detection",
-            linkText: "View on GitHub",
+            techStack: ["YOLO11", "Python", "OpenCV", "Video Analysis", "React"],
+            link: "https://voltclip.vercel.app/",
+            linkText: "Visit Live Site",
             isExternal: true
           },
           {
@@ -782,11 +782,11 @@ export const STRINGS_NL: PortfolioStrings = {
             title: "VØLTCLIP",
             subtitle: "Nauwkeurige bliksemdetectie & videoslicer",
             badge: "Open-source tool",
-            description: "Geautomatiseerde tool voor bliksemdetectie met ±1,0s gebufferde clip-extractie, differentiële kwadrantanalyse en straatlantaarnfiltering.",
+            description: "Geautomatiseerde tool voor bliksemdetectie aangedreven door een YOLO11-model, met ±1,0s gebufferde clip-extractie, differentiële kwadrantanalyse en straatlantaarnfiltering.",
             imageUrl: "/voltclip.jpg",
-            techStack: ["Python", "OpenCV", "Video Analysis", "React"],
-            link: "https://github.com/JoeyPoel/Video-Lighnting-Detection",
-            linkText: "Bekijk op GitHub",
+            techStack: ["YOLO11", "Python", "OpenCV", "Video Analysis", "React"],
+            link: "https://voltclip.vercel.app/",
+            linkText: "Bezoek website",
             isExternal: true
           },
           {

@@ -25,7 +25,7 @@ export default function TestimonialsSection({ testimonials }: TestimonialsSectio
       {/* Background Subtle Radial Accent using Slate Mist */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.06] dark:opacity-[0.10]" aria-hidden="true">
         <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[500px] blur-[150px] rounded-full"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[450px] blur-[75px] rounded-full transform-gpu will-change-transform"
           style={{ background: 'radial-gradient(circle, rgba(163,181,196,0.35) 0%, transparent 70%)' }}
         />
       </div>
