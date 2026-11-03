@@ -35,23 +35,35 @@ export default function Navbar({ profile }: NavbarProps): React.JSX.Element {
 
     let rafId: number | null = null
 
+    let heroBottom = window.innerHeight * 0.75
+    let sectionTops: { id: string; top: number }[] = []
+
+    const measureLayout = (): void => {
+      const heroElement = document.getElementById('home')
+      if (heroElement) {
+        heroBottom = heroElement.offsetHeight - 100
+      }
+      sectionTops = sectionIds
+        .map((id) => {
+          const el = document.getElementById(id)
+          return el ? { id, top: el.offsetTop } : null
+        })
+        .filter((entry): entry is { id: string; top: number } => entry !== null)
+        .sort((a, b) => b.top - a.top)
+    }
+
+    measureLayout()
+
     const checkScroll = (): void => {
       const scrollY = window.scrollY
-      const heroElement = document.getElementById('home')
-      const heroBottom = heroElement ? heroElement.offsetHeight - 100 : window.innerHeight * 0.75
       const nextScrolled = scrollY > heroBottom
       setIsScrolled((prev) => (prev !== nextScrolled ? nextScrolled : prev))
 
       const scrollPosition = scrollY + 160
-      for (let i = sectionIds.length - 1; i >= 0; i--) {
-        const id = sectionIds[i]
-        const element = document.getElementById(id)
-        if (element) {
-          const top = element.offsetTop
-          if (scrollPosition >= top) {
-            setActiveSection((prev) => (prev !== id ? id : prev))
-            break
-          }
+      for (const section of sectionTops) {
+        if (scrollPosition >= section.top) {
+          setActiveSection((prev) => (prev !== section.id ? section.id : prev))
+          break
         }
       }
       rafId = null
@@ -64,9 +76,12 @@ export default function Navbar({ profile }: NavbarProps): React.JSX.Element {
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('resize', measureLayout, { passive: true })
     checkScroll()
+
     return () => {
       window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', measureLayout)
       if (rafId !== null) {
         window.cancelAnimationFrame(rafId)
       }

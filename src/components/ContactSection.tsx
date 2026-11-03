@@ -350,8 +350,8 @@ export default function ContactSection(): React.JSX.Element {
             <div className="relative flex items-end justify-end">
               {/* Subtle Ambient Radial Glow */}
               <div
-                className="absolute bottom-6 right-0 w-44 h-44 sm:w-64 sm:h-64 rounded-full blur-[70px] pointer-events-none opacity-30 dark:opacity-45"
-                style={{ background: 'radial-gradient(circle, rgba(163,181,196,0.4) 0%, transparent 70%)' }}
+                className="absolute bottom-6 right-0 w-44 h-44 sm:w-64 sm:h-64 rounded-full pointer-events-none opacity-30 dark:opacity-45"
+                style={{ background: 'radial-gradient(circle, rgba(163, 181, 196, 0.35) 0%, rgba(163, 181, 196, 0.12) 40%, transparent 70%)' }}
               />
 
               {/* Light Mode: Joey Graduation on Pure White Background */}

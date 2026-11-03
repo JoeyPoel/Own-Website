@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React from 'react'
 
 interface LazySectionProps {
   id?: string
@@ -10,78 +10,34 @@ interface LazySectionProps {
 
 /**
  * LazySection Component:
- * Defers mounting and execution of heavy section subtrees (including WebGL shaders,
- * dynamic canvases, and image grids) until the user scrolls within range.
- * Preserves the section DOM anchor and reserved height to guarantee smooth scrolling
- * without layout shifts.
+ * Leverages native browser `content-visibility: auto` to defer layout and rendering
+ * of offscreen section subtrees without any React state flips, layout shifts, or scroll jank.
+ * Keeps anchors stable in the DOM for instant hash navigation.
  *
- * @param props.id - Anchor target ID for navigation before mounting.
+ * @param props.id - Anchor target ID for navigation.
  * @param props.className - Wrapper CSS classes.
- * @param props.minHeight - Reserved layout height (default '100vh').
- * @param props.rootMargin - Lookahead boundary margin before mounting (default '300px 0px').
- * @param props.children - Section content to mount when in view.
- * @returns {JSX.Element} Responsive lazy section container.
+ * @param props.minHeight - Estimated height for intrinsic sizing (default '800px').
+ * @param props.children - Section content.
+ * @returns {React.JSX.Element} High-performance content-visibility container.
  */
 export const LazySection: React.FC<LazySectionProps> = ({
   id,
   className = '',
-  minHeight = '100vh',
-  rootMargin = '300px 0px',
+  minHeight = '800px',
   children,
 }) => {
-  const containerRef = useRef<HTMLDivElement | null>(null)
-  const [hasEnteredView, setHasEnteredView] = useState<boolean>(() => {
-    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) {
-      return true
-    }
-    return false
-  })
-
-  useEffect(() => {
-    const el = containerRef.current
-    if (!el || hasEnteredView) return
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const [entry] = entries
-        if (entry?.isIntersecting) {
-          setHasEnteredView(true)
-          observer.disconnect()
-        }
-      },
-      {
-        rootMargin,
-        threshold: 0.01,
-      }
-    )
-
-    observer.observe(el)
-
-    return () => {
-      observer.disconnect()
-    }
-  }, [hasEnteredView, rootMargin])
+  const intrinsicHeight = typeof minHeight === 'number' ? `${minHeight}px` : minHeight
 
   return (
     <div
-      ref={containerRef}
-      id={hasEnteredView ? undefined : id}
+      id={id}
       className={className}
       style={{
-        minHeight: hasEnteredView ? undefined : minHeight,
+        contentVisibility: 'auto',
+        containIntrinsicSize: `auto ${intrinsicHeight}`,
       }}
     >
-      {hasEnteredView ? (
-        children
-      ) : (
-        <div
-          aria-hidden="true"
-          className="w-full flex items-center justify-center pointer-events-none select-none opacity-20"
-          style={{ minHeight }}
-        >
-          <div className="w-8 h-8 rounded-full border border-current border-t-transparent animate-spin" />
-        </div>
-      )}
+      {children}
     </div>
   )
 }

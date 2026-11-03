@@ -51,8 +51,8 @@ export default function Hero({ profile }: HeroProps): React.JSX.Element {
       <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
         {/* Warm Champagne Radial Illumination */}
         <div
-          className="absolute top-[25%] right-[5%] w-[45vw] h-[45vh] max-w-[650px] max-h-[650px] rounded-full blur-[80px] opacity-15 dark:opacity-20 transition-opacity duration-400 transform-gpu will-change-transform"
-          style={{ background: 'radial-gradient(circle, #fce9c7 0%, transparent 70%)' }}
+          className="absolute top-[25%] right-[5%] w-[45vw] h-[45vh] max-w-[650px] max-h-[650px] rounded-full opacity-15 dark:opacity-20 transition-opacity duration-400 pointer-events-none"
+          style={{ background: 'radial-gradient(circle, rgba(252, 233, 199, 0.8) 0%, rgba(252, 233, 199, 0.3) 35%, transparent 70%)' }}
         />
       </div>
 

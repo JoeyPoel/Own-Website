@@ -195,8 +195,7 @@ html.is-switching-theme *:not([data-theme-toggle], [data-theme-toggle] *)::after
 .card-ruled {
   background: rgba(0, 0, 0, 0.02);
   border: 1px solid var(--line);
-  backdrop-filter: blur(16px);
-  transition: all 0.25s ease;
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 html.dark .card-ruled,

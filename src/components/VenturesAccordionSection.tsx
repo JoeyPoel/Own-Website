@@ -18,7 +18,7 @@ const PROJECT_MEDIA: Record<
     title: 'Connect Cultures',
     link: 'https://www.connectcultures.world/',
     image: {
-      src: '/connectcultures_preview.png',
+      src: '/connectcultures_preview.jpg',
       alt: 'Connect Cultures 3D Earth and Global Hospitality Platform',
     },
   },
@@ -26,7 +26,7 @@ const PROJECT_MEDIA: Record<
     title: 'LØST SØULS',
     link: 'https://lostsouls-events.com/',
     image: {
-      src: '/lostsouls_preview.png',
+      src: '/lostsouls_preview.jpg',
       alt: 'LØST SØULS Underground Techno Rave Void',
     },
   },
@@ -106,9 +106,9 @@ export default function VenturesAccordionSection(): React.JSX.Element {
       {/* Subtle Ambient Glow Behind Card */}
       <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none" aria-hidden="true">
         <div
-          className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[450px] opacity-25 blur-[75px] rounded-full transform-gpu will-change-transform pointer-events-none"
+          className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[450px] opacity-25 rounded-full pointer-events-none"
           style={{
-            background: 'radial-gradient(circle, rgba(163, 181, 196, 0.35) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(163, 181, 196, 0.35) 0%, rgba(163, 181, 196, 0.12) 40%, transparent 70%)',
           }}
         />
         <div
